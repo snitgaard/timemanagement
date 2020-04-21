@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.TimeLoggerViewController">
+   <children>
+      <VBox layoutY="130.0" prefHeight="461.0" prefWidth="228.0">
+         <children>
+            <JFXButton prefHeight="31.0" prefWidth="134.0" text="Time Logger">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="HOURGLASS" size="15" />
+               </graphic>
+            </JFXButton>
+            <JFXButton prefHeight="31.0" prefWidth="107.0" text="Opgaver">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="BRIEFCASE" size="15" />
+               </graphic>
+            </JFXButton>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

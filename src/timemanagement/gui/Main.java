@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author CSnit
  */
-public class TimeManagement extends Application
+public class Main extends Application
 {
     
     @Override

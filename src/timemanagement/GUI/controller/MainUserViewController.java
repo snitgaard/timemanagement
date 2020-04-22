@@ -19,6 +19,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
+import javafx.scene.input.MouseEvent;
 
 
 /**
@@ -73,8 +74,6 @@ public class MainUserViewController implements Initializable
     private StackPane stackPane;
     @FXML
     private JFXButton btn_start;
-    @FXML
-    private JFXButton btn_stop;
 
     /**
      * Initializes the controller class.
@@ -98,7 +97,6 @@ public class MainUserViewController implements Initializable
         }
     }
     
-    @FXML
     private void starttime(javafx.scene.input.MouseEvent event)
     {
         try 
@@ -109,7 +107,6 @@ public class MainUserViewController implements Initializable
         catch (Exception e) {
         }
     }
-    @FXML
     private void stoptime(javafx.scene.input.MouseEvent event)
     {
         try 
@@ -120,4 +117,17 @@ public class MainUserViewController implements Initializable
         catch (Exception e) {
         }
     }
+
+    @FXML
+    private void handleStartDate(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleEndDate(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleStartTime(MouseEvent event) {
+    }
+    
 }

@@ -107,7 +107,7 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton layoutX="547.0" layoutY="71.0" onAction="#handleStopTime" text="Stop tid">
+                        <JFXButton layoutX="547.0" layoutY="71.0" text="Stop tid">
                            <graphic>
                               <FontAwesomeIconView glyphName="STOP-CIRCLE" size="15" text="" />
                            </graphic>

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timemanagement.dal.database;
+package timemanagement.DAL.database;
 
-import timemanagement.dal.DalException;
+import timemanagement.DAL.DalException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 import java.io.IOException;
 import java.sql.Connection;
@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import timemanagement.be.User;
+import timemanagement.BE.User;
 
 /**
  *

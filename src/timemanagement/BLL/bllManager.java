@@ -7,12 +7,10 @@ package timemanagement.BLL;
 
 import java.io.IOException;
 import java.util.List;
-import timemanagement.be.User;
-import timemanagement.BLL.bllException;
-import timemanagement.BLL.bllFacade;
-import timemanagement.dal.DalException;
-import timemanagement.dal.DalFacade;
-import timemanagement.dal.DalManager;
+import timemanagement.BE.User;
+import timemanagement.DAL.DalException;
+import timemanagement.DAL.DalFacade;
+import timemanagement.DAL.DalManager;
 
 /**
  *

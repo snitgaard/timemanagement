@@ -8,7 +8,7 @@ package timemanagement.gui.model;
 import java.io.IOException;
 import java.util.List;
 import timemanagement.BLL.bllManager;
-import timemanagement.be.User;
+import timemanagement.BE.User;
 import timemanagement.BLL.bllException;
 
 /**

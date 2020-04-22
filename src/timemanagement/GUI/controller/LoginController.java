@@ -32,9 +32,10 @@ import javafx.scene.layout.CornerRadii;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import timemanagement.be.User;
+import timemanagement.BE.User;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
+
 
 /**
  *

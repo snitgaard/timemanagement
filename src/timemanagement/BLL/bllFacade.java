@@ -6,8 +6,8 @@
 package timemanagement.BLL;
 
 import java.util.List;
-import timemanagement.be.User;
-import timemanagement.dal.DalException;
+import timemanagement.BE.User;
+import timemanagement.DAL.DalException;
 
 
 /**

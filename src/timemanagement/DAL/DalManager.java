@@ -3,15 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timemanagement.dal;
+package timemanagement.DAL;
 
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import timemanagement.be.User;
-import timemanagement.dal.database.UserDAO;
+import timemanagement.BE.User;
+import timemanagement.DAL.database.UserDAO;
 
 /**
  *

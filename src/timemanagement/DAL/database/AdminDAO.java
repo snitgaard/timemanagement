@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timemanagement.dal.database;
+package timemanagement.DAL.database;
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -13,69 +13,71 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import timemanagement.be.Project;
-import timemanagement.dal.DalException;
+import timemanagement.BE.Admin;
+import timemanagement.DAL.DalException;
 
 /**
  *
  * @author The Cowboys
  */
-public class ProjectDAO {
-    private DatabaseConnector dbCon;
+public class AdminDAO {
+        private DatabaseConnector dbCon;
 
-    public ProjectDAO() throws IOException 
+    public AdminDAO() throws IOException 
     { 
         dbCon = new DatabaseConnector();
     }
 /**
- * Creates SQL connection and gets list of all projects.
+ * Creates SQL connection and gets list of all Admins.
  * @return
  * @throws SQLException 
  */
-    public List<Project> getAllProjects() throws SQLException {
+    public List<Admin> getAllAdmins() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "SELECT * FROM Project;";
+            String sql = "SELECT * FROM Admin;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Project> allProjects = new ArrayList<>();
+            ArrayList<Admin> allAdmins = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                Project project = new Project(id);
-                allProjects.add(project);
+                String adminLogin = rs.getString("adminLogin");
+                String adminPassword = rs.getString("adminPassword");
+                Admin admin = new Admin(id, adminLogin, adminPassword);
+                allAdmins.add(admin);
             }
-            return allProjects;
+            return allAdmins;
         }
     }
 
     /**
-     * Creates SQL Connection and deletes the selected Project.
-     * @param project
+     * Creates SQL Connection and deletes the selected Admin.
+     * @param Admin
      * @throws DalException 
      */
-    public void deleteProject(Project project) throws DalException {
+    public void deleteAdmin(Admin admin) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            int id = project.getId();
-            String sql = "DELETE FROM Project WHERE id=?;";
+            int id = admin.getId();
+            String sql = "DELETE FROM Admin WHERE id=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {
-                throw new DalException("yes");
+                throw new DalException("Could not delete Admin");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DalException("Could not delete Project");
+            throw new DalException("Could not delete Admin");
         }
     }
 
     /**
-     * Creates SQL Connetion and creates a new Project.
+     * Creates SQL Connetion and creates a new Admin.
      * @return
      * @throws DalException 
      */
-    public boolean createProject() throws DalException {
+    public boolean createAdmin() throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Project;";
+            String sql = "INSERT INTO admin;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             int affectedRows = ps.executeUpdate();
 
@@ -88,7 +90,7 @@ public class ProjectDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DalException("Could not create project");
+            throw new DalException("Could not create Admin");
         }
         return false;
     }

@@ -41,7 +41,9 @@ public class UserDAO {
             ArrayList<User> allUsers = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                User user = new User(id);
+                String userLogin = rs.getString("userlogin");
+                String userPassword = rs.getString("userPassword");
+                User user = new User(id, userLogin, userPassword);
                 allUsers.add(user);
             }
             return allUsers;

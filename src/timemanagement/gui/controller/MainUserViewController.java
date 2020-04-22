@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Pane;
 
 /**
@@ -54,13 +55,19 @@ public class MainUserViewController implements Initializable
     @FXML
     private JFXTextArea beskrivelseTextArea;
     @FXML
-    private JFXDatePicker datoField;
-    @FXML
-    private Pane opgaverPane;
-    @FXML
     private JFXButton timeLoggerButton;
     @FXML
     private JFXButton opgaverButton;
+    @FXML
+    private TableColumn<?, ?> opgaveNavnColumn;
+    @FXML
+    private TableColumn<?, ?> projektNavnColumn;
+    @FXML
+    private TableColumn<?, ?> brugtTidColumn;
+    @FXML
+    private TableColumn<?, ?> datoColumn;
+    @FXML
+    private SplitPane opgaverPane;
 
     /**
      * Initializes the controller class.

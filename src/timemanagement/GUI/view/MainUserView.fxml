@@ -45,8 +45,8 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXDatePicker layoutX="92.0" layoutY="34.0" onAction="#handleStartDate" promptText="Vælg start dato" />
-                        <JFXDatePicker layoutX="445.0" layoutY="34.0" onAction="#handleEndDate" promptText="Vælg slut dato" />
+                        <JFXDatePicker layoutX="92.0" layoutY="34.0" promptText="Vælg start dato" />
+                        <JFXDatePicker layoutX="445.0" layoutY="34.0" promptText="Vælg slut dato" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -99,7 +99,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onMouseClicked="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLAY" size="15" />
                            </graphic>

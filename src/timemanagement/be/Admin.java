@@ -11,5 +11,10 @@ package timemanagement.be;
  */
 public class Admin extends User
 {
+
+    public Admin(int id) {
+        super(id);
+    }
+
     
 }

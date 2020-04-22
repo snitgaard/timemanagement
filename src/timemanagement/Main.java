@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class Main extends Application
 {

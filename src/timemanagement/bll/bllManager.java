@@ -7,7 +7,7 @@ package timemanagement.BLL;
 
 /**
  *
- * @author jigzi
+ * @author The Cowboys
  */
 public class bllManager {
     

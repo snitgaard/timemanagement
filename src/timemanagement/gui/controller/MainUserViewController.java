@@ -22,7 +22,7 @@ import javafx.scene.layout.Pane;
 /**
  * FXML Controller class
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class MainUserViewController implements Initializable
 {

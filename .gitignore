@@ -34,3 +34,7 @@ nbdist/
 
 build/built-jar.properties
 nbproject/private/private.properties
+jfoenix-9.0.8.jar
+fontawesomefx-commons-9.1.2.jar
+fontawesomefx-fontawesome-4.7.0-9.1.2.jar
+mssql-jdbc-6.4.0.jre9.jar

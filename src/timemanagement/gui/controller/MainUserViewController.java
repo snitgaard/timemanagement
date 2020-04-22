@@ -94,4 +94,24 @@ public class MainUserViewController implements Initializable
         }
     }
 
+    @FXML
+    private void handleStartTime(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleStopTime(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleStartDate(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleEndDate(ActionEvent event)
+    {
+    }
+
 }

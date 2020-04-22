@@ -99,7 +99,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton layoutX="359.0" layoutY="66.0" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onMouseClicked="#starttime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLAY" size="15" />
                            </graphic>
@@ -107,7 +107,7 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton layoutX="547.0" layoutY="71.0" text="Stop tid">
+                        <JFXButton fx:id="btn_stop" layoutX="547.0" layoutY="71.0" onMouseClicked="#stoptime" text="Stop tid">
                            <graphic>
                               <FontAwesomeIconView glyphName="STOP-CIRCLE" size="15" text="" />
                            </graphic>

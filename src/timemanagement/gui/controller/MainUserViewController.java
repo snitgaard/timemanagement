@@ -19,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 
 /**
  * FXML Controller class
@@ -68,6 +69,8 @@ public class MainUserViewController implements Initializable
     private TableColumn<?, ?> datoColumn;
     @FXML
     private SplitPane opgaverPane;
+    @FXML
+    private StackPane stackPane;
 
     /**
      * Initializes the controller class.
@@ -75,20 +78,20 @@ public class MainUserViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        opgaverPane.setResizableWithParent(stackPane, Boolean.FALSE);
     }
-    
+
     @FXML
     private void handleClicks(ActionEvent actionEvent)
     {
-        if(actionEvent.getSource() == timeLoggerButton)
+        if (actionEvent.getSource() == timeLoggerButton)
         {
             timeLoggerPane.toFront();
         }
-        if(actionEvent.getSource() == opgaverButton)
+        if (actionEvent.getSource() == opgaverButton)
         {
             opgaverPane.toFront();
         }
     }
-    
+
 }

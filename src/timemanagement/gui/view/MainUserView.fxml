@@ -38,7 +38,7 @@
             </JFXButton>
          </children>
       </VBox>
-      <StackPane layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
+      <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
             <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
@@ -62,7 +62,7 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5925297113752123" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
+            <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5297113752122241" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
                      <children>

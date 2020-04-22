@@ -12,7 +12,7 @@ import javafx.fxml.Initializable;
 /**
  * FXML Controller class
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class MainAdminViewController implements Initializable
 {

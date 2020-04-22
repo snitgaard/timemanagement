@@ -7,11 +7,12 @@ package timemanagement.dal;
 
 /**
  *
- * @author jigzi
+ * @author The Cowboys
  */
 public class DalException extends Exception {
 
-    public DalException() {
+    public DalException(String message) {
+        super(message);
     }
-    
+
 }

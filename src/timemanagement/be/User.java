@@ -7,20 +7,32 @@ package timemanagement.be;
 
 /**
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class User
 {
     private int id;
 
+    /**
+     * Constructor for User BE
+     * @param id 
+     */
     public User(int id) {
         this.id = id;
     }
 
+    /**
+     * gets Id
+     * @return 
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets id
+     * @param id 
+     */
     public void setId(int id) {
         this.id = id;
     }

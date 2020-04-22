@@ -19,7 +19,7 @@ import javafx.scene.layout.AnchorPane;
 
 /**
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class LoginController implements Initializable
 {

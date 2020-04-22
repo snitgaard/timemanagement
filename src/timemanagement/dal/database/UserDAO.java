@@ -19,7 +19,7 @@ import timemanagement.be.User;
 
 /**
  *
- * @author jigzi
+ * @author The Cowboys
  */
 public class UserDAO {
     private DatabaseConnector dbCon;
@@ -61,11 +61,11 @@ public class UserDAO {
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {
-                throw new DalException();
+                throw new DalException("Could not delete User");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DalException();
+            throw new DalException("Could not delete User");
         }
     }
 
@@ -89,7 +89,7 @@ public class UserDAO {
 
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DalException();
+            throw new DalException("Could not create User");
         }
         return false;
     }

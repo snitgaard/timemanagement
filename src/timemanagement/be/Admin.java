@@ -7,11 +7,15 @@ package timemanagement.be;
 
 /**
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class Admin extends User
 {
 
+    /**
+     * Constructor for Admin BE
+     * @param id 
+     */
     public Admin(int id) {
         super(id);
     }

@@ -25,7 +25,6 @@ public class DatabaseConnector
     /**
      * This method reads a file in our root folder, the file consists of credentials needed to connect to the database.
      * The data gathered in the DBSettings file is then inserted and then connects to the database
-     *
      * @throws IOException
      */
     DatabaseConnector() throws IOException
@@ -39,8 +38,10 @@ public class DatabaseConnector
         dataSource.setServerName(props.getProperty("server"));
     }
 
-    /*
-     *This method returns the data created in the constructor above
+    /**
+     * This method returns the data created in the constructor above
+     * @return
+     * @throws SQLServerException 
      */
     Connection getConnection() throws SQLServerException
     {

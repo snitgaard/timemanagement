@@ -1,4 +1,4 @@
 server=10.176.111.31
 user=CSe19A_17
 password=CSe19A_17
-database=AA Database
+database=TimeManagement

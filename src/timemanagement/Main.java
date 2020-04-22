@@ -1,4 +1,4 @@
-package timemanagement.gui.view;
+package timemanagement;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -23,7 +23,7 @@ public class Main extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("MainUserView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("gui/view/MainUserView.fxml"));
         
         Scene scene = new Scene(root);
         

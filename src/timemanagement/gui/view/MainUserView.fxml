@@ -1,19 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.TimeLoggerViewController">
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="949.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.MainUserViewController">
    <children>
       <VBox layoutY="163.0" prefHeight="428.0" prefWidth="228.0">
          <children>
-            <JFXButton prefHeight="31.0" prefWidth="134.0" text="Time Logger">
+            <JFXButton fx:id="timeLoggerButton" prefHeight="31.0" prefWidth="134.0" text="Time Logger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -21,7 +27,7 @@
                   <FontAwesomeIconView glyphName="HOURGLASS" size="15" />
                </graphic>
             </JFXButton>
-            <JFXButton prefHeight="31.0" prefWidth="107.0" text="Opgaver">
+            <JFXButton fx:id="opgaverButton" prefHeight="31.0" prefWidth="107.0" text="Opgaver">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -35,14 +41,136 @@
          <children>
             <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5925297113752123" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
+                     <children>
+                        <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
+                        <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
+                        <JFXTextField fx:id="startTidField" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="slutTidField" layoutX="600.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="25.0" prefWidth="89.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label layoutX="367.0" layoutY="121.0" text="Start tid">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="547.0" layoutY="121.0" text="Slut tid">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="365.0" layoutY="189.0" text="Brugt tid">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="359.0" layoutY="66.0" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="PLAY" size="15" />
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="547.0" layoutY="71.0" text="Stop tid">
+                           <graphic>
+                              <FontAwesomeIconView glyphName="STOP-CIRCLE" size="15" text="" />
+                           </graphic>
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXTextField layoutX="121.0" layoutY="28.0" />
+                        <JFXTextField fx:id="sagsNrField" layoutX="118.0" layoutY="6.0" prefHeight="25.0" prefWidth="89.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label layoutX="19.0" layoutY="13.0" text="Sags nr.">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="18.0" layoutY="50.0" text="Kunde">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="19.0" layoutY="90.0" text="Start dato">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="18.0" layoutY="133.0" text="Medarbejder">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="19.0" layoutY="171.0" text="Brugt tid i alt">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="18.0" layoutY="205.0" text="Betalt opgave">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <JFXTextField fx:id="kundeField" layoutX="118.0" layoutY="45.0" prefHeight="30.0" prefWidth="159.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="medarbejderField" layoutX="118.0" layoutY="123.0" prefHeight="30.0" prefWidth="159.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="timeField" layoutX="118.0" layoutY="166.0" prefHeight="30.0" prefWidth="159.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <Label layoutX="373.0" layoutY="11.0" text="Opgave titel:">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="titelField" layoutX="476.0" layoutY="6.0" prefHeight="30.0" prefWidth="159.0">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="373.0" layoutY="67.0" prefHeight="163.0" prefWidth="338.0" />
+                        <Label layoutX="373.0" layoutY="44.0" text="Beskrivelse">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <JFXDatePicker fx:id="datoField" layoutX="119.0" layoutY="87.0" />
                      </children>
                   </AnchorPane>
               </items>
             </SplitPane>
+            <Pane fx:id="opgaverPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                  <JFXTextArea layoutX="106.0" layoutY="124.0" />
+               </children>
+            </Pane>
          </children>
       </StackPane>
    </children>

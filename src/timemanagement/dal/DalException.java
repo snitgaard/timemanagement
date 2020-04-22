@@ -3,12 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package timemanagement.BLL;
+package timemanagement.dal;
 
 /**
  *
  * @author jigzi
  */
-public class bllManager {
+public class DalException extends Exception {
+
+    public DalException() {
+    }
     
 }

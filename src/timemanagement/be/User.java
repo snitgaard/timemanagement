@@ -12,7 +12,9 @@ package timemanagement.be;
 public class User
 {
     private int id;
-
+    private String userLogin;
+    private String userPassword;
+    
     /**
      * Constructor for User BE
      * @param id 

@@ -111,7 +111,7 @@ public class UserDAO {
         try (Connection con = dbCon.getConnection())
         {
 
-            String sql = "SELECT * FROM User WHERE userLogin = ? AND userPassword = ?;";
+            String sql = "SELECT * FROM [User] WHERE userLogin = ? AND userPassword = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, userLogin);
             ps.setString(2, userPassword);
@@ -127,7 +127,7 @@ public class UserDAO {
         } catch (SQLException ex)
         {
             System.out.println(ex);
-            throw new DalException("Could not check student credentials");
+            throw new DalException("Could not check user credentials");
         }
     }
     
@@ -145,7 +145,7 @@ public class UserDAO {
         try (Connection con = dbCon.getConnection())
         {
 
-            String sql = "SELECT * FROM User WHERE userLogin = ?";
+            String sql = "SELECT * FROM [User] WHERE userLogin = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, userLogin);
             ResultSet rs = ps.executeQuery();

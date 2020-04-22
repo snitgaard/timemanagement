@@ -19,7 +19,7 @@
    <children>
       <VBox layoutY="163.0" prefHeight="428.0" prefWidth="228.0">
          <children>
-            <JFXButton fx:id="timeLoggerButton" prefHeight="31.0" prefWidth="134.0" text="Time Logger">
+            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="134.0" text="Time Logger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -27,7 +27,7 @@
                   <FontAwesomeIconView glyphName="HOURGLASS" size="15" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="opgaverButton" prefHeight="31.0" prefWidth="107.0" text="Opgaver">
+            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="107.0" text="Opgaver">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

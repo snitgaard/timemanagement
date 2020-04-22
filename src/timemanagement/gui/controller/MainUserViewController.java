@@ -71,6 +71,7 @@ public class MainUserViewController implements Initializable
         // TODO
     }
     
+    @FXML
     private void handleClicks(ActionEvent actionEvent)
     {
         if(actionEvent.getSource() == timeLoggerButton)

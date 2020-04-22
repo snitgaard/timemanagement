@@ -22,7 +22,7 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <JFXButton fx:id="btnLogin" layoutX="139.0" layoutY="305.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="124.0" styleClass="login-button" text="Login">
+      <JFXButton layoutX="139.0" layoutY="305.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="124.0" styleClass="login-button" text="Login">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></JFXButton>

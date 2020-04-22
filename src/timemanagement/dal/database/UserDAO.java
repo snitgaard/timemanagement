@@ -41,9 +41,7 @@ public class UserDAO {
             ArrayList<User> allUsers = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                String userLogin = rs.getString("userlogin");
-                String userPassword = rs.getString("userPassword");
-                User user = new User(id, userLogin, userPassword);
+                User user = new User(id);
                 allUsers.add(user);
             }
             return allUsers;
@@ -94,91 +92,5 @@ public class UserDAO {
             throw new DalException("Could not create User");
         }
         return false;
-    }
-    
-    /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Checks the user credentials based on user login and password
-     *
-     * @param userLogin
-     * @param userPassword
-     * @return true if credentials match with the database and false if not
-     * @throws DalException
-     */
-    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-
-            String sql = "SELECT * FROM [User] WHERE userLogin = ? AND userPassword = ?;";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, userLogin);
-            ps.setString(2, userPassword);
-            ResultSet rs = ps.executeQuery();
-
-            while (rs.next())
-            {
-                return true;
-
-            }
-            return false;
-
-        } catch (SQLException ex)
-        {
-            System.out.println(ex);
-            throw new DalException("Could not check user credentials");
-        }
-    }
-    
-    /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Gets a list of users from userEmail
-     *
-     * @param userLogin
-     * @return list of users called selectedUser
-     * @throws DalException
-     */
-    public List<User> getUser(String userLogin) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-
-            String sql = "SELECT * FROM [User] WHERE userLogin = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, userLogin);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<User> selectedUser = new ArrayList<>();
-            while (rs.next())
-            {
-                int id = rs.getInt("id");
-                userLogin = rs.getString("userLogin");
-                String userPassword = rs.getString("userPassword");
-
-                User user = new User(id, userLogin, userPassword);
-                selectedUser.add(user);
-            }
-            return selectedUser;
-
-        } catch (SQLException ex)
-        {
-            System.out.println(ex);
-            throw new DalException("Could not get user");
-        }
-    }
-
-    /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Gets specific user on index 0
-     *
-     * @param userLogin
-     * @return index 0 of getStudent method
-     * @throws DalException
-     */
-    public User getSpecificUser(String userLogin) throws DalException
-    {
-        return getUser(userLogin).get(0);
     }
 }

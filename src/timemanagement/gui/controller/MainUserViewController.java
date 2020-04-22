@@ -12,9 +12,6 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,8 +20,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import java.sql.Timestamp;
-
 
 /**
  * FXML Controller class
@@ -76,10 +71,6 @@ public class MainUserViewController implements Initializable
     private SplitPane opgaverPane;
     @FXML
     private StackPane stackPane;
-    @FXML
-    private JFXButton btn_start;
-    @FXML
-    private JFXButton btn_stop;
 
     /**
      * Initializes the controller class.
@@ -102,27 +93,25 @@ public class MainUserViewController implements Initializable
             opgaverPane.toFront();
         }
     }
-    
+
     @FXML
-    private void starttime(javafx.scene.input.MouseEvent event)
+    private void handleStartTime(ActionEvent event)
     {
-        try 
-        {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println(timestamp);
-        }
-        catch (Exception e) {
-        }
     }
+
     @FXML
-    private void stoptime(javafx.scene.input.MouseEvent event)
+    private void handleStopTime(ActionEvent event)
     {
-        try 
-        {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println(timestamp);
-        }
-        catch (Exception e) {
-        }
     }
+
+    @FXML
+    private void handleStartDate(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleEndDate(ActionEvent event)
+    {
+    }
+
 }

@@ -12,32 +12,17 @@ package timemanagement.be;
 public class User
 {
     private int id;
-    private String userLogin;
-    private String userPassword;
 
-    
     /**
-     * Constructor for User
+     * Constructor for User BE
      * @param id 
      */
     public User(int id) {
         this.id = id;
     }
-    
-    /**
-     * Constructor for User
-     * @param id
-     * @param userLogin
-     * @param userPassword 
-     */
-    public User(int id, String userLogin, String userPassword) {
-        this.id = id;
-        this.userLogin = userLogin;
-        this.userPassword = userPassword;
-    }
 
     /**
-     * getter for Id
+     * gets Id
      * @return 
      */
     public int getId() {
@@ -45,45 +30,12 @@ public class User
     }
 
     /**
-     * Setter for id
+     * Sets id
      * @param id 
      */
     public void setId(int id) {
         this.id = id;
     }
-
-    /**
-     * getter for userLogin
-     * @return userLogin
-     */
-    public String getUserLogin() {
-        return userLogin;
-    }
-
-    /**
-     * setter for userLogin
-     * @param userLogin 
-     */
-    public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
-    }
-
-    /**
-     * getter for userPassword
-     * @return userPassword
-     */
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    /**
-     * setter for userPassword
-     * @param userPassword 
-     */
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-    
     
     
 }

@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="949.0" stylesheets="@../controller/TimeManagementCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.MainUserViewController">
@@ -99,7 +98,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onMouseClicked="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton layoutX="359.0" layoutY="66.0" onAction="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView glyphName="PLAY" size="15" />
                            </graphic>
@@ -115,7 +114,6 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <Line endX="626.0" layoutX="104.0" layoutY="298.0" startX="-100.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

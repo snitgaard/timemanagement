@@ -40,9 +40,7 @@ public class AdminDAO {
             ArrayList<Admin> allAdmins = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                String adminLogin = rs.getString("adminLogin");
-                String adminPassword = rs.getString("adminPassword");
-                Admin admin = new Admin(id, adminLogin, adminPassword);
+                Admin admin = new Admin(id);
                 allAdmins.add(admin);
             }
             return allAdmins;

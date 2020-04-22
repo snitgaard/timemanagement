@@ -93,4 +93,39 @@ public class UserDAO {
         }
         return false;
     }
+    
+    /**
+     * If called this method will create a connection between the database
+     * and the program. The SQL statement will be run afterwards.
+     * Checks the user credentials based on user login and password
+     *
+     * @param userLogin
+     * @param userPassword
+     * @return true if credentials match with the database and false if not
+     * @throws DalException
+     */
+    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+
+            String sql = "SELECT * FROM Student WHERE userLogin = ? AND userPassword = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, userLogin);
+            ps.setString(2, userPassword);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                return true;
+
+            }
+            return false;
+
+        } catch (SQLException ex)
+        {
+            System.out.println(ex);
+            throw new DalException("Could not check student credentials");
+        }
+    }
 }

@@ -265,11 +265,4 @@ public class MainUserViewController implements Initializable
                 
         }
     }
-
-    public int getAgeInSeconds()
-    {
-        long nowMillis = System.currentTimeMillis();
-        return (int) ((nowMillis - this.createdMillis) / 1000);
-    }
-
 }

@@ -135,6 +135,13 @@ public class MainUserViewController implements Initializable
         stage.setIconified(true);
     }
 
+    
+     /**
+     * Gets the current time and disables the start button
+     *
+     * @param event
+     */
+    
     @FXML
     private void starttime(ActionEvent event)
     {
@@ -153,6 +160,14 @@ public class MainUserViewController implements Initializable
         }
     }
 
+    
+     /**
+     * Gets the current time and disables the stop button.
+     * Calculating the time used and displays is into the field. 
+     * 
+     * @param event
+     */
+    
     @FXML
     private void stopTid(ActionEvent event) 
 {
@@ -178,7 +193,6 @@ public class MainUserViewController implements Initializable
                long hours = (input - input%3600)/3600;
                long minutes = (input%3600 - input%3600%60)/60;
                long seconds = input%3600%60;
-               System.out.println("Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
                
                brugtTidField.setText(hours +  " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
                

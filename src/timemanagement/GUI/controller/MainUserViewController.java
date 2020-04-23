@@ -20,6 +20,10 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 
 import java.text.SimpleDateFormat;
 
@@ -146,7 +150,6 @@ public class MainUserViewController implements Initializable
                 java.util.Date date = new java.util.Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 startTidField.setText(sdf.format(date));
-                System.out.println(sdf.format(date));
                 btn_start.setDisable(true);
                 btn_stop.setDisable(false);
                 slutTidField.clear();
@@ -164,11 +167,36 @@ public class MainUserViewController implements Initializable
                 java.util.Date date = new java.util.Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 slutTidField.setText(sdf.format(date));
-                System.out.println(sdf.format(date));
                 btn_start.setDisable(false);
                 btn_stop.setDisable(true);
+                
+               String startTid = startTidField.getText();
+               String slutTid = slutTidField.getText();
+               
+               startTid = startTid.replace(":", "");
+               slutTid = slutTid.replace(":", "");
+
+               int startTidInt = Integer.parseInt(startTid.trim());
+               int slutTidInt = Integer.parseInt(slutTid.trim());
+               System.out.println("start tid" + startTidInt);
+               System.out.println("slut tid"  + slutTidInt);
+               
+               int timeUsed = slutTidInt - startTidInt;
+               
+               long input = timeUsed;
+               long hours = (input - input%3600)/3600;
+               long minutes = (input%3600 - input%3600%60)/60;
+               long seconds = input%3600%60;
+               System.out.println("Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
+               
+               brugtTidField.setText(hours +  " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
+               
+               
+                
+                
         }
-        catch (Exception e) {
+        
+        catch (Exception e){
         }
     }
 }

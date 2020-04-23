@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 import timemanagement.DAL.database.AdminDAO;
+import timemanagement.DAL.database.ProjectDAO;
 import timemanagement.DAL.database.UserDAO;
 
 /**
@@ -23,10 +24,12 @@ public class DalManager implements DalFacade {
     
     private final UserDAO userDAO; 
     private final AdminDAO adminDAO;
+    private final ProjectDAO projectDAO;
 
     public DalManager() throws IOException {
         userDAO = new UserDAO();
         adminDAO = new AdminDAO();
+        projectDAO = new ProjectDAO();
     }
     
     
@@ -50,6 +53,15 @@ public class DalManager implements DalFacade {
         } catch (DalException ex) {
             throw new DalException(ex.getMessage());
         } 
+    }
+    
+    @Override
+    public List<String> getAllProjects() throws DalException {
+        try {
+            return projectDAO.getAllProjects();
+        } catch (SQLException ex) {
+            throw new DalException(ex.getMessage());
+        }
     }
 
     @Override

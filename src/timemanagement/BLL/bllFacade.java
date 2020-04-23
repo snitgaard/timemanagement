@@ -23,6 +23,8 @@ public interface bllFacade {
     
     User getSpecificUser(String userLogin) throws bllException;
     
+    public List<String> getAllProjects() throws bllException;
+    
     boolean checkAdminCredentials (String adminLogin, String adminPassword) throws bllException;
     
     List<Admin> getAdmin (String adminLogin) throws bllException;

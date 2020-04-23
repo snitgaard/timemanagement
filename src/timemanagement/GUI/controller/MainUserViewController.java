@@ -176,9 +176,13 @@ public class MainUserViewController implements Initializable
                
                int timeUsed = slutTidInt - startTidInt;
                
+               long input = timeUsed;
+               long hours = (input - input%3600)/3600;
+               long minutes = (input%3600 - input%3600%60)/60;
+               long seconds = input%3600%60;
+               System.out.println("Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
                
-               
-               brugtTidField.setText(timeUsed + "");
+               brugtTidField.setText(hours +  " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
                
                
                 

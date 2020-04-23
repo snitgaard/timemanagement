@@ -84,7 +84,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="30.0" prefWidth="220.0">
                            <font>
                               <Font size="14.0" />
                            </font>

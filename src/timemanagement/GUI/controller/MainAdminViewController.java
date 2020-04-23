@@ -92,7 +92,6 @@ public class MainAdminViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
     }
 
     /**
@@ -132,9 +131,10 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Handles the start / stop time function and changes the button icon / label
-     * depending on which action is to be performed.
-     * @param event 
+     * Handles the start / stop time function and changes the button icon /
+     * label depending on which action is to be performed.
+     *
+     * @param event
      */
     @FXML
     private void handleStartTime(ActionEvent event)

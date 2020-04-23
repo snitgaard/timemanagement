@@ -17,6 +17,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
 <AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="949.0" stylesheets="@../controller/TimeManagementCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.MainAdminViewController">
@@ -127,7 +128,7 @@
                   </AnchorPane>
                </items>
             </SplitPane>
-            <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5297113752122241" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
+            <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
                      <children>
@@ -163,7 +164,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="startTime" layoutX="359.0" layoutY="67.0" onAction="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="startTime" layoutX="359.0" layoutY="66.0" onAction="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView fx:id="startIcon" glyphName="PLAY" size="15" text="" />
                            </graphic>
@@ -175,77 +176,79 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXTextField fx:id="sagsNrField" layoutX="118.0" layoutY="6.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="sagsNrField" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="19.0" layoutY="13.0" text="Sags nr.">
+                        <Label layoutX="15.0" layoutY="38.0" text="Sags nr.">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="18.0" layoutY="50.0" text="Kunde">
+                        <Label layoutX="14.0" layoutY="75.0" text="Kunde">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="19.0" layoutY="90.0" text="Start dato">
+                        <Label layoutX="15.0" layoutY="115.0" text="Start dato">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="18.0" layoutY="133.0" text="Medarbejder">
+                        <Label layoutX="14.0" layoutY="158.0" text="Medarbejder">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="19.0" layoutY="171.0" text="Brugt tid i alt">
+                        <Label layoutX="15.0" layoutY="196.0" text="Brugt tid i alt">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="18.0" layoutY="205.0" text="Betalt opgave">
+                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="14.0" layoutY="230.0" text="Betalt opgave">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXTextField fx:id="kundeField" layoutX="118.0" layoutY="45.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="kundeField" layoutX="114.0" layoutY="70.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="medarbejderField" layoutX="118.0" layoutY="123.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="medarbejderField" layoutX="114.0" layoutY="148.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" layoutX="118.0" layoutY="166.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" layoutX="114.0" layoutY="191.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="373.0" layoutY="11.0" text="Opgave titel:">
+                        <Label layoutX="372.0" layoutY="28.0" text="Opgave titel:">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" layoutX="476.0" layoutY="6.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="titelField" layoutX="475.0" layoutY="23.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="373.0" layoutY="67.0" prefHeight="163.0" prefWidth="338.0" />
-                        <Label layoutX="373.0" layoutY="44.0" text="Beskrivelse">
+                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="373.0" layoutY="84.0" prefHeight="163.0" prefWidth="338.0" />
+                        <Label layoutX="372.0" layoutY="61.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" />
                      </children>
                   </AnchorPane>
                </items>
             </SplitPane>
          </children>
       </StackPane>
+      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" />
    </children>
 </AnchorPane>

@@ -8,7 +8,6 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -20,10 +19,6 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
-import javafx.scene.effect.BlendMode;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.paint.Color;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -91,8 +86,6 @@ public class MainUserViewController implements Initializable
     private ImageView btn_close;
     @FXML
     private JFXButton btn_stop;
-    @FXML
-    private JFXDatePicker datePicker;
 
     /**
      * Initializes the controller class.
@@ -178,22 +171,16 @@ public class MainUserViewController implements Initializable
                Date date2 = format.parse(slutTid);
                long difference = date2.getTime() - date1.getTime(); 
                
-//               startTid = startTid.replace(":", "");
-//               slutTid = slutTid.replace(":", "");
-//
-//               int startTidInt = Integer.parseInt(startTid.trim());
-//               int slutTidInt = Integer.parseInt(slutTid.trim());
-//               System.out.println("start tid" + startTidInt);
-//               System.out.println("slut tid"  + slutTidInt);
-//               
-//               int timeUsed = slutTidInt - startTidInt;
+
                
                long input = difference / 1000;
                long hours = (input - input%3600)/3600;
-               long minutes = (input%3600 - (input%3600%60))/60;
+               long minutes = (input%3600 - input%3600%60)/60;
                long seconds = input%3600%60;
+               System.out.println("Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
+               
                brugtTidField.setText(hours +  " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
-
+               
                
                 
                 

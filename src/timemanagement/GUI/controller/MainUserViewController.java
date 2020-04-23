@@ -8,6 +8,7 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -19,6 +20,10 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
+import javafx.scene.effect.BlendMode;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.paint.Color;
 
 import java.text.SimpleDateFormat;
 
@@ -85,6 +90,8 @@ public class MainUserViewController implements Initializable
     private ImageView btn_close;
     @FXML
     private JFXButton btn_stop;
+    @FXML
+    private JFXDatePicker datePicker;
 
     /**
      * Initializes the controller class.

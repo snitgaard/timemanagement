@@ -82,8 +82,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private FontAwesomeIconView startIcon;
     @FXML
-    private FontAwesomeIconView stopIcon;
-    @FXML
     private JFXButton startTime;
 
     /**

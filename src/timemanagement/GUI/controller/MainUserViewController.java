@@ -147,6 +147,7 @@ public class MainUserViewController implements Initializable
                 btn_start.setDisable(true);
                 btn_stop.setDisable(false);
                 slutTidField.clear();
+                brugtTidField.clear();
         }
         catch (Exception e) {
         }

@@ -7,11 +7,16 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -65,7 +70,7 @@
             </SplitPane>
             <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5297113752122241" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
               <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="717.0">
                      <children>
                         <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
                         <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
@@ -192,5 +197,33 @@
             </SplitPane>
          </children>
       </StackPane>
+      <Pane prefHeight="47.0" prefWidth="949.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <ImageView fitHeight="18.0" fitWidth="15.0" layoutX="898.0" layoutY="8.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../../../../../../Desktop/Attendance-Automation/src/images/minus-symbol.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <ColorAdjust brightness="0.21" />
+               </effect>
+            </ImageView>
+            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="btn_close" fitHeight="18.0" fitWidth="15.0" layoutX="930.0" layoutY="7.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../../../../../../../../../Desktop/Attendance-Automation/src/images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

@@ -19,8 +19,14 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
+
 import java.text.SimpleDateFormat;
+
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 
 /**
@@ -75,6 +81,8 @@ public class MainUserViewController implements Initializable
     private StackPane stackPane;
     @FXML
     private JFXButton btn_start;
+    @FXML
+    private ImageView btn_close;
 
     /**
      * Initializes the controller class.
@@ -112,5 +120,30 @@ public class MainUserViewController implements Initializable
         }
     }
     
+
+    /**
+     * Closes the stage, since this is the very first stage, it will close the program completely.
+     *
+     * @param event
+     */
+    @FXML
+    private void close_app(MouseEvent event)
+    {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
+    }
+
+
+    /**
+     * Minimizes the stage
+     *
+     * @param event
+     */
+    @FXML
+    private void minimize_app(MouseEvent event)
+    {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
 
 }

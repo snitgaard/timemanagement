@@ -18,6 +18,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -70,14 +71,29 @@ public class LoginController implements Initializable
         }
     }    
 
+     /**
+     * Closes the stage, since this is the very first stage, it will close the program completely.
+     *
+     * @param event
+     */
     @FXML
     private void close_app(MouseEvent event)
     {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
+
+    /**
+     * Minimizes the stage
+     *
+     * @param event
+     */
     @FXML
     private void minimize_app(MouseEvent event)
     {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
     }
 
     @FXML

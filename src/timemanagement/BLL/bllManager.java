@@ -7,7 +7,10 @@ package timemanagement.BLL;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Task;
 import timemanagement.BE.User;
 import timemanagement.DAL.DalException;
 import timemanagement.DAL.DalFacade;
@@ -93,5 +96,44 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
+
+    @Override
+    public List<String> getAllTasks() throws bllException
+    {
+        try
+        {
+            return dalFacade.getAllTasks();
+        } catch (DalException ex)
+        {
+            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
+    public void deleteTask(Task task) throws bllException
+    {
+        try
+        {
+            dalFacade.deleteTask(task);
+        } catch (DalException ex)
+        {
+            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }   
+ 
+
+    @Override
+    public boolean createTask() throws bllException
+    {
+        try
+        {
+            return dalFacade.createTask();
+        } catch (DalException ex)
+        {
+            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }  
     
 }

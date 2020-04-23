@@ -120,7 +120,7 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <Line endX="626.0" layoutX="104.0" layoutY="298.0" startX="-100.0" />
+                        <Line endX="626.0" layoutX="90.5" layoutY="299.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.bottomAnchor="12.5" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -210,11 +210,6 @@
                   <ColorAdjust brightness="0.21" />
                </effect>
             </ImageView>
-            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-            </Label>
             <ImageView fx:id="btn_close" fitHeight="18.0" fitWidth="15.0" layoutX="930.0" layoutY="7.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -225,5 +220,6 @@
             </ImageView>
          </children>
       </Pane>
+      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
    </children>
 </AnchorPane>

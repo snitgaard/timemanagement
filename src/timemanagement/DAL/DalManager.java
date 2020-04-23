@@ -11,9 +11,11 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Task;
 import timemanagement.BE.User;
 import timemanagement.DAL.database.AdminDAO;
 import timemanagement.DAL.database.ProjectDAO;
+import timemanagement.DAL.database.TaskDAO;
 import timemanagement.DAL.database.UserDAO;
 
 /**
@@ -25,11 +27,14 @@ public class DalManager implements DalFacade {
     private final UserDAO userDAO; 
     private final AdminDAO adminDAO;
     private final ProjectDAO projectDAO;
+    private final TaskDAO taskDAO;
 
     public DalManager() throws IOException {
         userDAO = new UserDAO();
         adminDAO = new AdminDAO();
         projectDAO = new ProjectDAO();
+        taskDAO = new TaskDAO();
+        
     }
     
     
@@ -82,6 +87,31 @@ public class DalManager implements DalFacade {
     @Override
     public Admin getSpecificAdmin(String adminLogin) throws DalException {
         return adminDAO.getSpecificAdmin(adminLogin);
+    }
+
+    @Override
+    public List<String> getAllTasks() throws DalException
+    {
+        try
+        {
+            return taskDAO.getAllTasks();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    @Override
+    public void deleteTask(Task task) throws DalException
+    {
+        taskDAO.deleteTask(task);
+    }
+
+    @Override
+    public boolean createTask() throws DalException
+    {
+        return taskDAO.createTask();
     }
     
     

@@ -7,6 +7,7 @@ package timemanagement.DAL;
 
 import java.util.List;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Task;
 import timemanagement.BE.User;
 
 /**
@@ -29,4 +30,9 @@ public interface DalFacade {
     
     Admin getSpecificAdmin (String adminLogin) throws DalException;
     
+    List<String> getAllTasks() throws DalException;
+    
+    void deleteTask(Task task) throws DalException;
+    
+    boolean createTask() throws DalException;
 }

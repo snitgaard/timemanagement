@@ -242,13 +242,13 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" />
+                        <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.rightAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </items>
             </SplitPane>
          </children>
       </StackPane>
-      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" />
+      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
    </children>
 </AnchorPane>

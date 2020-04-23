@@ -22,7 +22,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.StackPane;
+import timemanagement.BE.Project;
+import timemanagement.BE.Task;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 
@@ -51,19 +54,19 @@ public class MainAdminViewController implements Initializable
     @FXML
     private SplitPane opgaverPane;
     @FXML
-    private TableColumn<?, ?> opgaveNavnColumn;
+    private TableColumn<Task, String> opgaveNavnColumn;
     @FXML
-    private TableColumn<?, ?> projektNavnColumn;
+    private TableColumn<Project, String> projektNavnColumn;
     @FXML
-    private TableColumn<?, ?> brugtTidColumn;
+    private TableColumn<Task, Integer> brugtTidColumn;
     @FXML
-    private TableColumn<?, ?> datoColumn;
+    private TableColumn<Task, String> datoColumn;
     @FXML
     private SplitPane timeLoggerPane;
     @FXML
     private JFXComboBox<String> projektComboBox;
     @FXML
-    private JFXComboBox<?> opgaveComboBox;
+    private JFXComboBox<String> opgaveComboBox;
     @FXML
     private JFXTextField startTidField;
     @FXML
@@ -97,15 +100,22 @@ public class MainAdminViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-                try {
+        try
+        {
             model = new Model();
             projektComboBox.setItems(model.getAllProjects());
-        } catch (IOException ex) {
+            opgaveComboBox.setItems(model.getAllTasks());
+        } catch (IOException ex)
+        {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ModelException ex) { 
+        } catch (ModelException ex)
+        {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
+        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+        brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
+        datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
     }
 
     /**

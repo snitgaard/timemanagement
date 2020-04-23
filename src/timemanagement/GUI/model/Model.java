@@ -18,17 +18,18 @@ import timemanagement.BLL.bllException;
  *
  * @author jigzi
  */
-public class Model {
-    
+public class Model
+{
+
     private bllManager bllManager;
     private ObservableList<String> allProjects;
+    private ObservableList<String> allTasks;
 
-    public Model() throws IOException {
+    public Model() throws IOException
+    {
         bllManager = new bllManager();
     }
-    
-    
-    
+
     public boolean checkUserCredentials(String userLogin, String userPassword) throws ModelException
     {
         try
@@ -39,7 +40,7 @@ public class Model {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws ModelException
     {
         try
@@ -50,52 +51,75 @@ public class Model {
             throw new ModelException(ex.getMessage());
         }
     }
-    
-    public List<User> getUser (String userLogin) throws ModelException
+
+    public List<User> getUser(String userLogin) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.getUser(userLogin);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
-        public ObservableList<String> getAllProjects() throws ModelException
+
+    public ObservableList<String> getAllProjects() throws ModelException
     {
         allProjects = FXCollections.observableArrayList();
-        try {
+        try
+        {
             allProjects.addAll(bllManager.getAllProjects());
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
         return allProjects;
     }
-    
-    public User getSpecificUser (String userLogin) throws ModelException
+
+    public User getSpecificUser(String userLogin) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.getSpecificUser(userLogin);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
-    public List<Admin> getAdmin (String adminLogin) throws ModelException
+
+    public List<Admin> getAdmin(String adminLogin) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.getAdmin(adminLogin);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+
+    public Admin getSpecificAdmin(String adminLogin) throws ModelException
+    {
+        try
+        {
+            return bllManager.getSpecificAdmin(adminLogin);
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
     
-    public Admin getSpecificAdmin (String adminLogin) throws ModelException
+    public ObservableList<String> getAllTasks() throws ModelException
     {
-        try {
-            return bllManager.getSpecificAdmin(adminLogin);
-        } catch (bllException ex) {
+         allTasks = FXCollections.observableArrayList();
+        try
+        {
+            allTasks.addAll(bllManager.getAllTasks());
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
+        return allTasks;
     }
-     
+
 }

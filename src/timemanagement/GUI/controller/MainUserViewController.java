@@ -8,6 +8,7 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.net.URL;
@@ -85,6 +86,8 @@ public class MainUserViewController implements Initializable
     private ImageView btn_close;
     @FXML
     private JFXButton btn_stop;
+    @FXML
+    private JFXDatePicker datePicker;
 
     /**
      * Initializes the controller class.

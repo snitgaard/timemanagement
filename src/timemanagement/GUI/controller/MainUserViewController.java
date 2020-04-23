@@ -22,6 +22,11 @@ import javafx.scene.layout.StackPane;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.sql.Timestamp;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javafx.scene.Node;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
@@ -156,6 +161,13 @@ public class MainUserViewController implements Initializable
         stage.setIconified(true);
     }
 
+    
+     /**
+     * Gets the current time and disables the start button
+     *
+     * @param event
+     */
+    
     @FXML
     private void starttime(ActionEvent event)
     {
@@ -170,9 +182,26 @@ public class MainUserViewController implements Initializable
             slutTidField.clear();
         } catch (Exception e)
         {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                startTidField.setText(sdf.format(date));
+                btn_start.setDisable(true);
+                btn_stop.setDisable(false);
+                slutTidField.clear();
+                brugtTidField.clear();
+        }
+        catch (Exception e) {
         }
     }
 
+    
+     /**
+     * Gets the current time and disables the stop button.
+     * Calculating the time used and displays is into the field. 
+     * 
+     * @param event
+     */
+    
     @FXML
     private void stopTid(ActionEvent event)
     {
@@ -210,6 +239,34 @@ public class MainUserViewController implements Initializable
 
         } catch (Exception e)
         {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                slutTidField.setText(sdf.format(date));
+                btn_start.setDisable(false);
+                btn_stop.setDisable(true);
+                
+               String startTid = startTidField.getText();
+               String slutTid = slutTidField.getText();
+               SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+               Date date1 = format.parse(startTid);
+               Date date2 = format.parse(slutTid);
+               long difference = date2.getTime() - date1.getTime(); 
+               
+
+               
+               long input = difference / 1000;
+               long hours = (input - input%3600)/3600;
+               long minutes = (input%3600 - input%3600%60)/60;
+               long seconds = input%3600%60;
+               
+               brugtTidField.setText(hours +  " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
+               
+               
+                
+                
+        }
+        
+        catch (Exception e){
         }
     }
 

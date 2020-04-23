@@ -83,6 +83,8 @@ public class MainUserViewController implements Initializable
     private JFXButton btn_start;
     @FXML
     private ImageView btn_close;
+    @FXML
+    private JFXButton btn_stop;
 
     /**
      * Initializes the controller class.
@@ -105,21 +107,7 @@ public class MainUserViewController implements Initializable
             opgaverPane.toFront();
         }
     }
-    
-    @FXML
-    private void starttime(javafx.scene.input.MouseEvent event)
-    {
-        try 
-        {
-                java.util.Date date = new java.util.Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                startTidField.setText(sdf.format(date));
-                System.out.println(sdf.format(date));
-        }
-        catch (Exception e) {
-        }
-    }
-    
+
 
     /**
      * Closes the stage, since this is the very first stage, it will close the program completely.
@@ -146,4 +134,38 @@ public class MainUserViewController implements Initializable
         stage.setIconified(true);
     }
 
+    @FXML
+    private void starttime(ActionEvent event)
+    {
+        try 
+            
+        {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                startTidField.setText(sdf.format(date));
+                System.out.println(sdf.format(date));
+                btn_start.setDisable(true);
+                btn_stop.setDisable(false);
+                slutTidField.clear();
+        }
+        catch (Exception e) {
+        }
+    }
+
+    @FXML
+    private void stopTid(ActionEvent event) 
+{
+        try 
+            
+        {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                slutTidField.setText(sdf.format(date));
+                System.out.println(sdf.format(date));
+                btn_start.setDisable(false);
+                btn_stop.setDisable(true);
+        }
+        catch (Exception e) {
+        }
+    }
 }

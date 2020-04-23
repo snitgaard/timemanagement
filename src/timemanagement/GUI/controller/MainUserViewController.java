@@ -19,7 +19,14 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
+
+import java.text.SimpleDateFormat;
+
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+
 import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 
 
 /**
@@ -74,6 +81,10 @@ public class MainUserViewController implements Initializable
     private StackPane stackPane;
     @FXML
     private JFXButton btn_start;
+    @FXML
+    private ImageView btn_close;
+    @FXML
+    private JFXButton btn_stop;
 
     /**
      * Initializes the controller class.
@@ -96,26 +107,65 @@ public class MainUserViewController implements Initializable
             opgaverPane.toFront();
         }
     }
-    
-    private void starttime(javafx.scene.input.MouseEvent event)
+
+
+    /**
+     * Closes the stage, since this is the very first stage, it will close the program completely.
+     *
+     * @param event
+     */
+    @FXML
+    private void close_app(MouseEvent event)
     {
-        try 
-        {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println(timestamp);
-        }
-        catch (Exception e) {
-        }
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
-    private void stoptime(javafx.scene.input.MouseEvent event)
+
+
+    /**
+     * Minimizes the stage
+     *
+     * @param event
+     */
+    @FXML
+    private void minimize_app(MouseEvent event)
+    {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    @FXML
+    private void starttime(ActionEvent event)
     {
         try 
+            
         {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println(timestamp);
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                startTidField.setText(sdf.format(date));
+                System.out.println(sdf.format(date));
+                btn_start.setDisable(true);
+                btn_stop.setDisable(false);
+                slutTidField.clear();
         }
         catch (Exception e) {
         }
     }
 
+    @FXML
+    private void stopTid(ActionEvent event) 
+{
+        try 
+            
+        {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                slutTidField.setText(sdf.format(date));
+                System.out.println(sdf.format(date));
+                btn_start.setDisable(false);
+                btn_stop.setDisable(true);
+        }
+        catch (Exception e) {
+        }
+    }
 }

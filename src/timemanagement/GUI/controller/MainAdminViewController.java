@@ -12,14 +12,19 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
+import timemanagement.gui.model.Model;
+import timemanagement.gui.model.ModelException;
 
 /**
  * FXML Controller class
@@ -56,7 +61,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private SplitPane timeLoggerPane;
     @FXML
-    private JFXComboBox<?> projektComboBox;
+    private JFXComboBox<String> projektComboBox;
     @FXML
     private JFXComboBox<?> opgaveComboBox;
     @FXML
@@ -83,6 +88,7 @@ public class MainAdminViewController implements Initializable
     private FontAwesomeIconView startIcon;
     @FXML
     private JFXButton startTime;
+    private Model model;
 
     /**
      * Initializes the controller class.
@@ -91,6 +97,15 @@ public class MainAdminViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
+                try {
+            model = new Model();
+            projektComboBox.setItems(model.getAllProjects());
+        } catch (IOException ex) {
+            Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ModelException ex) { 
+            Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
     }
 
     /**
@@ -130,9 +145,10 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Handles the start / stop time function and changes the button icon / label
-     * depending on which action is to be performed.
-     * @param event 
+     * Handles the start / stop time function and changes the button icon /
+     * label depending on which action is to be performed.
+     *
+     * @param event
      */
     @FXML
     private void handleStartTime(ActionEvent event)

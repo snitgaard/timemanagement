@@ -26,7 +26,7 @@
    <children>
       <VBox layoutY="125.0" prefHeight="466.0" prefWidth="228.0">
          <children>
-            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="125.0" text="Tids logger">
+            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="125.0" ripplerFill="#bcb8b8" text="Tids logger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -34,7 +34,7 @@
                   <FontAwesomeIconView glyphName="HOURGLASS" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="107.0" text="Opgaver">
+            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="107.0" ripplerFill="#bcb8b8" text="Opgaver">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -50,8 +50,8 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXDatePicker layoutX="92.0" layoutY="34.0" promptText="Vælg start dato" />
-                        <JFXDatePicker layoutX="445.0" layoutY="34.0" promptText="Vælg slut dato" />
+                        <JFXDatePicker layoutX="89.0" layoutY="62.0" promptText="Vælg start dato" />
+                        <JFXDatePicker layoutX="341.0" layoutY="62.0" promptText="Vælg slut dato" />
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -125,52 +125,52 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXTextField fx:id="sagsNrField" layoutX="118.0" layoutY="6.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="sagsNrField" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="19.0" layoutY="13.0" text="Sags nr.">
+                        <Label layoutX="15.0" layoutY="21.0" text="Sags nr.">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="18.0" layoutY="50.0" text="Kunde">
+                        <Label layoutX="14.0" layoutY="58.0" text="Kunde">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="19.0" layoutY="90.0" text="Start dato">
+                        <Label layoutX="15.0" layoutY="98.0" text="Start dato">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="18.0" layoutY="133.0" text="Medarbejder">
+                        <Label layoutX="14.0" layoutY="141.0" text="Medarbejder">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="19.0" layoutY="171.0" text="Brugt tid i alt">
+                        <Label layoutX="15.0" layoutY="179.0" text="Brugt tid i alt">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="18.0" layoutY="205.0" text="Betalt opgave">
+                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="14.0" layoutY="213.0" text="Betalt opgave">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXTextField fx:id="kundeField" layoutX="118.0" layoutY="45.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="kundeField" layoutX="114.0" layoutY="53.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="medarbejderField" layoutX="118.0" layoutY="123.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="medarbejderField" layoutX="114.0" layoutY="131.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" layoutX="118.0" layoutY="166.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" layoutX="114.0" layoutY="174.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -191,6 +191,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
+                        <JFXDatePicker fx:id="datePicker" layoutX="118.0" layoutY="86.0" prefHeight="28.0" prefWidth="193.0" />
                      </children>
                   </AnchorPane>
               </items>

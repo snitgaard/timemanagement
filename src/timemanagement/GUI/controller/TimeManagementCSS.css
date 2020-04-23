@@ -7,7 +7,24 @@ and open the template in the editor.
     Created on : 22 Apr 2020, 12:23:07
     Author     : Mads
 */
+{
+    -fx-primary: #DADADA;
+    -fx-secondary: #000000;
+}
 
 .split-pane *.split-pane-divider {
-    -fx-padding: 1 0 1 0;
+    -fx-padding: 1 0 1 0;  
+}
+
+.button:hover
+{
+    -fx-border-color: -fx-primary; 
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-secondary; 
+}
+.button:active
+{
+    -fx-border-color: -fx-primary; 
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-secondary; 
 }

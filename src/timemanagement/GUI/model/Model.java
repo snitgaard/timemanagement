@@ -7,6 +7,8 @@ package timemanagement.gui.model;
 
 import java.io.IOException;
 import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import timemanagement.BE.Admin;
 import timemanagement.BLL.bllManager;
 import timemanagement.BE.User;
@@ -19,6 +21,7 @@ import timemanagement.BLL.bllException;
 public class Model {
     
     private bllManager bllManager;
+    private ObservableList<String> allProjects;
 
     public Model() throws IOException {
         bllManager = new bllManager();
@@ -55,6 +58,17 @@ public class Model {
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
+    }
+    
+        public ObservableList<String> getAllProjects() throws ModelException
+    {
+        allProjects = FXCollections.observableArrayList();
+        try {
+            allProjects.addAll(bllManager.getAllProjects());
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+        return allProjects;
     }
     
     public User getSpecificUser (String userLogin) throws ModelException

@@ -21,6 +21,8 @@ public interface DalFacade {
     
     List<User> getUser(String userLogin) throws DalException;
     
+    List<String> getAllProjects() throws DalException;
+    
     User getSpecificUser(String userLogin) throws DalException;
     
     List<Admin> getAdmin (String adminLogin) throws DalException;

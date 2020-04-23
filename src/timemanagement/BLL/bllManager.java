@@ -46,6 +46,15 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
+    
+     @Override
+    public List<String> getAllProjects() throws bllException {
+        try {
+            return dalFacade.getAllProjects();
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
 
     @Override
     public User getSpecificUser(String userLogin) throws bllException {

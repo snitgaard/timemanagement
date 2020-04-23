@@ -143,7 +143,6 @@ public class MainUserViewController implements Initializable
                 java.util.Date date = new java.util.Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 startTidField.setText(sdf.format(date));
-                System.out.println(sdf.format(date));
                 btn_start.setDisable(true);
                 btn_stop.setDisable(false);
                 slutTidField.clear();
@@ -161,11 +160,29 @@ public class MainUserViewController implements Initializable
                 java.util.Date date = new java.util.Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 slutTidField.setText(sdf.format(date));
-                System.out.println(sdf.format(date));
                 btn_start.setDisable(false);
                 btn_stop.setDisable(true);
+                
+               String startTid = startTidField.getText();
+               String slutTid = slutTidField.getText();
+               
+               startTid = startTid.replace(":", "");
+               slutTid = startTid.replace(":", "");
+
+               int startTidInt = Integer.parseInt(startTid.trim());
+               int slutTidInt = Integer.parseInt(slutTid.trim());
+               System.out.println("start tid" + startTidInt);
+               System.out.println("slut tid"  + slutTidInt);
+               
+               int timeUsed = slutTidInt - startTidInt;
+               System.out.println("total time" + timeUsed);
+               
+               
+                
+                
         }
-        catch (Exception e) {
+        
+        catch (Exception e){
         }
     }
 }

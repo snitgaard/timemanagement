@@ -10,7 +10,10 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import timemanagement.BE.Admin;
 import timemanagement.BE.User;
+import timemanagement.DAL.database.AdminDAO;
+import timemanagement.DAL.database.ProjectDAO;
 import timemanagement.DAL.database.UserDAO;
 
 /**
@@ -20,9 +23,13 @@ import timemanagement.DAL.database.UserDAO;
 public class DalManager implements DalFacade {
     
     private final UserDAO userDAO; 
+    private final AdminDAO adminDAO;
+    private final ProjectDAO projectDAO;
 
     public DalManager() throws IOException {
         userDAO = new UserDAO();
+        adminDAO = new AdminDAO();
+        projectDAO = new ProjectDAO();
     }
     
     
@@ -47,10 +54,34 @@ public class DalManager implements DalFacade {
             throw new DalException(ex.getMessage());
         } 
     }
+    
+    @Override
+    public List<String> getAllProjects() throws DalException {
+        try {
+            return projectDAO.getAllProjects();
+        } catch (SQLException ex) {
+            throw new DalException(ex.getMessage());
+        }
+    }
 
     @Override
     public User getSpecificUser(String userLogin) throws DalException {
         return userDAO.getSpecificUser(userLogin);
+    }
+
+    @Override
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException {
+        return adminDAO.checkAdminCredentials(adminLogin, adminPassword);
+    }
+
+    @Override
+    public List<Admin> getAdmin(String adminLogin) throws DalException {
+        return adminDAO.getAdmin(adminLogin);
+    }
+
+    @Override
+    public Admin getSpecificAdmin(String adminLogin) throws DalException {
+        return adminDAO.getSpecificAdmin(adminLogin);
     }
     
     

@@ -32,16 +32,20 @@ public class ProjectDAO {
  * @return
  * @throws SQLException 
  */
-    public List<Project> getAllProjects() throws SQLException {
+    public List<String> getAllProjects() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT * FROM Project;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Project> allProjects = new ArrayList<>();
+            ArrayList<String> allProjects = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                Project project = new Project(id);
-                allProjects.add(project);
+                String projektNavn = rs.getString("projektNavn");
+                String kunde = rs.getString("kunde");
+                String startDato = rs.getString("startDato");
+                int brugtTid = rs.getInt("brugtTid");
+                Project project = new Project(id, projektNavn, kunde, startDato, brugtTid);
+                allProjects.add(project + "");
             }
             return allProjects;
         }
@@ -60,7 +64,7 @@ public class ProjectDAO {
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {
-                throw new DalException("yes");
+                throw new DalException("Shit fuck, could not delete");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -85,7 +89,6 @@ public class ProjectDAO {
                     return true;
                 }
             }
-
         } catch (SQLException ex) {
             ex.printStackTrace();
             throw new DalException("Could not create project");

@@ -6,6 +6,7 @@
 package timemanagement.BLL;
 
 import java.util.List;
+import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 import timemanagement.DAL.DalException;
 
@@ -21,5 +22,13 @@ public interface bllFacade {
     List<User> getUser(String userLogin) throws bllException;
     
     User getSpecificUser(String userLogin) throws bllException;
+    
+    public List<String> getAllProjects() throws bllException;
+    
+    boolean checkAdminCredentials (String adminLogin, String adminPassword) throws bllException;
+    
+    List<Admin> getAdmin (String adminLogin) throws bllException;
+    
+    Admin getSpecificAdmin (String adminLogin) throws bllException;
     
 }

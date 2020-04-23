@@ -6,6 +6,7 @@
 package timemanagement.DAL;
 
 import java.util.List;
+import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 
 /**
@@ -16,8 +17,16 @@ public interface DalFacade {
     
     boolean checkUserCredentials(String userLogin, String userPassword) throws DalException;
     
+    boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException;
+    
     List<User> getUser(String userLogin) throws DalException;
     
+    List<String> getAllProjects() throws DalException;
+    
     User getSpecificUser(String userLogin) throws DalException;
+    
+    List<Admin> getAdmin (String adminLogin) throws DalException;
+    
+    Admin getSpecificAdmin (String adminLogin) throws DalException;
     
 }

@@ -32,6 +32,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
@@ -54,6 +55,7 @@ public class LoginController implements Initializable
     private JFXPasswordField passwordField;
     private Model model;
     private User selectedUser;
+    private Admin selectedAdmin;
     
     private double xOffset = 0;
     private double yOffset = 0;
@@ -100,17 +102,17 @@ public class LoginController implements Initializable
             stage.close();
         
 
-//        } else if (model.checkTeacherCredentials(username, password))
-//        {
-//            Teacher selectedTeacher = model.getSpecificTeacher(username);
-//            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/attendance/automation/gui/view/TeacherMain.fxml"));
-//            redirectToStage(fxmlLoader);
-//            TeacherMainController teachercontroller = fxmlLoader.getController();
+        } else if (model.checkAdminCredentials(username, password))
+        {
+            Admin selectedAdmin = model.getSpecificAdmin(username);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
+            redirectToStage(fxmlLoader);
+            MainAdminViewController mainAdmincontroller = fxmlLoader.getController();
 //            // Here the TeacherMainController is given important data objects,
 //            // This secures that it is the correct ones we are working with.
 //            teachercontroller.ApplyImportantData(model, this, selectedTeacher);
-//            Stage stage = (Stage) btnLogin.getScene().getWindow();
-//            stage.close();
+            Stage stage = (Stage) btnLogin.getScene().getWindow();
+            stage.close();
         } else
         {
             Border warning = new Border(new BorderStroke(javafx.scene.paint.Color.RED,

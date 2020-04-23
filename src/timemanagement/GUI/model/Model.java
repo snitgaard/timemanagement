@@ -7,6 +7,7 @@ package timemanagement.gui.model;
 
 import java.io.IOException;
 import java.util.List;
+import timemanagement.BE.Admin;
 import timemanagement.BLL.bllManager;
 import timemanagement.BE.User;
 import timemanagement.BLL.bllException;
@@ -36,6 +37,17 @@ public class Model {
         }
     }
     
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws ModelException
+    {
+        try
+        {
+            return bllManager.checkAdminCredentials(adminLogin, adminPassword);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
     public List<User> getUser (String userLogin) throws ModelException
     {
         try {
@@ -49,6 +61,24 @@ public class Model {
     {
         try {
             return bllManager.getSpecificUser(userLogin);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public List<Admin> getAdmin (String adminLogin) throws ModelException
+    {
+        try {
+            return bllManager.getAdmin(adminLogin);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public Admin getSpecificAdmin (String adminLogin) throws ModelException
+    {
+        try {
+            return bllManager.getSpecificAdmin(adminLogin);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

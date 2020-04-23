@@ -19,6 +19,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.layout.StackPane;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import javafx.scene.input.MouseEvent;
 
 
@@ -97,25 +98,19 @@ public class MainUserViewController implements Initializable
         }
     }
     
+    @FXML
     private void starttime(javafx.scene.input.MouseEvent event)
     {
         try 
         {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println(timestamp);
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                startTidField.setText(sdf.format(date));
+                System.out.println(sdf.format(date));
         }
         catch (Exception e) {
         }
     }
-    private void stoptime(javafx.scene.input.MouseEvent event)
-    {
-        try 
-        {
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                System.out.println(timestamp);
-        }
-        catch (Exception e) {
-        }
-    }
+    
 
 }

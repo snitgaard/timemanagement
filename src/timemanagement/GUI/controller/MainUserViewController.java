@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.Timestamp;
+import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -190,8 +191,6 @@ public class MainUserViewController implements Initializable
                 slutTidField.clear();
                 brugtTidField.clear();
         }
-        catch (Exception e) {
-        }
     }
 
     
@@ -203,7 +202,7 @@ public class MainUserViewController implements Initializable
      */
     
     @FXML
-    private void stopTid(ActionEvent event)
+    private void stopTid(ActionEvent event) throws ParseException
     {
         try
 
@@ -264,9 +263,6 @@ public class MainUserViewController implements Initializable
                
                 
                 
-        }
-        
-        catch (Exception e){
         }
     }
 

@@ -167,7 +167,7 @@ public class MainUserViewController implements Initializable
                String slutTid = slutTidField.getText();
                
                startTid = startTid.replace(":", "");
-               slutTid = startTid.replace(":", "");
+               slutTid = slutTid.replace(":", "");
 
                int startTidInt = Integer.parseInt(startTid.trim());
                int slutTidInt = Integer.parseInt(slutTid.trim());
@@ -175,7 +175,10 @@ public class MainUserViewController implements Initializable
                System.out.println("slut tid"  + slutTidInt);
                
                int timeUsed = slutTidInt - startTidInt;
-               System.out.println("total time" + timeUsed);
+               
+               
+               
+               brugtTidField.setText(timeUsed + "");
                
                
                 

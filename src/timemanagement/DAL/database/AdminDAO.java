@@ -94,4 +94,90 @@ public class AdminDAO {
         }
         return false;
     }
+    
+    /**
+     * If called this method will create a connection between the database
+     * and the program. The SQL statement will be run afterwards.
+     * Checks the user credentials based on user login and password
+     *
+     * @param userLogin
+     * @param userPassword
+     * @return true if credentials match with the database and false if not
+     * @throws DalException
+     */
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+
+            String sql = "SELECT * FROM [Admin] WHERE adminLogin = ? AND adminPassword = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, adminLogin);
+            ps.setString(2, adminPassword);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next())
+            {
+                return true;
+
+            }
+            return false;
+
+        } catch (SQLException ex)
+        {
+            System.out.println(ex);
+            throw new DalException("Could not check admin credentials");
+        }
+    }
+    
+    /**
+     * If called this method will create a connection between the database
+     * and the program. The SQL statement will be run afterwards.
+     * Gets a list of users from userEmail
+     *
+     * @param adminLogin
+     * @return list of users called selectedUser
+     * @throws DalException
+     */
+    public List<Admin> getAdmin(String adminLogin) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+
+            String sql = "SELECT * FROM [Admin] WHERE adminLogin = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, adminLogin);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Admin> selectedAdmin = new ArrayList<>();
+            while (rs.next())
+            {
+                int id = rs.getInt("id");
+                adminLogin = rs.getString("adminLogin");
+                String adminPassword = rs.getString("adminPassword");
+
+                Admin admin = new Admin(id, adminLogin, adminPassword);
+                selectedAdmin.add(admin);
+            }
+            return selectedAdmin;
+
+        } catch (SQLException ex)
+        {
+            System.out.println(ex);
+            throw new DalException("Could not get user");
+        }
+    }
+
+    /**
+     * If called this method will create a connection between the database
+     * and the program. The SQL statement will be run afterwards.
+     * Gets specific user on index 0
+     *
+     * @param adminLogin
+     * @return index 0 of getAdmin method
+     * @throws DalException
+     */
+    public Admin getSpecificAdmin(String adminLogin) throws DalException
+    {
+        return getAdmin(adminLogin).get(0);
+    }
 }

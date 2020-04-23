@@ -7,6 +7,7 @@ package timemanagement.BLL;
 
 import java.io.IOException;
 import java.util.List;
+import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 import timemanagement.DAL.DalException;
 import timemanagement.DAL.DalFacade;
@@ -50,6 +51,35 @@ public class bllManager implements bllFacade {
     public User getSpecificUser(String userLogin) throws bllException {
         try {
             return dalFacade.getSpecificUser(userLogin);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException {
+        try
+        {
+            return dalFacade.checkAdminCredentials(adminLogin, adminPassword);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<Admin> getAdmin(String adminLogin) throws bllException {
+        try {
+            return dalFacade.getAdmin(adminLogin);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Admin getSpecificAdmin(String adminLogin) throws bllException {
+        try {
+            return dalFacade.getSpecificAdmin(adminLogin);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

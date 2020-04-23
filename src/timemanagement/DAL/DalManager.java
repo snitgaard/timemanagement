@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import timemanagement.BE.Admin;
 import timemanagement.BE.User;
+import timemanagement.DAL.database.AdminDAO;
 import timemanagement.DAL.database.UserDAO;
 
 /**
@@ -20,9 +22,11 @@ import timemanagement.DAL.database.UserDAO;
 public class DalManager implements DalFacade {
     
     private final UserDAO userDAO; 
+    private final AdminDAO adminDAO;
 
     public DalManager() throws IOException {
         userDAO = new UserDAO();
+        adminDAO = new AdminDAO();
     }
     
     
@@ -51,6 +55,21 @@ public class DalManager implements DalFacade {
     @Override
     public User getSpecificUser(String userLogin) throws DalException {
         return userDAO.getSpecificUser(userLogin);
+    }
+
+    @Override
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException {
+        return adminDAO.checkAdminCredentials(adminLogin, adminPassword);
+    }
+
+    @Override
+    public List<Admin> getAdmin(String adminLogin) throws DalException {
+        return adminDAO.getAdmin(adminLogin);
+    }
+
+    @Override
+    public Admin getSpecificAdmin(String adminLogin) throws DalException {
+        return adminDAO.getSpecificAdmin(adminLogin);
     }
     
     

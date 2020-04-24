@@ -56,7 +56,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TableView prefHeight="466.0" prefWidth="719.0">
+                        <TableView fx:id="opgaverTableView" prefHeight="466.0" prefWidth="719.0">
                           <columns>
                             <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Opgave navn" />
                             <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Projekt navn" />
@@ -104,23 +104,43 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onAction="#starttime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onAction="#handleTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
-                              <FontAwesomeIconView glyphName="PLAY" size="15" />
+                              <FontAwesomeIconView fx:id="startIcon" glyphName="PLAY" size="15" />
                            </graphic>
                            <font>
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="btn_stop" layoutX="547.0" layoutY="71.0" onAction="#stopTid" text="Stop tid">
-                           <graphic>
-                              <FontAwesomeIconView glyphName="STOP-CIRCLE" size="15" text="" />
-                           </graphic>
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                        </JFXButton>
-                        <Line endX="626.0" layoutX="90.5" layoutY="299.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.bottomAnchor="12.5" AnchorPane.rightAnchor="0.0" />
+                        <Line endX="626.0" layoutX="90.5" layoutY="311.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.5" AnchorPane.rightAnchor="0.0" />
+                        <Pane layoutX="-231.0" layoutY="-3.0" prefHeight="47.0" prefWidth="955.0" AnchorPane.leftAnchor="-231.0" AnchorPane.rightAnchor="-7.0" AnchorPane.topAnchor="-3.0">
+                           <children>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="881.0" layoutY="12.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../Images/minimize.png" />
+                                 </image>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <effect>
+                                    <ColorAdjust brightness="0.21" />
+                                 </effect>
+                              </ImageView>
+                              <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
+                                 <font>
+                                    <Font name="Lato Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <ImageView fx:id="btn_close" fitHeight="22.0" fitWidth="22.0" layoutX="919.0" layoutY="13.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                                 <image>
+                                    <Image url="@../../../Images/close.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
                      </children>
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -191,7 +211,8 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXDatePicker fx:id="datePicker" layoutX="118.0" layoutY="86.0" prefHeight="28.0" prefWidth="193.0" />
+                        <JFXDatePicker fx:id="datePicker" layoutX="118.0" layoutY="99.0" prefHeight="28.0" prefWidth="193.0" />
+                        <Line endX="413.0" endY="281.0" layoutX="-84.0" layoutY="-5.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" />
                      </children>
                   </AnchorPane>
               </items>

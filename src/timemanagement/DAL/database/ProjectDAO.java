@@ -32,12 +32,12 @@ public class ProjectDAO {
  * @return
  * @throws SQLException 
  */
-    public List<String> getAllProjects() throws SQLException {
+    public List<Project> getAllProjects() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT * FROM Project;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<String> allProjects = new ArrayList<>();
+            ArrayList<Project> allProjects = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String projektNavn = rs.getString("projektNavn");
@@ -45,7 +45,7 @@ public class ProjectDAO {
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
                 Project project = new Project(id, projektNavn, kunde, startDato, brugtTid);
-                allProjects.add(project + "");
+                allProjects.add(project);
             }
             return allProjects;
         }

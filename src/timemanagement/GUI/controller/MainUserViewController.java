@@ -29,7 +29,10 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -105,6 +108,7 @@ public class MainUserViewController implements Initializable
     private FontAwesomeIconView startIcon;
     @FXML
     private TableView<Task> opgaverTableView;
+    private Project project; 
 
     /**
      * Initializes the controller class.
@@ -115,7 +119,10 @@ public class MainUserViewController implements Initializable
         try
         {
             model = new Model();
-            projektComboBox.setItems(model.getAllProjects());
+            for (Project projects : model.getAllProjects()) {
+                projektComboBox.getItems().add(projects.getProjektNavn());
+            }
+//            projektComboBox.setItems(model.getAllProjects());
             opgaveComboBox.setItems(model.getAllTasks());
             opgaverTableView.setItems(model.getAllTasks());
 
@@ -130,6 +137,7 @@ public class MainUserViewController implements Initializable
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
+
     }
 
     @FXML
@@ -197,6 +205,7 @@ public class MainUserViewController implements Initializable
             long seconds = input % 3600 % 60;
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
+
         } catch (Exception e)
         {
         }
@@ -234,5 +243,26 @@ public class MainUserViewController implements Initializable
             {
             }
         }
+    }
+
+    @FXML
+    private void setProjectData(ActionEvent event) throws ModelException {
+        List<Project> projectNames = model.getAllProjects();
+        List<Project> result = new ArrayList<>();
+
+
+        for (Project projects : projectNames)
+        {
+            if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem()))
+            {
+                
+                 result.add(projects);
+                
+
+            }
+        }
+        
+        sagsNrField.setText(result.get(0).getId() + "");
+        kundeField.setText(result.get(0).getKunde());
     }
 }

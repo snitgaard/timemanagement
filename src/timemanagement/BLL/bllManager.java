@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
 import timemanagement.DAL.DalException;
@@ -51,7 +52,7 @@ public class bllManager implements bllFacade {
     }
     
      @Override
-    public List<String> getAllProjects() throws bllException {
+    public List<Project> getAllProjects() throws bllException {
         try {
             return dalFacade.getAllProjects();
         } catch (DalException ex) {

@@ -7,6 +7,7 @@ package timemanagement.BLL;
 
 import java.util.List;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
 
@@ -23,7 +24,7 @@ public interface bllFacade
 
     User getSpecificUser(String userLogin) throws bllException;
 
-    public List<String> getAllProjects() throws bllException;
+    public List<Project> getAllProjects() throws bllException;
 
     boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException;
 

@@ -8,6 +8,7 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -26,7 +27,10 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javafx.scene.Node;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -97,6 +101,9 @@ public class MainUserViewController implements Initializable
 
     private final long createdMillis = System.currentTimeMillis();
     private Model model;
+    private Project project; 
+    @FXML
+    private JFXDatePicker datePicker;
 
     /**
      * Initializes the controller class.
@@ -107,7 +114,10 @@ public class MainUserViewController implements Initializable
         try
         {
             model = new Model();
-            projektComboBox.setItems(model.getAllProjects());
+            for (Project projects : model.getAllProjects()) {
+                projektComboBox.getItems().add(projects.getProjektNavn());
+            }
+//            projektComboBox.setItems(model.getAllProjects());
             opgaveComboBox.setItems(model.getAllTasks());
 
         } catch (IOException ex)
@@ -121,6 +131,7 @@ public class MainUserViewController implements Initializable
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
+        
 
     }
 
@@ -260,5 +271,26 @@ public class MainUserViewController implements Initializable
                 
                 
         }
+    }
+
+    @FXML
+    private void setProjectData(ActionEvent event) throws ModelException {
+        List<Project> projectNames = model.getAllProjects();
+        List<Project> result = new ArrayList<>();
+
+
+        for (Project projects : projectNames)
+        {
+            if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem()))
+            {
+                
+                 result.add(projects);
+                
+
+            }
+        }
+        
+        sagsNrField.setText(result.get(0).getId() + "");
+        kundeField.setText(result.get(0).getKunde());
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Project;
 import timemanagement.BLL.bllManager;
 import timemanagement.BE.User;
 import timemanagement.BLL.bllException;
@@ -22,7 +23,7 @@ public class Model
 {
 
     private bllManager bllManager;
-    private ObservableList<String> allProjects;
+    private ObservableList<Project> allProjects;
     private ObservableList<String> allTasks;
 
     public Model() throws IOException
@@ -63,7 +64,7 @@ public class Model
         }
     }
 
-    public ObservableList<String> getAllProjects() throws ModelException
+    public ObservableList<Project> getAllProjects() throws ModelException
     {
         allProjects = FXCollections.observableArrayList();
         try

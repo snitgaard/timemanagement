@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
 import timemanagement.DAL.database.AdminDAO;
@@ -61,7 +62,7 @@ public class DalManager implements DalFacade {
     }
     
     @Override
-    public List<String> getAllProjects() throws DalException {
+    public List<Project> getAllProjects() throws DalException {
         try {
             return projectDAO.getAllProjects();
         } catch (SQLException ex) {

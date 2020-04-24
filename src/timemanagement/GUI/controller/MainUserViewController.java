@@ -27,6 +27,7 @@ import java.sql.Timestamp;
 import java.text.ParseException;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -285,12 +286,13 @@ public class MainUserViewController implements Initializable
             {
                 
                  result.add(projects);
-                
-
             }
         }
         
         sagsNrField.setText(result.get(0).getId() + "");
         kundeField.setText(result.get(0).getKunde());
+        LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
+        datePicker.setValue(localDate);
+        
     }
 }

@@ -8,8 +8,11 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javafx.scene.Node;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -92,11 +96,15 @@ public class MainUserViewController implements Initializable
     private JFXButton btn_start;
     @FXML
     private ImageView btn_close;
-    @FXML
-    private JFXButton btn_stop;
 
     private final long createdMillis = System.currentTimeMillis();
     private Model model;
+    @FXML
+    private JFXDatePicker datePicker;
+    @FXML
+    private FontAwesomeIconView startIcon;
+    @FXML
+    private TableView<Task> opgaverTableView;
 
     /**
      * Initializes the controller class.
@@ -109,6 +117,7 @@ public class MainUserViewController implements Initializable
             model = new Model();
             projektComboBox.setItems(model.getAllProjects());
             opgaveComboBox.setItems(model.getAllTasks());
+            opgaverTableView.setItems(model.getAllTasks());
 
         } catch (IOException ex)
         {
@@ -121,7 +130,6 @@ public class MainUserViewController implements Initializable
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
-
     }
 
     @FXML
@@ -162,114 +170,69 @@ public class MainUserViewController implements Initializable
         stage.setIconified(true);
     }
 
-    
-     /**
-     * Gets the current time and disables the start button
+    /**
+     * Gets the current time and disables the stop button. Calculating the time
+     * used and displays is into the field.
      *
      * @param event
      */
-    
-    @FXML
-    private void starttime(ActionEvent event)
+    private void stopTidMethod() throws ParseException
     {
         try
-
-        {
-            java.util.Date date = new java.util.Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            startTidField.setText(sdf.format(date));
-            btn_start.setDisable(true);
-            btn_stop.setDisable(false);
-            slutTidField.clear();
-        } catch (Exception e)
-        {
-                java.util.Date date = new java.util.Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                startTidField.setText(sdf.format(date));
-                btn_start.setDisable(true);
-                btn_stop.setDisable(false);
-                slutTidField.clear();
-                brugtTidField.clear();
-        }
-    }
-
-    
-     /**
-     * Gets the current time and disables the stop button.
-     * Calculating the time used and displays is into the field. 
-     * 
-     * @param event
-     */
-    
-    @FXML
-    private void stopTid(ActionEvent event) throws ParseException
-    {
-        try
-
         {
             java.util.Date date = new java.util.Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             slutTidField.setText(sdf.format(date));
-            btn_start.setDisable(false);
-            btn_stop.setDisable(true);
 
             String startTid = startTidField.getText();
             String slutTid = slutTidField.getText();
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            Date date1 = format.parse(startTid);
+            Date date2 = format.parse(slutTid);
+            long difference = date2.getTime() - date1.getTime();
 
-            startTid = startTid.replace(":", "");
-            slutTid = slutTid.replace(":", "");
-
-            int startTidInt = Integer.parseInt(startTid.trim());
-            int slutTidInt = Integer.parseInt(slutTid.trim());
-            System.out.println("start tid" + startTidInt);
-            System.out.println("slut tid" + slutTidInt);
-
-            int timeUsed = slutTidInt - startTidInt;
-
-            long input = timeUsed;
+            long input = difference / 1000;
             long hours = (input - input % 3600) / 3600;
             long minutes = (input % 3600 - input % 3600 % 60) / 60;
             long seconds = input % 3600 % 60;
 
-            System.out.println(
-                    "Hours: " + hours + " Minutes: " + minutes + " Seconds: " + seconds);
-            brugtTidField.setText(hours
-                    + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
-
+            brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
         } catch (Exception e)
         {
-                java.util.Date date = new java.util.Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                slutTidField.setText(sdf.format(date));
-                btn_start.setDisable(false);
-                btn_stop.setDisable(true);
-                
-               String startTid = startTidField.getText();
-               String slutTid = slutTidField.getText();
-               SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-               Date date1 = format.parse(startTid);
-               Date date2 = format.parse(slutTid);
-               long difference = date2.getTime() - date1.getTime(); 
-               
-
-               
-               long input = difference / 1000;
-               long hours = (input - input%3600)/3600;
-               long minutes = (input%3600 - input%3600%60)/60;
-               long seconds = input%3600%60;
-               
-               brugtTidField.setText(hours +  " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
-               
-               
-                
-                
         }
     }
 
-    public int getAgeInSeconds()
+    /**
+     * Handles the start / stop time function and changes the button icon /
+     * label depending on which action is to be performed. Also gets the time
+     * different between when you press start and stop and calculates it into
+     * HH:mm:ss using the stopTidMethod.
+     *
+     * @param event
+     * @throws ParseException
+     */
+    @FXML
+    private void handleTime(ActionEvent event) throws ParseException
     {
-        long nowMillis = System.currentTimeMillis();
-        return (int) ((nowMillis - this.createdMillis) / 1000);
+        if (startIcon.getGlyphName().equals("PAUSE"))
+        {
+            startIcon.setIcon(FontAwesomeIcon.PLAY);
+            btn_start.setText("Start tid");
+            stopTidMethod();
+        } else if (startIcon.getGlyphName().equals("PLAY"))
+        {
+            startIcon.setIcon(FontAwesomeIcon.PAUSE);
+            btn_start.setText("Stop tid");
+            try
+            {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                startTidField.setText(sdf.format(date));
+                slutTidField.clear();
+                brugtTidField.clear();
+            } catch (Exception e)
+            {
+            }
+        }
     }
-
 }

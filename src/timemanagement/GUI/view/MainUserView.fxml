@@ -198,8 +198,14 @@
             </SplitPane>
          </children>
       </StackPane>
+      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
       <Pane prefHeight="47.0" prefWidth="949.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
+            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="872.0" layoutY="10.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Images/minimize.png" />
@@ -211,11 +217,6 @@
                   <ColorAdjust brightness="0.21" />
                </effect>
             </ImageView>
-            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-            </Label>
             <ImageView fx:id="btn_close" fitHeight="22.0" fitWidth="22.0" layoutX="907.0" layoutY="12.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -226,6 +227,5 @@
             </ImageView>
          </children>
       </Pane>
-      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
    </children>
 </AnchorPane>

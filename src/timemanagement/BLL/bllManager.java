@@ -160,7 +160,7 @@ public class bllManager implements bllFacade
         }
     }
     
-    }
+    
 
     @Override
     public List<Task> getAllTasksProjektNavn() throws bllException

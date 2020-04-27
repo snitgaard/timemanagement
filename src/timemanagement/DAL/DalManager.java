@@ -23,25 +23,26 @@ import timemanagement.DAL.database.UserDAO;
  *
  * @author Mads
  */
-public class DalManager implements DalFacade {
-    
-    private final UserDAO userDAO; 
+public class DalManager implements DalFacade
+{
+
+    private final UserDAO userDAO;
     private final AdminDAO adminDAO;
     private final ProjectDAO projectDAO;
     private final TaskDAO taskDAO;
 
-    public DalManager() throws IOException {
+    public DalManager() throws IOException
+    {
         userDAO = new UserDAO();
         adminDAO = new AdminDAO();
         projectDAO = new ProjectDAO();
         taskDAO = new TaskDAO();
-        
+
     }
-    
-    
 
     @Override
-    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException {
+    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException
+    {
         try
         {
             return userDAO.checkUserCredentials(userLogin, userPassword);
@@ -53,40 +54,50 @@ public class DalManager implements DalFacade {
     }
 
     @Override
-    public List<User> getUser(String userLogin) throws DalException {
-        try {
+    public List<User> getUser(String userLogin) throws DalException
+    {
+        try
+        {
             return userDAO.getUser(userLogin);
-        } catch (DalException ex) {
-            throw new DalException(ex.getMessage());
-        } 
-    }
-    
-    @Override
-    public List<Project> getAllProjects() throws DalException {
-        try {
-            return projectDAO.getAllProjects();
-        } catch (SQLException ex) {
+        } catch (DalException ex)
+        {
             throw new DalException(ex.getMessage());
         }
     }
 
     @Override
-    public User getSpecificUser(String userLogin) throws DalException {
+    public List<Project> getAllProjects() throws DalException
+    {
+        try
+        {
+            return projectDAO.getAllProjects();
+        } catch (SQLException ex)
+        {
+            throw new DalException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public User getSpecificUser(String userLogin) throws DalException
+    {
         return userDAO.getSpecificUser(userLogin);
     }
 
     @Override
-    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException {
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException
+    {
         return adminDAO.checkAdminCredentials(adminLogin, adminPassword);
     }
 
     @Override
-    public List<Admin> getAdmin(String adminLogin) throws DalException {
+    public List<Admin> getAdmin(String adminLogin) throws DalException
+    {
         return adminDAO.getAdmin(adminLogin);
     }
 
     @Override
-    public Admin getSpecificAdmin(String adminLogin) throws DalException {
+    public Admin getSpecificAdmin(String adminLogin) throws DalException
+    {
         return adminDAO.getSpecificAdmin(adminLogin);
     }
 
@@ -98,8 +109,7 @@ public class DalManager implements DalFacade {
             return taskDAO.getAllTasks();
         } catch (SQLException ex)
         {
-            Logger.getLogger(DalManager.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+            throw new DalException(ex.getMessage());
         }
     }
 
@@ -114,7 +124,17 @@ public class DalManager implements DalFacade {
     {
         return taskDAO.createTask();
     }
-    
-    
-    
+
+    @Override
+    public List<Task> getAllTasksProjektNavn() throws DalException
+    {
+        try
+        {
+            return taskDAO.getAllTasksProjektNavn();
+        } catch (SQLException ex)
+        {
+            throw new DalException(ex.getMessage());
+        }
+    }
+
 }

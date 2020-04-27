@@ -21,15 +21,16 @@ import timemanagement.DAL.DalManager;
  *
  * @author The Cowboys
  */
-public class bllManager implements bllFacade {
-    
+public class bllManager implements bllFacade
+{
+
     private final DalFacade dalFacade;
 
     public bllManager() throws IOException
     {
         dalFacade = new DalManager();
     }
-    
+
     @Override
     public boolean checkUserCredentials(String userLogin, String userPassword) throws bllException
     {
@@ -43,34 +44,44 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public List<User> getUser(String userLogin) throws bllException {
-        try {
+    public List<User> getUser(String userLogin) throws bllException
+    {
+        try
+        {
             return dalFacade.getUser(userLogin);
-        } catch (DalException ex) {
+        } catch (DalException ex)
+        {
             throw new bllException(ex.getMessage());
         }
     }
-    
-     @Override
-    public List<Project> getAllProjects() throws bllException {
-        try {
+
+    @Override
+    public List<Project> getAllProjects() throws bllException
+    {
+        try
+        {
             return dalFacade.getAllProjects();
-        } catch (DalException ex) {
+        } catch (DalException ex)
+        {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public User getSpecificUser(String userLogin) throws bllException {
-        try {
+    public User getSpecificUser(String userLogin) throws bllException
+    {
+        try
+        {
             return dalFacade.getSpecificUser(userLogin);
-        } catch (DalException ex) {
+        } catch (DalException ex)
+        {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException {
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException
+    {
         try
         {
             return dalFacade.checkAdminCredentials(adminLogin, adminPassword);
@@ -81,19 +92,25 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public List<Admin> getAdmin(String adminLogin) throws bllException {
-        try {
+    public List<Admin> getAdmin(String adminLogin) throws bllException
+    {
+        try
+        {
             return dalFacade.getAdmin(adminLogin);
-        } catch (DalException ex) {
+        } catch (DalException ex)
+        {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public Admin getSpecificAdmin(String adminLogin) throws bllException {
-        try {
+    public Admin getSpecificAdmin(String adminLogin) throws bllException
+    {
+        try
+        {
             return dalFacade.getSpecificAdmin(adminLogin);
-        } catch (DalException ex) {
+        } catch (DalException ex)
+        {
             throw new bllException(ex.getMessage());
         }
     }
@@ -106,8 +123,7 @@ public class bllManager implements bllFacade {
             return dalFacade.getAllTasks();
         } catch (DalException ex)
         {
-            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
+             throw new bllException(ex.getMessage());
         }
     }
 
@@ -119,10 +135,9 @@ public class bllManager implements bllFacade {
             dalFacade.deleteTask(task);
         } catch (DalException ex)
         {
-            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
+             throw new bllException(ex.getMessage());
         }
-    }   
- 
+    }
 
     @Override
     public boolean createTask() throws bllException
@@ -132,9 +147,20 @@ public class bllManager implements bllFacade {
             return dalFacade.createTask();
         } catch (DalException ex)
         {
-            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
+             throw new bllException(ex.getMessage());
         }
-    }  
-    
+    }
+
+    @Override
+    public List<Task> getAllTasksProjektNavn() throws bllException
+    {
+        try
+        {
+            return dalFacade.getAllTasksProjektNavn();
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 }

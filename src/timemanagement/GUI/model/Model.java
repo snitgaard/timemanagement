@@ -123,5 +123,18 @@ public class Model
         }
         return allTasks;
     }
+    
+    public ObservableList<Task> getAllTasksProjektNavn() throws ModelException
+    {
+        allTasks = FXCollections.observableArrayList();
+        try
+        {
+            allTasks.addAll(bllManager.getAllTasksProjektNavn());
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+        return allTasks;
+    }
 
 }

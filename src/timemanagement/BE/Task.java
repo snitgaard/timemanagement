@@ -14,17 +14,28 @@ public class Task
     private int id;
     private String opgaveNavn;
     private String projektNavn;
+    private int projektId;
     private int brugtTid;
     private String dato;
 
-    public Task(int id, String opgaveNavn, String projektNavn, int brugtTid, String dato)
+    public Task(int id, String opgaveNavn, int projektId, int brugtTid, String dato)
     {
         this.id = id;
+        this.opgaveNavn = opgaveNavn;
+        this.projektId = projektId;
+        this.brugtTid = brugtTid;
+        this.dato = dato;
+    }
+
+    public Task(String opgaveNavn, String projektNavn, int brugtTid, String dato)
+    {
         this.opgaveNavn = opgaveNavn;
         this.projektNavn = projektNavn;
         this.brugtTid = brugtTid;
         this.dato = dato;
     }
+    
+    
 
     public int getId()
     {
@@ -55,6 +66,17 @@ public class Task
     {
         this.projektNavn = projektNavn;
     }
+
+    public int getProjektId()
+    {
+        return projektId;
+    }
+
+    public void setProjektId(int projektId)
+    {
+        this.projektId = projektId;
+    }
+
 
     public int getBrugtTid()
     {

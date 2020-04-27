@@ -10,6 +10,7 @@ import timemanagement.BE.Admin;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
+import timemanagement.DAL.DalException;
 
 /**
  *
@@ -37,5 +38,6 @@ public interface bllFacade
     void deleteTask(Task task) throws bllException;
 
     boolean createTask() throws bllException;
-
+    
+    List<Task> getAllTasksProjektNavn() throws bllException;
 }

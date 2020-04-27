@@ -36,4 +36,6 @@ public interface DalFacade {
     void deleteTask(Task task) throws DalException;
     
     boolean createTask() throws DalException;
+    
+    List<Task> getAllTasksProjektNavn() throws DalException;
 }

@@ -103,8 +103,16 @@ public class MainAdminViewController implements Initializable
         try
         {
             model = new Model();
+            for (Project projects : model.getAllProjects())
+            {
+                projektComboBox.getItems().add(projects.getProjektNavn());
+            }
 //            projektComboBox.setItems(model.getAllProjects());
-            opgaveComboBox.setItems(model.getAllTasks());
+            for (Task tasks : model.getAllTasks())
+            {
+                opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
+            }
+//            opgaverTableView.setItems(model.getAllTasks());
         } catch (IOException ex)
         {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);

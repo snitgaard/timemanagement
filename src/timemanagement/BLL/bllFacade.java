@@ -32,7 +32,7 @@ public interface bllFacade
 
     Admin getSpecificAdmin(String adminLogin) throws bllException;
 
-    List<String> getAllTasks() throws bllException;
+    List<Task> getAllTasks() throws bllException;
 
     void deleteTask(Task task) throws bllException;
 

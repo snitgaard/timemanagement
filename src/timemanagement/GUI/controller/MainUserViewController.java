@@ -33,6 +33,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javafx.beans.property.SimpleStringProperty;
 
 import javafx.scene.Node;
 import javafx.scene.control.TableView;
@@ -108,7 +109,7 @@ public class MainUserViewController implements Initializable
     private FontAwesomeIconView startIcon;
     @FXML
     private TableView<Task> opgaverTableView;
-    private Project project; 
+    private Project project;
 
     /**
      * Initializes the controller class.
@@ -119,11 +120,15 @@ public class MainUserViewController implements Initializable
         try
         {
             model = new Model();
-            for (Project projects : model.getAllProjects()) {
+            for (Project projects : model.getAllProjects())
+            {
                 projektComboBox.getItems().add(projects.getProjektNavn());
             }
 //            projektComboBox.setItems(model.getAllProjects());
-            opgaveComboBox.setItems(model.getAllTasks());
+            for (Task tasks : model.getAllTasks())
+            {
+                opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
+            }
             opgaverTableView.setItems(model.getAllTasks());
 
         } catch (IOException ex)
@@ -134,7 +139,8 @@ public class MainUserViewController implements Initializable
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
-        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+//        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+        projektNavnColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProjektNavn()));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 
@@ -246,22 +252,21 @@ public class MainUserViewController implements Initializable
     }
 
     @FXML
-    private void setProjectData(ActionEvent event) throws ModelException {
+    private void setProjectData(ActionEvent event) throws ModelException
+    {
         List<Project> projectNames = model.getAllProjects();
         List<Project> result = new ArrayList<>();
-
 
         for (Project projects : projectNames)
         {
             if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem()))
             {
-                
-                 result.add(projects);
-                
+
+                result.add(projects);
 
             }
         }
-        
+
         sagsNrField.setText(result.get(0).getId() + "");
         kundeField.setText(result.get(0).getKunde());
     }

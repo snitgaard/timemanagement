@@ -31,7 +31,7 @@ public interface DalFacade {
     
     Admin getSpecificAdmin (String adminLogin) throws DalException;
     
-    List<String> getAllTasks() throws DalException;
+    List<Task> getAllTasks() throws DalException;
     
     void deleteTask(Task task) throws DalException;
     

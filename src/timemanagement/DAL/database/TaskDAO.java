@@ -34,12 +34,12 @@ private DatabaseConnector dbCon;
  * @return
  * @throws SQLException 
  */
-    public List<String> getAllTasks() throws SQLException {
+    public List<Task> getAllTasks() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT * FROM Task;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<String> allProjects = new ArrayList<>();
+            ArrayList<Task> allProjects = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String projektNavn = rs.getString("opgaveNavn");
@@ -47,7 +47,7 @@ private DatabaseConnector dbCon;
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
                 Task task = new Task(id, projektNavn, projektNavn, brugtTid, dato);
-                allProjects.add(task + "");
+                allProjects.add(task);
             }
             return allProjects;
         }

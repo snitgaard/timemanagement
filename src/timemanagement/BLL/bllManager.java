@@ -99,7 +99,7 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public List<String> getAllTasks() throws bllException
+    public List<Task> getAllTasks() throws bllException
     {
         try
         {

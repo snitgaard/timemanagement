@@ -91,7 +91,7 @@ public class DalManager implements DalFacade {
     }
 
     @Override
-    public List<String> getAllTasks() throws DalException
+    public List<Task> getAllTasks() throws DalException
     {
         try
         {

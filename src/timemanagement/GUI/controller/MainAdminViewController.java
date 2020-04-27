@@ -101,6 +101,8 @@ public class MainAdminViewController implements Initializable
     private ImageView btn_close;
     @FXML
     private TableView<Task> opgaverTableView;
+    @FXML
+    private JFXComboBox<String> projektComboBox2;
 
     /**
      * Initializes the controller class.
@@ -115,6 +117,10 @@ public class MainAdminViewController implements Initializable
             for (Project projects : model.getAllProjects())
             {
                 projektComboBox.getItems().add(projects.getProjektNavn());
+            }
+            for (Project projects : model.getAllProjects())
+            {
+                projektComboBox2.getItems().add(projects.getProjektNavn());
             }
 //            projektComboBox.setItems(model.getAllProjects());
             for (Task tasks : model.getAllTasks())

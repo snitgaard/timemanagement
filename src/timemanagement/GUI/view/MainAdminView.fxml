@@ -104,7 +104,7 @@
                             <NumberAxis side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <JFXComboBox layoutX="42.0" layoutY="36.0" promptText="Vælg projekt" />
+                        <JFXComboBox fx:id="projektComboBox2" layoutX="42.0" layoutY="36.0" promptText="Vælg projekt" />
                         <JFXDatePicker layoutX="42.0" layoutY="131.0" promptText="Vælg start dato" />
                         <JFXDatePicker layoutX="257.0" layoutY="131.0" promptText="Vælg slut dato" />
                      </children>

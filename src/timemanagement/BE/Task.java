@@ -26,7 +26,7 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, String projektId, int brugtTid, String dato)
+    public Task(int id, String opgaveNavn, int projektId, int brugtTid, String dato)
     {
         this.id = id;
         this.opgaveNavn = opgaveNavn;

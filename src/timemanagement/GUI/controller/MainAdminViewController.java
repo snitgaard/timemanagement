@@ -110,6 +110,14 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_kundeNavn;
     @FXML
     private JFXButton btn_start;
+    @FXML
+    private JFXTextField txt_userPassword;
+    @FXML
+    private JFXTextField txt_userLogin;
+    @FXML
+    private JFXButton opretBrugerButton;
+    @FXML
+    private SplitPane opretBrugerPane;
 
     /**
      * Initializes the controller class.
@@ -120,6 +128,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
+            timeLoggerPane.toFront();
             model = new Model();
             for (Project projects : model.getAllProjects())
             {
@@ -172,6 +181,10 @@ public class MainAdminViewController implements Initializable
         if (actionEvent.getSource() == projekterButton)
         {
             projektPane.toFront();
+        }
+        if (actionEvent.getSource() == opretBrugerButton)
+        {
+            opretBrugerPane.toFront();
         }
     }
 
@@ -274,6 +287,10 @@ public class MainAdminViewController implements Initializable
         String kunde = txt_kundeNavn.getText();
         String startDato = LocalDate.now()+"";
         model.createProjekt(projektNavn, kunde, startDato);
+    }
+
+    @FXML
+    private void handleCreateUser(ActionEvent event) {
     }
 
 }

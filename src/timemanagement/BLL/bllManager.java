@@ -136,5 +136,14 @@ public class bllManager implements bllFacade {
             return false;
         }
     }  
+
+    @Override
+    public void addTime(long brugtTid, String opgaveNavn) throws bllException {
+        try {
+            dalFacade.addTime(brugtTid, opgaveNavn);
+        } catch (DalException ex) {
+            Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     
 }

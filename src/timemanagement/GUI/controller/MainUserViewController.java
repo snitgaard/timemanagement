@@ -212,6 +212,7 @@ public class MainUserViewController implements Initializable
             long seconds = input % 3600 % 60;
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
+            model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
 
         } catch (Exception e)
         {

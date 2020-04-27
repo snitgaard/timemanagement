@@ -114,6 +114,11 @@ public class DalManager implements DalFacade {
     {
         return taskDAO.createTask();
     }
+
+    @Override
+    public void addTime(long brugtTid, String opgaveNavn) throws DalException {
+        taskDAO.addTime(brugtTid, opgaveNavn);
+    }
     
     
     

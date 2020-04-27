@@ -7,6 +7,8 @@ package timemanagement.gui.model;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timemanagement.BE.Admin;
@@ -123,5 +125,17 @@ public class Model
         }
         return allTasks;
     }
+    
+    public void addTime(long brugtTid, String opgaveNavn) throws ModelException
+    {
+        try {
+            bllManager.addTime(brugtTid, opgaveNavn);
+        } catch (bllException ex) {
+            Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+            
+                
+            
 
 }

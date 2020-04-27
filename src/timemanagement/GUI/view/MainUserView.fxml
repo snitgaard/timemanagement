@@ -165,12 +165,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="360.0" layoutY="253.0" text="Medarbejder">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="14.0" layoutY="145.0" text="Brugt tid i alt">
+                        <Label layoutX="360.0" layoutY="48.0" text="Brugt tid i alt">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -185,12 +180,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="medarbejderField" layoutX="506.0" layoutY="238.0" prefHeight="30.0" prefWidth="159.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXTextField>
-                        <JFXTextField fx:id="timeField" layoutX="114.0" layoutY="140.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" layoutX="450.0" layoutY="43.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -205,8 +195,8 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="359.0" layoutY="57.0" prefHeight="163.0" prefWidth="338.0" />
-                        <Label layoutX="357.0" layoutY="34.0" text="Beskrivelse">
+                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="360.0" layoutY="138.0" prefHeight="65.0" prefWidth="338.0" />
+                        <Label layoutX="357.0" layoutY="117.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />
                            </font>

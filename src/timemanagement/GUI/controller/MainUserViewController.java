@@ -141,7 +141,7 @@ public class MainUserViewController implements Initializable
         }
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
 //        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        projektNavnColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProjektNavn()));
+//        projektNavnColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProjektNavn()));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 

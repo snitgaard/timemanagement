@@ -44,4 +44,6 @@ public interface DalFacade {
     boolean createProject(String projektNavn, String kunde, String startDato) throws DalException;
     
     List<Task> getAllTasksByProject(int projektId) throws DalException;
+    
+    boolean createUser(String userLogin, String userPassword) throws DalException;
 }

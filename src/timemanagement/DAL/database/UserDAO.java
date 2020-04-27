@@ -37,7 +37,7 @@ public class UserDAO {
      */
     public List<User> getAllUsers() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "SELECT * FROM User;";
+            String sql = "SELECT * FROM [User];";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<User> allUsers = new ArrayList<>();
@@ -61,7 +61,7 @@ public class UserDAO {
     public void deleteUser(User user) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             int id = user.getId();
-            String sql = "DELETE FROM User WHERE id=?;";
+            String sql = "DELETE FROM [User] WHERE id=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
@@ -80,10 +80,12 @@ public class UserDAO {
      * @return
      * @throws DalException
      */
-    public boolean createUser() throws DalException {
+    public boolean createUser(String userLogin, String userPassword) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO User;";
+            String sql = "INSERT INTO [User] (userLogin, userPassword) VALUES (?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, userLogin);
+            ps.setString(2, userPassword);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {

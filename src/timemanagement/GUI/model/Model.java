@@ -182,5 +182,16 @@ public class Model
         }
         return allTasksByProject;
     }
+    
+    public boolean createUser(String userLogin, String userPassword) throws ModelException
+            {
+        try
+        {
+            return bllManager.createUser(userLogin, userPassword);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
 }

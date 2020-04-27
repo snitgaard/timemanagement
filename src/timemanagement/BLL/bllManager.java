@@ -192,4 +192,13 @@ public class bllManager implements bllFacade
         }
     }
 
+    @Override
+    public boolean createUser(String userLogin, String userPassword) throws bllException {
+        try {
+            return dalFacade.createUser(userLogin, userPassword);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 }

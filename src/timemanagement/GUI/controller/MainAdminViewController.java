@@ -290,7 +290,10 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleCreateUser(ActionEvent event) {
+    private void handleCreateUser(ActionEvent event) throws ModelException {
+        String userLogin = txt_userLogin.getText();
+        String userPassword = txt_userPassword.getText();
+        model.createUser(userLogin, userPassword);
     }
 
 }

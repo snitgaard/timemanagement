@@ -14,6 +14,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -232,7 +233,8 @@ public class MainAdminViewController implements Initializable
     private void handleCreateProjekt(ActionEvent event) throws ModelException {
         String projektNavn = txt_projektNavn.getText();
         String kunde = txt_kundeNavn.getText();
-        model.createProjekt(projektNavn, kunde);
+        String startDato = LocalDate.now()+"";
+        model.createProjekt(projektNavn, kunde, startDato);
     }
 
 }

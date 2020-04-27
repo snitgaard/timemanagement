@@ -42,4 +42,6 @@ public interface bllFacade
     void addTime(long brugtTid, String opgaveNavn) throws bllException;
 
     List<Task> getAllTasksProjektNavn() throws bllException;
+    
+    boolean createProjekt(String projektNavn, String kunde) throws bllException;
 }

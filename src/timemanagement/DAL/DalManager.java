@@ -143,4 +143,9 @@ public class DalManager implements DalFacade
         }
     }
 
+    @Override
+    public boolean createProject(String projektNavn, String kunde) throws DalException {
+        return projectDAO.createProject(projektNavn, kunde);
+    }
+
 }

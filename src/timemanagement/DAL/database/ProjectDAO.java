@@ -81,10 +81,12 @@ public class ProjectDAO {
      * @return
      * @throws DalException
      */
-    public boolean createProject() throws DalException {
+    public boolean createProject(String projektNavn, String kunde) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Project;";
+            String sql = "INSERT INTO Project (projektNavn, kunde) VALUES (?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, projektNavn);
+            ps.setString(2, kunde);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {

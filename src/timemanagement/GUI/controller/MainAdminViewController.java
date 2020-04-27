@@ -187,9 +187,12 @@ public class MainAdminViewController implements Initializable
 
     /**
      * Handles the start / stop time function and changes the button icon /
-     * label depending on which action is to be performed.
+     * label depending on which action is to be performed. Also gets the time
+     * different between when you press start and stop and calculates it into
+     * HH:mm:ss using the stopTidMethod.
      *
      * @param event
+     * @throws ParseException
      */
    @FXML
     private void handleTime(ActionEvent event) throws ParseException 
@@ -212,6 +215,12 @@ public class MainAdminViewController implements Initializable
         }
     }
     
+     /**
+     * Gets the current time and disables the stop button. Calculating the time
+     * used and displays is into the field.
+     *
+     * @param event
+     */
      private void stopTidMethod() throws ParseException {
         try {
             java.util.Date date = new java.util.Date();

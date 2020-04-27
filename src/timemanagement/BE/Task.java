@@ -173,18 +173,34 @@ public class Task
         return opgaveNavn;
     }
 
+    /**
+     * getter for beskrivelse
+     * @return beskrivelse
+     */
     public String getBeskrivelse() {
         return beskrivelse;
     }
 
+    /**
+     * setter for beskrivelse
+     * @param beskrivelse 
+     */
     public void setBeskrivelse(String beskrivelse) {
         this.beskrivelse = beskrivelse;
     }
 
+    /**
+     * getter for betalt
+     * @return betalt
+     */
     public int getBetalt() {
         return betalt;
     }
 
+    /**
+     * setter for betalt
+     * @param betalt 
+     */
     public void setBetalt(int betalt) {
         this.betalt = betalt;
     }

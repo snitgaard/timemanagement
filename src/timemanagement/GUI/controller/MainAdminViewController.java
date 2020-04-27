@@ -14,7 +14,10 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,8 +98,6 @@ public class MainAdminViewController implements Initializable
     private JFXTextArea beskrivelseTextArea;
     @FXML
     private FontAwesomeIconView startIcon;
-    @FXML
-    private JFXButton startTime;
     private Model model;
     @FXML
     private ImageView btn_close;
@@ -104,13 +105,19 @@ public class MainAdminViewController implements Initializable
     private TableView<Task> opgaverTableView;
     @FXML
     private JFXComboBox<String> projektComboBox2;
-    @FXML
-    private JFXButton createProjekt;
     private JFXTextField kundeNavn;
-    @FXML
     private JFXTextField txt_projektNavn;
-    @FXML
     private JFXTextField txt_kundeNavn;
+    @FXML
+    private JFXButton btn_start;
+    @FXML
+    private JFXTextField txt_userPassword;
+    @FXML
+    private JFXTextField txt_userLogin;
+    @FXML
+    private JFXButton opretBrugerButton;
+    @FXML
+    private SplitPane opretBrugerPane;
 
     /**
      * Initializes the controller class.
@@ -121,6 +128,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
+            timeLoggerPane.toFront();
             model = new Model();
             for (Project projects : model.getAllProjects())
             {
@@ -174,6 +182,10 @@ public class MainAdminViewController implements Initializable
         {
             projektPane.toFront();
         }
+        if (actionEvent.getSource() == opretBrugerButton)
+        {
+            opretBrugerPane.toFront();
+        }
     }
 
     @FXML
@@ -188,21 +200,62 @@ public class MainAdminViewController implements Initializable
 
     /**
      * Handles the start / stop time function and changes the button icon /
-     * label depending on which action is to be performed.
+     * label depending on which action is to be performed. Also gets the time
+     * different between when you press start and stop and calculates it into
+     * HH:mm:ss using the stopTidMethod.
+     *
+     * @param event
+     * @throws ParseException
+     */
+   @FXML
+    private void handleTime(ActionEvent event) throws ParseException 
+    {
+        if (startIcon.getGlyphName().equals("PAUSE")) {
+            startIcon.setIcon(FontAwesomeIcon.PLAY);
+            btn_start.setText("Start tid");
+            stopTidMethod();
+        } else if (startIcon.getGlyphName().equals("PLAY")) {
+            startIcon.setIcon(FontAwesomeIcon.PAUSE);
+            btn_start.setText("Stop tid");
+            try {
+                java.util.Date date = new java.util.Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                startTidField.setText(sdf.format(date));
+                slutTidField.clear();
+                brugtTidField.clear();
+            } catch (Exception e) {
+            }
+        }
+    }
+    
+     /**
+     * Gets the current time and disables the stop button. Calculating the time
+     * used and displays is into the field.
      *
      * @param event
      */
-    @FXML
-    private void handleStartTime(ActionEvent event)
-    {
-        if (startIcon.getGlyphName().equals("PAUSE"))
-        {
-            startIcon.setIcon(FontAwesomeIcon.PLAY);
-            startTime.setText("Start tid");
-        } else if (startIcon.getGlyphName().equals("PLAY"))
-        {
-            startIcon.setIcon(FontAwesomeIcon.PAUSE);
-            startTime.setText("Stop tid");
+     private void stopTidMethod() throws ParseException {
+        try {
+            java.util.Date date = new java.util.Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            slutTidField.setText(sdf.format(date));
+
+            String startTid = startTidField.getText();
+            String slutTid = slutTidField.getText();
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            Date date1 = format.parse(startTid);
+            Date date2 = format.parse(slutTid);
+            long difference = date2.getTime() - date1.getTime();
+
+            long input = difference / 1000;
+            long hours = (input - input % 3600) / 3600;
+            long minutes = (input % 3600 - input % 3600 % 60) / 60;
+            long seconds = input % 3600 % 60;
+
+            brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
+            model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
+
+        } catch (Exception e) {
         }
     }
 
@@ -229,12 +282,15 @@ public class MainAdminViewController implements Initializable
         stage.close();
     }
 
-    @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException {
         String projektNavn = txt_projektNavn.getText();
         String kunde = txt_kundeNavn.getText();
         String startDato = LocalDate.now()+"";
         model.createProjekt(projektNavn, kunde, startDato);
+    }
+
+    @FXML
+    private void handleCreateUser(ActionEvent event) {
     }
 
 }

@@ -45,7 +45,6 @@ import timemanagement.gui.model.ModelException;
  */
 public class LoginController implements Initializable
 {
-
     @FXML
     private AnchorPane anchorPane;
     @FXML

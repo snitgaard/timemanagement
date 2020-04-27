@@ -29,7 +29,7 @@
    <children>
       <VBox layoutX="-1.0" layoutY="125.0" prefHeight="466.0" prefWidth="224.0">
          <children>
-            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="129.0" text="Tids logger">
+            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="146.0" text="Tids logger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -37,7 +37,7 @@
                   <FontAwesomeIconView glyphName="HOURGLASS" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="109.0" text="Opgaver">
+            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="127.0" text="Opgaver">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -45,7 +45,7 @@
                   <FontAwesomeIconView glyphName="BRIEFCASE" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="103.0" text="Analyse">
+            <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="124.0" text="Analyse">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -53,7 +53,15 @@
                   <FontAwesomeIconView glyphName="´" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="projekterButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="111.0" text="Projekter">
+            <JFXButton fx:id="projekterButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="134.0" text="Projekter">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="opretBrugerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="162.0" text="Opret bruger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -76,8 +84,8 @@
                               <TableColumn prefWidth="162.0" text="Brugt tid" />
                           </columns>
                         </TableView>
-                        <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
-                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
+                        <JFXTextField layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
+                        <JFXTextField layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
                         <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="144.0" text="Opret nyt projekt">
                            <font>
                               <Font name="System Bold" size="17.0" />
@@ -88,7 +96,6 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXButton fx:id="createProjekt" layoutX="386.0" layoutY="54.0" onAction="#handleCreateProjekt" prefHeight="25.0" prefWidth="55.0" text="Opret Projekt" />
                      </children>
                   </AnchorPane>
               </items>
@@ -150,7 +157,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="30.0" prefWidth="231.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -170,7 +177,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="startTime" layoutX="359.0" layoutY="67.0" onAction="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onAction="#handleTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView fx:id="startIcon" glyphName="PLAY" size="15" text="" />
                            </graphic>
@@ -250,6 +257,26 @@
                         </Label>
                         <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.rightAnchor="0.0" />
                         <Line endX="316.0" endY="315.5736083984375" startX="316.0" startY="25.881206512451172" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <JFXTextField fx:id="txt_userPassword" layoutX="11.0" layoutY="133.0" prefHeight="32.0" prefWidth="224.0" promptText="Indtast projekt navn" text="Indtast bruger password" />
+                        <JFXTextField fx:id="txt_userLogin" layoutX="11.0" layoutY="91.0" prefHeight="30.0" prefWidth="224.0" text="Indtast bruger login" />
+                        <Label layoutY="45.0" prefHeight="32.0" prefWidth="144.0" text="Opret ny bruger">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="133.0" layoutY="188.0" onAction="#handleCreateUser" prefHeight="32.0" prefWidth="102.0" text="Opret bruger">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
                </items>

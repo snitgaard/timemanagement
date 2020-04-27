@@ -17,6 +17,14 @@ public class Task
     private int brugtTid;
     private String dato;
 
+    /**
+     * Constructor for Task
+     * @param id
+     * @param opgaveNavn
+     * @param projektNavn
+     * @param brugtTid
+     * @param dato 
+     */
     public Task(int id, String opgaveNavn, String projektNavn, int brugtTid, String dato)
     {
         this.id = id;
@@ -26,56 +34,100 @@ public class Task
         this.dato = dato;
     }
 
+    /**
+     * getter for Id
+     * @return Id
+     */
     public int getId()
     {
         return id;
     }
 
+    /**
+     * setter for id
+     * @param id 
+     */
     public void setId(int id)
     {
         this.id = id;
     }
 
+    /**
+     * getter for opgaveNavn
+     * @return opgaveNavn
+     */
     public String getOpgaveNavn()
     {
         return opgaveNavn;
     }
 
+    /**
+     * setter for opgaveNavn
+     * @param opgaveNavn 
+     */
     public void setOpgaveNavn(String opgaveNavn)
     {
         this.opgaveNavn = opgaveNavn;
     }
 
+    /**
+     * getter for projektNavn
+     * @return projektNavn
+     */
     public String getProjektNavn()
     {
         return projektNavn;
     }
 
+    /**
+     * setter for projektNavn
+     * @param projektNavn 
+     */
     public void setProjektNavn(String projektNavn)
     {
         this.projektNavn = projektNavn;
     }
 
+    /**
+     * getter for brugtTid
+     * @return brugtTid
+     */
     public int getBrugtTid()
     {
         return brugtTid;
     }
 
+    /**
+     * setter for brugtTid
+     * @param brugtTid 
+     */
     public void setBrugtTid(int brugtTid)
     {
         this.brugtTid = brugtTid;
     }
 
+    /**
+     * getter for dato
+     * @return dato
+     */
     public String getDato()
     {
         return dato;
     }
 
+    /**
+     * setter for dato
+     * @param dato 
+     */
     public void setDato(String dato)
     {
         this.dato = dato;
     }
 
+    /**
+     * toString metode for Task
+     * @return opgaveNavn
+     */
     @Override
     public String toString()
     {

@@ -148,4 +148,13 @@ public class DalManager implements DalFacade
         return projectDAO.createProject(projektNavn, kunde, startDato);
     }
 
+    @Override
+    public List<Task> getAllTasksByProject(int projektId) throws DalException {
+        try {
+            return taskDAO.getAllTasksByProject(projektId);
+        } catch (SQLException ex) {
+            throw new DalException(ex.getMessage());
+        }
+    }
+
 }

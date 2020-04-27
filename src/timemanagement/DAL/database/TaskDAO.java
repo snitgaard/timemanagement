@@ -137,5 +137,27 @@ public class TaskDAO {
             return allProjects;
         }
     }
+    
+    public List<Task> getAllTasksByProject(int projektId) throws SQLException {
+        try (Connection con = dbCon.getConnection()) {
+            String sql = "SELECT * FROM Task WHERE projektId = ?;";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, projektId);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Task> allProjects = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String opgaveNavn = rs.getString("opgaveNavn");
+                projektId = rs.getInt("projektId");
+                int brugtTid = rs.getInt("brugtTid");
+                String dato = rs.getString("dato");
+                String beskrivelse = rs.getString("beskrivelse");
+                int betalt = rs.getInt("betalt");
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
+                allProjects.add(task);
+            }
+            return allProjects;
+        }
+    }
 
 }

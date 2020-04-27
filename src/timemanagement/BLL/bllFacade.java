@@ -44,4 +44,6 @@ public interface bllFacade
     List<Task> getAllTasksProjektNavn() throws bllException;
     
     boolean createProjekt(String projektNavn, String kunde, String startDato) throws bllException;
+    
+    List<Task> getAllTasksByProject(int projektId) throws bllException;
 }

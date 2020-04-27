@@ -28,6 +28,7 @@ public class Model
     private bllManager bllManager;
     private ObservableList<Project> allProjects;
     private ObservableList<Task> allTasks;
+    private ObservableList<Task> allTasksByProject;
 
     public Model() throws IOException
     {
@@ -168,6 +169,18 @@ public class Model
         {
             throw new ModelException(ex.getMessage());
         }
+    }
+    
+    public ObservableList<Task> getAllTasksByProject(int projektId) throws ModelException
+    {
+        try {
+            allTasksByProject = FXCollections.observableArrayList();
+            
+            allTasksByProject.addAll(bllManager.getAllTasksByProject(projektId));
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+        return allTasksByProject;
     }
 
 }

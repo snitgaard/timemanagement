@@ -21,17 +21,19 @@ import timemanagement.DAL.DalException;
  * @author The Cowboys
  */
 public class ProjectDAO {
+
     private DatabaseConnector dbCon;
 
-    public ProjectDAO() throws IOException 
-    { 
+    public ProjectDAO() throws IOException {
         dbCon = new DatabaseConnector();
     }
-/**
- * Creates SQL connection and gets list of all projects.
- * @return
- * @throws SQLException 
- */
+
+    /**
+     * Creates SQL connection and gets list of all projects.
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<Project> getAllProjects() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT * FROM Project;";
@@ -53,8 +55,9 @@ public class ProjectDAO {
 
     /**
      * Creates SQL Connection and deletes the selected Project.
+     *
      * @param project
-     * @throws DalException 
+     * @throws DalException
      */
     public void deleteProject(Project project) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
@@ -74,8 +77,9 @@ public class ProjectDAO {
 
     /**
      * Creates SQL Connetion and creates a new Project.
+     *
      * @return
-     * @throws DalException 
+     * @throws DalException
      */
     public boolean createProject() throws DalException {
         try ( Connection con = dbCon.getConnection()) {

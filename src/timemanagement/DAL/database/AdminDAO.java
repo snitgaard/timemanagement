@@ -21,17 +21,19 @@ import timemanagement.DAL.DalException;
  * @author The Cowboys
  */
 public class AdminDAO {
-        private DatabaseConnector dbCon;
 
-    public AdminDAO() throws IOException 
-    { 
+    private DatabaseConnector dbCon;
+
+    public AdminDAO() throws IOException {
         dbCon = new DatabaseConnector();
     }
-/**
- * Creates SQL connection and gets list of all Admins.
- * @return
- * @throws SQLException 
- */
+
+    /**
+     * Creates SQL connection and gets list of all Admins.
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<Admin> getAllAdmins() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT * FROM Admin;";
@@ -51,8 +53,9 @@ public class AdminDAO {
 
     /**
      * Creates SQL Connection and deletes the selected Admin.
+     *
      * @param Admin
-     * @throws DalException 
+     * @throws DalException
      */
     public void deleteAdmin(Admin admin) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
@@ -72,8 +75,9 @@ public class AdminDAO {
 
     /**
      * Creates SQL Connetion and creates a new Admin.
+     *
      * @return
-     * @throws DalException 
+     * @throws DalException
      */
     public boolean createAdmin() throws DalException {
         try ( Connection con = dbCon.getConnection()) {
@@ -94,21 +98,19 @@ public class AdminDAO {
         }
         return false;
     }
-    
+
     /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Checks the user credentials based on user login and password
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Checks the user
+     * credentials based on user login and password
      *
      * @param userLogin
      * @param userPassword
      * @return true if credentials match with the database and false if not
      * @throws DalException
      */
-    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
 
             String sql = "SELECT * FROM [Admin] WHERE adminLogin = ? AND adminPassword = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -116,41 +118,36 @@ public class AdminDAO {
             ps.setString(2, adminPassword);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 return true;
 
             }
             return false;
 
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             System.out.println(ex);
             throw new DalException("Could not check admin credentials");
         }
     }
-    
+
     /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Gets a list of users from userEmail
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Gets a list of
+     * users from userEmail
      *
      * @param adminLogin
      * @return list of users called selectedUser
      * @throws DalException
      */
-    public List<Admin> getAdmin(String adminLogin) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
+    public List<Admin> getAdmin(String adminLogin) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
 
             String sql = "SELECT * FROM [Admin] WHERE adminLogin = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, adminLogin);
             ResultSet rs = ps.executeQuery();
             ArrayList<Admin> selectedAdmin = new ArrayList<>();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 adminLogin = rs.getString("adminLogin");
                 String adminPassword = rs.getString("adminPassword");
@@ -160,24 +157,22 @@ public class AdminDAO {
             }
             return selectedAdmin;
 
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             System.out.println(ex);
             throw new DalException("Could not get user");
         }
     }
 
     /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Gets specific user on index 0
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Gets specific user
+     * on index 0
      *
      * @param adminLogin
      * @return index 0 of getAdmin method
      * @throws DalException
      */
-    public Admin getSpecificAdmin(String adminLogin) throws DalException
-    {
+    public Admin getSpecificAdmin(String adminLogin) throws DalException {
         return getAdmin(adminLogin).get(0);
     }
 }

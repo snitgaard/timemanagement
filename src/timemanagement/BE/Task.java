@@ -22,7 +22,7 @@ public class Task
      * Constructor for Task
      * @param id
      * @param opgaveNavn
-     * @param projektNavn
+     * @param projektId
      * @param brugtTid
      * @param dato 
      */
@@ -35,6 +35,13 @@ public class Task
         this.dato = dato;
     }
 
+    /**
+     * Constructor for Task
+     * @param opgaveNavn
+     * @param projektNavn
+     * @param brugtTid
+     * @param dato 
+     */
     public Task(String opgaveNavn, String projektNavn, int brugtTid, String dato)
     {
         this.opgaveNavn = opgaveNavn;
@@ -42,8 +49,6 @@ public class Task
         this.brugtTid = brugtTid;
         this.dato = dato;
     }
-    
-    
 
     /**
      * getter for Id
@@ -99,11 +104,19 @@ public class Task
         this.projektNavn = projektNavn;
     }
 
+    /**
+     * getter for projektId
+     * @return projektId
+     */
     public int getProjektId()
     {
         return projektId;
     }
 
+    /**
+     * setter for projektId
+     * @param projektId 
+     */
     public void setProjektId(int projektId)
     {
         this.projektId = projektId;

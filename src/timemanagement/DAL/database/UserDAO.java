@@ -22,17 +22,19 @@ import timemanagement.BE.User;
  * @author The Cowboys
  */
 public class UserDAO {
+
     private DatabaseConnector dbCon;
 
-    public UserDAO() throws IOException 
-    { 
+    public UserDAO() throws IOException {
         dbCon = new DatabaseConnector();
     }
-/**
- * Creates SQL connection and gets list of all users.
- * @return
- * @throws SQLException 
- */
+
+    /**
+     * Creates SQL connection and gets list of all users.
+     *
+     * @return
+     * @throws SQLException
+     */
     public List<User> getAllUsers() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT * FROM User;";
@@ -52,8 +54,9 @@ public class UserDAO {
 
     /**
      * Creates SQL Connection and deletes the selected User.
+     *
      * @param user
-     * @throws DalException 
+     * @throws DalException
      */
     public void deleteUser(User user) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
@@ -73,8 +76,9 @@ public class UserDAO {
 
     /**
      * Creates SQL Connetion and creates a new User.
+     *
      * @return
-     * @throws DalException 
+     * @throws DalException
      */
     public boolean createUser() throws DalException {
         try ( Connection con = dbCon.getConnection()) {
@@ -95,21 +99,19 @@ public class UserDAO {
         }
         return false;
     }
-    
+
     /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Checks the user credentials based on user login and password
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Checks the user
+     * credentials based on user login and password
      *
      * @param userLogin
      * @param userPassword
      * @return true if credentials match with the database and false if not
      * @throws DalException
      */
-    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
+    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
 
             String sql = "SELECT * FROM [User] WHERE userLogin = ? AND userPassword = ?;";
             PreparedStatement ps = con.prepareStatement(sql);
@@ -117,41 +119,36 @@ public class UserDAO {
             ps.setString(2, userPassword);
             ResultSet rs = ps.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 return true;
 
             }
             return false;
 
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             System.out.println(ex);
             throw new DalException("Could not check user credentials");
         }
     }
-    
+
     /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Gets a list of users from userEmail
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Gets a list of
+     * users from userEmail
      *
      * @param userLogin
      * @return list of users called selectedUser
      * @throws DalException
      */
-    public List<User> getUser(String userLogin) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
+    public List<User> getUser(String userLogin) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
 
             String sql = "SELECT * FROM [User] WHERE userLogin = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, userLogin);
             ResultSet rs = ps.executeQuery();
             ArrayList<User> selectedUser = new ArrayList<>();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int id = rs.getInt("id");
                 userLogin = rs.getString("userLogin");
                 String userPassword = rs.getString("userPassword");
@@ -161,24 +158,22 @@ public class UserDAO {
             }
             return selectedUser;
 
-        } catch (SQLException ex)
-        {
+        } catch (SQLException ex) {
             System.out.println(ex);
             throw new DalException("Could not get user");
         }
     }
 
     /**
-     * If called this method will create a connection between the database
-     * and the program. The SQL statement will be run afterwards.
-     * Gets specific user on index 0
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Gets specific user
+     * on index 0
      *
      * @param userLogin
      * @return index 0 of getStudent method
      * @throws DalException
      */
-    public User getSpecificUser(String userLogin) throws DalException
-    {
+    public User getSpecificUser(String userLogin) throws DalException {
         return getUser(userLogin).get(0);
     }
 }

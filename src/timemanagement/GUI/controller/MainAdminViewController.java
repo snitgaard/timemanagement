@@ -23,6 +23,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -60,7 +61,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Task, String> opgaveNavnColumn;
     @FXML
-    private TableColumn<Project, String> projektNavnColumn;
+    private TableColumn<Task, String> projektNavnColumn;
     @FXML
     private TableColumn<Task, Integer> brugtTidColumn;
     @FXML
@@ -98,6 +99,8 @@ public class MainAdminViewController implements Initializable
     private Model model;
     @FXML
     private ImageView btn_close;
+    @FXML
+    private TableView<Task> opgaverTableView;
 
     /**
      * Initializes the controller class.
@@ -118,7 +121,8 @@ public class MainAdminViewController implements Initializable
             {
                 opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
             }
-//            opgaverTableView.setItems(model.getAllTasks());
+            opgaverTableView.setItems(model.getAllTasksProjektNavn());
+            
         } catch (IOException ex)
         {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);

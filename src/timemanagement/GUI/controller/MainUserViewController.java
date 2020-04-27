@@ -88,7 +88,7 @@ public class MainUserViewController implements Initializable
     @FXML
     private TableColumn<Task, String> opgaveNavnColumn;
     @FXML
-    private TableColumn<Project, String> projektNavnColumn;
+    private TableColumn<Task, String> projektNavnColumn;
     @FXML
     private TableColumn<Task, Integer> brugtTidColumn;
     @FXML
@@ -130,7 +130,7 @@ public class MainUserViewController implements Initializable
             {
                 opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
             }
-            opgaverTableView.setItems(model.getAllTasks());
+            opgaverTableView.setItems(model.getAllTasksProjektNavn());
 
         } catch (IOException ex)
         {
@@ -140,8 +140,7 @@ public class MainUserViewController implements Initializable
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
-//        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-//        projektNavnColumn.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProjektNavn()));
+        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 

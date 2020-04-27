@@ -38,4 +38,6 @@ public interface DalFacade {
     boolean createTask() throws DalException;
     
     void addTime(long brugtTid, String opgaveNavn) throws DalException;
+    
+    List<Task> getAllTasksProjektNavn() throws DalException;
 }

@@ -21,7 +21,7 @@ import timemanagement.DAL.DalException;
 
 /**
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class TaskDAO {
 
@@ -45,11 +45,11 @@ public class TaskDAO {
             ArrayList<Task> allProjects = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                String projektNavn = rs.getString("opgaveNavn");
+                String opgaveNavn = rs.getString("opgaveNavn");
                 int projektId = rs.getInt("projektId");
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
-                Task task = new Task(id, projektNavn, projektNavn, brugtTid, dato);
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato);
                 allProjects.add(task);
             }
             return allProjects;
@@ -116,4 +116,24 @@ public class TaskDAO {
             throw new DalException("Could not fetch all classes");
         }
     }
+    public List<Task> getAllTasksProjektNavn() throws SQLException {
+        try ( Connection con = dbCon.getConnection()) {
+            String sql = "SELECT Task.opgaveNavn, Task.brugtTid, Task.dato, Project.projektNavn\n"
+                    + "FROM Task \n"
+                    + "INNER JOIN Project ON Task.projektId=Project.id;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            ArrayList<Task> allProjects = new ArrayList<>();
+            while (rs.next()) {
+                String opgaveNavn = rs.getString("opgaveNavn");
+                String projektNavn = rs.getString("projektNavn");
+                int brugtTid = rs.getInt("brugtTid");
+                String dato = rs.getString("dato");
+                Task task = new Task(opgaveNavn, projektNavn, brugtTid, dato);
+                allProjects.add(task);
+            }
+            return allProjects;
+        }
+    }
+
 }

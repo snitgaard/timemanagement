@@ -10,6 +10,7 @@ import timemanagement.BE.Admin;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
+import timemanagement.DAL.DalException;
 
 /**
  *
@@ -40,4 +41,5 @@ public interface bllFacade
     
     void addTime(long brugtTid, String opgaveNavn) throws bllException;
 
+    List<Task> getAllTasksProjektNavn() throws bllException;
 }

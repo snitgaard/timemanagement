@@ -121,7 +121,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TableView prefHeight="466.0" prefWidth="719.0">
+                        <TableView fx:id="opgaverTableView" prefHeight="466.0" prefWidth="719.0">
                            <columns>
                               <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Opgave navn" />
                               <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Projekt navn" />
@@ -177,34 +177,6 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
-                        <Pane layoutX="-226.0" prefHeight="47.0" prefWidth="955.0" AnchorPane.leftAnchor="-226.0" AnchorPane.rightAnchor="-12.0" AnchorPane.topAnchor="0.0">
-                           <children>
-                              <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="881.0" layoutY="12.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../Images/minimize.png" />
-                                 </image>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <effect>
-                                    <ColorAdjust brightness="0.21" />
-                                 </effect>
-                              </ImageView>
-                              <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
-                                 <font>
-                                    <Font name="Lato Bold" size="14.0" />
-                                 </font>
-                              </Label>
-                              <ImageView fx:id="btn_close" fitHeight="22.0" fitWidth="22.0" layoutX="919.0" layoutY="13.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                                 <image>
-                                    <Image url="@../../../Images/close.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </Pane>
                      </children>
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -283,5 +255,33 @@
             </SplitPane>
          </children>
       </StackPane>
+      <Pane layoutX="2.0" prefHeight="47.0" prefWidth="959.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-12.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="881.0" layoutY="12.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/minimize.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <ColorAdjust brightness="0.21" />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="btn_close" fitHeight="22.0" fitWidth="22.0" layoutX="918.0" layoutY="14.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../../Images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

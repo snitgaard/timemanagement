@@ -17,6 +17,8 @@ public class Task
     private int projektId;
     private int brugtTid;
     private String dato;
+    private String beskrivelse;
+    private int betalt;
 
     /**
      * Constructor for Task
@@ -26,13 +28,15 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, int projektId, int brugtTid, String dato)
+    public Task(int id, String opgaveNavn, int projektId, int brugtTid, String dato, String beskrivelse, int betalt)
     {
         this.id = id;
         this.opgaveNavn = opgaveNavn;
         this.projektId = projektId;
         this.brugtTid = brugtTid;
         this.dato = dato;
+        this.beskrivelse = beskrivelse;
+        this.betalt = betalt;
     }
 
     /**
@@ -168,4 +172,24 @@ public class Task
     {
         return opgaveNavn;
     }
+
+    public String getBeskrivelse() {
+        return beskrivelse;
+    }
+
+    public void setBeskrivelse(String beskrivelse) {
+        this.beskrivelse = beskrivelse;
+    }
+
+    public int getBetalt() {
+        return betalt;
+    }
+
+    public void setBetalt(int betalt) {
+        this.betalt = betalt;
+    }
+    
+    
+    
+    
 }

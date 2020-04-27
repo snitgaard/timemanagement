@@ -73,7 +73,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="717.0">
                      <children>
                         <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" onAction="#setProjectData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
-                        <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
+                        <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
                         <JFXTextField fx:id="startTidField" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />

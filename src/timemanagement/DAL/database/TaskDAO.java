@@ -49,7 +49,9 @@ public class TaskDAO {
                 int projektId = rs.getInt("projektId");
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
-                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato);
+                String beskrivelse = rs.getString("beskrivelse");
+                int betalt = rs.getInt("betalt");
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
                 allProjects.add(task);
             }
             return allProjects;

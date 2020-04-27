@@ -213,7 +213,8 @@ public class MainUserViewController implements Initializable {
      * @throws ParseException
      */
     @FXML
-    private void handleTime(ActionEvent event) throws ParseException {
+    private void handleTime(ActionEvent event) throws ParseException 
+    {
         if (startIcon.getGlyphName().equals("PAUSE")) {
             startIcon.setIcon(FontAwesomeIcon.PLAY);
             btn_start.setText("Start tid");

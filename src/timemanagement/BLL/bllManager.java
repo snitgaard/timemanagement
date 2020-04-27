@@ -174,4 +174,13 @@ public class bllManager implements bllFacade
         }
     }
 
+    @Override
+    public boolean createProjekt(String projektNavn, String kunde, String startDato) throws bllException {
+        try {
+            return dalFacade.createProject(projektNavn, kunde, startDato);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 }

@@ -149,5 +149,25 @@ public class Model
         }
         return allTasks;
     }
+    
+    /**
+     * Creates attendance from courseId, studentId and attended parameters
+     *
+     * @param courseId
+     * @param studentId
+     * @param attended
+     * @return createAttendance method in the bllManager that returns true if a row was added, false if not
+     * @throws ModelException
+     */
+    public boolean createProjekt(String projektNavn, String kunde, String startDato) throws ModelException
+    {
+        try
+        {
+            return bllManager.createProjekt(projektNavn, kunde, startDato);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
 }

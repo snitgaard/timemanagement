@@ -11,12 +11,6 @@ package timemanagement.BE;
  */
 public class Admin extends User
 {
-
-    /**
-     * Constructor for Admin BE
-     * @param id 
-     */
-    
     private String adminLogin;
     private String adminPassword;
 
@@ -63,8 +57,4 @@ public class Admin extends User
     public void setAdminPassword(String adminPassword) {
         this.adminPassword = adminPassword;
     }
-    
-    
-
-    
 }

@@ -76,8 +76,8 @@
                               <TableColumn prefWidth="162.0" text="Brugt tid" />
                           </columns>
                         </TableView>
-                        <JFXTextField layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
-                        <JFXTextField layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
+                        <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
+                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
                         <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="144.0" text="Opret nyt projekt">
                            <font>
                               <Font name="System Bold" size="17.0" />
@@ -88,6 +88,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
+                        <JFXButton fx:id="createProjekt" layoutX="386.0" layoutY="54.0" onAction="#handleCreateProjekt" prefHeight="25.0" prefWidth="55.0" text="Opret Projekt" />
                      </children>
                   </AnchorPane>
               </items>
@@ -169,7 +170,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="startTime" layoutX="359.0" layoutY="66.0" onAction="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="startTime" layoutX="359.0" layoutY="67.0" onAction="#handleStartTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView fx:id="startIcon" glyphName="PLAY" size="15" text="" />
                            </graphic>

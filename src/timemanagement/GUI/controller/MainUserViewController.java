@@ -131,7 +131,7 @@ public class MainUserViewController implements Initializable {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ModelException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }   
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));

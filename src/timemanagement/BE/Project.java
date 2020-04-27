@@ -20,6 +20,10 @@ public class Project {
     /**
      * Constructor for Project
      * @param id
+     * @param projektNavn
+     * @param Kunde
+     * @param startDato
+     * @param brugtTid 
      */
     public Project(int id, String projektNavn, String Kunde, String startDato, int brugtTid) {
         this.id = id;

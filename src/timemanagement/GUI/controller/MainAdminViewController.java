@@ -14,6 +14,7 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -103,6 +104,13 @@ public class MainAdminViewController implements Initializable
     private TableView<Task> opgaverTableView;
     @FXML
     private JFXComboBox<String> projektComboBox2;
+    @FXML
+    private JFXButton createProjekt;
+    private JFXTextField kundeNavn;
+    @FXML
+    private JFXTextField txt_projektNavn;
+    @FXML
+    private JFXTextField txt_kundeNavn;
 
     /**
      * Initializes the controller class.
@@ -219,6 +227,14 @@ public class MainAdminViewController implements Initializable
     private void close_app(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
+    }
+
+    @FXML
+    private void handleCreateProjekt(ActionEvent event) throws ModelException {
+        String projektNavn = txt_projektNavn.getText();
+        String kunde = txt_kundeNavn.getText();
+        String startDato = LocalDate.now()+"";
+        model.createProjekt(projektNavn, kunde, startDato);
     }
 
 }

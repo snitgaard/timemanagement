@@ -63,7 +63,7 @@ public class Project {
     
     /**
      * getter for Kunde
-     * @return 
+     * @return Kunde
      */
     public String getKunde() {
         return Kunde;

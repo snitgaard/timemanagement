@@ -7,6 +7,7 @@
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
@@ -14,7 +15,11 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.effect.ColorAdjust?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Line?>
@@ -243,12 +248,40 @@
                            </font>
                         </Label>
                         <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.rightAnchor="0.0" />
+                        <Line endX="316.0" endY="315.5736083984375" startX="316.0" startY="25.881206512451172" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
                      </children>
                   </AnchorPane>
                </items>
             </SplitPane>
          </children>
       </StackPane>
-      <Line endX="413.0" endY="281.0" layoutX="140.0" layoutY="308.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
+      <Pane layoutX="2.0" prefHeight="47.0" prefWidth="959.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-12.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
+               <font>
+                  <Font name="Lato Bold" size="14.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="881.0" layoutY="12.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../Images/minimize.png" />
+               </image>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <effect>
+                  <ColorAdjust brightness="0.21" />
+               </effect>
+            </ImageView>
+            <ImageView fx:id="btn_close" fitHeight="22.0" fitWidth="22.0" layoutX="918.0" layoutY="14.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <image>
+                  <Image url="@../../../Images/close.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>

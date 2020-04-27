@@ -20,10 +20,14 @@ import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.gui.model.Model;
@@ -92,6 +96,8 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXButton startTime;
     private Model model;
+    @FXML
+    private ImageView btn_close;
 
     /**
      * Initializes the controller class.
@@ -180,6 +186,29 @@ public class MainAdminViewController implements Initializable
             startIcon.setIcon(FontAwesomeIcon.PAUSE);
             startTime.setText("Stop tid");
         }
+    }
+
+    /**
+     * Minimizes the stage
+     *
+     * @param event
+     */
+    @FXML
+    private void minimize_app(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setIconified(true);
+    }
+
+    /**
+     * Closes the stage, since this is the very first stage, it will close the
+     * program completely.
+     *
+     * @param event
+     */
+    @FXML
+    private void close_app(MouseEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 
 }

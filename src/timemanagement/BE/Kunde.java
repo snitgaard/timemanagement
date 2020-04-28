@@ -11,18 +11,48 @@ package timemanagement.BE;
  */
 public class Kunde
 {
+    private int id;
     private String kundeNavn;
 
-    public Kunde(String kundeNavn)
-    {
+    /**
+     * Constructor for Kunde
+     * @param id
+     * @param kundeNavn 
+     */
+    public Kunde(int id, String kundeNavn) {
+        this.id = id;
         this.kundeNavn = kundeNavn;
     }
 
+    /**
+     * Getter for id
+     * @return Id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * setter for id
+     * @param id 
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * getter for kundeNavn
+     * @return kundeNavn
+     */
     public String getKundeNavn()
     {
         return kundeNavn;
     }
 
+    /**
+     * setter for kundeNavn
+     * @param kundeNavn 
+     */
     public void setKundeNavn(String kundeNavn)
     {
         this.kundeNavn = kundeNavn;

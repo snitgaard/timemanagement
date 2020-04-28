@@ -296,7 +296,8 @@ public class MainAdminViewController implements Initializable
 //        String userLogin = txt_userLogin.getText();
 //        String userPassword = txt_userPassword.getText();
 //        model.createUser(userLogin, userPassword);
-        if (opretAdminCheckBox.equals(true)){
+        if (opretAdminCheckBox.isSelected())
+        {
             System.out.println("it is true");
         }
         

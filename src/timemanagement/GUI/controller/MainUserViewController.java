@@ -254,6 +254,7 @@ public class MainUserViewController implements Initializable
             {
             }
         }
+
     }
 
     @FXML
@@ -330,6 +331,11 @@ public class MainUserViewController implements Initializable
             timeField.clear();
             beskrivelseTextArea.clear();
             betaltCheckBox.setSelected(false);
+        }
+        
+        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null)
+        {
+            btn_start.setDisable(false);
         }
 
     }

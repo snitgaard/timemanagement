@@ -21,135 +21,103 @@ import timemanagement.DAL.DalManager;
  *
  * @author The Cowboys
  */
-public class bllManager implements bllFacade
-{
+public class bllManager implements bllFacade {
 
     private final DalFacade dalFacade;
 
-    public bllManager() throws IOException
-    {
+    public bllManager() throws IOException {
         dalFacade = new DalManager();
     }
 
     @Override
-    public boolean checkUserCredentials(String userLogin, String userPassword) throws bllException
-    {
-        try
-        {
+    public boolean checkUserCredentials(String userLogin, String userPassword) throws bllException {
+        try {
             return dalFacade.checkUserCredentials(userLogin, userPassword);
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public List<User> getUser(String userLogin) throws bllException
-    {
-        try
-        {
+    public List<User> getUser(String userLogin) throws bllException {
+        try {
             return dalFacade.getUser(userLogin);
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public List<Project> getAllProjects() throws bllException
-    {
-        try
-        {
+    public List<Project> getAllProjects() throws bllException {
+        try {
             return dalFacade.getAllProjects();
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public User getSpecificUser(String userLogin) throws bllException
-    {
-        try
-        {
+    public User getSpecificUser(String userLogin) throws bllException {
+        try {
             return dalFacade.getSpecificUser(userLogin);
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException
-    {
-        try
-        {
+    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException {
+        try {
             return dalFacade.checkAdminCredentials(adminLogin, adminPassword);
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public List<Admin> getAdmin(String adminLogin) throws bllException
-    {
-        try
-        {
+    public List<Admin> getAdmin(String adminLogin) throws bllException {
+        try {
             return dalFacade.getAdmin(adminLogin);
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public Admin getSpecificAdmin(String adminLogin) throws bllException
-    {
-        try
-        {
+    public Admin getSpecificAdmin(String adminLogin) throws bllException {
+        try {
             return dalFacade.getSpecificAdmin(adminLogin);
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public List<Task> getAllTasks() throws bllException
-    {
-        try
-        {
+    public List<Task> getAllTasks() throws bllException {
+        try {
             return dalFacade.getAllTasks();
-        } catch (DalException ex)
-        {
-             throw new bllException(ex.getMessage());
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public void deleteTask(Task task) throws bllException
-    {
-        try
-        {
+    public void deleteTask(Task task) throws bllException {
+        try {
             dalFacade.deleteTask(task);
-        } catch (DalException ex)
-        {
-             throw new bllException(ex.getMessage());
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public boolean createTask() throws bllException
-    {
-        try
-        {
+    public boolean createTask() throws bllException {
+        try {
             return dalFacade.createTask();
-        } catch (DalException ex)
-        {
-             throw new bllException(ex.getMessage());
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
         }
-    }  
+    }
 
     @Override
     public void addTime(long brugtTid, String opgaveNavn) throws bllException {
@@ -159,17 +127,12 @@ public class bllManager implements bllFacade
             Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
 
     @Override
-    public List<Task> getAllTasksProjektNavn() throws bllException
-    {
-        try
-        {
+    public List<Task> getAllTasksProjektNavn() throws bllException {
+        try {
             return dalFacade.getAllTasksProjektNavn();
-        } catch (DalException ex)
-        {
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
@@ -196,6 +159,15 @@ public class bllManager implements bllFacade
     public boolean createUser(String userLogin, String userPassword) throws bllException {
         try {
             return dalFacade.createUser(userLogin, userPassword);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public boolean createAdmin(String adminLogin, String adminPassword) throws bllException {
+        try {
+            return dalFacade.createAdmin(adminLogin, adminPassword);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

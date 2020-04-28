@@ -118,6 +118,8 @@ public class MainAdminViewController implements Initializable
     private JFXButton opretBrugerButton;
     @FXML
     private SplitPane opretBrugerPane;
+    @FXML
+    private JFXCheckBox opretAdminCheckBox;
 
     /**
      * Initializes the controller class.
@@ -291,9 +293,13 @@ public class MainAdminViewController implements Initializable
 
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException {
-        String userLogin = txt_userLogin.getText();
-        String userPassword = txt_userPassword.getText();
-        model.createUser(userLogin, userPassword);
+//        String userLogin = txt_userLogin.getText();
+//        String userPassword = txt_userPassword.getText();
+//        model.createUser(userLogin, userPassword);
+        if (opretAdminCheckBox.equals(true)){
+            System.out.println("it is true");
+        }
+        
     }
 
 }

@@ -125,6 +125,8 @@ public class MainAdminViewController implements Initializable {
     private TableColumn<Project, String> projektNavnAdminColumn;
     @FXML
     private TableColumn<Project, Integer> brugtTidAdminColumn;
+    @FXML
+    private JFXCheckBox opretAdminCheckBox;
 
     /**
      * Initializes the controller class.

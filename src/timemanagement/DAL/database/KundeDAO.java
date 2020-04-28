@@ -13,81 +13,75 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import timemanagement.BE.Project;
+import timemanagement.BE.Kunde;
 import timemanagement.DAL.DalException;
 
 /**
  *
  * @author The Cowboys
  */
-public class ProjectDAO {
-
+public class KundeDAO {
     private DatabaseConnector dbCon;
 
-    public ProjectDAO() throws IOException {
+    public KundeDAO() throws IOException {
         dbCon = new DatabaseConnector();
     }
 
     /**
-     * Creates SQL connection and gets list of all projects.
+     * Creates SQL connection and gets list of all kunder.
      *
      * @return
      * @throws SQLException
      */
-    public List<Project> getAllProjects() throws SQLException {
+    public List<Kunde> getAllKunder() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "SELECT * FROM Project;";
+            String sql = "SELECT * FROM Kunde;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Project> allProjects = new ArrayList<>();
+            ArrayList<Kunde> allKunder = new ArrayList<>();
             while (rs.next()) {
                 int id = rs.getInt("Id");
-                String projektNavn = rs.getString("projektNavn");
-                String kunde = rs.getString("kundeNavn");
-                String startDato = rs.getString("startDato");
-                int brugtTid = rs.getInt("brugtTid");
-                Project project = new Project(id, projektNavn, kunde, startDato, brugtTid);
-                allProjects.add(project);
+                String kundeNavn = rs.getString("kundeNavn");
+                Kunde kunde = new Kunde(id, kundeNavn);
+                allKunder.add(kunde);
             }
-            return allProjects;
+            return allKunder;
         }
     }
 
     /**
-     * Creates SQL Connection and deletes the selected Project.
+     * Creates SQL Connection and deletes the selected Kunde.
      *
-     * @param project
+     * @param user
      * @throws DalException
      */
-    public void deleteProject(Project project) throws DalException {
+    public void deleteKunde(Kunde kunde) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            int id = project.getId();
-            String sql = "DELETE FROM Project WHERE id=?;";
+            int id = kunde.getId();
+            String sql = "DELETE FROM Kunde WHERE id=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
             if (affectedRows != 1) {
-                throw new DalException("Shit fuck, could not delete");
+                throw new DalException("Could not delete User");
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DalException("Could not delete Project");
+            throw new DalException("Could not delete User");
         }
     }
 
     /**
-     * Creates SQL Connetion and creates a new Project.
+     * Creates SQL Connetion and creates a new Kunde.
      *
      * @return
      * @throws DalException
      */
-    public boolean createProject(String projektNavn, String kunde, String startDato) throws DalException {
+    public boolean createKunde(String kundeNavn) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Project (projektNavn, kunde, startDato) VALUES (?,?,?);";
+            String sql = "INSERT INTO Kunde (kundeNavn) VALUES (?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, projektNavn);
-            ps.setString(2, kunde);
-            ps.setString(3, startDato);
+            ps.setString(1, kundeNavn);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {
@@ -96,9 +90,10 @@ public class ProjectDAO {
                     return true;
                 }
             }
+
         } catch (SQLException ex) {
             ex.printStackTrace();
-            throw new DalException("Could not create project");
+            throw new DalException("Could not create User");
         }
         return false;
     }

@@ -37,7 +37,7 @@ public interface bllFacade
 
     void deleteTask(Task task) throws bllException;
 
-    boolean createTask() throws bllException;
+    boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws bllException;
     
     void addTime(long brugtTid, String opgaveNavn) throws bllException;
 

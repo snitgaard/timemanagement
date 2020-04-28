@@ -204,5 +204,14 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+    
+    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws ModelException
+    {
+        try {
+            return bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
 }

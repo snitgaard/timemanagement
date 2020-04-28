@@ -211,11 +211,7 @@ public class MainUserViewController implements Initializable
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
-            timeField.textProperty().addListener((obs, oldText, newText) -> {
-                System.out.println("Text changed from "+oldText +" to "+newText);
-            });
-            
-            
+            opgaveData();
 
         } catch (Exception e)
         {
@@ -297,7 +293,15 @@ public class MainUserViewController implements Initializable
     @FXML
     private void setOpgaveData(ActionEvent event) throws ModelException
     {
+        opgaveData();
+        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null)
+        {
+            btn_start.setDisable(false);
+        }
+    }
 
+    private void opgaveData() throws ModelException
+    {
         List<Task> taskNames = model.getAllTasks();
         List<Task> result = new ArrayList<>();
 
@@ -332,11 +336,6 @@ public class MainUserViewController implements Initializable
             beskrivelseTextArea.clear();
             betaltCheckBox.setSelected(false);
         }
-        
-        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null)
-        {
-            btn_start.setDisable(false);
-        }
-
     }
+
 }

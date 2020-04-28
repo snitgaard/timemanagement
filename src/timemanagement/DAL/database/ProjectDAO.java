@@ -43,7 +43,7 @@ public class ProjectDAO {
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String projektNavn = rs.getString("projektNavn");
-                String kunde = rs.getString("kunde");
+                String kunde = rs.getString("kundeNavn");
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
                 Project project = new Project(id, projektNavn, kunde, startDato, brugtTid);

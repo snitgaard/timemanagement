@@ -27,5 +27,4 @@ public class Kunde
     {
         this.kundeNavn = kundeNavn;
     }
-
 }

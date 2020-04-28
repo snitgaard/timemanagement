@@ -66,7 +66,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
+                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
                </graphic>
             </JFXButton>
          </children>
@@ -77,11 +77,11 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TableView layoutY="220.0" prefHeight="369.0" prefWidth="717.0">
+                        <TableView fx:id="projekterTableView" layoutY="220.0" prefHeight="369.0" prefWidth="717.0">
                           <columns>
-                            <TableColumn prefWidth="237.0" text="Projekt navn" />
-                            <TableColumn prefWidth="317.0" text="Kunde" />
-                              <TableColumn prefWidth="162.0" text="Brugt tid" />
+                            <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Projekt navn" />
+                            <TableColumn fx:id="kundeColumn" prefWidth="317.0" text="Kunde" />
+                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="162.0" text="Brugt tid" />
                           </columns>
                         </TableView>
                         <JFXTextField layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />

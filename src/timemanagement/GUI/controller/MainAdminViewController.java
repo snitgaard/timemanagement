@@ -43,8 +43,7 @@ import timemanagement.gui.model.ModelException;
  *
  * @author The Cowboys
  */
-public class MainAdminViewController implements Initializable
-{
+public class MainAdminViewController implements Initializable {
 
     @FXML
     private JFXButton timeLoggerButton;
@@ -119,45 +118,45 @@ public class MainAdminViewController implements Initializable
     @FXML
     private SplitPane opretBrugerPane;
     @FXML
+    private TableView<Project> projekterTableView;
+    @FXML
+    private TableColumn<Project, String> kundeColumn;
+    @FXML
+    private TableColumn<Project, String> projektNavnAdminColumn;
+    @FXML
+    private TableColumn<Project, Integer> brugtTidAdminColumn;
+    @FXML
     private JFXCheckBox opretAdminCheckBox;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try
-        {
+        try {
             timeLoggerPane.toFront();
             model = new Model();
-            for (Project projects : model.getAllProjects())
-            {
+            for (Project projects : model.getAllProjects()) {
                 projektComboBox.getItems().add(projects.getProjektNavn());
             }
-            for (Project projects : model.getAllProjects())
-            {
+            for (Project projects : model.getAllProjects()) {
                 projektComboBox2.getItems().add(projects.getProjektNavn());
             }
 //            projektComboBox.setItems(model.getAllProjects());
-            for (Task tasks : model.getAllTasks())
-            {
+            for (Task tasks : model.getAllTasks()) {
                 opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
             }
             opgaverTableView.setItems(model.getAllTasksProjektNavn());
-            
+            projekterTableView.setItems(model.getAllProjects());
+
         } catch (IOException ex)
         {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ModelException ex)
-        {
+        } catch (ModelException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
-        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
-        datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
+        fillColumns();
     }
 
     /**
@@ -166,38 +165,44 @@ public class MainAdminViewController implements Initializable
      * @param actionEvent
      */
     @FXML
-    private void handleClicks(ActionEvent actionEvent)
-    {
-        if (actionEvent.getSource() == timeLoggerButton)
-        {
+    private void handleClicks(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == timeLoggerButton) {
             timeLoggerPane.toFront();
         }
-        if (actionEvent.getSource() == opgaverButton)
-        {
+        if (actionEvent.getSource() == opgaverButton) {
             opgaverPane.toFront();
         }
-        if (actionEvent.getSource() == analyseButton)
-        {
+        if (actionEvent.getSource() == analyseButton) {
             analysePane.toFront();
         }
-        if (actionEvent.getSource() == projekterButton)
-        {
+        if (actionEvent.getSource() == projekterButton) {
             projektPane.toFront();
         }
-        if (actionEvent.getSource() == opretBrugerButton)
-        {
+        if (actionEvent.getSource() == opretBrugerButton) {
             opretBrugerPane.toFront();
         }
     }
 
-    @FXML
-    private void handleStartDate(ActionEvent event)
+    private void fillColumns()
     {
+        //Opgaver tableview
+        opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
+        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+        brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
+        datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
+        
+        //Projekter tableview
+        projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kunde"));
+        brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
     }
 
     @FXML
-    private void handleEndDate(ActionEvent event)
-    {
+    private void handleStartDate(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleEndDate(ActionEvent event) {
     }
 
     /**
@@ -209,35 +214,41 @@ public class MainAdminViewController implements Initializable
      * @param event
      * @throws ParseException
      */
-   @FXML
-    private void handleTime(ActionEvent event) throws ParseException 
+    @FXML
+    private void handleTime(ActionEvent event) throws ParseException
     {
-        if (startIcon.getGlyphName().equals("PAUSE")) {
+        if (startIcon.getGlyphName().equals("PAUSE"))
+        {
             startIcon.setIcon(FontAwesomeIcon.PLAY);
             btn_start.setText("Start tid");
             stopTidMethod();
-        } else if (startIcon.getGlyphName().equals("PLAY")) {
+        } else if (startIcon.getGlyphName().equals("PLAY"))
+        {
             startIcon.setIcon(FontAwesomeIcon.PAUSE);
             btn_start.setText("Stop tid");
-            try {
+            try
+            {
                 java.util.Date date = new java.util.Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 startTidField.setText(sdf.format(date));
                 slutTidField.clear();
                 brugtTidField.clear();
-            } catch (Exception e) {
+            } catch (Exception e)
+            {
             }
         }
     }
-    
-     /**
+
+    /**
      * Gets the current time and disables the stop button. Calculating the time
      * used and displays is into the field.
      *
      * @param event
      */
-     private void stopTidMethod() throws ParseException {
-        try {
+    private void stopTidMethod() throws ParseException
+    {
+        try
+        {
             java.util.Date date = new java.util.Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             slutTidField.setText(sdf.format(date));
@@ -257,7 +268,8 @@ public class MainAdminViewController implements Initializable
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
 
-        } catch (Exception e) {
+        } catch (Exception e)
+        {
         }
     }
 
@@ -267,7 +279,8 @@ public class MainAdminViewController implements Initializable
      * @param event
      */
     @FXML
-    private void minimize_app(MouseEvent event) {
+    private void minimize_app(MouseEvent event)
+    {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
@@ -279,31 +292,34 @@ public class MainAdminViewController implements Initializable
      * @param event
      */
     @FXML
-    private void close_app(MouseEvent event) {
+    private void close_app(MouseEvent event)
+    {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        
+
         stage.close();
     }
 
-    private void handleCreateProjekt(ActionEvent event) throws ModelException {
+    private void handleCreateProjekt(ActionEvent event) throws ModelException
+    {
         String projektNavn = txt_projektNavn.getText();
         String kunde = txt_kundeNavn.getText();
-        String startDato = LocalDate.now()+"";
+        String startDato = LocalDate.now() + "";
         model.createProjekt(projektNavn, kunde, startDato);
     }
 
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException {
-        String userLogin = txt_userLogin.getText();
-        String userPassword = txt_userPassword.getText();
-        model.createUser(userLogin, userPassword);
         if (opretAdminCheckBox.isSelected()) {
             System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
             String adminPassword = txt_userPassword.getText();
             model.createAdmin(adminLogin, adminPassword);
+        } else {
+            String userLogin = txt_userLogin.getText();
+            String userPassword = txt_userPassword.getText();
+            model.createUser(userLogin, userPassword);
         }
-        
+
     }
 
 }

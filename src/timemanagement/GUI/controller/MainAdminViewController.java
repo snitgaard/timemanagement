@@ -293,12 +293,14 @@ public class MainAdminViewController implements Initializable
 
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException {
-//        String userLogin = txt_userLogin.getText();
-//        String userPassword = txt_userPassword.getText();
-//        model.createUser(userLogin, userPassword);
-        if (opretAdminCheckBox.isSelected())
-        {
+        String userLogin = txt_userLogin.getText();
+        String userPassword = txt_userPassword.getText();
+        model.createUser(userLogin, userPassword);
+        if (opretAdminCheckBox.isSelected()) {
             System.out.println("it is true");
+            String adminLogin = txt_userLogin.getText();
+            String adminPassword = txt_userPassword.getText();
+            model.createAdmin(adminLogin, adminPassword);
         }
         
     }

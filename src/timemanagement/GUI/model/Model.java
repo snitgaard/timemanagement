@@ -193,5 +193,16 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+    
+    public boolean createAdmin(String adminLogin, String adminPassword) throws ModelException
+    {
+        try 
+        {
+            return bllManager.createAdmin(adminLogin, adminPassword);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
 }

@@ -79,10 +79,12 @@ public class AdminDAO {
      * @return
      * @throws DalException
      */
-    public boolean createAdmin() throws DalException {
+    public boolean createAdmin(String adminLogin, String adminPassword) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO admin;";
+            String sql = "INSERT INTO admin (adminLogin, adminPassword) VALUES (?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, adminLogin);
+            ps.setString(2, adminPassword);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {

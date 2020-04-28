@@ -74,17 +74,17 @@
                      <children>
                         <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" onAction="#setProjectData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
                         <JFXComboBox fx:id="opgaveComboBox" disable="true" layoutX="30.0" layoutY="186.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
-                        <JFXTextField fx:id="startTidField" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="startTidField" editable="false" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="slutTidField" layoutX="600.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="slutTidField" editable="false" layoutX="600.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="30.0" prefWidth="220.0">
+                        <JFXTextField fx:id="brugtTidField" editable="false" layoutX="426.0" layoutY="184.0" prefHeight="30.0" prefWidth="220.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -117,7 +117,7 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXTextField fx:id="sagsNrField" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="sagsNrField" editable="false" layoutX="114.0" layoutY="14.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -147,12 +147,12 @@
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXTextField fx:id="kundeField" layoutX="114.0" layoutY="53.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="kundeField" editable="false" layoutX="114.0" layoutY="53.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" layoutX="450.0" layoutY="43.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" editable="false" layoutX="450.0" layoutY="43.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -162,18 +162,18 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" layoutX="449.0" layoutY="-1.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="titelField" editable="false" layoutX="449.0" layoutY="-1.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="360.0" layoutY="138.0" prefHeight="65.0" prefWidth="338.0" />
+                        <JFXTextArea fx:id="beskrivelseTextArea" editable="false" layoutX="360.0" layoutY="138.0" prefHeight="65.0" prefWidth="338.0" />
                         <Label layoutX="357.0" layoutY="117.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXDatePicker fx:id="datePicker" layoutX="118.0" layoutY="99.0" prefHeight="28.0" prefWidth="193.0" />
+                        <JFXDatePicker fx:id="datePicker" editable="false" layoutX="118.0" layoutY="99.0" prefHeight="28.0" prefWidth="193.0" />
                         <Line endX="413.0" endY="281.0" layoutX="-84.0" layoutY="-5.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" />
                      </children>
                   </AnchorPane>

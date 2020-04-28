@@ -189,7 +189,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXTextField fx:id="sagsNrField" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="sagsNrField" editable="false" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -224,17 +224,17 @@
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXTextField fx:id="kundeField" layoutX="114.0" layoutY="70.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="kundeField" editable="false" layoutX="114.0" layoutY="70.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="medarbejderField" layoutX="114.0" layoutY="148.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="medarbejderField" editable="false" layoutX="114.0" layoutY="148.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" layoutX="114.0" layoutY="191.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" editable="false" layoutX="114.0" layoutY="191.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -244,7 +244,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" layoutX="475.0" layoutY="23.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="titelField" editable="false" layoutX="475.0" layoutY="23.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -162,4 +162,10 @@ public class DalManager implements DalFacade
     {
         return userDAO.createUser(userLogin, userPassword);
     }    
+    
+    @Override
+    public boolean createAdmin(String adminLogin, String adminPassword) throws DalException
+    {
+        return adminDAO.createAdmin(adminLogin, adminPassword);
+    }
 }

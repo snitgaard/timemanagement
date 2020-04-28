@@ -281,6 +281,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void close_app(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        
         stage.close();
     }
 

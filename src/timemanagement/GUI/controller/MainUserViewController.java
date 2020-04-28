@@ -269,7 +269,7 @@ public class MainUserViewController implements Initializable
         }
 
         sagsNrField.setText(result.get(0).getId() + "");
-        kundeField.setText(result.get(0).getKunde());
+        kundeField.setText(result.get(0).getKundeId() + "");
         LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
         datePicker.setValue(localDate);
 

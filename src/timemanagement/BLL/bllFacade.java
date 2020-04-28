@@ -7,6 +7,7 @@ package timemanagement.BLL;
 
 import java.util.List;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -43,11 +44,15 @@ public interface bllFacade
 
     List<Task> getAllTasksProjektNavn() throws bllException;
     
-    boolean createProjekt(String projektNavn, String kunde, String startDato) throws bllException;
+    boolean createProjekt(String projektNavn, int kundeId, String startDato) throws bllException;
     
     List<Task> getAllTasksByProject(int projektId) throws bllException;
     
     boolean createUser(String userLogin, String userPassword) throws bllException;
     
     boolean createAdmin(String adminLogin, String adminPassword) throws bllException;
+    
+    boolean createKunde(String kundeNavn) throws bllException;
+    
+    int getKundeId(String kundeNavn) throws bllException;
 }

@@ -43,10 +43,10 @@ public class ProjectDAO {
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String projektNavn = rs.getString("projektNavn");
-                String kunde = rs.getString("kundeNavn");
+                int kundeId = rs.getInt("kundeId");
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
-                Project project = new Project(id, projektNavn, kunde, startDato, brugtTid);
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid);
                 allProjects.add(project);
             }
             return allProjects;
@@ -81,12 +81,12 @@ public class ProjectDAO {
      * @return
      * @throws DalException
      */
-    public boolean createProject(String projektNavn, String kunde, String startDato) throws DalException {
+    public boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Project (projektNavn, kunde, startDato) VALUES (?,?,?);";
+            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato) VALUES (?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projektNavn);
-            ps.setString(2, kunde);
+            ps.setInt(2, kundeId);
             ps.setString(3, startDato);
             int affectedRows = ps.executeUpdate();
 

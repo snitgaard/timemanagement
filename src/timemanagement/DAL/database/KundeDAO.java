@@ -97,4 +97,33 @@ public class KundeDAO {
         }
         return false;
     }
+    
+    /**
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Gets a list of
+     * users from userEmail
+     *
+     * @param kundeNavn
+     * @return list of users called selectedUser
+     * @throws DalException
+     */
+    public int getKundeId(String kundeNavn) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
+
+            String sql = "SELECT * FROM Kunde WHERE kundeNavn = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, kundeNavn);
+            ResultSet rs = ps.executeQuery();
+            int kundeId = 0;
+            while (rs.next()) {
+                kundeId = rs.getInt("id");
+
+            }
+            return kundeId;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new DalException("Could not get user");
+        }
+    }
 }

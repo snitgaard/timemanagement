@@ -338,4 +338,19 @@ public class MainUserViewController implements Initializable
         }
     }
 
+    @FXML
+    private void createOpgave(ActionEvent event) throws ModelException {
+        
+        int projektId = Integer.parseInt(sagsNrField.getText());
+        
+        if (betaltCheckBox.isSelected() == true)
+        {
+            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
+        } else
+        {
+            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
+        }
+        
+        
+    }
 }

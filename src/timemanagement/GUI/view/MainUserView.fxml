@@ -152,7 +152,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" editable="false" layoutX="450.0" layoutY="43.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" layoutX="450.0" layoutY="43.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -162,12 +162,12 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" editable="false" layoutX="449.0" layoutY="-1.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="titelField" layoutX="449.0" layoutY="-1.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextArea fx:id="beskrivelseTextArea" editable="false" layoutX="360.0" layoutY="138.0" prefHeight="65.0" prefWidth="338.0" />
+                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="360.0" layoutY="138.0" prefHeight="65.0" prefWidth="338.0" />
                         <Label layoutX="357.0" layoutY="117.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />
@@ -175,6 +175,7 @@
                         </Label>
                         <JFXDatePicker fx:id="datePicker" editable="false" layoutX="118.0" layoutY="99.0" prefHeight="28.0" prefWidth="193.0" />
                         <Line endX="413.0" endY="281.0" layoutX="-84.0" layoutY="-5.0" startX="413.0" startY="-9.5" stroke="#b9b9b9" />
+                        <JFXButton layoutX="599.0" layoutY="248.0" onAction="#createOpgave" text="Opret Ny Opgave" />
                      </children>
                   </AnchorPane>
               </items>

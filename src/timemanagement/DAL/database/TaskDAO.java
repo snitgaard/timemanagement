@@ -91,17 +91,21 @@ public class TaskDAO
     }
 
     /**
-     * Creates SQL Connetion and creates a new Task.
+     * Creates SQL Connection and creates a new Task.
      *
      * @return
      * @throws DalException
      */
-    public boolean createTask() throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-            String sql = "INSERT INTO Task;";
+    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws DalException {
+        try (Connection con = dbCon.getConnection()) {
+            String sql = "INSERT INTO Task (opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt) VALUES (?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, opgaveNavn);
+            ps.setInt(2, projektId);
+            ps.setLong(3, brugtTid);
+            ps.setString(4, dato);
+            ps.setString(5, beskrivelse);
+            ps.setInt(6, betalt);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1)

@@ -111,9 +111,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public boolean createTask() throws bllException {
+    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws bllException {
         try {
-            return dalFacade.createTask();
+            return dalFacade.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

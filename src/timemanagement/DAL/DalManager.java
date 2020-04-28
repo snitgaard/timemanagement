@@ -120,9 +120,9 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public boolean createTask() throws DalException
+    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws DalException
     {
-        return taskDAO.createTask();
+        return taskDAO.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
     }
 
     @Override

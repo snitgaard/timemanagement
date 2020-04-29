@@ -57,8 +57,7 @@ import timemanagement.gui.model.ModelException;
  *
  * @author The Cowboys
  */
-public class MainUserViewController implements Initializable
-{
+public class MainUserViewController implements Initializable {
 
     @FXML
     private SplitPane timeLoggerPane;
@@ -122,42 +121,38 @@ public class MainUserViewController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-        try
-        {
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
             model = new Model();
-            for (Project projects : model.getAllProjects())
-            {
+            for (Project projects : model.getAllProjects()) {
                 projektComboBox.getItems().add(projects.getProjektNavn());
             }
-//            projektComboBox.setItems(model.getAllProjects());
+            // projektComboBox.setItems(model.getAllProjects());
 
-            opgaverTableView.setItems(model.getAllTasksProjektNavn());
+            setOpgaveTable();
 
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ModelException ex)
-        {
+        } catch (ModelException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+    }
+
+    private void setOpgaveTable() throws ModelException {
+        opgaverTableView.setItems(model.getAllTasksProjektNavn());
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
-
     }
 
     @FXML
-    private void handleClicks(ActionEvent actionEvent)
-    {
-        if (actionEvent.getSource() == timeLoggerButton)
-        {
+    private void handleClicks(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == timeLoggerButton) {
             timeLoggerPane.toFront();
         }
-        if (actionEvent.getSource() == opgaverButton)
-        {
+        if (actionEvent.getSource() == opgaverButton) {
             opgaverPane.toFront();
         }
     }
@@ -169,8 +164,7 @@ public class MainUserViewController implements Initializable
      * @param event
      */
     @FXML
-    private void close_app(MouseEvent event)
-    {
+    private void close_app(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -181,22 +175,19 @@ public class MainUserViewController implements Initializable
      * @param event
      */
     @FXML
-    private void minimize_app(MouseEvent event)
-    {
+    private void minimize_app(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
     /**
-     * Gets the current time and disables the stop button. Calculating the time
-     * used and displays is into the field.
+     * Gets the current time and disables the stop button. Calculating the time used
+     * and displays is into the field.
      *
      * @param event
      */
-    private void stopTidMethod() throws ParseException
-    {
-        try
-        {
+    private void stopTidMethod() throws ParseException {
+        try {
             java.util.Date date = new java.util.Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             slutTidField.setText(sdf.format(date));
@@ -217,56 +208,52 @@ public class MainUserViewController implements Initializable
             model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
         }
     }
 
     /**
-     * Handles the start / stop time function and changes the button icon /
-     * label depending on which action is to be performed. Also gets the time
-     * different between when you press start and stop and calculates it into
-     * HH:mm:ss using the stopTidMethod.
+     * Handles the start / stop time function and changes the button icon / label
+     * depending on which action is to be performed. Also gets the time different
+     * between when you press start and stop and calculates it into HH:mm:ss using
+     * the stopTidMethod.
      *
      * @param event
      * @throws ParseException
      */
     @FXML
-    private void handleTime(ActionEvent event) throws ParseException
-    {
-        if (startIcon.getGlyphName().equals("PAUSE"))
-        {
+    private void handleTime(ActionEvent event) throws ParseException {
+        if (startIcon.getGlyphName().equals("PAUSE")) {
             startIcon.setIcon(FontAwesomeIcon.PLAY);
             btn_start.setText("Start tid");
             stopTidMethod();
-        } else if (startIcon.getGlyphName().equals("PLAY"))
-        {
+        } else if (startIcon.getGlyphName().equals("PLAY")) {
             startIcon.setIcon(FontAwesomeIcon.PAUSE);
             btn_start.setText("Stop tid");
-            try
-            {
+            try {
                 java.util.Date date = new java.util.Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
                 startTidField.setText(sdf.format(date));
                 slutTidField.clear();
                 brugtTidField.clear();
-            } catch (Exception e)
-            {
+            } catch (Exception e) {
             }
         }
 
     }
 
     @FXML
-    private void setProjectData(ActionEvent event) throws ModelException
-    {
+    private void setProjectData(ActionEvent event) throws ModelException {
+        projectData();
+
+    }
+
+    private void projectData() throws ModelException {
         List<Project> projectNames = model.getAllProjects();
         List<Project> result = new ArrayList<>();
 
-        for (Project projects : projectNames)
-        {
-            if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem()))
-            {
+        for (Project projects : projectNames) {
+            if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem())) {
 
                 result.add(projects);
             }
@@ -277,19 +264,17 @@ public class MainUserViewController implements Initializable
         LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
         datePicker.setValue(localDate);
 
-        if (projektComboBox.getSelectionModel().getSelectedItem() != null)
-        {
+        if (projektComboBox.getSelectionModel().getSelectedItem() != null) {
             opgaveComboBox.setDisable(false);
             titelField.setDisable(false);
-            brugtTidField.setDisable(false);
+            timeField.setDisable(false);
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
-        } else
-        {
+        } else {
             opgaveComboBox.setDisable(true);
             titelField.setDisable(true);
-            brugtTidField.setDisable(true);
+            timeField.setDisable(true);
             beskrivelseTextArea.setDisable(true);
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
@@ -297,39 +282,31 @@ public class MainUserViewController implements Initializable
 
         opgaveComboBox.getItems().clear();
 
-        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
-        {
+        for (Task tasks : model.getAllTasksByProject(result.get(0).getId())) {
             opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
         }
-
     }
 
     @FXML
-    private void setOpgaveData(ActionEvent event) throws ModelException
-    {
+    private void setOpgaveData(ActionEvent event) throws ModelException {
         opgaveData();
-        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null)
-        {
+        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null) {
             btn_start.setDisable(false);
         }
     }
 
-    private void opgaveData() throws ModelException
-    {
+    private void opgaveData() throws ModelException {
         List<Task> taskNames = model.getAllTasks();
         List<Task> result = new ArrayList<>();
 
-        for (Task tasks : taskNames)
-        {
-            if (tasks.getOpgaveNavn().equals(opgaveComboBox.getSelectionModel().getSelectedItem()))
-            {
+        for (Task tasks : taskNames) {
+            if (tasks.getOpgaveNavn().equals(opgaveComboBox.getSelectionModel().getSelectedItem())) {
 
                 result.add(tasks);
             }
         }
 
-        if (opgaveComboBox.getSelectionModel().getSelectedItem() != null)
-        {
+        if (opgaveComboBox.getSelectionModel().getSelectedItem() != null) {
             titelField.setText(result.get(0).getOpgaveNavn());
 
             long hours = (result.get(0).getBrugtTid() - result.get(0).getBrugtTid() % 3600) / 3600;
@@ -339,12 +316,10 @@ public class MainUserViewController implements Initializable
             timeField.setText(f.format(hours) + ":" + f.format(minutes) + ":" + f.format(seconds));
             beskrivelseTextArea.setText(result.get(0).getBeskrivelse());
 
-            if (result.get(0).getBetalt() == 1)
-            {
+            if (result.get(0).getBetalt() == 1) {
                 betaltCheckBox.setSelected(true);
             }
-        } else
-        {
+        } else {
             titelField.clear();
             timeField.clear();
             beskrivelseTextArea.clear();
@@ -353,24 +328,26 @@ public class MainUserViewController implements Initializable
     }
 
     @FXML
-    private void createOpgave(ActionEvent event) throws ModelException
-    {
+    private void createOpgave(ActionEvent event) throws ModelException {
 
         int projektId = Integer.parseInt(sagsNrField.getText());
 
-        if (betaltCheckBox.isSelected() == true)
-        {
-            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
+        if (betaltCheckBox.isSelected() == true) {
+            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(),
+                    beskrivelseTextArea.getText(), 1);
             opgaveAlert();
-        } else
-        {
-            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
+        } else {
+            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(),
+                    beskrivelseTextArea.getText(), 0);
             opgaveAlert();
         }
+
+        projectData();
+        opgaveComboBox.getSelectionModel().select(titelField.getText());
+        setOpgaveTable();
     }
 
-    private void opgaveAlert()
-    {
+    private void opgaveAlert() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
         stage.setAlwaysOnTop(true);

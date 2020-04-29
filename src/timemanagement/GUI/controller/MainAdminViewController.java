@@ -353,11 +353,13 @@ public class MainAdminViewController implements Initializable
             String adminLogin = txt_userLogin.getText();
             String adminPassword = txt_userPassword.getText();
             model.createAdmin(adminLogin, adminPassword);
+            int adminId = model.getAdminId(adminLogin);
+            model.createUserAdmin(null, null, adminId);
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = txt_userPassword.getText();
-            model.createUser(userLogin, userPassword);
+            model.createUser(userLogin, userPassword, null);
         }
     }
 }

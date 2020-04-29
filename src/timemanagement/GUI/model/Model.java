@@ -198,13 +198,33 @@ public class Model
         return allTasksByProject;
     }
     
-    public boolean createUser(String userLogin, String userPassword) throws ModelException
+    public boolean createUser(String userLogin, String userPassword, String adminId) throws ModelException
             {
         try
         {
-            return bllManager.createUser(userLogin, userPassword);
+            return bllManager.createUser(userLogin, userPassword, adminId);
         } catch (bllException ex)
         {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+        public boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws ModelException
+    {
+        try 
+        {
+            return bllManager.createUserAdmin(userLogin, userPassword, adminId);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+        public int getAdminId(String adminLogin) throws ModelException
+    {
+        try {
+            return bllManager.getAdminId(adminLogin);
+        } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }

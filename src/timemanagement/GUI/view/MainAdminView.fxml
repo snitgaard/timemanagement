@@ -170,8 +170,8 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
                      <children>
-                        <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
-                        <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
+                        <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" onAction="#setProjectData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
+                        <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
                         <JFXTextField fx:id="startTidField" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
@@ -202,7 +202,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXButton fx:id="btn_start" layoutX="359.0" layoutY="66.0" onAction="#handleTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
+                        <JFXButton fx:id="btn_start" disable="true" layoutX="359.0" layoutY="66.0" onAction="#handleTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView fx:id="startIcon" glyphName="PLAY" size="15" text="" />
                            </graphic>
@@ -214,7 +214,7 @@
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXTextField fx:id="sagsNrField" editable="false" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="sagsNrField" disable="true" editable="false" layoutX="114.0" layoutY="31.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -239,17 +239,17 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="329.0" layoutY="260.0" text="Betalt opgave">
+                        <JFXCheckBox fx:id="betaltCheckBox" disable="true" layoutX="329.0" layoutY="260.0" text="Betalt opgave">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXTextField fx:id="kundeField" editable="false" layoutX="114.0" layoutY="70.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="kundeField" disable="true" editable="false" layoutX="114.0" layoutY="70.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" editable="false" layoutX="452.0" layoutY="46.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" disable="true" editable="false" layoutX="452.0" layoutY="46.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -259,12 +259,12 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" editable="false" layoutX="452.0" layoutY="9.0" prefHeight="20.0" prefWidth="159.0">
+                        <JFXTextField fx:id="titelField" disable="true" layoutX="452.0" layoutY="9.0" prefHeight="20.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="374.0" layoutY="124.0" prefHeight="127.0" prefWidth="338.0" />
+                        <JFXTextArea fx:id="beskrivelseTextArea" disable="true" layoutX="374.0" layoutY="124.0" prefHeight="127.0" prefWidth="338.0" />
                         <Label layoutX="373.0" layoutY="105.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />

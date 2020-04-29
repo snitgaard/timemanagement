@@ -15,10 +15,14 @@ import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.io.IOException;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -34,10 +38,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import static javax.swing.UIManager.getInt;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
-import timemanagement.BE.Kunde;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 
@@ -46,8 +48,7 @@ import timemanagement.gui.model.ModelException;
  *
  * @author The Cowboys
  */
-public class MainAdminViewController implements Initializable
-{
+public class MainAdminViewController implements Initializable {
 
     @FXML
     private JFXButton timeLoggerButton;
@@ -139,38 +140,30 @@ public class MainAdminViewController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        try
-        {
+        try {
             timeLoggerPane.toFront();
+            
             model = new Model();
-            for (Project projects : model.getAllProjects())
-            {
+            for (Project projects : model.getAllProjects()) {
                 projektComboBox.getItems().add(projects.getProjektNavn());
             }
-            for (Project projects : model.getAllProjects())
-            {
-                projektComboBox2.getItems().add(projects.getProjektNavn());
-            }
 //            projektComboBox.setItems(model.getAllProjects());
-            for (Task tasks : model.getAllTasks())
-            {
-                opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
-            }
-            opgaverTableView.setItems(model.getAllTasksProjektNavn());
-            projekterTableView.setItems(model.getProjectKundeNavn());
+        
+            fillColumns();
 
-        } catch (IOException ex)
-        {
+        } catch (IOException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ModelException ex)
-        {
+        } catch (ModelException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        fillColumns();
+
+        
+       
     }
+    
+   
 
     /**
      * Changes the view depending on which button in the side panel you click
@@ -178,38 +171,33 @@ public class MainAdminViewController implements Initializable
      * @param actionEvent
      */
     @FXML
-    private void handleClicks(ActionEvent actionEvent)
-    {
-        if (actionEvent.getSource() == timeLoggerButton)
-        {
+    private void handleClicks(ActionEvent actionEvent) {
+        if (actionEvent.getSource() == timeLoggerButton) {
             timeLoggerPane.toFront();
         }
-        if (actionEvent.getSource() == opgaverButton)
-        {
+        if (actionEvent.getSource() == opgaverButton) {
             opgaverPane.toFront();
         }
-        if (actionEvent.getSource() == analyseButton)
-        {
+        if (actionEvent.getSource() == analyseButton) {
             analysePane.toFront();
         }
-        if (actionEvent.getSource() == projekterButton)
-        {
+        if (actionEvent.getSource() == projekterButton) {
             projektPane.toFront();
         }
-        if (actionEvent.getSource() == opretBrugerButton)
-        {
+        if (actionEvent.getSource() == opretBrugerButton) {
             opretBrugerPane.toFront();
         }
     }
 
-    private void fillColumns()
+    private void fillColumns() throws ModelException
     {
         //Opgaver tableview
+        opgaverTableView.setItems(model.getAllTasksProjektNavn());
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
-
+        
         //Projekter tableview
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
@@ -217,13 +205,11 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleStartDate(ActionEvent event)
-    {
+    private void handleStartDate(ActionEvent event) {
     }
 
     @FXML
-    private void handleEndDate(ActionEvent event)
-    {
+    private void handleEndDate(ActionEvent event) {
     }
 
     /**
@@ -288,6 +274,8 @@ public class MainAdminViewController implements Initializable
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
+            opgaveData();
+            opgaverTableView.setItems(model.refreshTasks());
 
         } catch (Exception e)
         {
@@ -320,53 +308,115 @@ public class MainAdminViewController implements Initializable
         stage.close();
     }
 
-    /**
-     *
-     * @param event
-     * @throws ModelException
-     */
     @FXML
-    private void handleCreateProjekt(ActionEvent event) throws ModelException
+    private void setProjectData(ActionEvent event) throws ModelException {
+        projectData();
+
+    }
+    
+    private void projectData() throws ModelException
     {
-        String projektNavn = txt_projektNavn.getText();
-        System.out.println("projektNavn =" + projektNavn);
-        String kundeNavn = txt_kundeNavn.getText();
-        String startDato = LocalDate.now() + "";
+        List<Project> projectNames = model.getAllProjects();
+        List<Project> result = new ArrayList<>();
 
-        System.out.println("startDato =" + startDato);
-        System.out.println("kundeNavn =" + kundeNavn);
-        System.out.println("specific kunde =" + model.getKundeId(kundeNavn));
-        model.createKunde(kundeNavn);
-        int kundeId = model.getKundeId(kundeNavn);
+        for (Project projects : projectNames) {
+            if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem())) {
 
-        System.out.println("kundeId =" + kundeId);
-        if (model.createKunde(kundeNavn) == true)
-        {
-            model.createProjekt(projektNavn, kundeId, startDato);
-            projekterTableView.setItems(model.refreshProjects());
+                result.add(projects);
+            }
+        }
+
+        sagsNrField.setText(result.get(0).getId() + "");
+        kundeField.setText(result.get(0).getKundeId() + "");
+        LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
+        datePicker.setValue(localDate);
+
+        if (projektComboBox.getSelectionModel().getSelectedItem() != null) {
+            opgaveComboBox.setDisable(false);
+            titelField.setDisable(false);
+            timeField.setDisable(false);
+            beskrivelseTextArea.setDisable(false);
+            betaltCheckBox.setDisable(false);
+            nyOpgaveButton.setDisable(false);
+        } else {
+            opgaveComboBox.setDisable(true);
+            titelField.setDisable(true);
+            timeField.setDisable(true);
+            beskrivelseTextArea.setDisable(true);
+            betaltCheckBox.setDisable(true);
+            nyOpgaveButton.setDisable(true);
+        }
+
+        opgaveComboBox.getItems().clear();
+
+        for (Task tasks : model.getAllTasksByProject(result.get(0).getId())) {
+            opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
         }
     }
 
     @FXML
-    private void handleCreateUser(ActionEvent event) throws ModelException
-    {
-        if (opretAdminCheckBox.isSelected())
-        {
-            System.out.println("it is true");
-            String adminLogin = txt_userLogin.getText();
-            String adminPassword = txt_userPassword.getText();
-            model.createAdmin(adminLogin, adminPassword);
-            int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(null, null, adminId);
-        } else
-        {
-            String userLogin = txt_userLogin.getText();
-            String userPassword = txt_userPassword.getText();
-            model.createUser(userLogin, userPassword, null);
+    private void setOpgaveData(ActionEvent event) throws ModelException {
+        opgaveData();
+        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null) {
+            btn_start.setDisable(false);
+        }
+    }
+
+    private void opgaveData() throws ModelException {
+        List<Task> taskNames = model.getAllTasks();
+        List<Task> result = new ArrayList<>();
+
+        for (Task tasks : taskNames) {
+            if (tasks.getOpgaveNavn().equals(opgaveComboBox.getSelectionModel().getSelectedItem())) {
+
+                result.add(tasks);
+            }
+        }
+
+        if (opgaveComboBox.getSelectionModel().getSelectedItem() != null) {
+            titelField.setText(result.get(0).getOpgaveNavn());
+
+            long hours = (result.get(0).getBrugtTid() - result.get(0).getBrugtTid() % 3600) / 3600;
+            long minutes = (result.get(0).getBrugtTid() % 3600 - result.get(0).getBrugtTid() % 3600 % 60) / 60;
+            long seconds = result.get(0).getBrugtTid() % 3600 % 60;
+            NumberFormat f = new DecimalFormat("00");
+            timeField.setText(f.format(hours) + ":" + f.format(minutes) + ":" + f.format(seconds));
+            beskrivelseTextArea.setText(result.get(0).getBeskrivelse());
+
+            if (result.get(0).getBetalt() == 1) {
+                betaltCheckBox.setSelected(true);
+            }
+        } else {
+            titelField.clear();
+            timeField.clear();
+            beskrivelseTextArea.clear();
+            betaltCheckBox.setSelected(false);
         }
     }
 
     @FXML
-    private void createOpgave(ActionEvent event) {
+    private void createOpgave(ActionEvent event) throws ModelException {
+
+        int projektId = Integer.parseInt(sagsNrField.getText());
+
+        if (betaltCheckBox.isSelected() == true) {
+            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
+        } else {
+            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
+        }
+        
+        projectData();
+        opgaveComboBox.getSelectionModel().select(titelField.getText());
+        fillColumns();
+
     }
+
+    @FXML
+    private void handleCreateProjekt(ActionEvent event) {
+    }
+
+    @FXML
+    private void handleCreateUser(ActionEvent event) {
+    }
+
 }

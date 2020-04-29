@@ -9,7 +9,10 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -37,6 +40,8 @@ import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
+import utilities.encryptThisString;
+import static utilities.encryptThisString.encryptThisString;
 
 
 /**
@@ -61,6 +66,8 @@ public class LoginController implements Initializable
     private double yOffset = 0;
     @FXML
     private JFXButton btnLogin;
+    
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -101,7 +108,7 @@ public class LoginController implements Initializable
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException
     {
         String username = emailField.getText();
-        String password = passwordField.getText();
+        String password = encryptThisString(passwordField.getText());
 
         if (model.checkUserCredentials(username, password))
         {

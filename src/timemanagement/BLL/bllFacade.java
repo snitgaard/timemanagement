@@ -48,6 +48,8 @@ public interface bllFacade
     
     List<Task> getAllTasksByProject(int projektId) throws bllException;
     
+    List<Project> getProjectKundeNavn() throws bllException;
+    
     boolean createUser(String userLogin, String userPassword) throws bllException;
     
     boolean createAdmin(String adminLogin, String adminPassword) throws bllException;

@@ -151,7 +151,7 @@ public class MainAdminViewController implements Initializable {
                 opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
             }
             opgaverTableView.setItems(model.getAllTasksProjektNavn());
-            projekterTableView.setItems(model.getAllProjects());
+            projekterTableView.setItems(model.getProjectKundeNavn());
 
         } catch (IOException ex)
         {
@@ -196,7 +196,7 @@ public class MainAdminViewController implements Initializable {
         
         //Projekter tableview
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeId"));
+        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
         brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
     }
 
@@ -302,6 +302,11 @@ public class MainAdminViewController implements Initializable {
         stage.close();
     }
 
+    /**
+     * 
+     * @param event
+     * @throws ModelException 
+     */
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
@@ -320,6 +325,7 @@ public class MainAdminViewController implements Initializable {
         System.out.println("kundeId =" + kundeId);
         if(model.createKunde(kundeNavn) == true){
         model.createProjekt(projektNavn, kundeId, startDato);
+        projekterTableView.setItems(model.refreshProjects());
     }
     }
 

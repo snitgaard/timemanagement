@@ -126,4 +126,5 @@ public class KundeDAO {
             throw new DalException("Could not get user");
         }
     }
+    
 }

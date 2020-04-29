@@ -45,7 +45,8 @@ import timemanagement.gui.model.ModelException;
  *
  * @author The Cowboys
  */
-public class MainAdminViewController implements Initializable {
+public class MainAdminViewController implements Initializable
+{
 
     @FXML
     private JFXButton timeLoggerButton;
@@ -135,19 +136,24 @@ public class MainAdminViewController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         // TODO
-        try {
+        try
+        {
             timeLoggerPane.toFront();
             model = new Model();
-            for (Project projects : model.getAllProjects()) {
+            for (Project projects : model.getAllProjects())
+            {
                 projektComboBox.getItems().add(projects.getProjektNavn());
             }
-            for (Project projects : model.getAllProjects()) {
+            for (Project projects : model.getAllProjects())
+            {
                 projektComboBox2.getItems().add(projects.getProjektNavn());
             }
 //            projektComboBox.setItems(model.getAllProjects());
-            for (Task tasks : model.getAllTasks()) {
+            for (Task tasks : model.getAllTasks())
+            {
                 opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
             }
             opgaverTableView.setItems(model.getAllTasksProjektNavn());
@@ -156,7 +162,8 @@ public class MainAdminViewController implements Initializable {
         } catch (IOException ex)
         {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ModelException ex) {
+        } catch (ModelException ex)
+        {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         fillColumns();
@@ -168,20 +175,26 @@ public class MainAdminViewController implements Initializable {
      * @param actionEvent
      */
     @FXML
-    private void handleClicks(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == timeLoggerButton) {
+    private void handleClicks(ActionEvent actionEvent)
+    {
+        if (actionEvent.getSource() == timeLoggerButton)
+        {
             timeLoggerPane.toFront();
         }
-        if (actionEvent.getSource() == opgaverButton) {
+        if (actionEvent.getSource() == opgaverButton)
+        {
             opgaverPane.toFront();
         }
-        if (actionEvent.getSource() == analyseButton) {
+        if (actionEvent.getSource() == analyseButton)
+        {
             analysePane.toFront();
         }
-        if (actionEvent.getSource() == projekterButton) {
+        if (actionEvent.getSource() == projekterButton)
+        {
             projektPane.toFront();
         }
-        if (actionEvent.getSource() == opretBrugerButton) {
+        if (actionEvent.getSource() == opretBrugerButton)
+        {
             opretBrugerPane.toFront();
         }
     }
@@ -193,7 +206,7 @@ public class MainAdminViewController implements Initializable {
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
-        
+
         //Projekter tableview
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
@@ -201,11 +214,13 @@ public class MainAdminViewController implements Initializable {
     }
 
     @FXML
-    private void handleStartDate(ActionEvent event) {
+    private void handleStartDate(ActionEvent event)
+    {
     }
 
     @FXML
-    private void handleEndDate(ActionEvent event) {
+    private void handleEndDate(ActionEvent event)
+    {
     }
 
     /**
@@ -303,45 +318,46 @@ public class MainAdminViewController implements Initializable {
     }
 
     /**
-     * 
+     *
      * @param event
-     * @throws ModelException 
+     * @throws ModelException
      */
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        String projektNavn = txt_projektNavn.getText(); 
+        String projektNavn = txt_projektNavn.getText();
         System.out.println("projektNavn =" + projektNavn);
         String kundeNavn = txt_kundeNavn.getText();
         String startDato = LocalDate.now() + "";
-        
+
         System.out.println("startDato =" + startDato);
         System.out.println("kundeNavn =" + kundeNavn);
         System.out.println("specific kunde =" + model.getKundeId(kundeNavn));
         model.createKunde(kundeNavn);
         int kundeId = model.getKundeId(kundeNavn);
-        
-                
+
         System.out.println("kundeId =" + kundeId);
-        if(model.createKunde(kundeNavn) == true){
-        model.createProjekt(projektNavn, kundeId, startDato);
-        projekterTableView.setItems(model.refreshProjects());
-    }
+        if (model.createKunde(kundeNavn) == true)
+        {
+            model.createProjekt(projektNavn, kundeId, startDato);
+            projekterTableView.setItems(model.refreshProjects());
+        }
     }
 
     @FXML
-    private void handleCreateUser(ActionEvent event) throws ModelException {
-        if (opretAdminCheckBox.isSelected()) {
+    private void handleCreateUser(ActionEvent event) throws ModelException
+    {
+        if (opretAdminCheckBox.isSelected())
+        {
             System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
             String adminPassword = txt_userPassword.getText();
             model.createAdmin(adminLogin, adminPassword);
-        } else {
+        } else
+        {
             String userLogin = txt_userLogin.getText();
             String userPassword = txt_userPassword.getText();
             model.createUser(userLogin, userPassword);
         }
-
     }
-
 }

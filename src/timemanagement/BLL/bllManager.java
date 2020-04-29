@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -138,9 +139,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public boolean createProjekt(String projektNavn, String kunde, String startDato) throws bllException {
+    public boolean createProjekt(String projektNavn, int kundeId, String startDato) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kunde, startDato);
+            return dalFacade.createProject(projektNavn, kundeId, startDato);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -172,5 +173,28 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
+    
+    @Override
+    public boolean createKunde(String kundeNavn) throws bllException
+    {
+        try
+        {
+            return dalFacade.createKunde(kundeNavn);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+    
+    @Override
+    public int getKundeId(String kundeNavn) throws bllException
+    {
+        try {
+            return dalFacade.getKundeId(kundeNavn);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+
 
 }

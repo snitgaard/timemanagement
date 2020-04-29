@@ -12,6 +12,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BLL.bllManager;
@@ -160,11 +161,11 @@ public class Model
      * @return createAttendance method in the bllManager that returns true if a row was added, false if not
      * @throws ModelException
      */
-    public boolean createProjekt(String projektNavn, String kunde, String startDato) throws ModelException
+    public boolean createProjekt(String projektNavn, int kundeId, String startDato) throws ModelException
     {
         try
         {
-            return bllManager.createProjekt(projektNavn, kunde, startDato);
+            return bllManager.createProjekt(projektNavn, kundeId, startDato);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -209,6 +210,26 @@ public class Model
     {
         try {
             return bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public boolean createKunde(String kundeNavn) throws ModelException
+    {
+        try
+        {
+            return bllManager.createKunde(kundeNavn);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public int getKundeId(String kundeNavn) throws ModelException
+    {
+        try {
+            return bllManager.getKundeId(kundeNavn);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

@@ -7,6 +7,7 @@ package timemanagement.DAL;
 
 import java.util.List;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -41,11 +42,15 @@ public interface DalFacade {
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    boolean createProject(String projektNavn, String kunde, String startDato) throws DalException;
+    boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException;
     
     List<Task> getAllTasksByProject(int projektId) throws DalException;
     
     boolean createUser(String userLogin, String userPassword) throws DalException;
     
     boolean createAdmin(String adminLogin, String adminPassword) throws DalException;
+    
+    boolean createKunde(String kundeNavn) throws DalException;
+    
+    int getKundeId (String kundeNavn) throws DalException;
 }

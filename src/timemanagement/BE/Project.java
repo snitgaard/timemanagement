@@ -13,7 +13,7 @@ public class Project {
 
     private int id;
     private String projektNavn;
-    private String Kunde;
+    private int kundeId;
     private String startDato;
     private int brugtTid;
 
@@ -25,10 +25,10 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, String Kunde, String startDato, int brugtTid) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid) {
         this.id = id;
         this.projektNavn = projektNavn;
-        this.Kunde = Kunde;
+        this.kundeId = kundeId;
         this.startDato = startDato;
         this.brugtTid = brugtTid;
     }
@@ -66,19 +66,19 @@ public class Project {
     }
     
     /**
-     * getter for Kunde
-     * @return Kunde
+     * getter for kundeId
+     * @return kundeId
      */
-    public String getKunde() {
-        return Kunde;
+    public int getKundeId() {
+        return kundeId;
     }
 
     /**
-     * Setter for Kunde
-     * @param id
+     * Setter for kundeId
+     * @param kundeId
      */
-    public void setKunde(String Kunde) {
-        this.Kunde = Kunde;
+    public void setKundeId(int kundeId) {
+        this.kundeId = kundeId;
     }
 
     /**

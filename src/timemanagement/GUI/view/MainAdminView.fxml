@@ -84,14 +84,14 @@
                               <TableColumn fx:id="brugtTidAdminColumn" prefWidth="162.0" text="Brugt tid" />
                           </columns>
                         </TableView>
-                        <JFXTextField layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
-                        <JFXTextField layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
+                        <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
+                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
                         <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="144.0" text="Opret nyt projekt">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Label>
-                        <JFXButton layoutX="145.0" layoutY="172.0" text="Opret projekt">
+                        <JFXButton layoutX="145.0" layoutY="172.0" onAction="#handleCreateProjekt" text="Opret projekt">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>

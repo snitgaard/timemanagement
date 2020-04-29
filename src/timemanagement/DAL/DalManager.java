@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import timemanagement.BE.Admin;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
 import timemanagement.DAL.database.AdminDAO;
+import timemanagement.DAL.database.KundeDAO;
 import timemanagement.DAL.database.ProjectDAO;
 import timemanagement.DAL.database.TaskDAO;
 import timemanagement.DAL.database.UserDAO;
@@ -30,6 +32,7 @@ public class DalManager implements DalFacade
     private final AdminDAO adminDAO;
     private final ProjectDAO projectDAO;
     private final TaskDAO taskDAO;
+    private final KundeDAO kundeDAO;
 
     public DalManager() throws IOException
     {
@@ -37,6 +40,7 @@ public class DalManager implements DalFacade
         adminDAO = new AdminDAO();
         projectDAO = new ProjectDAO();
         taskDAO = new TaskDAO();
+        kundeDAO = new KundeDAO();
 
     }
 
@@ -144,8 +148,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public boolean createProject(String projektNavn, String kunde, String startDato) throws DalException {
-        return projectDAO.createProject(projektNavn, kunde, startDato);
+    public boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException {
+        return projectDAO.createProject(projektNavn, kundeId, startDato);
     }
 
     @Override
@@ -167,5 +171,17 @@ public class DalManager implements DalFacade
     public boolean createAdmin(String adminLogin, String adminPassword) throws DalException
     {
         return adminDAO.createAdmin(adminLogin, adminPassword);
+    }
+    
+    @Override
+    public boolean createKunde(String kundeNavn) throws DalException
+    {
+        return kundeDAO.createKunde(kundeNavn);
+    }
+    
+    @Override
+    public int getKundeId(String kundeNavn) throws DalException
+    {
+        return kundeDAO.getKundeId(kundeNavn);
     }
 }

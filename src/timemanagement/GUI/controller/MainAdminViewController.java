@@ -33,8 +33,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import static javax.swing.UIManager.getInt;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
+import timemanagement.BE.Kunde;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 
@@ -104,8 +106,9 @@ public class MainAdminViewController implements Initializable {
     private TableView<Task> opgaverTableView;
     @FXML
     private JFXComboBox<String> projektComboBox2;
-    private JFXTextField kundeNavn;
+    @FXML
     private JFXTextField txt_projektNavn;
+    @FXML
     private JFXTextField txt_kundeNavn;
     @FXML
     private JFXButton btn_start;
@@ -193,7 +196,7 @@ public class MainAdminViewController implements Initializable {
         
         //Projekter tableview
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kunde"));
+        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeId"));
         brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
     }
 
@@ -299,12 +302,25 @@ public class MainAdminViewController implements Initializable {
         stage.close();
     }
 
+    @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        String projektNavn = txt_projektNavn.getText();
-        String kunde = txt_kundeNavn.getText();
+        String projektNavn = txt_projektNavn.getText(); 
+        System.out.println("projektNavn =" + projektNavn);
+        String kundeNavn = txt_kundeNavn.getText();
         String startDato = LocalDate.now() + "";
-        model.createProjekt(projektNavn, kunde, startDato);
+        
+        System.out.println("startDato =" + startDato);
+        System.out.println("kundeNavn =" + kundeNavn);
+        System.out.println("specific kunde =" + model.getKundeId(kundeNavn));
+        model.createKunde(kundeNavn);
+        int kundeId = model.getKundeId(kundeNavn);
+        
+                
+        System.out.println("kundeId =" + kundeId);
+        if(model.createKunde(kundeNavn) == true){
+        model.createProjekt(projektNavn, kundeId, startDato);
+    }
     }
 
     @FXML

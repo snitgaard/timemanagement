@@ -392,6 +392,11 @@ public class MainAdminViewController implements Initializable {
             timeField.clear();
             beskrivelseTextArea.clear();
             betaltCheckBox.setSelected(false);
+     
+        }
+    }
+    
+    @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
         if (opretAdminCheckBox.isSelected())
@@ -431,8 +436,5 @@ public class MainAdminViewController implements Initializable {
     private void handleCreateProjekt(ActionEvent event) {
     }
 
-    @FXML
-    private void handleCreateUser(ActionEvent event) {
-    }
-
+    
 }

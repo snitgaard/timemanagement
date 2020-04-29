@@ -50,11 +50,15 @@ public interface bllFacade
     
     List<Project> getProjectKundeNavn() throws bllException;
     
-    boolean createUser(String userLogin, String userPassword) throws bllException;
+    boolean createUser(String userLogin, String userPassword, String adminId) throws bllException;
+    
+    boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws bllException;
     
     boolean createAdmin(String adminLogin, String adminPassword) throws bllException;
     
     boolean createKunde(String kundeNavn) throws bllException;
     
     int getKundeId(String kundeNavn) throws bllException;
+    
+    int getAdminId(String adminLogin) throws bllException;
 }

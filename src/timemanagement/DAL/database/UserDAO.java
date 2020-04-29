@@ -45,7 +45,8 @@ public class UserDAO {
                 int id = rs.getInt("Id");
                 String userLogin = rs.getString("userlogin");
                 String userPassword = rs.getString("userPassword");
-                User user = new User(id, userLogin, userPassword);
+                int adminId = rs.getInt("adminId");
+                User user = new User(id, userLogin, userPassword, adminId);
                 allUsers.add(user);
             }
             return allUsers;
@@ -77,15 +78,19 @@ public class UserDAO {
     /**
      * Creates SQL Connetion and creates a new User.
      *
+     * @param userLogin
+     * @param userPassword
+     * @param adminId
      * @return
      * @throws DalException
      */
-    public boolean createUser(String userLogin, String userPassword) throws DalException {
+    public boolean createUser(String userLogin, String userPassword, String adminId) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO [User] (userLogin, userPassword) VALUES (?,?);";
+            String sql = "INSERT INTO [User] (userLogin, userPassword, adminId) VALUES (?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, userLogin);
             ps.setString(2, userPassword);
+            ps.setString(3, adminId);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {
@@ -101,6 +106,30 @@ public class UserDAO {
         }
         return false;
     }
+    
+    public boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
+            String sql = "INSERT INTO [User] (userLogin, userPassword, adminId) VALUES (?,?,?);";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, userLogin);
+            ps.setString(2, userPassword);
+            ps.setInt(3, adminId);
+            int affectedRows = ps.executeUpdate();
+
+            if (affectedRows == 1) {
+                ResultSet rs = ps.getGeneratedKeys();
+                if (rs.next()) {
+                    return true;
+                }
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            throw new DalException("Could not create User");
+        }
+        return false;
+    }
+    
 
     /**
      * If called this method will create a connection between the database and
@@ -154,8 +183,9 @@ public class UserDAO {
                 int id = rs.getInt("id");
                 userLogin = rs.getString("userLogin");
                 String userPassword = rs.getString("userPassword");
+                int adminId = rs.getInt("adminId");
 
-                User user = new User(id, userLogin, userPassword);
+                User user = new User(id, userLogin, userPassword, adminId);
                 selectedUser.add(user);
             }
             return selectedUser;

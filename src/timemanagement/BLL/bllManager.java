@@ -157,9 +157,18 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public boolean createUser(String userLogin, String userPassword) throws bllException {
+    public boolean createUser(String userLogin, String userPassword, String adminId) throws bllException {
         try {
-            return dalFacade.createUser(userLogin, userPassword);
+            return dalFacade.createUser(userLogin, userPassword, adminId);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+    
+    @Override
+    public boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws bllException {
+        try {
+            return dalFacade.createUserAdmin(userLogin, userPassword, adminId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -203,6 +212,15 @@ public class bllManager implements bllFacade {
             return dalFacade.getProjectKundeNavn();
         } catch (DalException ex)
         {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public int getAdminId(String adminLogin) throws bllException {
+        try {
+            return dalFacade.getAdminId(adminLogin);
+        } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }

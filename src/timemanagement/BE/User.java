@@ -14,6 +14,7 @@ public class User
     private int id;
     private String userLogin;
     private String userPassword;
+    private int adminId;
 
     
     /**
@@ -28,12 +29,14 @@ public class User
      * Constructor for User
      * @param id
      * @param userLogin
-     * @param userPassword 
+     * @param userPassword
+     * @param adminId
      */
-    public User(int id, String userLogin, String userPassword) {
+    public User(int id, String userLogin, String userPassword, int adminId) {
         this.id = id;
         this.userLogin = userLogin;
         this.userPassword = userPassword;
+        this.adminId = adminId;
     }
 
     /**
@@ -83,4 +86,14 @@ public class User
     public void setUserPassword(String userPassword) {
         this.userPassword = userPassword;
     } 
+
+    public int getAdminId() {
+        return adminId;
+    }
+
+    public void setAdminId(int adminId) {
+        this.adminId = adminId;
+    }
+    
+    
 }

@@ -177,4 +177,33 @@ public class AdminDAO {
     public Admin getSpecificAdmin(String adminLogin) throws DalException {
         return getAdmin(adminLogin).get(0);
     }
+    
+    /**
+     * If called this method will create a connection between the database and
+     * the program. The SQL statement will be run afterwards. Gets a list of
+     * users from userEmail
+     *
+     * @param adminLogin
+     * @return list of users called selectedUser
+     * @throws DalException
+     */
+    public int getAdminId(String adminLogin) throws DalException {
+        try ( Connection con = dbCon.getConnection()) {
+
+            String sql = "SELECT * FROM [Admin] WHERE adminLogin = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, adminLogin);
+            ResultSet rs = ps.executeQuery();
+            int adminId = 0;
+            while (rs.next()) {
+                adminId = rs.getInt("id");
+
+            }
+            return adminId;
+
+        } catch (SQLException ex) {
+            System.out.println(ex);
+            throw new DalException("Could not get user");
+        }
+    }
 }

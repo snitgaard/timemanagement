@@ -141,6 +141,31 @@
                   </AnchorPane>
                </items>
             </SplitPane>
+            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <JFXTextField fx:id="txt_userPassword" layoutX="11.0" layoutY="133.0" prefHeight="32.0" prefWidth="224.0" promptText="Indtast projekt navn" text="Indtast bruger password" />
+                        <JFXTextField fx:id="txt_userLogin" layoutX="11.0" layoutY="91.0" prefHeight="30.0" prefWidth="224.0" text="Indtast bruger login" />
+                        <Label layoutX="14.0" layoutY="45.0" prefHeight="32.0" prefWidth="144.0" text="Opret ny bruger">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="133.0" layoutY="188.0" onAction="#handleCreateUser" prefHeight="32.0" prefWidth="102.0" text="Opret bruger">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="11.0" layoutY="194.0" text="Admin">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
             <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
@@ -204,22 +229,17 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="15.0" layoutY="115.0" text="Start dato">
+                        <Label layoutX="9.0" layoutY="115.0" text="Start dato">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="14.0" layoutY="158.0" text="Medarbejder">
+                        <Label layoutX="366.0" layoutY="51.0" text="Brugt tid i alt">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="15.0" layoutY="196.0" text="Brugt tid i alt">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="14.0" layoutY="230.0" text="Betalt opgave">
+                        <JFXCheckBox fx:id="betaltCheckBox" layoutX="329.0" layoutY="260.0" text="Betalt opgave">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -229,59 +249,31 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="medarbejderField" editable="false" layoutX="114.0" layoutY="148.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="timeField" editable="false" layoutX="452.0" layoutY="46.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="timeField" editable="false" layoutX="114.0" layoutY="191.0" prefHeight="30.0" prefWidth="159.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXTextField>
-                        <Label layoutX="372.0" layoutY="28.0" text="Opgave titel:">
+                        <Label layoutX="367.0" layoutY="13.0" text="Opgave titel:">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" editable="false" layoutX="475.0" layoutY="23.0" prefHeight="30.0" prefWidth="159.0">
+                        <JFXTextField fx:id="titelField" editable="false" layoutX="452.0" layoutY="9.0" prefHeight="20.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="373.0" layoutY="84.0" prefHeight="163.0" prefWidth="338.0" />
-                        <Label layoutX="372.0" layoutY="61.0" text="Beskrivelse">
+                        <JFXTextArea fx:id="beskrivelseTextArea" layoutX="374.0" layoutY="124.0" prefHeight="127.0" prefWidth="338.0" />
+                        <Label layoutX="373.0" layoutY="105.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
                         <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.rightAnchor="0.0" />
                         <Line endX="316.0" endY="315.5736083984375" startX="316.0" startY="25.881206512451172" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
-            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <JFXTextField fx:id="txt_userPassword" layoutX="11.0" layoutY="133.0" prefHeight="32.0" prefWidth="224.0" promptText="Indtast projekt navn" text="Indtast bruger password" />
-                        <JFXTextField fx:id="txt_userLogin" layoutX="11.0" layoutY="91.0" prefHeight="30.0" prefWidth="224.0" text="Indtast bruger login" />
-                        <Label layoutX="14.0" layoutY="45.0" prefHeight="32.0" prefWidth="144.0" text="Opret ny bruger">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <JFXButton layoutX="133.0" layoutY="188.0" onAction="#handleCreateUser" prefHeight="32.0" prefWidth="102.0" text="Opret bruger">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="11.0" layoutY="194.0" text="Admin">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXCheckBox>
+                        <JFXButton fx:id="nyOpgaveButton" disable="true" layoutX="602.0" layoutY="258.0" onAction="#createOpgave" prefHeight="25.0" prefWidth="110.0" text="Opret Ny Opgave" />
+                        <JFXDatePicker fx:id="datePicker" disable="true" editable="false" layoutX="107.0" layoutY="109.0" prefHeight="28.0" prefWidth="193.0" />
                      </children>
                   </AnchorPane>
                </items>

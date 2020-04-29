@@ -8,6 +8,7 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
@@ -92,8 +93,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField kundeField;
     @FXML
-    private JFXTextField medarbejderField;
-    @FXML
     private JFXTextField timeField;
     @FXML
     private JFXTextField titelField;
@@ -132,6 +131,10 @@ public class MainAdminViewController implements Initializable
     private TableColumn<Project, Integer> brugtTidAdminColumn;
     @FXML
     private JFXCheckBox opretAdminCheckBox;
+    @FXML
+    private JFXButton nyOpgaveButton;
+    @FXML
+    private JFXDatePicker datePicker;
 
     /**
      * Initializes the controller class.
@@ -362,5 +365,9 @@ public class MainAdminViewController implements Initializable
             String userPassword = txt_userPassword.getText();
             model.createUser(userLogin, encryptThisString(userPassword), null);
         }
+    }
+
+    @FXML
+    private void createOpgave(ActionEvent event) {
     }
 }

@@ -126,19 +126,25 @@ public class MainUserViewController implements Initializable {
                 projektComboBox.getItems().add(projects.getProjektNavn());
             }
 //            projektComboBox.setItems(model.getAllProjects());
-
-            opgaverTableView.setItems(model.getAllTasksProjektNavn());
+        
+            setOpgaveTable();
 
         } catch (IOException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ModelException ex) {
             Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
+        
+
+    }
+    
+    private void setOpgaveTable() throws ModelException
+    {
+         opgaverTableView.setItems(model.getAllTasksProjektNavn());
+         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
-
     }
 
     @FXML
@@ -238,6 +244,12 @@ public class MainUserViewController implements Initializable {
 
     @FXML
     private void setProjectData(ActionEvent event) throws ModelException {
+        projectData();
+
+    }
+    
+    private void projectData() throws ModelException
+    {
         List<Project> projectNames = model.getAllProjects();
         List<Project> result = new ArrayList<>();
 
@@ -256,14 +268,14 @@ public class MainUserViewController implements Initializable {
         if (projektComboBox.getSelectionModel().getSelectedItem() != null) {
             opgaveComboBox.setDisable(false);
             titelField.setDisable(false);
-            brugtTidField.setDisable(false);
+            timeField.setDisable(false);
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
         } else {
             opgaveComboBox.setDisable(true);
             titelField.setDisable(true);
-            brugtTidField.setDisable(true);
+            timeField.setDisable(true);
             beskrivelseTextArea.setDisable(true);
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
@@ -274,7 +286,6 @@ public class MainUserViewController implements Initializable {
         for (Task tasks : model.getAllTasksByProject(result.get(0).getId())) {
             opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
         }
-
     }
 
     @FXML
@@ -327,6 +338,10 @@ public class MainUserViewController implements Initializable {
         } else {
             model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
         }
+        
+        projectData();
+        opgaveComboBox.getSelectionModel().select(titelField.getText());
+        setOpgaveTable();
 
     }
 }

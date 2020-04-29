@@ -184,4 +184,16 @@ public class DalManager implements DalFacade
     {
         return kundeDAO.getKundeId(kundeNavn);
     }
+
+    @Override
+    public List<Project> getProjectKundeNavn() throws DalException
+    {
+        try
+        {
+            return projectDAO.getProjectKundeNavn();
+        } catch (SQLException ex)
+        {
+            throw new DalException(ex.getMessage());
+        }
+    }
 }

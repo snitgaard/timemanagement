@@ -20,11 +20,13 @@ import timemanagement.DAL.DalException;
  *
  * @author The Cowboys
  */
-public class ProjectDAO {
+public class ProjectDAO
+{
 
     private DatabaseConnector dbCon;
 
-    public ProjectDAO() throws IOException {
+    public ProjectDAO() throws IOException
+    {
         dbCon = new DatabaseConnector();
     }
 
@@ -34,13 +36,16 @@ public class ProjectDAO {
      * @return
      * @throws SQLException
      */
-    public List<Project> getAllProjects() throws SQLException {
-        try ( Connection con = dbCon.getConnection()) {
+    public List<Project> getAllProjects() throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "SELECT * FROM Project;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Project> allProjects = new ArrayList<>();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 int id = rs.getInt("Id");
                 String projektNavn = rs.getString("projektNavn");
                 int kundeId = rs.getInt("kundeId");
@@ -59,30 +64,36 @@ public class ProjectDAO {
      * @param project
      * @throws DalException
      */
-    public void deleteProject(Project project) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public void deleteProject(Project project) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             int id = project.getId();
             String sql = "DELETE FROM Project WHERE id=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
-            if (affectedRows != 1) {
+            if (affectedRows != 1)
+            {
                 throw new DalException("Shit fuck, could not delete");
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
             throw new DalException("Could not delete Project");
         }
     }
 
     /**
-     * Creates SQL Connetion and creates a new Project.
+     * Creates SQL Connection and creates a new Project.
      *
      * @return
      * @throws DalException
      */
-    public boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "INSERT INTO Project (projektNavn, kundeId, startDato) VALUES (?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projektNavn);
@@ -90,16 +101,41 @@ public class ProjectDAO {
             ps.setString(3, startDato);
             int affectedRows = ps.executeUpdate();
 
-            if (affectedRows == 1) {
+            if (affectedRows == 1)
+            {
                 ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
+                if (rs.next())
+                {
                     return true;
                 }
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
             throw new DalException("Could not create project");
         }
         return false;
+    }
+
+    public List<Project> getProjectKundeNavn() throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "SELECT Project.projektNavn, Project.brugtTid, Kunde.kundeNavn\n"
+                    + "FROM Project\n"
+                    + "INNER JOIN Kunde ON Project.kundeId=Kunde.id;";
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            ArrayList<Project> allProjects = new ArrayList<>();
+            while (rs.next())
+            {
+                String projektNavn = rs.getString("projektNavn");
+                String kundeNavn = rs.getString("kundeNavn");
+                int brugtTid = rs.getInt("brugtTid");
+                Project project = new Project(projektNavn, kundeNavn, brugtTid);
+                allProjects.add(project);
+            }
+            return allProjects;
+        }
     }
 }

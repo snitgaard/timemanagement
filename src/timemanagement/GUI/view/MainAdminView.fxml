@@ -85,7 +85,7 @@
                           </columns>
                         </TableView>
                         <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
-                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" text="Indtast kunde navn" />
+                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast kunde navn" />
                         <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="144.0" text="Opret nyt projekt">
                            <font>
                               <Font name="System Bold" size="17.0" />
@@ -290,11 +290,6 @@
       </StackPane>
       <Pane layoutX="2.0" prefHeight="47.0" prefWidth="959.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="-12.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="188.0" layoutY="14.0" text="Login" textFill="WHITE">
-               <font>
-                  <Font name="Lato Bold" size="14.0" />
-               </font>
-            </Label>
             <ImageView fitHeight="25.0" fitWidth="25.0" layoutX="881.0" layoutY="12.0" onMouseClicked="#minimize_app" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../Images/minimize.png" />

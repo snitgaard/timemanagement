@@ -30,6 +30,7 @@ public class Model
     private ObservableList<Project> allProjects;
     private ObservableList<Task> allTasks;
     private ObservableList<Task> allTasksByProject;
+    private ObservableList<Project> allProjectsMedKunde;
 
     public Model() throws IOException
     {
@@ -234,5 +235,30 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-
+    
+    public ObservableList<Project> getProjectKundeNavn() throws ModelException
+    {
+        try {
+            allProjectsMedKunde = FXCollections.observableArrayList();
+            
+            allProjectsMedKunde.addAll(bllManager.getProjectKundeNavn());
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+        return allProjectsMedKunde;
+    }
+    
+    public ObservableList<Project> refreshProjects() throws ModelException
+    {
+        allProjectsMedKunde.clear();
+        try
+        {
+            allProjectsMedKunde.addAll(bllManager.getProjectKundeNavn());
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+        return allProjectsMedKunde;
+    }
+    
 }

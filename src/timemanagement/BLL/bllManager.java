@@ -195,6 +195,18 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public List<Project> getProjectKundeNavn() throws bllException
+    {
+        try
+        {
+            return dalFacade.getProjectKundeNavn();
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 
 
 }

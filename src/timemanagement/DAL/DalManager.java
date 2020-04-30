@@ -232,4 +232,11 @@ public class DalManager implements DalFacade
             throw new DalException(ex.getMessage());
         }
     }
+
+    @Override
+    public boolean updateTask(int brugtTid, int id) throws DalException {
+        return taskDAO.updateTask(brugtTid, id);
+    }
+    
+    
 }

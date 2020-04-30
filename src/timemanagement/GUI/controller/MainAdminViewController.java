@@ -153,6 +153,8 @@ public class MainAdminViewController implements Initializable
     private TableColumn<Admin, String> adminViewEmail;
     @FXML
     private JFXTextField txt_hourlyRate;
+    @FXML
+    private JFXTextField txt_nyBrugtTid;
 
     /**
      * Initializes the controller class.
@@ -450,7 +452,6 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
         if (opretAdminCheckBox.isSelected())
@@ -496,6 +497,10 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event)
     {
+    }
+
+    @FXML
+    private void handleUpdateTime(ActionEvent event) {
     }
 
 }

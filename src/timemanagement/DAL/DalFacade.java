@@ -63,4 +63,6 @@ public interface DalFacade {
     List<Admin> getAllAdmins() throws DalException;
     
     List<User> getAllUsers() throws DalException;
+    
+    boolean updateTask(int brugtTid, int id) throws DalException;
 }

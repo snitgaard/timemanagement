@@ -309,5 +309,14 @@ public class Model {
         }
         return allUsers;
     }
+    
+    public boolean updateTask(int brugtTid, int id) throws ModelException
+    {
+        try {
+            return bllManager.updateTask(brugtTid, id);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
 }

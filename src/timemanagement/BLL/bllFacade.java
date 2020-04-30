@@ -65,4 +65,6 @@ public interface bllFacade
     List<Admin> getAllAdmins() throws bllException;
 
     List<User> getAllUsers() throws bllException;
+    
+    boolean updateTask(int brugtTid, int id) throws bllException;
 }

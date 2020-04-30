@@ -101,7 +101,7 @@
                               <TableColumn prefWidth="163.0" text="Admin email" />
                            </columns>
                         </TableView>
-                        <JFXTextField fx:id="hourlyRate" layoutX="14.0" layoutY="157.0" text="Timeløn" />
+                        <JFXTextField fx:id="txt_hourlyRate" layoutX="14.0" layoutY="157.0" text="Timeløn" />
                      </children>
                   </AnchorPane>
                </items>

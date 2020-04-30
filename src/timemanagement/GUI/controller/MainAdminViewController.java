@@ -137,6 +137,13 @@ public class MainAdminViewController implements Initializable
     private JFXButton nyOpgaveButton;
     @FXML
     private JFXDatePicker datePicker;
+    @FXML
+    private TableView<?> userView;
+    @FXML
+    private TableView<?> adminView;
+    private JFXTextField hourlyRate;
+    @FXML
+    private JFXTextField txt_hourlyRate;
 
     /**
      * Initializes the controller class.
@@ -435,14 +442,16 @@ public class MainAdminViewController implements Initializable
             System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
             String adminPassword = txt_userPassword.getText();
+            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createAdmin(adminLogin, encryptThisString(adminPassword));
             int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(null, null, adminId);
+            model.createUserAdmin(null, null, adminId, hourlyRate);
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = txt_userPassword.getText();
-            model.createUser(userLogin, encryptThisString(userPassword), null);
+            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
+            model.createUser(userLogin, encryptThisString(userPassword), null, hourlyRate);
         }
     }
 

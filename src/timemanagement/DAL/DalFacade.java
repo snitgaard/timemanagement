@@ -48,9 +48,9 @@ public interface DalFacade {
     
     List<Project> getProjectKundeNavn() throws DalException;
     
-    boolean createUser(String userLogin, String userPassword, String adminId) throws DalException;
+    boolean createUser(String userLogin, String userPassword, String adminId, long hourlyRate) throws DalException;
     
-    boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws DalException;
+    boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws DalException;
     
     boolean createAdmin(String adminLogin, String adminPassword) throws DalException;
     

@@ -198,22 +198,22 @@ public class Model
         return allTasksByProject;
     }
     
-    public boolean createUser(String userLogin, String userPassword, String adminId) throws ModelException
+    public boolean createUser(String userLogin, String userPassword, String adminId, long hourlyRate) throws ModelException
             {
         try
         {
-            return bllManager.createUser(userLogin, userPassword, adminId);
+            return bllManager.createUser(userLogin, userPassword, adminId, hourlyRate);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
     
-        public boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws ModelException
+        public boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws ModelException
     {
         try 
         {
-            return bllManager.createUserAdmin(userLogin, userPassword, adminId);
+            return bllManager.createUserAdmin(userLogin, userPassword, adminId, hourlyRate);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

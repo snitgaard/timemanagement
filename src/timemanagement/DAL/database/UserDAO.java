@@ -46,7 +46,8 @@ public class UserDAO {
                 String userLogin = rs.getString("userlogin");
                 String userPassword = rs.getString("userPassword");
                 int adminId = rs.getInt("adminId");
-                User user = new User(id, userLogin, userPassword, adminId);
+                long hourlyRate = rs.getLong("hourlyRate");
+                User user = new User(id, userLogin, userPassword, adminId, hourlyRate);
                 allUsers.add(user);
             }
             return allUsers;
@@ -84,13 +85,14 @@ public class UserDAO {
      * @return
      * @throws DalException
      */
-    public boolean createUser(String userLogin, String userPassword, String adminId) throws DalException {
+    public boolean createUser(String userLogin, String userPassword, String adminId, long hourlyRate) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO [User] (userLogin, userPassword, adminId) VALUES (?,?,?);";
+            String sql = "INSERT INTO [User] (userLogin, userPassword, adminId, hourlyRate) VALUES (?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, userLogin);
             ps.setString(2, userPassword);
             ps.setString(3, adminId);
+            ps.setLong(4, hourlyRate);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {
@@ -107,13 +109,14 @@ public class UserDAO {
         return false;
     }
     
-    public boolean createUserAdmin(String userLogin, String userPassword, int adminId) throws DalException {
+    public boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO [User] (userLogin, userPassword, adminId) VALUES (?,?,?);";
+            String sql = "INSERT INTO [User] (userLogin, userPassword, adminId, hourlyRate) VALUES (?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, userLogin);
             ps.setString(2, userPassword);
             ps.setInt(3, adminId);
+            ps.setLong(4, hourlyRate);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {
@@ -184,8 +187,9 @@ public class UserDAO {
                 userLogin = rs.getString("userLogin");
                 String userPassword = rs.getString("userPassword");
                 int adminId = rs.getInt("adminId");
+                long hourlyRate = rs.getLong("hourlyRate");
 
-                User user = new User(id, userLogin, userPassword, adminId);
+                User user = new User(id, userLogin, userPassword, adminId, hourlyRate);
                 selectedUser.add(user);
             }
             return selectedUser;
@@ -196,6 +200,7 @@ public class UserDAO {
         }
     }
 
+    
     /**
      * If called this method will create a connection between the database and
      * the program. The SQL statement will be run afterwards. Gets specific user

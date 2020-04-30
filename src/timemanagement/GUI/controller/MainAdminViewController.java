@@ -30,6 +30,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -155,6 +156,8 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_hourlyRate;
     @FXML
     private TableColumn<User, Long> userViewRate;
+    @FXML
+    private JFXTextField txt_nyBrugtTid;
     private User user;
 
     /**
@@ -168,11 +171,9 @@ public class MainAdminViewController implements Initializable
         {
             timeLoggerPane.toFront();
 
+            
             model = model.getInstance();
-            for (Project projects : model.getAllProjects())
-            {
-                projektComboBox.getItems().add(projects.getProjektNavn());
-            }
+            setProjects();
 
             projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
@@ -219,6 +220,14 @@ public class MainAdminViewController implements Initializable
         analyseButton.setVisible(true);
         projekterButton.setVisible(true);
         opretBrugerButton.setVisible(true);
+    }
+    
+    private void setProjects() throws ModelException
+    {
+        for (Project projects : model.getAllProjects())
+            {
+                projektComboBox.getItems().add(projects.getProjektNavn());
+            }
     }
 
     private void fillColumns() throws ModelException
@@ -323,8 +332,10 @@ public class MainAdminViewController implements Initializable
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
+            model.addProjectTime(input, projektComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
             opgaverTableView.setItems(model.refreshTasks());
+            projekterTableView.setItems(model.refreshProjects());
 
         } catch (Exception e)
         {
@@ -458,7 +469,6 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
         if (opretAdminCheckBox.isSelected())
@@ -503,8 +513,30 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleCreateProjekt(ActionEvent event)
+    private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
+        model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0);
+        projekterTableView.setItems(model.refreshProjects());
+        setProjects();
+    }
+
+    @FXML
+    private void handleUpdateTime(ActionEvent event) {
+                opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        System.out.println("selectedTask =" + selectedTask);
+        int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
+        int id = selectedTask.getId();
+        System.out.println("id =" + id);
+        try {
+            System.out.println("brugt tid =" + brugtTid);
+            
+            model.updateTask(brugtTid, id);
+            System.out.println("udpated!");
+        } catch (ModelException ex) {
+            System.out.println("woops");
+        }
+    
     }
 
     @FXML

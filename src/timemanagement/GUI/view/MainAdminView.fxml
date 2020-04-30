@@ -161,28 +161,6 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <JFXDatePicker layoutX="127.0" layoutY="34.0" onAction="#handleStartDate" promptText="Vælg start dato" />
-                        <JFXDatePicker layoutX="445.0" layoutY="34.0" onAction="#handleEndDate" promptText="Vælg slut dato" />
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <TableView fx:id="opgaverTableView" prefHeight="466.0" prefWidth="719.0">
-                           <columns>
-                              <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Opgave navn" />
-                              <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Projekt navn" />
-                              <TableColumn fx:id="brugtTidColumn" prefWidth="165.0" text="Brugt tid" />
-                              <TableColumn fx:id="datoColumn" prefWidth="108.0" text="Dato" />
-                           </columns>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
             <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
@@ -291,6 +269,30 @@
                         <Line endX="316.0" endY="315.5736083984375" startX="316.0" startY="25.881206512451172" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
                         <JFXButton fx:id="nyOpgaveButton" disable="true" layoutX="602.0" layoutY="258.0" onAction="#createOpgave" prefHeight="25.0" prefWidth="110.0" text="Opret Ny Opgave" />
                         <JFXDatePicker fx:id="datePicker" disable="true" editable="false" layoutX="107.0" layoutY="109.0" prefHeight="28.0" prefWidth="193.0" />
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+            <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <JFXDatePicker layoutX="127.0" layoutY="34.0" onAction="#handleStartDate" promptText="Vælg start dato" />
+                        <JFXDatePicker layoutX="445.0" layoutY="34.0" onAction="#handleEndDate" promptText="Vælg slut dato" />
+                        <JFXTextField fx:id="txt_nyBrugtTid" layoutX="303.0" layoutY="78.0" prefHeight="25.0" prefWidth="112.0" promptText="Ny Brugt Tid" />
+                        <JFXButton layoutX="419.0" layoutY="83.0" onAction="#handleUpdateTime" prefHeight="25.0" prefWidth="68.0" text="Opdater" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView fx:id="opgaverTableView" prefHeight="466.0" prefWidth="719.0">
+                           <columns>
+                              <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Opgave navn" />
+                              <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Projekt navn" />
+                              <TableColumn fx:id="brugtTidColumn" prefWidth="165.0" text="Brugt tid" />
+                              <TableColumn fx:id="datoColumn" prefWidth="108.0" text="Dato" />
+                           </columns>
+                        </TableView>
                      </children>
                   </AnchorPane>
                </items>

@@ -42,7 +42,7 @@ public interface DalFacade {
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException;
+    boolean createProject(String projektNavn, int kundeId, String startDato, long brugtTid) throws DalException;
     
     List<Task> getAllTasksByProject(int projektId) throws DalException;
     
@@ -63,4 +63,7 @@ public interface DalFacade {
     List<Admin> getAllAdmins() throws DalException;
     
     List<User> getAllUsers() throws DalException;
+    
+    void addProjektTime(long brugtTid, String projektNavn) throws DalException;
+    boolean updateTask(int brugtTid, int id) throws DalException;
 }

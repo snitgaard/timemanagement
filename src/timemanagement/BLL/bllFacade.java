@@ -44,7 +44,7 @@ public interface bllFacade
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 
-    boolean createProjekt(String projektNavn, int kundeId, String startDato) throws bllException;
+    boolean createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid) throws bllException;
 
     List<Task> getAllTasksByProject(int projektId) throws bllException;
 
@@ -65,4 +65,7 @@ public interface bllFacade
     List<Admin> getAllAdmins() throws bllException;
 
     List<User> getAllUsers() throws bllException;
+    
+    void addProjectTime(long brugtTid, String projektNavn) throws bllException;
+    boolean updateTask(int brugtTid, int id) throws bllException;
 }

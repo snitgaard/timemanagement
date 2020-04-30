@@ -139,9 +139,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public boolean createProjekt(String projektNavn, int kundeId, String startDato) throws bllException {
+    public boolean createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kundeId, startDato);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -249,6 +249,23 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public void addProjectTime(long brugtTid, String projektNavn) throws bllException {
+        try {
+            dalFacade.addProjektTime(brugtTid, projektNavn);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+    public boolean updateTask(int brugtTid, int id) throws bllException {
+        try {
+            return dalFacade.updateTask(brugtTid, id);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    
 
 
 }

@@ -145,7 +145,7 @@ public class TaskDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT Task.opgaveNavn, Task.brugtTid, Task.dato, Project.projektNavn\n"
+            String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Project.projektNavn\n"
                     + "FROM Task \n"
                     + "INNER JOIN Project ON Task.projektId=Project.id;";
             Statement statement = con.createStatement();
@@ -153,11 +153,12 @@ public class TaskDAO
             ArrayList<Task> allProjects = new ArrayList<>();
             while (rs.next())
             {
+                int id = rs.getInt("id");
                 String opgaveNavn = rs.getString("opgaveNavn");
                 String projektNavn = rs.getString("projektNavn");
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
-                Task task = new Task(opgaveNavn, projektNavn, brugtTid, dato);
+                Task task = new Task(id, opgaveNavn, projektNavn, brugtTid, dato);
                 allProjects.add(task);
             }
             return allProjects;
@@ -189,4 +190,20 @@ public class TaskDAO
         }
     }
 
+    public boolean updateTask(int brugtTid, int id)
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "UPDATE Task SET brugtTid = ? WHERE Id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, brugtTid);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
 }

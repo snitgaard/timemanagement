@@ -238,5 +238,10 @@ public class DalManager implements DalFacade
         projectDAO.addProjectTime(brugtTid, projektNavn);
     }
 
+    @Override
+    public boolean updateTask(int brugtTid, int id) throws DalException {
+        return taskDAO.updateTask(brugtTid, id);
+    }
+    
     
 }

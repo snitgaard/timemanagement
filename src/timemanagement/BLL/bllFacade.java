@@ -67,4 +67,5 @@ public interface bllFacade
     List<User> getAllUsers() throws bllException;
     
     void addProjectTime(long brugtTid, String projektNavn) throws bllException;
+    boolean updateTask(int brugtTid, int id) throws bllException;
 }

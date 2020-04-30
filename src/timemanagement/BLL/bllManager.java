@@ -257,7 +257,15 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
+    public boolean updateTask(int brugtTid, int id) throws bllException {
+        try {
+            return dalFacade.updateTask(brugtTid, id);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
 
+    
 
 
 }

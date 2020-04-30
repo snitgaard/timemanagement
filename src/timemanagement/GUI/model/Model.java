@@ -314,6 +314,15 @@ public class Model {
     {
         try {
             bllManager.addProjectTime(brugtTid, projektNavn);
+            catch (bllException ex) {
+                throw new ModelException(ex.getMessage());
+            }
+        }
+    }
+    public boolean updateTask(int brugtTid, int id) throws ModelException
+    {
+        try {
+            return bllManager.updateTask(brugtTid, id);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

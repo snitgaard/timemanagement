@@ -49,6 +49,7 @@ public class Task
      */
     public Task(int id, String opgaveNavn, String projektNavn, int brugtTid, String dato)
     {
+        this.id = id;
         this.opgaveNavn = opgaveNavn;
         this.projektNavn = projektNavn;
         this.brugtTid = brugtTid;

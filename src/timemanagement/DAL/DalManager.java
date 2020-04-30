@@ -242,6 +242,12 @@ public class DalManager implements DalFacade
     public boolean updateTask(int brugtTid, int id) throws DalException {
         return taskDAO.updateTask(brugtTid, id);
     }
+
+    @Override
+    public void deleteUser(User user) throws DalException
+    {
+        userDAO.deleteUser(user);
+    }
     
     
 }

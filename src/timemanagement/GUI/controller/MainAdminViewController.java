@@ -492,7 +492,7 @@ public class MainAdminViewController implements Initializable
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createAdmin(adminLogin, encryptThisString(adminPassword));
             int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(null, null, adminId, hourlyRate);
+            model.createUserAdmin(adminLogin, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
 
         } else

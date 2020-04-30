@@ -45,6 +45,8 @@ import timemanagement.BE.Admin;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
+import timemanagement.DAL.DalException;
+import timemanagement.DAL.database.UserDAO;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 import static utilities.encryptThisString.encryptThisString;
@@ -161,6 +163,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User user;
+    private UserDAO userDAO;
+    @FXML
+    private TableColumn<Task, Integer> idColumn;
     @FXML
     private JFXDatePicker startDate;
     @FXML
@@ -240,6 +245,7 @@ public class MainAdminViewController implements Initializable
     {
         //Opgaver tableview
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
+        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
@@ -256,6 +262,7 @@ public class MainAdminViewController implements Initializable
         
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
+        userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
         
         System.out.println(userViewEmail.getCellFactory());
 
@@ -493,7 +500,7 @@ public class MainAdminViewController implements Initializable
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createAdmin(adminLogin, encryptThisString(adminPassword));
             int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(null, null, adminId, hourlyRate);
+            model.createUserAdmin(adminLogin, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
 
         } else
@@ -547,6 +554,7 @@ public class MainAdminViewController implements Initializable
             
             model.updateTask(brugtTid, id);
             System.out.println("udpated!");
+            opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex) {
             System.out.println("woops");
         }
@@ -554,8 +562,12 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void deleteUser(ActionEvent event)
+    private void deleteUser(ActionEvent event) throws DalException, ModelException
     {
+        userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        User selectedUser = userView.getSelectionModel().getSelectedItem();
+        model.deleteUser(selectedUser);
+        userView.setItems(model.getAllUsers());
     }
 
     

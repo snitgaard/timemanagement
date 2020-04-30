@@ -146,7 +146,7 @@ public class Model
         allTasks.clear();
         try
         {
-            allTasks.addAll(bllManager.getAllTasks());
+            allTasks.addAll(bllManager.getAllTasksProjektNavn());
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -321,6 +321,17 @@ public class Model
         try {
             return bllManager.updateTask(brugtTid, id);
         } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public void deleteUser(User user) throws ModelException
+    {
+        try
+        {
+            bllManager.deleteUser(user);
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }

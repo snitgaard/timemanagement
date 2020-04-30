@@ -287,6 +287,7 @@
                      <children>
                         <TableView fx:id="opgaverTableView" prefHeight="466.0" prefWidth="719.0">
                            <columns>
+                              <TableColumn fx:id="idColumn" prefWidth="75.0" text="Column X" />
                               <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Opgave navn" />
                               <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Projekt navn" />
                               <TableColumn fx:id="brugtTidColumn" prefWidth="165.0" text="Brugt tid" />

@@ -265,6 +265,18 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public void deleteUser(User user) throws bllException
+    {
+        try
+        {
+            dalFacade.deleteUser(user);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
     
 
 

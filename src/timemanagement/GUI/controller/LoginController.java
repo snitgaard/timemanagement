@@ -43,13 +43,12 @@ import timemanagement.gui.model.ModelException;
 import utilities.encryptThisString;
 import static utilities.encryptThisString.encryptThisString;
 
-
 /**
  *
  * @author The Cowboys
  */
-public class LoginController implements Initializable
-{
+public class LoginController implements Initializable {
+
     @FXML
     private AnchorPane anchorPane;
     @FXML
@@ -61,36 +60,30 @@ public class LoginController implements Initializable
     private Model model;
     private User selectedUser;
     private Admin selectedAdmin;
-    
+
     private double xOffset = 0;
     private double yOffset = 0;
     @FXML
     private JFXButton btnLogin;
-    
-    
-    
-    @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
-        try {
-            model = new Model();
-        } catch (IOException ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }    
 
-     /**
-     * Closes the stage, since this is the very first stage, it will close the program completely.
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+
+        model = model.getInstance();
+
+    }
+
+    /**
+     * Closes the stage, since this is the very first stage, it will close the
+     * program completely.
      *
      * @param event
      */
     @FXML
-    private void close_app(MouseEvent event)
-    {
+    private void close_app(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
-
 
     /**
      * Minimizes the stage
@@ -98,20 +91,17 @@ public class LoginController implements Initializable
      * @param event
      */
     @FXML
-    private void minimize_app(MouseEvent event)
-    {
+    private void minimize_app(MouseEvent event) {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
     @FXML
-    private void handleLoginButton(ActionEvent event) throws ModelException, IOException
-    {
+    private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
 
-        if (model.checkUserCredentials(username, password))
-        {
+        if (model.checkUserCredentials(username, password)) {
             User selectedUser = model.getSpecificUser(username);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
@@ -122,10 +112,8 @@ public class LoginController implements Initializable
 
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
-        
 
-        } else if (model.checkAdminCredentials(username, password))
-        {
+        } else if (model.checkAdminCredentials(username, password)) {
             Admin selectedAdmin = model.getSpecificAdmin(username);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
@@ -136,17 +124,15 @@ public class LoginController implements Initializable
 //            teachercontroller.ApplyImportantData(model, this, selectedTeacher);
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
-        } else
-        {
+        } else {
             Border warning = new Border(new BorderStroke(javafx.scene.paint.Color.RED,
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)));
             emailField.setBorder(warning);
             passwordField.setBorder(warning);
         }
     }
-    
-    private void redirectToStage(FXMLLoader fxmlLoader) throws IOException
-    {
+
+    private void redirectToStage(FXMLLoader fxmlLoader) throws IOException {
         Parent root = fxmlLoader.load();
         Object c = fxmlLoader.getController();
         Stage stage = new Stage();
@@ -156,24 +142,20 @@ public class LoginController implements Initializable
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
-        root.setOnMousePressed(new EventHandler<MouseEvent>()
-        {
+        root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event)
-            {
+            public void handle(MouseEvent event) {
                 xOffset = event.getSceneX();
                 yOffset = event.getSceneY();
             }
         });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>()
-        {
+        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
             @Override
-            public void handle(MouseEvent event)
-            {
+            public void handle(MouseEvent event) {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
     }
-    
+
 }

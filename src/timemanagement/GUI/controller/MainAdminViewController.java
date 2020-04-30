@@ -149,7 +149,7 @@ public class MainAdminViewController implements Initializable
         {
             timeLoggerPane.toFront();
 
-            model = new Model();
+            model = model.getInstance();
             for (Project projects : model.getAllProjects())
             {
                 projektComboBox.getItems().add(projects.getProjektNavn());
@@ -158,9 +158,6 @@ public class MainAdminViewController implements Initializable
             projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
 
-        } catch (IOException ex)
-        {
-            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ModelException ex)
         {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);

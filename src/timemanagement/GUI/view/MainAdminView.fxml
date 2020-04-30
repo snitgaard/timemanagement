@@ -45,7 +45,7 @@
                   <FontAwesomeIconView glyphName="BRIEFCASE" size="20" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="124.0" text="Analyse">
+            <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="124.0" text="Analyse" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -53,7 +53,7 @@
                   <FontAwesomeIconView glyphName="´" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="projekterButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="134.0" text="Projekter">
+            <JFXButton fx:id="projekterButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="134.0" text="Projekter" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -61,7 +61,7 @@
                   <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="opretBrugerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="162.0" text="Opret bruger">
+            <JFXButton fx:id="opretBrugerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="162.0" text="Opret bruger" visible="false">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -171,18 +171,18 @@
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="341.0" prefWidth="717.0">
                      <children>
                         <JFXComboBox fx:id="projektComboBox" layoutX="30.0" layoutY="108.0" onAction="#setProjectData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg projekt" />
-                        <JFXComboBox fx:id="opgaveComboBox" layoutX="30.0" layoutY="186.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
-                        <JFXTextField fx:id="startTidField" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXComboBox fx:id="opgaveComboBox" disable="true" layoutX="30.0" layoutY="186.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="107.0" promptText="Vælg opgave" />
+                        <JFXTextField fx:id="startTidField" editable="false" layoutX="426.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="slutTidField" layoutX="600.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="slutTidField" editable="false" layoutX="600.0" layoutY="106.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <JFXTextField fx:id="brugtTidField" layoutX="426.0" layoutY="184.0" prefHeight="30.0" prefWidth="231.0">
+                        <JFXTextField fx:id="brugtTidField" editable="false" layoutX="426.0" layoutY="184.0" prefHeight="30.0" prefWidth="231.0">
                            <font>
                               <Font size="14.0" />
                            </font>

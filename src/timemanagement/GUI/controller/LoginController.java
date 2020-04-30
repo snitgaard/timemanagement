@@ -113,9 +113,9 @@ public class LoginController implements Initializable
         if (model.checkUserCredentials(username, password))
         {
             User selectedUser = model.getSpecificUser(username);
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainUserView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
-            MainUserViewController mainUserController = fxmlLoader.getController();
+            MainAdminViewController mainAdminController = fxmlLoader.getController();
             // Here the StudentAttendanceController is given important data objects,
             // This secures that it is the correct ones we are working with.
 //            mainUserController.ApplyImportantData(model, this, selectedUser);
@@ -130,6 +130,7 @@ public class LoginController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdmincontroller = fxmlLoader.getController();
+            mainAdmincontroller.showAdminButtons();
 //            // Here the TeacherMainController is given important data objects,
 //            // This secures that it is the correct ones we are working with.
 //            teachercontroller.ApplyImportantData(model, this, selectedTeacher);

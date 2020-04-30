@@ -197,6 +197,13 @@ public class MainAdminViewController implements Initializable
             opretBrugerPane.toFront();
         }
     }
+    
+    public void showAdminButtons()
+    {
+        analyseButton.setVisible(true);
+        projekterButton.setVisible(true);
+        opretBrugerButton.setVisible(true);
+    }
 
     private void fillColumns() throws ModelException
     {

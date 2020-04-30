@@ -73,6 +73,39 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
+            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <JFXTextField fx:id="txt_userPassword" layoutX="11.0" layoutY="110.0" prefHeight="32.0" prefWidth="224.0" promptText="Indtast projekt navn" text="Indtast bruger password" />
+                        <JFXTextField fx:id="txt_userLogin" layoutX="11.0" layoutY="64.0" prefHeight="30.0" prefWidth="224.0" text="Indtast bruger login" />
+                        <JFXButton layoutX="133.0" layoutY="190.0" onAction="#handleCreateUser" prefHeight="32.0" prefWidth="102.0" text="Opret bruger">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="11.0" layoutY="196.0" text="Admin">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <TableView fx:id="userView" layoutY="233.0" prefHeight="356.0" prefWidth="239.0">
+                          <columns>
+                            <TableColumn prefWidth="75.0" text="Bruger ID" />
+                            <TableColumn prefWidth="163.0" text="Bruger email" />
+                          </columns>
+                        </TableView>
+                        <TableView fx:id="adminView" layoutX="299.0" layoutY="233.0" prefHeight="356.0" prefWidth="239.0">
+                           <columns>
+                              <TableColumn prefWidth="75.0" text="Admin ID" />
+                              <TableColumn prefWidth="163.0" text="Admin email" />
+                           </columns>
+                        </TableView>
+                        <JFXTextField fx:id="hourlyRate" layoutX="14.0" layoutY="157.0" text="Timeløn" />
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
             <SplitPane fx:id="projektPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -249,39 +282,6 @@
                         <Line endX="316.0" endY="315.5736083984375" startX="316.0" startY="25.881206512451172" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
                         <JFXButton fx:id="nyOpgaveButton" disable="true" layoutX="602.0" layoutY="258.0" onAction="#createOpgave" prefHeight="25.0" prefWidth="110.0" text="Opret Ny Opgave" />
                         <JFXDatePicker fx:id="datePicker" disable="true" editable="false" layoutX="107.0" layoutY="109.0" prefHeight="28.0" prefWidth="193.0" />
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
-            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <JFXTextField fx:id="txt_userPassword" layoutX="11.0" layoutY="110.0" prefHeight="32.0" prefWidth="224.0" promptText="Indtast projekt navn" text="Indtast bruger password" />
-                        <JFXTextField fx:id="txt_userLogin" layoutX="11.0" layoutY="64.0" prefHeight="30.0" prefWidth="224.0" text="Indtast bruger login" />
-                        <JFXButton layoutX="133.0" layoutY="190.0" onAction="#handleCreateUser" prefHeight="32.0" prefWidth="102.0" text="Opret bruger">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="11.0" layoutY="196.0" text="Admin">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXCheckBox>
-                        <TableView fx:id="userView" layoutY="233.0" prefHeight="356.0" prefWidth="239.0">
-                          <columns>
-                            <TableColumn prefWidth="75.0" text="Bruger ID" />
-                            <TableColumn prefWidth="163.0" text="Bruger email" />
-                          </columns>
-                        </TableView>
-                        <TableView fx:id="adminView" layoutX="299.0" layoutY="233.0" prefHeight="356.0" prefWidth="239.0">
-                           <columns>
-                              <TableColumn prefWidth="75.0" text="Admin ID" />
-                              <TableColumn prefWidth="163.0" text="Admin email" />
-                           </columns>
-                        </TableView>
-                        <JFXTextField fx:id="hourlyRate" layoutX="14.0" layoutY="157.0" text="Timeløn" />
                      </children>
                   </AnchorPane>
                </items>

@@ -165,11 +165,9 @@ public class MainAdminViewController implements Initializable
         {
             timeLoggerPane.toFront();
 
+            
             model = model.getInstance();
-            for (Project projects : model.getAllProjects())
-            {
-                projektComboBox.getItems().add(projects.getProjektNavn());
-            }
+            setProjects();
 
             projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
@@ -216,6 +214,14 @@ public class MainAdminViewController implements Initializable
         analyseButton.setVisible(true);
         projekterButton.setVisible(true);
         opretBrugerButton.setVisible(true);
+    }
+    
+    private void setProjects() throws ModelException
+    {
+        for (Project projects : model.getAllProjects())
+            {
+                projektComboBox.getItems().add(projects.getProjektNavn());
+            }
     }
 
     private void fillColumns() throws ModelException
@@ -315,8 +321,10 @@ public class MainAdminViewController implements Initializable
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
+            model.addProjectTime(input, projektComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
             opgaverTableView.setItems(model.refreshTasks());
+            projekterTableView.setItems(model.refreshProjects());
 
         } catch (Exception e)
         {
@@ -494,8 +502,11 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleCreateProjekt(ActionEvent event)
+    private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
+        model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0);
+        projekterTableView.setItems(model.refreshProjects());
+        setProjects();
     }
 
 }

@@ -90,15 +90,16 @@ public class ProjectDAO
      * @return
      * @throws DalException
      */
-    public boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException
+    public boolean createProject(String projektNavn, int kundeId, String startDato, long brugtTid) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato) VALUES (?,?,?);";
+            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid) VALUES (?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projektNavn);
             ps.setInt(2, kundeId);
             ps.setString(3, startDato);
+            ps.setLong(4, brugtTid);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1)
@@ -136,6 +137,23 @@ public class ProjectDAO
                 allProjects.add(project);
             }
             return allProjects;
+        }
+    }
+    
+    public void addProjectTime(long brugtTid, String projektNavn) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "UPDATE Project SET brugtTid = brugtTid + ? WHERE projektNavn = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, brugtTid);
+            ps.setString(2, projektNavn);
+            ps.executeUpdate();
+
+        } catch (SQLException ex)
+        {
+            System.out.println(ex);
+            throw new DalException("Could not fetch all classes");
         }
     }
 }

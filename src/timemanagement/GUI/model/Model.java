@@ -160,9 +160,9 @@ public class Model {
      * row was added, false if not
      * @throws ModelException
      */
-    public boolean createProjekt(String projektNavn, int kundeId, String startDato) throws ModelException {
+    public boolean createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid) throws ModelException {
         try {
-            return bllManager.createProjekt(projektNavn, kundeId, startDato);
+            return bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
@@ -308,6 +308,15 @@ public class Model {
             throw new ModelException(ex.getMessage());
         }
         return allUsers;
+    }
+    
+    public void addProjectTime(long brugtTid, String projektNavn) throws ModelException
+    {
+        try {
+            bllManager.addProjectTime(brugtTid, projektNavn);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
     }
 
 }

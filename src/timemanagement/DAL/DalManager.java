@@ -148,8 +148,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public boolean createProject(String projektNavn, int kundeId, String startDato) throws DalException {
-        return projectDAO.createProject(projektNavn, kundeId, startDato);
+    public boolean createProject(String projektNavn, int kundeId, String startDato, long brugtTid) throws DalException {
+        return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid);
     }
 
     @Override
@@ -232,4 +232,11 @@ public class DalManager implements DalFacade
             throw new DalException(ex.getMessage());
         }
     }
+
+    @Override
+    public void addProjektTime(long brugtTid, String projektNavn) throws DalException {
+        projectDAO.addProjectTime(brugtTid, projektNavn);
+    }
+
+    
 }

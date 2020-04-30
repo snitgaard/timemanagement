@@ -180,7 +180,6 @@ public class MainAdminViewController implements Initializable
         {
             timeLoggerPane.toFront();
 
-            
             model = model.getInstance();
             setProjects();
             dateFilter();
@@ -231,13 +230,13 @@ public class MainAdminViewController implements Initializable
         projekterButton.setVisible(true);
         opretBrugerButton.setVisible(true);
     }
-    
+
     private void setProjects() throws ModelException
     {
         for (Project projects : model.getAllProjects())
-            {
-                projektComboBox.getItems().add(projects.getProjektNavn());
-            }
+        {
+            projektComboBox.getItems().add(projects.getProjektNavn());
+        }
     }
 
     private void fillColumns() throws ModelException
@@ -258,17 +257,15 @@ public class MainAdminViewController implements Initializable
         //User & Admin views
         userView.setItems(model.getAllUsers());
         adminView.setItems(model.getAllAdmins());
-        
+
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
-        
+
         System.out.println(userViewEmail.getCellFactory());
 
         adminViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         adminViewEmail.setCellValueFactory(new PropertyValueFactory<>("adminLogin"));
-        
-        
 
     }
 
@@ -494,6 +491,7 @@ public class MainAdminViewController implements Initializable
             int adminId = model.getAdminId(adminLogin);
             model.createUserAdmin(null, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
+            userView.setItems(model.getAllUsers());
 
         } else
         {
@@ -534,23 +532,26 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleUpdateTime(ActionEvent event) {
-                opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    private void handleUpdateTime(ActionEvent event)
+    {
+        opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         System.out.println("selectedTask =" + selectedTask);
         int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
         int id = selectedTask.getId();
         System.out.println("id =" + id);
-        try {
+        try
+        {
             System.out.println("brugt tid =" + brugtTid);
-            
+
             model.updateTask(brugtTid, id);
             System.out.println("udpated!");
             opgaverTableView.setItems(model.refreshTasks());
-        } catch (ModelException ex) {
+        } catch (ModelException ex)
+        {
             System.out.println("woops");
         }
-    
+
     }
 
     @FXML
@@ -560,33 +561,41 @@ public class MainAdminViewController implements Initializable
         User selectedUser = userView.getSelectionModel().getSelectedItem();
         model.deleteUser(selectedUser);
         userView.setItems(model.getAllUsers());
+
+        adminView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Admin selectedAdmin = adminView.getSelectionModel().getSelectedItem();
+        model.deleteAdmin(selectedAdmin);
+        adminView.setItems(model.getAllAdmins());
+        userView.setItems(model.getAllUsers());
     }
 
-    
-     private void dateFilter()
+    private void dateFilter()
     {
         LocalDate minDate = startDate.getValue();
         LocalDate maxDate = endDate.getValue();
 
-        try {
+        try
+        {
             List<Task> taskNames = model.getAllTasks();
             List<Task> result = new ArrayList<>();
-            
+
             for (Task tasks : taskNames)
             {
-                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
-                    Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(date1);
-                    calendar1.add(Calendar.DATE, 1);
-                    Date x = calendar1.getTime();
-                    System.out.println(x);
-                }
-            } catch (ParseException ex) {
+                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.setTime(date1);
+                calendar1.add(Calendar.DATE, 1);
+                Date x = calendar1.getTime();
+                System.out.println(x);
+            }
+        } catch (ParseException ex)
+        {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-        
-        } catch (ModelException ex) {
+
+        } catch (ModelException ex)
+        {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        }
-    
+    }
+
 }

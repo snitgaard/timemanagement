@@ -335,5 +335,16 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+    
+    public void deleteAdmin(Admin admin) throws ModelException
+    {
+        try
+        {
+            bllManager.deleteAdmin(admin);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
 }

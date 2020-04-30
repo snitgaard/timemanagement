@@ -248,6 +248,12 @@ public class DalManager implements DalFacade
     {
         userDAO.deleteUser(user);
     }
+
+    @Override
+    public void deleteAdmin(Admin admin) throws DalException
+    {
+        adminDAO.deleteAdmin(admin);
+    }
     
     
 }

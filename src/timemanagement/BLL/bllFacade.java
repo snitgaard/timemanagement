@@ -71,4 +71,6 @@ public interface bllFacade
     boolean updateTask(int brugtTid, int id) throws bllException;
     
     void deleteUser(User user) throws bllException;
+    
+    void deleteAdmin(Admin admin) throws bllException;
 }

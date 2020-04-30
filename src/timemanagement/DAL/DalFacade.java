@@ -69,4 +69,6 @@ public interface DalFacade {
     boolean updateTask(int brugtTid, int id) throws DalException;
     
     void deleteUser(User user) throws DalException;
+    
+    void deleteAdmin(Admin admin) throws DalException;
 }

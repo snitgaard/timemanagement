@@ -277,7 +277,15 @@ public class bllManager implements bllFacade {
         }
     }
 
-    
-
-
+    @Override
+    public void deleteAdmin(Admin admin) throws bllException
+    {
+        try
+        {
+            dalFacade.deleteAdmin(admin);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
 }

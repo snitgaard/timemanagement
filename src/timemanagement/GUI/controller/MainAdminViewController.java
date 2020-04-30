@@ -160,10 +160,10 @@ public class MainAdminViewController implements Initializable
 
         } catch (IOException ex)
         {
-            Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ModelException ex)
         {
-            Logger.getLogger(MainUserViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

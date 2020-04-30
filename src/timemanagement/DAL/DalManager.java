@@ -208,4 +208,28 @@ public class DalManager implements DalFacade
             throw new DalException(ex.getMessage());
         }
     }
+
+    @Override
+    public List<Admin> getAllAdmins() throws DalException
+    {
+        try
+        {
+            return adminDAO.getAllAdmins();
+        } catch (SQLException ex)
+        {
+            throw new DalException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws DalException
+    {
+        try
+        {
+            return userDAO.getAllUsers();
+        } catch (SQLException ex)
+        {
+            throw new DalException(ex.getMessage());
+        }
+    }
 }

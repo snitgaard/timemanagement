@@ -59,4 +59,8 @@ public interface DalFacade {
     int getKundeId (String kundeNavn) throws DalException;
     
     int getAdminId (String adminLogin) throws DalException;
+    
+    List<Admin> getAllAdmins() throws DalException;
+    
+    List<User> getAllUsers() throws DalException;
 }

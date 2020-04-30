@@ -225,6 +225,30 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public List<Admin> getAllAdmins() throws bllException
+    {
+        try
+        {
+            return dalFacade.getAllAdmins();
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<User> getAllUsers() throws bllException
+    {
+        try
+        {
+            return dalFacade.getAllUsers();
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 
 
 }

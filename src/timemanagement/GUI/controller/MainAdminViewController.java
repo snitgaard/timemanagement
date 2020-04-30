@@ -38,8 +38,10 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import timemanagement.BE.Admin;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
+import timemanagement.BE.User;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 import static utilities.encryptThisString.encryptThisString;
@@ -137,6 +139,20 @@ public class MainAdminViewController implements Initializable
     private JFXButton nyOpgaveButton;
     @FXML
     private JFXDatePicker datePicker;
+    @FXML
+    private TableView<User> userView;
+    @FXML
+    private TableView<Admin> adminView;
+    @FXML
+    private JFXTextField hourlyRate;
+//    @FXML
+//    private TableColumn<User, Integer> userViewId;
+//    @FXML
+//    private TableColumn<User, String> userViewEmail;
+    @FXML
+    private TableColumn<Admin, Integer> adminViewId;
+    @FXML
+    private TableColumn<Admin, Integer> adminViewEmail;
 
     /**
      * Initializes the controller class.
@@ -218,6 +234,16 @@ public class MainAdminViewController implements Initializable
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
         brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
+        
+        //User & Admin views
+//        userView.setItems(model.getAllUsers());
+        adminView.setItems(model.getAllAdmins());
+        
+//        userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
+//        userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
+        
+        adminViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        adminViewEmail.setCellValueFactory(new PropertyValueFactory<>("adminLogin"));
     }
 
     @FXML
@@ -438,11 +464,14 @@ public class MainAdminViewController implements Initializable
             model.createAdmin(adminLogin, encryptThisString(adminPassword));
             int adminId = model.getAdminId(adminLogin);
             model.createUserAdmin(null, null, adminId);
+            adminView.setItems(model.getAllAdmins());
+            
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = txt_userPassword.getText();
             model.createUser(userLogin, encryptThisString(userPassword), null);
+//            model.getAllUsers();
         }
     }
 

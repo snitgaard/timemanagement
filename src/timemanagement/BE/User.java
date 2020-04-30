@@ -106,6 +106,12 @@ public class User
     public void setAdminId(int adminId) {
         this.adminId = adminId;
     }
+
+    @Override
+    public String toString()
+    {
+        return userLogin;
+    }
     
     
 }

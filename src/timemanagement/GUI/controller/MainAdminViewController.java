@@ -143,16 +143,19 @@ public class MainAdminViewController implements Initializable
     private TableView<User> userView;
     @FXML
     private TableView<Admin> adminView;
-//    @FXML
-//    private TableColumn<User, Integer> userViewId;
-//    @FXML
-//    private TableColumn<User, String> userViewEmail;
+    @FXML
+    private TableColumn<User, Integer> userViewId;
+    @FXML
+    private TableColumn<User, String> userViewEmail;
     @FXML
     private TableColumn<Admin, Integer> adminViewId;
     @FXML
     private TableColumn<Admin, String> adminViewEmail;
     @FXML
     private JFXTextField txt_hourlyRate;
+    @FXML
+    private TableColumn<User, Long> userViewRate;
+    private User user;
 
     /**
      * Initializes the controller class.
@@ -210,7 +213,7 @@ public class MainAdminViewController implements Initializable
             opretBrugerPane.toFront();
         }
     }
-    
+
     public void showAdminButtons()
     {
         analyseButton.setVisible(true);
@@ -231,16 +234,21 @@ public class MainAdminViewController implements Initializable
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
         brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
-        
+
         //User & Admin views
-//        userView.setItems(model.getAllUsers());
+        userView.setItems(model.getAllUsers());
         adminView.setItems(model.getAllAdmins());
         
-//        userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
-//        userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
+        userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         
+        System.out.println(userViewEmail.getCellFactory());
+
         adminViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         adminViewEmail.setCellValueFactory(new PropertyValueFactory<>("adminLogin"));
+        
+        
+
     }
 
     @FXML
@@ -463,13 +471,14 @@ public class MainAdminViewController implements Initializable
             int adminId = model.getAdminId(adminLogin);
             model.createUserAdmin(null, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
-            
+
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = txt_userPassword.getText();
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUser(userLogin, encryptThisString(userPassword), null, hourlyRate);
+            userView.setItems(model.getAllUsers());
         }
     }
 
@@ -495,6 +504,11 @@ public class MainAdminViewController implements Initializable
 
     @FXML
     private void handleCreateProjekt(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void deleteUser(ActionEvent event)
     {
     }
 

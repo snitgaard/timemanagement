@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
-import java.io.IOException;
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -21,6 +20,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -159,6 +159,10 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User user;
+    @FXML
+    private JFXDatePicker startDate;
+    @FXML
+    private JFXDatePicker endDate;
 
     /**
      * Initializes the controller class.
@@ -174,6 +178,7 @@ public class MainAdminViewController implements Initializable
             
             model = model.getInstance();
             setProjects();
+            dateFilter();
 
             projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
@@ -469,6 +474,7 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
         if (opretAdminCheckBox.isSelected())
@@ -544,4 +550,31 @@ public class MainAdminViewController implements Initializable
     {
     }
 
+    
+     private void dateFilter()
+    {
+        LocalDate minDate = startDate.getValue();
+        LocalDate maxDate = endDate.getValue();
+
+        try {
+            List<Task> taskNames = model.getAllTasks();
+            List<Task> result = new ArrayList<>();
+            
+            for (Task tasks : taskNames)
+            {
+                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
+                    Calendar calendar1 = Calendar.getInstance();
+                    calendar1.setTime(date1);
+                    calendar1.add(Calendar.DATE, 1);
+                    Date x = calendar1.getTime();
+                    System.out.println(x);
+                }
+            } catch (ParseException ex) {
+            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+        
+        } catch (ModelException ex) {
+            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }
+    
 }

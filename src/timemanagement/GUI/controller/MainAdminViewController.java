@@ -30,6 +30,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -512,6 +513,21 @@ public class MainAdminViewController implements Initializable
 
     @FXML
     private void handleUpdateTime(ActionEvent event) {
+                opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        System.out.println("selectedTask =" + selectedTask);
+        int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
+        int id = selectedTask.getId();
+        System.out.println("id =" + id);
+        try {
+            System.out.println("brugt tid =" + brugtTid);
+            
+            model.updateTask(brugtTid, id);
+            System.out.println("udpated!");
+        } catch (ModelException ex) {
+            System.out.println("woops");
+        }
+    
     }
 
 }

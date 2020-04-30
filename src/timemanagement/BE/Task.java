@@ -41,12 +41,13 @@ public class Task
 
     /**
      * Constructor for Task
+     * @param id
      * @param opgaveNavn
      * @param projektNavn
      * @param brugtTid
      * @param dato 
      */
-    public Task(String opgaveNavn, String projektNavn, int brugtTid, String dato)
+    public Task(int id, String opgaveNavn, String projektNavn, int brugtTid, String dato)
     {
         this.opgaveNavn = opgaveNavn;
         this.projektNavn = projektNavn;

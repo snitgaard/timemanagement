@@ -277,8 +277,8 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <JFXDatePicker layoutX="127.0" layoutY="34.0" onAction="#handleStartDate" promptText="Vælg start dato" />
-                        <JFXDatePicker layoutX="445.0" layoutY="34.0" onAction="#handleEndDate" promptText="Vælg slut dato" />
+                        <JFXDatePicker fx:id="startDate" layoutX="127.0" layoutY="34.0" onAction="#handleStartDate" promptText="Vælg start dato" />
+                        <JFXDatePicker fx:id="endDate" layoutX="445.0" layoutY="34.0" onAction="#handleEndDate" promptText="Vælg slut dato" />
                         <JFXTextField fx:id="txt_nyBrugtTid" layoutX="303.0" layoutY="78.0" prefHeight="25.0" prefWidth="112.0" promptText="Ny Brugt Tid" />
                         <JFXButton layoutX="419.0" layoutY="83.0" onAction="#handleUpdateTime" prefHeight="25.0" prefWidth="68.0" text="Opdater" />
                      </children>

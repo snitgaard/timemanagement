@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -182,7 +184,6 @@ public class MainAdminViewController implements Initializable
 
             model = model.getInstance();
             setProjects();
-            dateFilter();
 
             projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
@@ -272,11 +273,18 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleStartDate(ActionEvent event)
     {
+        try {
+        dateFilter();
+        } catch (Exception e) 
+        {
+            
+        }
     }
 
     @FXML
     private void handleEndDate(ActionEvent event)
     {
+        dateFilter();
     }
 
     /**
@@ -489,7 +497,7 @@ public class MainAdminViewController implements Initializable
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createAdmin(adminLogin, encryptThisString(adminPassword));
             int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(null, null, adminId, hourlyRate);
+            model.createUserAdmin(adminLogin, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
             userView.setItems(model.getAllUsers());
 
@@ -571,25 +579,44 @@ public class MainAdminViewController implements Initializable
 
     private void dateFilter()
     {
-        LocalDate minDate = startDate.getValue();
-        LocalDate maxDate = endDate.getValue();
 
         try
         {
             List<Task> taskNames = model.getAllTasks();
-            List<Task> result = new ArrayList<>();
-
+            ObservableList<Task> result = FXCollections.observableArrayList();
+            Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate.getValue().toString());
+            
+            Calendar calendar2 = Calendar.getInstance();
+            calendar2.setTime(start);
+            calendar2.add(Calendar.DATE, 1);
+            Date sDate = calendar2.getTime();
+                    
+                    
+            Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate.getValue().toString());
+            Calendar calendar3 = Calendar.getInstance();
+            calendar3.setTime(end);
+            calendar3.add(Calendar.DATE, 1);
+            Date eDate = calendar3.getTime();
+            
+            
             for (Task tasks : taskNames)
             {
-                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.setTime(date1);
-                calendar1.add(Calendar.DATE, 1);
-                Date x = calendar1.getTime();
-                System.out.println(x);
+                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
+                    
+                    Calendar calendar1 = Calendar.getInstance();
+                    calendar1.setTime(date1);
+                    calendar1.add(Calendar.DATE, 1);
+                    Date x = calendar1.getTime();
+                    if (x.after(sDate) && x.before(eDate) || x.equals(sDate) || x.equals(eDate))
+                    {
+                        result.add(tasks);
+                    }
+                }
+            
+            opgaverTableView.setItems(result);
             }
-        } catch (ParseException ex)
-        {
+        
+        catch (ParseException ex) {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
 
         } catch (ModelException ex)

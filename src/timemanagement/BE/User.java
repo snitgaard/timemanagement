@@ -15,6 +15,7 @@ public class User
     private String userLogin;
     private String userPassword;
     private int adminId;
+    private long hourlyRate;
 
     
     /**
@@ -32,11 +33,22 @@ public class User
      * @param userPassword
      * @param adminId
      */
-    public User(int id, String userLogin, String userPassword, int adminId) {
+    public User(int id, String userLogin, String userPassword, int adminId, long hourlyRate) {
         this.id = id;
         this.userLogin = userLogin;
         this.userPassword = userPassword;
         this.adminId = adminId;
+        this.hourlyRate = hourlyRate;
+        
+        
+    }
+
+    public long getHourlyRate() {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(long hourlyRate) {
+        this.hourlyRate = hourlyRate;
     }
 
     /**

@@ -96,7 +96,7 @@
                               <TableColumn fx:id="adminViewEmail" prefWidth="163.0" text="Admin email" />
                            </columns>
                         </TableView>
-                        <JFXTextField fx:id="hourlyRate" layoutX="14.0" layoutY="157.0" promptText="Timeløn" />
+                        <JFXTextField fx:id="txt_hourlyRate" layoutX="14.0" layoutY="157.0" promptText="Indtast Timeløn" />
                      </children>
                   </AnchorPane>
                </items>

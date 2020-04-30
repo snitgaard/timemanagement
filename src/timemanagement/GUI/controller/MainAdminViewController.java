@@ -143,8 +143,6 @@ public class MainAdminViewController implements Initializable
     private TableView<User> userView;
     @FXML
     private TableView<Admin> adminView;
-    @FXML
-    private JFXTextField hourlyRate;
 //    @FXML
 //    private TableColumn<User, Integer> userViewId;
 //    @FXML
@@ -152,7 +150,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Admin, Integer> adminViewId;
     @FXML
-    private TableColumn<Admin, Integer> adminViewEmail;
+    private TableColumn<Admin, String> adminViewEmail;
+    @FXML
+    private JFXTextField txt_hourlyRate;
 
     /**
      * Initializes the controller class.
@@ -458,17 +458,18 @@ public class MainAdminViewController implements Initializable
             System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
             String adminPassword = txt_userPassword.getText();
+            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createAdmin(adminLogin, encryptThisString(adminPassword));
             int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(null, null, adminId);
+            model.createUserAdmin(null, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
             
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = txt_userPassword.getText();
-            model.createUser(userLogin, encryptThisString(userPassword), null);
-//            model.getAllUsers();
+            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
+            model.createUser(userLogin, encryptThisString(userPassword), null, hourlyRate);
         }
     }
 

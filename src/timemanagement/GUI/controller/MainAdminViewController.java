@@ -567,10 +567,10 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void deleteUser(ActionEvent event) throws DalException, ModelException
     {
-        userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        User selectedUser = userView.getSelectionModel().getSelectedItem();
-        model.deleteUser(selectedUser);
-        userView.setItems(model.getAllUsers());
+//        userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+//        User selectedUser = userView.getSelectionModel().getSelectedItem();
+//        model.deleteUser(selectedUser);
+//        userView.setItems(model.getAllUsers());
 
         adminView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Admin selectedAdmin = adminView.getSelectionModel().getSelectedItem();

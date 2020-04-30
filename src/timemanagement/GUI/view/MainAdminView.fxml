@@ -281,6 +281,7 @@
                         <JFXDatePicker fx:id="endDate" layoutX="445.0" layoutY="34.0" onAction="#handleEndDate" promptText="Vælg slut dato" />
                         <JFXTextField fx:id="txt_nyBrugtTid" layoutX="303.0" layoutY="78.0" prefHeight="25.0" prefWidth="112.0" promptText="Ny Brugt Tid" />
                         <JFXButton layoutX="419.0" layoutY="83.0" onAction="#handleUpdateTime" prefHeight="25.0" prefWidth="68.0" text="Opdater" />
+                        <JFXButton fx:id="btnTaskClearFilter" layoutX="559.0" layoutY="71.0" onAction="#taskClearFilter" text="Clear date filter" />
                      </children>
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

@@ -170,6 +170,8 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker startDate;
     @FXML
     private JFXDatePicker endDate;
+    @FXML
+    private JFXButton btnTaskClearFilter;
 
     /**
      * Initializes the controller class.
@@ -618,6 +620,12 @@ public class MainAdminViewController implements Initializable
         
         
         }
+
+    @FXML
+    private void taskClearFilter(ActionEvent event) throws ModelException 
+    {
+        opgaverTableView.setItems(model.getAllTasksProjektNavn());
+    }
      
     
 }

@@ -24,10 +24,26 @@ public class bllManager implements bllFacade {
 
     private final DalFacade dalFacade;
 
+    /**
+     * Constructor for bllManager
+     * 
+     * @throws IOException 
+     */
     public bllManager() throws IOException {
         dalFacade = new DalManager();
     }
 
+    /**
+     * Checks if the login and password is correct 
+     * and whether or not "isAdmin" integer
+     * is 0 or 1
+     * 
+     * @param userLogin
+     * @param userPassword
+     * @param isAdmin
+     * @return checkUserCredentials method from the dalFacade
+     * @throws bllException 
+     */
     @Override
     public boolean checkUserCredentials(String userLogin, String userPassword, int isAdmin) throws bllException {
         try {
@@ -37,6 +53,13 @@ public class bllManager implements bllFacade {
         }
     }
 
+    /**
+     * Gets a list of a User from the dalFacade
+     *
+     * @param userLogin
+     * @return getUser method from the DalFacade
+     * @throws bllException
+     */
     @Override
     public List<User> getUser(String userLogin) throws bllException {
         try {
@@ -46,6 +69,12 @@ public class bllManager implements bllFacade {
         }
     }
 
+    /**
+     * Gets a list of all Projects from the dalFacade
+     *
+     * @return getAllProjects method from the DalFacade
+     * @throws bllException
+     */
     @Override
     public List<Project> getAllProjects() throws bllException {
         try {
@@ -55,6 +84,13 @@ public class bllManager implements bllFacade {
         }
     }
 
+    /**
+     * This method gets the specific user down depending on the userLogin
+     * 
+     * @param userLogin
+     * @return getSpecificUser method from the dalFacade
+     * @throws bllException 
+     */
     @Override
     public User getSpecificUser(String userLogin) throws bllException {
         try {

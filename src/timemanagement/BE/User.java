@@ -32,6 +32,7 @@ public class User
      * @param userLogin
      * @param userPassword
      * @param isAdmin
+     * @param hourlyRate
      */
     public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate) {
         this.id = id;
@@ -39,14 +40,20 @@ public class User
         this.userPassword = userPassword;
         this.isAdmin = isAdmin;
         this.hourlyRate = hourlyRate;
-        
-        
     }
 
+    /**
+     * getter for hourlyRate
+     * @return hourlyRate
+     */
     public long getHourlyRate() {
         return hourlyRate;
     }
 
+    /**
+     * setter for hourlyRate
+     * @param hourlyRate 
+     */
     public void setHourlyRate(long hourlyRate) {
         this.hourlyRate = hourlyRate;
     }
@@ -99,14 +106,26 @@ public class User
         this.userPassword = userPassword;
     } 
 
+    /**
+     * getter for isAdmin
+     * @return isAdmin
+     */
     public int getIsAdmin() {
         return isAdmin;
     }
 
+    /**
+     * setter for isAdmin
+     * @param isAdmin 
+     */
     public void setIsAdmin(int isAdmin) {
         this.isAdmin = isAdmin;
     }
 
+    /**
+     * toString Method for User
+     * @return userLogin
+     */
     @Override
     public String toString()
     {

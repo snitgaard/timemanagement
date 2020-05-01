@@ -34,6 +34,12 @@ public class Project {
         this.brugtTid = brugtTid;
     }
 
+    /**
+     * Constructor for Porject
+     * @param projektNavn
+     * @param kundeNavn
+     * @param brugtTid 
+     */
     public Project(String projektNavn, String kundeNavn, int brugtTid)
     {
         this.projektNavn = projektNavn;
@@ -89,11 +95,19 @@ public class Project {
         this.kundeId = kundeId;
     }
 
+    /**
+     * getter for kundeNavn
+     * @return kundeNavn
+     */
     public String getKundeNavn()
     {
         return kundeNavn;
     }
 
+    /**
+     * setter for kundeNavn
+     * @param kundeNavn 
+     */
     public void setKundeNavn(String kundeNavn)
     {
         this.kundeNavn = kundeNavn;

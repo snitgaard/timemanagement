@@ -7,7 +7,7 @@ package timemanagement.BLL;
 
 /**
  *
- * @author Mads
+ * @author The Cowboys
  */
 public class bllException extends Exception {
     

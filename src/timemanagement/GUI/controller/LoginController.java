@@ -104,7 +104,7 @@ public class LoginController implements Initializable {
         System.out.println("username =" + username);
         System.out.println("password =" + password);
         System.out.println("isAdmin =" + isAdmin);
-        if (model.checkUserCredentials(username, password, isAdmin)) {
+        if (model.checkUserCredentials(username, password, 0)) {
             User selectedUser = model.getSpecificUser(username);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
@@ -116,7 +116,7 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
 
-        } else if (model.checkUserCredentials(username, password, isAdmin)) {
+        } else if (model.checkUserCredentials(username, password, 1)) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdmincontroller = fxmlLoader.getController();

@@ -156,7 +156,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User user;
-    private UserDAO userDAO;
+
     private TableColumn<Task, Integer> idColumn;
     @FXML
     private JFXDatePicker startDate;
@@ -537,11 +537,9 @@ public class MainAdminViewController implements Initializable
     {
         if (opretAdminCheckBox.isSelected())
         {
-            System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
             String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            int isAdmin = model.getIsAdminInt(adminLogin, encryptThisString(adminPassword));
             model.createUserAdmin(adminLogin, encryptThisString(adminPassword), 1, hourlyRate);
             userView.setItems(model.getAllUsers());
         } else
@@ -628,7 +626,6 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUser = userView.getSelectionModel().getSelectedItem();
         model.deleteUser(selectedUser);
-        userView.setItems(model.getAllUsers());
         userView.setItems(model.getAllUsers());
     }
 

@@ -7,7 +7,7 @@ package timemanagement.BE;
 
 /**
  *
- * @author CSnit
+ * @author The Cowboys
  */
 public class Kunde
 {

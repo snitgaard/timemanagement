@@ -100,11 +100,11 @@ public class KundeDAO {
     
     /**
      * If called this method will create a connection between the database and
-     * the program. The SQL statement will be run afterwards. Gets a list of
-     * users from userEmail
-     *
+     * the program. The SQL statement will be run afterwards. 
+     * using the name of a customer, this method will get the id.
+     * 
      * @param kundeNavn
-     * @return list of users called selectedUser
+     * @return kundeId
      * @throws DalException
      */
     public int getKundeId(String kundeNavn) throws DalException {

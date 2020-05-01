@@ -33,7 +33,7 @@ public class ProjectDAO
     /**
      * Creates SQL connection and gets list of all projects.
      *
-     * @return
+     * @return allProjects
      * @throws SQLException
      */
     public List<Project> getAllProjects() throws SQLException
@@ -87,6 +87,10 @@ public class ProjectDAO
     /**
      * Creates SQL Connection and creates a new Project.
      *
+     * @param projektNavn
+     * @param kundeId
+     * @param startDato
+     * @param brugtTid
      * @return
      * @throws DalException
      */

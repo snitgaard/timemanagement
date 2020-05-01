@@ -13,7 +13,7 @@ import timemanagement.DAL.DalException;
 
 /**
  *
- * @author Mads
+ * @author The Cowboys
  */
 public interface bllFacade
 {

@@ -227,6 +227,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    /**
+     * Makes the admin buttons visible for admins only
+     */
     public void showAdminButtons()
     {
         analyseButton.setVisible(true);
@@ -234,6 +237,10 @@ public class MainAdminViewController implements Initializable
         opretBrugerButton.setVisible(true);
     }
 
+    /**
+     * Fills the project combobox with projects
+     * @throws ModelException 
+     */
     private void setProjects() throws ModelException
     {
         for (Project projects : model.getAllProjects())
@@ -242,6 +249,11 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    /**
+     * Fills the columns in the view with proper data. Seperates the columns and the data
+     * within the columns.
+     * @throws ModelException 
+     */
     private void fillColumns() throws ModelException
     {
         //Opgaver tableview
@@ -265,13 +277,15 @@ public class MainAdminViewController implements Initializable
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
 
-        System.out.println(userViewEmail.getCellFactory());
-
         adminViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         adminViewEmail.setCellValueFactory(new PropertyValueFactory<>("adminLogin"));
 
     }
 
+    /**
+     * Uses the date filter method to find a start date
+     * @param event 
+     */
     @FXML
     private void handleStartDate(ActionEvent event)
     {
@@ -283,6 +297,10 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    /**
+     * Uses the date filter method to find an end date
+     * @param event 
+     */
     @FXML
     private void handleEndDate(ActionEvent event)
     {
@@ -292,7 +310,7 @@ public class MainAdminViewController implements Initializable
     /**
      * Handles the start / stop time function and changes the button icon /
      * label depending on which action is to be performed. Also gets the time
-     * different between when you press start and stop and calculates it into
+     * difference between when you press start and stop and calculates it into
      * HH:mm:ss using the stopTidMethod.
      *
      * @param event
@@ -391,7 +409,6 @@ public class MainAdminViewController implements Initializable
     private void setProjectData(ActionEvent event) throws ModelException
     {
         projectData();
-
     }
 
     private void projectData() throws ModelException
@@ -488,6 +505,12 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    /**
+     * Creates a new user and updates the list of users / admins dynamically.
+     * If the admin checkbox is selected, the user will become an admin.
+     * @param event
+     * @throws ModelException 
+     */
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
@@ -502,7 +525,6 @@ public class MainAdminViewController implements Initializable
             model.createUserAdmin(adminLogin, null, adminId, hourlyRate);
             adminView.setItems(model.getAllAdmins());
             userView.setItems(model.getAllUsers());
-
         } else
         {
             String userLogin = txt_userLogin.getText();
@@ -581,7 +603,6 @@ public class MainAdminViewController implements Initializable
 
     private void dateFilter()
     {
-
         try
         {
             List<Task> taskNames = model.getAllTasks();

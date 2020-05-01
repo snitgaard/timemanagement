@@ -145,7 +145,6 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker datePicker;
     @FXML
     private TableView<User> userView;
-
     @FXML
     private TableColumn<User, Integer> userViewId;
     @FXML
@@ -158,7 +157,6 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_nyBrugtTid;
     private User user;
     private UserDAO userDAO;
-    @FXML
     private TableColumn<Task, Integer> idColumn;
     @FXML
     private JFXDatePicker startDate;
@@ -166,6 +164,8 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker endDate;
     @FXML
     private JFXButton btnTaskClearFilter;
+    @FXML
+    private TableColumn<User, Integer> userViewRolle;
 
     /**
      * Initializes the controller class.
@@ -233,7 +233,8 @@ public class MainAdminViewController implements Initializable
 
     /**
      * Fills the project combobox with projects
-     * @throws ModelException 
+     *
+     * @throws ModelException
      */
     private void setProjects() throws ModelException
     {
@@ -244,15 +245,15 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Fills the columns in the view with proper data. Seperates the columns and the data
-     * within the columns.
-     * @throws ModelException 
+     * Fills the columns in the view with proper data. Seperates the columns and
+     * the data within the columns.
+     *
+     * @throws ModelException
      */
     private void fillColumns() throws ModelException
     {
         //Opgaver tableview
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
-        idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
         opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
         projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
@@ -265,33 +266,52 @@ public class MainAdminViewController implements Initializable
 
         //User & Admin views
         userView.setItems(model.getAllUsers());
+        
+        List<User> allUsersList = model.getAllUsers();
+        List<User> allUsersResultList = new ArrayList<>();
+        String isAdminString = String.valueOf(user.getIsAdmin());
+        
+
+//        for (User users1 : allUsersList)
+//        {
+//            if (isAdminString.equals(1))
+//            {
+//                
+//            } 
+//            else if (isAdminString.equals(0))
+//            {
+//                user.setIsAdmin("User");
+//            }
+//        }
 
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
-
-        System.out.println(userViewEmail.getCellFactory());
+        userViewRolle.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
 
     }
 
     /**
      * Uses the date filter method to find a start date
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void handleStartDate(ActionEvent event)
     {
-        try {
-        dateFilter();
-        } catch (Exception e) 
+        try
         {
-            
+            dateFilter();
+        } catch (Exception e)
+        {
+
         }
     }
 
     /**
      * Uses the date filter method to find an end date
-     * @param event 
+     *
+     * @param event
      */
     @FXML
     private void handleEndDate(ActionEvent event)
@@ -498,10 +518,11 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Creates a new user and updates the list of users / admins dynamically.
-     * If the admin checkbox is selected, the user will become an admin.
+     * Creates a new user and updates the list of users / admins dynamically. If
+     * the admin checkbox is selected, the user will become an admin.
+     *
      * @param event
-     * @throws ModelException 
+     * @throws ModelException
      */
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
@@ -593,53 +614,48 @@ public class MainAdminViewController implements Initializable
             List<Task> taskNames = model.getAllTasks();
             ObservableList<Task> result = FXCollections.observableArrayList();
             Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate.getValue().toString());
-            
+
             Calendar calendar2 = Calendar.getInstance();
             calendar2.setTime(start);
             calendar2.add(Calendar.DATE, 1);
             Date sDate = calendar2.getTime();
-                    
-                    
+
             Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate.getValue().toString());
             Calendar calendar3 = Calendar.getInstance();
             calendar3.setTime(end);
             calendar3.add(Calendar.DATE, 1);
             Date eDate = calendar3.getTime();
-            
-            
+
             for (Task tasks : taskNames)
             {
-                    Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
-                    
-                    Calendar calendar1 = Calendar.getInstance();
-                    calendar1.setTime(date1);
-                    calendar1.add(Calendar.DATE, 1);
-                    Date x = calendar1.getTime();
-                    if (x.after(sDate) && x.before(eDate) || x.equals(sDate) || x.equals(eDate))
-                    {
-                        result.add(tasks);
-                    }
+                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
+
+                Calendar calendar1 = Calendar.getInstance();
+                calendar1.setTime(date1);
+                calendar1.add(Calendar.DATE, 1);
+                Date x = calendar1.getTime();
+                if (x.after(sDate) && x.before(eDate) || x.equals(sDate) || x.equals(eDate))
+                {
+                    result.add(tasks);
                 }
-            
-            opgaverTableView.setItems(result);
             }
-        
-        catch (ParseException ex) {
+
+            opgaverTableView.setItems(result);
+        } catch (ParseException ex)
+        {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
 
         } catch (ModelException ex)
         {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        }
+
+    }
 
     @FXML
-    private void taskClearFilter(ActionEvent event) throws ModelException 
+    private void taskClearFilter(ActionEvent event) throws ModelException
     {
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
     }
-     
-    
+
 }

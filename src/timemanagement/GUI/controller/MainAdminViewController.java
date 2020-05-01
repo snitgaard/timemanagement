@@ -554,24 +554,19 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleUpdateTime(ActionEvent event)
+    private void handleUpdateTime(ActionEvent event) throws ModelException
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
-        System.out.println("selectedTask =" + selectedTask);
         int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
         int id = selectedTask.getId();
-        System.out.println("id =" + id);
         try
         {
-            System.out.println("brugt tid =" + brugtTid);
-
             model.updateTask(brugtTid, id);
-            System.out.println("udpated!");
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
         {
-            System.out.println("woops");
+            
         }
         
         List<Project> allProjects = model.getAllProjects();
@@ -587,12 +582,14 @@ public class MainAdminViewController implements Initializable
         
         result.get(0).setBrugtTid(0);
         
-        for (Task tasks : model.getAllTasksByProject(selectedTask.getProjektId())) {
-            if (tasks.getProjektId() == selectedTask.getProjektId())
+        for (Task tasks : model.getAllTasksByProject(result.get(0).getId())) {
+            if (tasks.getProjektId() == result.get(0).getId())
             {
-                model.addProjectTime(tasks.getBrugtTid(), tasks.getProjektNavn());
+                model.addProjectTime(tasks.getBrugtTid(), result.get(0).getProjektNavn());
             }
         }
+        
+        projekterTableView.setItems(model.refreshProjects());
     
     }
 

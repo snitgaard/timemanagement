@@ -47,13 +47,14 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, String projektNavn, int brugtTid, String dato)
+    public Task(int id, String opgaveNavn, String projektNavn,  int brugtTid, String dato, int projektId)
     {
         this.id = id;
         this.opgaveNavn = opgaveNavn;
         this.projektNavn = projektNavn;
         this.brugtTid = brugtTid;
         this.dato = dato;
+        this.projektId = projektId;
     }
 
     /**

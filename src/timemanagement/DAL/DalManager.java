@@ -10,12 +10,11 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import timemanagement.BE.Admin;
 import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
-import timemanagement.DAL.database.AdminDAO;
+
 import timemanagement.DAL.database.KundeDAO;
 import timemanagement.DAL.database.ProjectDAO;
 import timemanagement.DAL.database.TaskDAO;
@@ -29,7 +28,6 @@ public class DalManager implements DalFacade
 {
 
     private final UserDAO userDAO;
-    private final AdminDAO adminDAO;
     private final ProjectDAO projectDAO;
     private final TaskDAO taskDAO;
     private final KundeDAO kundeDAO;
@@ -37,7 +35,6 @@ public class DalManager implements DalFacade
     public DalManager() throws IOException
     {
         userDAO = new UserDAO();
-        adminDAO = new AdminDAO();
         projectDAO = new ProjectDAO();
         taskDAO = new TaskDAO();
         kundeDAO = new KundeDAO();
@@ -45,13 +42,12 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public boolean checkUserCredentials(String userLogin, String userPassword) throws DalException
+    public boolean checkUserCredentials(String userLogin, String userPassword, int isAdmin) throws DalException
     {
         try
         {
-            return userDAO.checkUserCredentials(userLogin, userPassword);
+            return userDAO.checkUserCredentials(userLogin, userPassword, isAdmin);
         } catch (DalException ex)
-
         {
             throw new DalException(ex.getMessage());
         }
@@ -85,24 +81,6 @@ public class DalManager implements DalFacade
     public User getSpecificUser(String userLogin) throws DalException
     {
         return userDAO.getSpecificUser(userLogin);
-    }
-
-    @Override
-    public boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException
-    {
-        return adminDAO.checkAdminCredentials(adminLogin, adminPassword);
-    }
-
-    @Override
-    public List<Admin> getAdmin(String adminLogin) throws DalException
-    {
-        return adminDAO.getAdmin(adminLogin);
-    }
-
-    @Override
-    public Admin getSpecificAdmin(String adminLogin) throws DalException
-    {
-        return adminDAO.getSpecificAdmin(adminLogin);
     }
 
     @Override
@@ -162,22 +140,17 @@ public class DalManager implements DalFacade
     }
     
     @Override
-    public boolean createUser(String userLogin, String userPassword, String adminId, long hourlyRate) throws DalException
+    public boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
     {
-        return userDAO.createUser(userLogin, userPassword, adminId, hourlyRate);
+        return userDAO.createUser(userLogin, userPassword, isAdmin, hourlyRate);
     }    
 
     @Override
-    public boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws DalException
+    public boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
     {
-        return userDAO.createUserAdmin(userLogin, userPassword, adminId, hourlyRate);
+        return userDAO.createUserAdmin(userLogin, userPassword, isAdmin, hourlyRate);
     }   
     
-    @Override
-    public boolean createAdmin(String adminLogin, String adminPassword) throws DalException
-    {
-        return adminDAO.createAdmin(adminLogin, adminPassword);
-    }
     
     @Override
     public boolean createKunde(String kundeNavn) throws DalException
@@ -192,12 +165,6 @@ public class DalManager implements DalFacade
     }
     
     @Override
-    public int getAdminId(String adminLogin) throws DalException
-    {
-        return adminDAO.getAdminId(adminLogin);
-    }
-
-    @Override
     public List<Project> getProjectKundeNavn() throws DalException
     {
         try
@@ -209,17 +176,6 @@ public class DalManager implements DalFacade
         }
     }
 
-    @Override
-    public List<Admin> getAllAdmins() throws DalException
-    {
-        try
-        {
-            return adminDAO.getAllAdmins();
-        } catch (SQLException ex)
-        {
-            throw new DalException(ex.getMessage());
-        }
-    }
 
     @Override
     public List<User> getAllUsers() throws DalException
@@ -250,10 +206,10 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void deleteAdmin(Admin admin) throws DalException
-    {
-        adminDAO.deleteAdmin(admin);
+    public int getIsAdminInt(String userLogin, String userPassword) throws DalException {
+        return userDAO.getIsAdminInt(userLogin, userPassword);
     }
+
     
     
 }

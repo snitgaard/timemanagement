@@ -36,7 +36,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import timemanagement.BE.Admin;
 import timemanagement.BE.User;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
@@ -59,7 +58,7 @@ public class LoginController implements Initializable {
     private JFXPasswordField passwordField;
     private Model model;
     private User selectedUser;
-    private Admin selectedAdmin;
+
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -100,8 +99,12 @@ public class LoginController implements Initializable {
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
-
-        if (model.checkUserCredentials(username, password)) {
+        System.out.println(model.getSpecificUser(username));
+        int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
+        System.out.println("username =" + username);
+        System.out.println("password =" + password);
+        System.out.println("isAdmin =" + isAdmin);
+        if (model.checkUserCredentials(username, password, 0)) {
             User selectedUser = model.getSpecificUser(username);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
@@ -113,8 +116,7 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
 
-        } else if (model.checkAdminCredentials(username, password)) {
-            Admin selectedAdmin = model.getSpecificAdmin(username);
+        } else if (model.checkUserCredentials(username, password, 1)) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdmincontroller = fxmlLoader.getController();

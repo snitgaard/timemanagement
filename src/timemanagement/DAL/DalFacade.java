@@ -6,7 +6,7 @@
 package timemanagement.DAL;
 
 import java.util.List;
-import timemanagement.BE.Admin;
+
 import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
@@ -18,20 +18,15 @@ import timemanagement.BE.User;
  */
 public interface DalFacade {
     
-    boolean checkUserCredentials(String userLogin, String userPassword) throws DalException;
-    
-    boolean checkAdminCredentials(String adminLogin, String adminPassword) throws DalException;
+    boolean checkUserCredentials(String userLogin, String userPassword, int isAdmin) throws DalException;
+
     
     List<User> getUser(String userLogin) throws DalException;
     
     List<Project> getAllProjects() throws DalException;
     
     User getSpecificUser(String userLogin) throws DalException;
-    
-    List<Admin> getAdmin (String adminLogin) throws DalException;
-    
-    Admin getSpecificAdmin (String adminLogin) throws DalException;
-    
+
     List<Task> getAllTasks() throws DalException;
     
     void deleteTask(Task task) throws DalException;
@@ -48,19 +43,14 @@ public interface DalFacade {
     
     List<Project> getProjectKundeNavn() throws DalException;
     
-    boolean createUser(String userLogin, String userPassword, String adminId, long hourlyRate) throws DalException;
+    boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
     
-    boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws DalException;
-    
-    boolean createAdmin(String adminLogin, String adminPassword) throws DalException;
+    boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
+
     
     boolean createKunde(String kundeNavn) throws DalException;
     
     int getKundeId (String kundeNavn) throws DalException;
-    
-    int getAdminId (String adminLogin) throws DalException;
-    
-    List<Admin> getAllAdmins() throws DalException;
     
     List<User> getAllUsers() throws DalException;
     
@@ -70,5 +60,5 @@ public interface DalFacade {
     
     void deleteUser(User user) throws DalException;
     
-    void deleteAdmin(Admin admin) throws DalException;
+    int getIsAdminInt(String userLogin, String userPassword) throws DalException;
 }

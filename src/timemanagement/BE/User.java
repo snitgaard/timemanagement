@@ -14,7 +14,7 @@ public class User
     private int id;
     private String userLogin;
     private String userPassword;
-    private int adminId;
+    private int isAdmin;
     private long hourlyRate;
 
     
@@ -31,13 +31,13 @@ public class User
      * @param id
      * @param userLogin
      * @param userPassword
-     * @param adminId
+     * @param isAdmin
      */
-    public User(int id, String userLogin, String userPassword, int adminId, long hourlyRate) {
+    public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate) {
         this.id = id;
         this.userLogin = userLogin;
         this.userPassword = userPassword;
-        this.adminId = adminId;
+        this.isAdmin = isAdmin;
         this.hourlyRate = hourlyRate;
         
         
@@ -99,12 +99,12 @@ public class User
         this.userPassword = userPassword;
     } 
 
-    public int getAdminId() {
-        return adminId;
+    public int getIsAdmin() {
+        return isAdmin;
     }
 
-    public void setAdminId(int adminId) {
-        this.adminId = adminId;
+    public void setIsAdmin(int isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
     @Override

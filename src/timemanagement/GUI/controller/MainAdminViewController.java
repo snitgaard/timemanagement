@@ -554,7 +554,7 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleUpdateTime(ActionEvent event)
+    private void handleUpdateTime(ActionEvent event) throws ModelException
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();

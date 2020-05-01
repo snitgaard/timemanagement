@@ -41,7 +41,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import timemanagement.BE.Admin;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -146,16 +145,11 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker datePicker;
     @FXML
     private TableView<User> userView;
-    @FXML
-    private TableView<Admin> adminView;
+
     @FXML
     private TableColumn<User, Integer> userViewId;
     @FXML
     private TableColumn<User, String> userViewEmail;
-    @FXML
-    private TableColumn<Admin, Integer> adminViewId;
-    @FXML
-    private TableColumn<Admin, String> adminViewEmail;
     @FXML
     private JFXTextField txt_hourlyRate;
     @FXML
@@ -170,6 +164,8 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker startDate;
     @FXML
     private JFXDatePicker endDate;
+    @FXML
+    private JFXButton btnTaskClearFilter;
 
     /**
      * Initializes the controller class.
@@ -182,7 +178,6 @@ public class MainAdminViewController implements Initializable
         {
             timeLoggerPane.toFront();
 
-            
             model = model.getInstance();
             setProjects();
 
@@ -232,13 +227,13 @@ public class MainAdminViewController implements Initializable
         projekterButton.setVisible(true);
         opretBrugerButton.setVisible(true);
     }
-    
+
     private void setProjects() throws ModelException
     {
         for (Project projects : model.getAllProjects())
-            {
-                projektComboBox.getItems().add(projects.getProjektNavn());
-            }
+        {
+            projektComboBox.getItems().add(projects.getProjektNavn());
+        }
     }
 
     private void fillColumns() throws ModelException
@@ -258,18 +253,12 @@ public class MainAdminViewController implements Initializable
 
         //User & Admin views
         userView.setItems(model.getAllUsers());
-        adminView.setItems(model.getAllAdmins());
-        
+
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
-        
-        System.out.println(userViewEmail.getCellFactory());
 
-        adminViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        adminViewEmail.setCellValueFactory(new PropertyValueFactory<>("adminLogin"));
-        
-        
+        System.out.println(userViewEmail.getCellFactory());
 
     }
 
@@ -496,19 +485,18 @@ public class MainAdminViewController implements Initializable
         {
             System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
-            String adminPassword = txt_userPassword.getText();
+            String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createAdmin(adminLogin, encryptThisString(adminPassword));
-            int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(adminLogin, null, adminId, hourlyRate);
-            adminView.setItems(model.getAllAdmins());
+            int isAdmin = model.getIsAdminInt(adminLogin, encryptThisString(adminPassword));
+            model.createUserAdmin(adminLogin, encryptThisString(adminPassword), 1, hourlyRate);
+            userView.setItems(model.getAllUsers());
 
         } else
         {
             String userLogin = txt_userLogin.getText();
-            String userPassword = txt_userPassword.getText();
+            String userPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUser(userLogin, encryptThisString(userPassword), null, hourlyRate);
+            model.createUser(userLogin, encryptThisString(userPassword), 0, hourlyRate);
             userView.setItems(model.getAllUsers());
         }
     }
@@ -542,20 +530,23 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleUpdateTime(ActionEvent event) throws ModelException {
-                opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+    private void handleUpdateTime(ActionEvent event)
+    {
+        opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         System.out.println("selectedTask =" + selectedTask);
         int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
         int id = selectedTask.getId();
         System.out.println("id =" + id);
-        try {
+        try
+        {
             System.out.println("brugt tid =" + brugtTid);
-            
+
             model.updateTask(brugtTid, id);
             System.out.println("udpated!");
             opgaverTableView.setItems(model.refreshTasks());
-        } catch (ModelException ex) {
+        } catch (ModelException ex)
+        {
             System.out.println("woops");
         }
         
@@ -588,13 +579,14 @@ public class MainAdminViewController implements Initializable
         User selectedUser = userView.getSelectionModel().getSelectedItem();
         model.deleteUser(selectedUser);
         userView.setItems(model.getAllUsers());
+        userView.setItems(model.getAllUsers());
     }
 
-    
-     private void dateFilter()
+    private void dateFilter()
     {
 
-        try {
+        try
+        {
             List<Task> taskNames = model.getAllTasks();
             ObservableList<Task> result = FXCollections.observableArrayList();
             Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate.getValue().toString());
@@ -631,13 +623,20 @@ public class MainAdminViewController implements Initializable
         
         catch (ParseException ex) {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-        
-        } catch (ModelException ex) {
+
+        } catch (ModelException ex)
+        {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
         }
+
+    @FXML
+    private void taskClearFilter(ActionEvent event) throws ModelException 
+    {
+        opgaverTableView.setItems(model.getAllTasksProjektNavn());
+    }
      
     
 }

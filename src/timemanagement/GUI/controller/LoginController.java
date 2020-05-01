@@ -98,9 +98,9 @@ public class LoginController implements Initializable {
     @FXML
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
         String username = emailField.getText();
-        String password = passwordField.getText();
+        String password = encryptThisString(passwordField.getText());
         System.out.println(model.getSpecificUser(username));
-        int isAdmin = model.getIsAdminInt(username, password);
+        int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
         System.out.println("username =" + username);
         System.out.println("password =" + password);
         System.out.println("isAdmin =" + isAdmin);

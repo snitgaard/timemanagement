@@ -41,7 +41,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import timemanagement.BE.Admin;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -146,16 +145,11 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker datePicker;
     @FXML
     private TableView<User> userView;
-    @FXML
-    private TableView<Admin> adminView;
+
     @FXML
     private TableColumn<User, Integer> userViewId;
     @FXML
     private TableColumn<User, String> userViewEmail;
-    @FXML
-    private TableColumn<Admin, Integer> adminViewId;
-    @FXML
-    private TableColumn<Admin, String> adminViewEmail;
     @FXML
     private JFXTextField txt_hourlyRate;
     @FXML
@@ -259,16 +253,12 @@ public class MainAdminViewController implements Initializable
 
         //User & Admin views
         userView.setItems(model.getAllUsers());
-        adminView.setItems(model.getAllAdmins());
 
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
 
         System.out.println(userViewEmail.getCellFactory());
-
-        adminViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        adminViewEmail.setCellValueFactory(new PropertyValueFactory<>("adminLogin"));
 
     }
 
@@ -495,20 +485,18 @@ public class MainAdminViewController implements Initializable
         {
             System.out.println("it is true");
             String adminLogin = txt_userLogin.getText();
-            String adminPassword = txt_userPassword.getText();
+            String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createAdmin(adminLogin, encryptThisString(adminPassword));
-            int adminId = model.getAdminId(adminLogin);
-            model.createUserAdmin(adminLogin, null, adminId, hourlyRate);
-            adminView.setItems(model.getAllAdmins());
+            int isAdmin = model.getIsAdminInt(adminLogin, encryptThisString(adminPassword));
+            model.createUserAdmin(adminLogin, encryptThisString(adminPassword), 1, hourlyRate);
             userView.setItems(model.getAllUsers());
 
         } else
         {
             String userLogin = txt_userLogin.getText();
-            String userPassword = txt_userPassword.getText();
+            String userPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUser(userLogin, encryptThisString(userPassword), null, hourlyRate);
+            model.createUser(userLogin, encryptThisString(userPassword), 0, hourlyRate);
             userView.setItems(model.getAllUsers());
         }
     }
@@ -567,15 +555,10 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void deleteUser(ActionEvent event) throws DalException, ModelException
     {
-//        userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-//        User selectedUser = userView.getSelectionModel().getSelectedItem();
-//        model.deleteUser(selectedUser);
-//        userView.setItems(model.getAllUsers());
-
-        adminView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        Admin selectedAdmin = adminView.getSelectionModel().getSelectedItem();
-        model.deleteAdmin(selectedAdmin);
-        adminView.setItems(model.getAllAdmins());
+        userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        User selectedUser = userView.getSelectionModel().getSelectedItem();
+        model.deleteUser(selectedUser);
+        userView.setItems(model.getAllUsers());
         userView.setItems(model.getAllUsers());
     }
 

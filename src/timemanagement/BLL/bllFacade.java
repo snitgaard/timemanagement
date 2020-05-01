@@ -6,8 +6,6 @@
 package timemanagement.BLL;
 
 import java.util.List;
-import timemanagement.BE.Admin;
-import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -20,19 +18,13 @@ import timemanagement.DAL.DalException;
 public interface bllFacade
 {
 
-    boolean checkUserCredentials(String userLogin, String userPassword) throws bllException;
+    boolean checkUserCredentials(String userLogin, String userPassword, int isAdmin) throws bllException;
 
     List<User> getUser(String userLogin) throws bllException;
 
     User getSpecificUser(String userLogin) throws bllException;
 
     public List<Project> getAllProjects() throws bllException;
-
-    boolean checkAdminCredentials(String adminLogin, String adminPassword) throws bllException;
-
-    List<Admin> getAdmin(String adminLogin) throws bllException;
-
-    Admin getSpecificAdmin(String adminLogin) throws bllException;
 
     List<Task> getAllTasks() throws bllException;
 
@@ -50,19 +42,13 @@ public interface bllFacade
 
     List<Project> getProjectKundeNavn() throws bllException;
     
-    boolean createUser(String userLogin, String userPassword, String adminId, long hourlyRate) throws bllException;
+    boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
     
-    boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws bllException;
-    
-    boolean createAdmin(String adminLogin, String adminPassword) throws bllException;
+    boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
 
     boolean createKunde(String kundeNavn) throws bllException;
 
     int getKundeId(String kundeNavn) throws bllException;
-
-    int getAdminId(String adminLogin) throws bllException;
-
-    List<Admin> getAllAdmins() throws bllException;
 
     List<User> getAllUsers() throws bllException;
     
@@ -72,5 +58,6 @@ public interface bllFacade
     
     void deleteUser(User user) throws bllException;
     
-    void deleteAdmin(Admin admin) throws bllException;
+    int getIsAdminInt(String userLogin, String userPassword) throws bllException;
+
 }

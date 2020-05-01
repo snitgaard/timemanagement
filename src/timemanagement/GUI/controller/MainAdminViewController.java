@@ -542,7 +542,7 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleUpdateTime(ActionEvent event) {
+    private void handleUpdateTime(ActionEvent event) throws ModelException {
                 opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         System.out.println("selectedTask =" + selectedTask);
@@ -557,6 +557,26 @@ public class MainAdminViewController implements Initializable
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex) {
             System.out.println("woops");
+        }
+        
+        List<Project> allProjects = model.getAllProjects();
+        List<Project> result = new ArrayList();
+        
+        for (Project projects : allProjects)
+        {
+            if (projects.getId() == selectedTask.getProjektId())
+            {
+                result.add(projects);
+            }
+        }
+        
+        result.get(0).setBrugtTid(0);
+        
+        for (Task tasks : model.getAllTasksByProject(selectedTask.getProjektId())) {
+            if (tasks.getProjektId() == selectedTask.getProjektId())
+            {
+                model.addProjectTime(tasks.getBrugtTid(), tasks.getProjektNavn());
+            }
         }
     
     }

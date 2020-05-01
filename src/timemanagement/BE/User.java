@@ -5,6 +5,9 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author The Cowboys
@@ -16,6 +19,7 @@ public class User
     private String userPassword;
     private int isAdmin;
     private long hourlyRate;
+    private StringProperty adminRights; 
 
     
     /**
@@ -33,14 +37,28 @@ public class User
      * @param userPassword
      * @param isAdmin
      */
-    public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate) {
+    public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate, String adminRights) {
         this.id = id;
         this.userLogin = userLogin;
         this.userPassword = userPassword;
         this.isAdmin = isAdmin;
-        this.hourlyRate = hourlyRate;
-        
-        
+        this.hourlyRate = hourlyRate;   
+        this.adminRights = new SimpleStringProperty(adminRights);
+    }
+
+    
+
+    
+    public String getAdminRights() {
+        return adminRights.get();
+    }
+
+    public void setAdminRights(String adminRights) {
+        this.adminRights.set(adminRights);
+    }
+    
+    public StringProperty adminRighsProperty() {
+        return adminRights;
     }
 
     public long getHourlyRate() {

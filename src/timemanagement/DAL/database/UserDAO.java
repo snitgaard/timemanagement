@@ -47,7 +47,9 @@ public class UserDAO {
                 String userPassword = rs.getString("userPassword");
                 int isAdmin = rs.getInt("isAdmin");
                 long hourlyRate = rs.getLong("hourlyRate");
-                User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate);
+                String adminRights = "";
+                
+                User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, adminRights);
                 allUsers.add(user);
             }
             return allUsers;
@@ -190,8 +192,9 @@ public class UserDAO {
                 String userPassword = rs.getString("userPassword");
                 int isAdmin = rs.getInt("isAdmin");
                 long hourlyRate = rs.getLong("hourlyRate");
+                String adminRights = "";
 
-                User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate);
+                User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, adminRights);
                 selectedUser.add(user);
             }
             return selectedUser;

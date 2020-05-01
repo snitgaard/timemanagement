@@ -165,7 +165,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXButton btnTaskClearFilter;
     @FXML
-    private TableColumn<User, Integer> userViewRolle;
+    private TableColumn<User, String> userViewRolle;
 
     /**
      * Initializes the controller class.
@@ -265,29 +265,37 @@ public class MainAdminViewController implements Initializable
         brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
 
         //User & Admin views
-        userView.setItems(model.getAllUsers());
         
         List<User> allUsersList = model.getAllUsers();
-        List<User> allUsersResultList = new ArrayList<>();
-        String isAdminString = String.valueOf(user.getIsAdmin());
+        ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+        String isAdminString = "";
         
 
-//        for (User users1 : allUsersList)
-//        {
-//            if (isAdminString.equals(1))
-//            {
-//                
-//            } 
-//            else if (isAdminString.equals(0))
-//            {
-//                user.setIsAdmin("User");
-//            }
-//        }
+        for (User users1 : allUsersList)
+        {
+            if (users1.getIsAdmin() == 0)
+            {
+                System.out.println(users1.getIsAdmin() + "ER DET HER");
+                users1.setAdminRights("User");
+            } 
+            else 
+            {
+                System.out.println(users1.getIsAdmin() + "ER DET HER HER HER");
+                users1.setAdminRights("Admin");
+                
+            }
+            
+            allUsersResultList.add(users1);
+        }
+        
+        userView.setItems(allUsersResultList);
+        
+        System.out.println(model.getAllUsers().get(0).adminRighsProperty() + "ER DET HER");
 
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
-        userViewRolle.setCellValueFactory(new PropertyValueFactory<>("isAdmin"));
+        userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
 
     }
 

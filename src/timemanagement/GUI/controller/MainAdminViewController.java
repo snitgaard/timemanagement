@@ -166,6 +166,8 @@ public class MainAdminViewController implements Initializable
     private JFXButton btnTaskClearFilter;
     @FXML
     private TableColumn<User, String> userViewRolle;
+    @FXML
+    private JFXCheckBox ongoingCheckbox;
 
     /**
      * Initializes the controller class.
@@ -678,6 +680,33 @@ public class MainAdminViewController implements Initializable
     private void taskClearFilter(ActionEvent event) throws ModelException
     {
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
+    }
+
+    @FXML
+    private void setOngoing(ActionEvent event) throws ModelException {
+        
+        
+        List<Project> allProjects = model.getProjectKundeNavn();
+        ObservableList<Project> result = FXCollections.observableArrayList();
+        
+        if (ongoingCheckbox.isSelected() == true)
+        {
+           for (Project project : allProjects) {
+            if (project.getOngoing() == 1)
+            {
+                result.add(project);
+            }
+            
+        }
+        
+        projekterTableView.setItems(result); 
+        }
+        
+        else
+        {
+            projekterTableView.setItems(model.getProjectKundeNavn());
+        }
+        
     }
 
 }

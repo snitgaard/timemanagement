@@ -73,33 +73,6 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
-            <SplitPane fx:id="projektPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <TableView fx:id="projekterTableView" layoutY="220.0" prefHeight="369.0" prefWidth="717.0">
-                          <columns>
-                            <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Projekt navn" />
-                            <TableColumn fx:id="kundeColumn" prefWidth="317.0" text="Kunde" />
-                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="162.0" text="Brugt tid" />
-                          </columns>
-                        </TableView>
-                        <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
-                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast kunde navn" />
-                        <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="144.0" text="Opret nyt projekt">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <JFXButton layoutX="145.0" layoutY="172.0" onAction="#handleCreateProjekt" text="Opret projekt">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
             <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -292,6 +265,34 @@
                      </children>
                   </AnchorPane>
                </items>
+            </SplitPane>
+            <SplitPane fx:id="projektPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView fx:id="projekterTableView" layoutY="220.0" prefHeight="369.0" prefWidth="717.0">
+                          <columns>
+                            <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Projekt navn" />
+                            <TableColumn fx:id="kundeColumn" prefWidth="317.0" text="Kunde" />
+                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="162.0" text="Brugt tid" />
+                          </columns>
+                        </TableView>
+                        <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />
+                        <JFXTextField fx:id="txt_kundeNavn" layoutX="23.0" layoutY="112.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast kunde navn" />
+                        <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="144.0" text="Opret nyt projekt">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="145.0" layoutY="172.0" onAction="#handleCreateProjekt" text="Opret projekt">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="23.0" layoutY="178.0" onAction="#setOngoing" text="Igangværende" />
+                     </children>
+                  </AnchorPane>
+              </items>
             </SplitPane>
          </children>
       </StackPane>

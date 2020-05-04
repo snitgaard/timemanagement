@@ -17,6 +17,7 @@ public class Project {
     private String kundeNavn;
     private String startDato;
     private int brugtTid;
+    private int ongoing;
 
     /**
      * Constructor for Project
@@ -26,25 +27,29 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid, int ongoing) {
         this.id = id;
         this.projektNavn = projektNavn;
         this.kundeId = kundeId;
         this.startDato = startDato;
         this.brugtTid = brugtTid;
+        this.ongoing = ongoing;
     }
 
+    
+
     /**
-     * Constructor for Porject
+     * Constructor for Project
      * @param projektNavn
      * @param kundeNavn
      * @param brugtTid 
      */
-    public Project(String projektNavn, String kundeNavn, int brugtTid)
+    public Project(String projektNavn, String kundeNavn, int brugtTid, int ongoing)
     {
         this.projektNavn = projektNavn;
         this.kundeNavn = kundeNavn;
         this.brugtTid = brugtTid;
+        this.ongoing = ongoing;
     }
     
     /**
@@ -144,6 +149,14 @@ public class Project {
      */
     public void setBrugtTid(int brugtTid) {
         this.brugtTid = brugtTid;
+    }
+    
+    public int getOngoing() {
+        return ongoing;
+    }
+
+    public void setOngoing(int ongoing) {
+        this.ongoing = ongoing;
     }
 
     /**

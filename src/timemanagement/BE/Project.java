@@ -50,12 +50,13 @@ public class Project {
      * @param kundeNavn
      * @param brugtTid 
      */
-    public Project(String projektNavn, String kundeNavn, int brugtTid, int ongoing)
+    public Project(String projektNavn, String kundeNavn, int brugtTid, int ongoing, int brugtTidMinutter)
     {
         this.projektNavn = projektNavn;
         this.kundeNavn = kundeNavn;
         this.brugtTid = brugtTid;
         this.ongoing = ongoing;
+        this.brugtTidMinutter = new SimpleIntegerProperty(brugtTidMinutter);
     }
     
     /**

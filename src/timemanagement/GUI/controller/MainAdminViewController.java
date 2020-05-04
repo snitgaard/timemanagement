@@ -262,22 +262,8 @@ public class MainAdminViewController implements Initializable
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 
         //Projekter tableview
-        List<Project> allProjectsList = model.getAllProjects();
-        ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
-        int brugtTidMinutter = 0;
-        for (Project project1 : allProjectsList)
-        {
-            System.out.println("HVAD ER DET HER ???? " + project1);
-            project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
-            
-            allProjectsResultList.add(project1);
-        }
-        projekterTableView.setItems(allProjectsResultList);
         
-        projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
-        
-        brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
+        setProjectTable();
 
         //User & Admin views
         
@@ -313,6 +299,49 @@ public class MainAdminViewController implements Initializable
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
 
     }
+    
+    private void setProjectTable() throws ModelException
+    {
+        List<Project> allProjectsList = model.getProjectKundeNavn();
+        ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
+        ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+        int brugtTidMinutter = 0;
+        for (Project project1 : allProjectsList)
+        {
+            
+            project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
+            
+            if (project1.getOngoing() == 1)
+            {
+                allProjectsFilteredList.add(project1);
+            } 
+            
+            allProjectsResultList.add(project1);
+            
+            
+            
+        }
+        
+        if (ongoingCheckbox.isSelected() == true)
+        {
+           projekterTableView.setItems(allProjectsFilteredList);
+        
+        }
+        
+        else
+        {
+            projekterTableView.setItems(allProjectsResultList);
+            
+        }
+        
+        
+        projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
+        
+        brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
+    }
+            
+
 
     /**
      * Uses the date filter method to find a start date
@@ -700,26 +729,10 @@ public class MainAdminViewController implements Initializable
     private void setOngoing(ActionEvent event) throws ModelException {
         
         
-        List<Project> allProjects = model.getProjectKundeNavn();
-        ObservableList<Project> result = FXCollections.observableArrayList();
+        setProjectTable();
         
-        if (ongoingCheckbox.isSelected() == true)
-        {
-           for (Project project : allProjects) {
-            if (project.getOngoing() == 1)
-            {
-                result.add(project);
-            }
-            
-        }
         
-        projekterTableView.setItems(result); 
-        }
         
-        else
-        {
-            projekterTableView.setItems(model.getProjectKundeNavn());
-        }
         
     }
 

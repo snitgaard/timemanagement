@@ -142,7 +142,7 @@ public class ProjectDAO
                 int brugtTid = rs.getInt("brugtTid");
                 int ongoing = rs.getInt("ongoing");
                 int brugtTidMinutter = -1;
-                Project project = new Project(projektNavn, kundeNavn,  brugtTid, startDato, ongoing, brugtTidMinutter);
+                Project project = new Project(projektNavn, kundeNavn, brugtTid, startDato, ongoing, brugtTidMinutter);
                 allProjects.add(project);
             }
             return allProjects;

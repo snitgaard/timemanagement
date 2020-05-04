@@ -403,12 +403,17 @@ public class MainAdminViewController implements Initializable
             long seconds = input % 3600 % 60;
             long variableNumber = input / 60 / 15;
 
+            
+            if (variableNumber == 0)
+            {
+                variableNumber = 1;
+            }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
             model.addProjectTime(variableNumber, projektComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
-            opgaverTableView.setItems(model.refreshTasks());
-            projekterTableView.setItems(model.refreshProjects());
+//            opgaverTableView.setItems(model.refreshTasks());
+//            projekterTableView.setItems(model.refreshProjects());
 
         } catch (Exception e)
         {

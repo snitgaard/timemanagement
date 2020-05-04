@@ -149,7 +149,7 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Project SET brugtTid = brugtTid + ? WHERE projektNavn = ?";
+            String sql = "UPDATE Project SET brugtTid = CEILING(brugtTid + ?) WHERE projektNavn = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, brugtTid);
             ps.setString(2, projektNavn);

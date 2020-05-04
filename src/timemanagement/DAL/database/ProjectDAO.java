@@ -128,7 +128,7 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT Project.projektNavn, Project.brugtTid, Kunde.kundeNavn, Project.ongoing\n"
+            String sql = "SELECT Project.projektNavn, Project.brugtTid, Kunde.kundeNavn, Project.startDato, Project.ongoing\n"
                     + "FROM Project\n"
                     + "INNER JOIN Kunde ON Project.kundeId=Kunde.id;";
             Statement statement = con.createStatement();
@@ -138,10 +138,11 @@ public class ProjectDAO
             {
                 String projektNavn = rs.getString("projektNavn");
                 String kundeNavn = rs.getString("kundeNavn");
+                String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
                 int ongoing = rs.getInt("ongoing");
                 int brugtTidMinutter = -1;
-                Project project = new Project(projektNavn, kundeNavn, brugtTid, ongoing, brugtTidMinutter);
+                Project project = new Project(projektNavn, kundeNavn,  brugtTid, startDato, ongoing, brugtTidMinutter);
                 allProjects.add(project);
             }
             return allProjects;

@@ -483,7 +483,7 @@ public class MainAdminViewController implements Initializable
 
     private void projectData() throws ModelException
     {
-        List<Project> projectNames = model.getAllProjects();
+        List<Project> projectNames = model.getProjectKundeNavn();
         List<Project> result = new ArrayList<>();
 
         for (Project projects : projectNames)
@@ -496,7 +496,7 @@ public class MainAdminViewController implements Initializable
         }
 
         sagsNrField.setText(result.get(0).getId() + "");
-        kundeField.setText(result.get(0).getKundeId() + "");
+        kundeField.setText(result.get(0).getKundeNavn() + "");
         LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
         datePicker.setValue(localDate);
 

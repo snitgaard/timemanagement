@@ -51,8 +51,8 @@ public class ProjectDAO
                 int kundeId = rs.getInt("kundeId");
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
-                int ongoing = rs.getInt("ongoing");
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing);
+                int brugtTidMinutter = 0;
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, brugtTidMinutter);
                 allProjects.add(project);
             }
             return allProjects;
@@ -150,7 +150,7 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Project SET brugtTid = brugtTid + ? WHERE projektNavn = ?";
+            String sql = "UPDATE Project SET brugtTid = CEILING(brugtTid + ?) WHERE projektNavn = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, brugtTid);
             ps.setString(2, projektNavn);

@@ -5,6 +5,10 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
+
 /**
  *
  * @author The Cowboys
@@ -18,6 +22,7 @@ public class Project {
     private String startDato;
     private int brugtTid;
     private int ongoing;
+    private IntegerProperty brugtTidMinutter;
 
     /**
      * Constructor for Project
@@ -27,13 +32,14 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid, int ongoing) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid, int ongoing, int brugtTidMinutter) {
         this.id = id;
         this.projektNavn = projektNavn;
         this.kundeId = kundeId;
         this.startDato = startDato;
         this.brugtTid = brugtTid;
         this.ongoing = ongoing;
+        this.brugtTidMinutter = new SimpleIntegerProperty(brugtTidMinutter);
     }
 
     
@@ -157,6 +163,26 @@ public class Project {
 
     public void setOngoing(int ongoing) {
         this.ongoing = ongoing;
+    }
+
+    public int getBrugtTidMinutter() {
+        return brugtTidMinutter.get();
+    }
+    
+    /**
+     * getter for brugtTidMinutter
+     * @return brugtTidMinutter
+     */
+    public ObservableValue<Integer> brugtTidMinutter() {
+        return brugtTidMinutter.asObject();
+    }
+
+    /**
+     * setter for brugtTidMinutter
+     * @param brugtTidMinutter 
+     */
+    public void setBrugtTidMinutter(int brugtTidMinutter) {
+        this.brugtTidMinutter.set(brugtTidMinutter);
     }
 
     /**

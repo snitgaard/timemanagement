@@ -37,6 +37,7 @@ public class User
      * @param userPassword
      * @param isAdmin
      * @param hourlyRate
+     * @param adminRights
      */
     public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate, String adminRights) {
         this.id = id;

@@ -51,7 +51,8 @@ public class ProjectDAO
                 int kundeId = rs.getInt("kundeId");
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid);
+                int brugtTidMinutter = 0;
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, brugtTidMinutter);
                 allProjects.add(project);
             }
             return allProjects;

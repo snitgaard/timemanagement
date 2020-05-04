@@ -260,9 +260,22 @@ public class MainAdminViewController implements Initializable
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 
         //Projekter tableview
+        List<Project> allProjectsList = model.getAllProjects();
+        ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
+        int brugtTidMinutter = 0;
+        for (Project project1 : allProjectsList)
+        {
+            System.out.println("HVAD ER DET HER ???? " + project1);
+            project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
+            
+            allProjectsResultList.add(project1);
+        }
+        projekterTableView.setItems(allProjectsResultList);
+        
         projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
         kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
-        brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
+        
+        brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
 
         //User & Admin views
         
@@ -382,14 +395,15 @@ public class MainAdminViewController implements Initializable
             Date date2 = format.parse(slutTid);
             long difference = date2.getTime() - date1.getTime();
 
-            long input = difference / 1000;
+            long input = difference / 1000;           
             long hours = (input - input % 3600) / 3600;
             long minutes = (input % 3600 - input % 3600 % 60) / 60;
             long seconds = input % 3600 % 60;
+            long variableNumber = input / 60 / 15;
 
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
-            model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.addProjectTime(input, projektComboBox.getSelectionModel().getSelectedItem());
+            model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
+            model.addProjectTime(variableNumber, projektComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
             opgaverTableView.setItems(model.refreshTasks());
             projekterTableView.setItems(model.refreshProjects());

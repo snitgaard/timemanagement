@@ -169,8 +169,11 @@ public class MainAdminViewController implements Initializable
     private JFXComboBox<String> userComboBox;
 
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
     @FXML
     private JFXCheckBox ongoingCheckbox;
+    @FXML
+    private TableColumn<Project, Integer> archivedColumn;
 
     /**
      * Initializes the controller class.
@@ -303,7 +306,8 @@ public class MainAdminViewController implements Initializable
     {
         List<Project> allProjectsList = model.getProjectKundeNavn();
         ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
-        ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+        allProjectsFilteredList.clear();
+        
         int brugtTidMinutter = 0;
         for (Project project1 : allProjectsList)
         {
@@ -321,6 +325,8 @@ public class MainAdminViewController implements Initializable
             
         }
         
+        
+        
         if (ongoingCheckbox.isSelected() == true)
         {
            projekterTableView.setItems(allProjectsFilteredList);
@@ -336,6 +342,7 @@ public class MainAdminViewController implements Initializable
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
+        archivedColumn.setCellValueFactory(cellData -> cellData.getValue().ongoingObservable());
     }
             
 
@@ -760,10 +767,10 @@ public class MainAdminViewController implements Initializable
     private void handleArchiveProject(ActionEvent event) throws ModelException {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-        System.out.println(selectedProject + "ER DET HER");
         selectedProject.setOngoing(0);
         model.archiveProject(selectedProject);
-        projekterTableView.refresh();
+        allProjectsFilteredList.remove(selectedProject);
+        projekterTableView.setItems(allProjectsFilteredList);
 //        setProjectTable();
     }
 

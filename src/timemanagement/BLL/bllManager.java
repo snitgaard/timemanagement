@@ -263,5 +263,17 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public boolean updateUserRoles(int isAdmin, int id) throws bllException
+    {
+        try
+        {
+            return dalFacade.updateUserRoles(isAdmin, id);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 
 }

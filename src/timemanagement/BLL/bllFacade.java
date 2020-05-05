@@ -60,4 +60,5 @@ public interface bllFacade
     
     int getIsAdminInt(String userLogin, String userPassword) throws bllException;
 
+    boolean updateUserRoles(int isAdmin, int id) throws bllException;
 }

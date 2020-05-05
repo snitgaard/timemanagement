@@ -169,6 +169,7 @@ public class MainAdminViewController implements Initializable
     private JFXComboBox<String> userComboBox;
 
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+    private JFXCheckBox ongoingCheckbox;
 
     /**
      * Initializes the controller class.
@@ -266,9 +267,8 @@ public class MainAdminViewController implements Initializable
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 
         //Projekter tableview
-        projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
-        brugtTidAdminColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
+        
+        setProjectTable();
 
         //User & Admin views
         fillUserAdminViews();
@@ -297,6 +297,49 @@ public class MainAdminViewController implements Initializable
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
+    
+    private void setProjectTable() throws ModelException
+    {
+        List<Project> allProjectsList = model.getProjectKundeNavn();
+        ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
+        ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+        int brugtTidMinutter = 0;
+        for (Project project1 : allProjectsList)
+        {
+            
+            project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
+            
+            if (project1.getOngoing() == 1)
+            {
+                allProjectsFilteredList.add(project1);
+            } 
+            
+            allProjectsResultList.add(project1);
+            
+            
+            
+        }
+        
+        if (ongoingCheckbox.isSelected() == true)
+        {
+           projekterTableView.setItems(allProjectsFilteredList);
+        
+        }
+        
+        else
+        {
+            projekterTableView.setItems(allProjectsResultList);
+            
+        }
+        
+        
+        projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
+        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
+        
+        brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
+    }
+            
+
 
     /**
      * Uses the date filter method to find a start date
@@ -381,17 +424,23 @@ public class MainAdminViewController implements Initializable
             Date date2 = format.parse(slutTid);
             long difference = date2.getTime() - date1.getTime();
 
-            long input = difference / 1000;
+            long input = difference / 1000;           
             long hours = (input - input % 3600) / 3600;
             long minutes = (input % 3600 - input % 3600 % 60) / 60;
             long seconds = input % 3600 % 60;
+            long variableNumber = input / 60 / 15;
 
+            
+            if (variableNumber == 0)
+            {
+                variableNumber = 1;
+            }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
-            model.addTime(input, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.addProjectTime(input, projektComboBox.getSelectionModel().getSelectedItem());
+            model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
+            model.addProjectTime(variableNumber, projektComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
-            opgaverTableView.setItems(model.refreshTasks());
-            projekterTableView.setItems(model.refreshProjects());
+//            opgaverTableView.setItems(model.refreshTasks());
+//            projekterTableView.setItems(model.refreshProjects());
 
         } catch (Exception e)
         {
@@ -432,7 +481,7 @@ public class MainAdminViewController implements Initializable
 
     private void projectData() throws ModelException
     {
-        List<Project> projectNames = model.getAllProjects();
+        List<Project> projectNames = model.getProjectKundeNavn();
         List<Project> result = new ArrayList<>();
 
         for (Project projects : projectNames)
@@ -445,7 +494,7 @@ public class MainAdminViewController implements Initializable
         }
 
         sagsNrField.setText(result.get(0).getId() + "");
-        kundeField.setText(result.get(0).getKundeId() + "");
+        kundeField.setText(result.get(0).getKundeNavn() + "");
         LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
         datePicker.setValue(localDate);
 
@@ -700,4 +749,10 @@ public class MainAdminViewController implements Initializable
             fillUserAdminViews();
         }
     }
+    
+    @FXML
+    private void setOngoing(ActionEvent event) throws ModelException {
+        setProjectTable();   
+    }
+
 }

@@ -51,7 +51,9 @@ public class ProjectDAO
                 int kundeId = rs.getInt("kundeId");
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid);
+                int ongoing = rs.getInt("ongoing");
+                int brugtTidMinutter = 0;
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter);
                 allProjects.add(project);
             }
             return allProjects;
@@ -126,7 +128,7 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT Project.projektNavn, Project.brugtTid, Kunde.kundeNavn\n"
+            String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Kunde.kundeNavn, Project.startDato, Project.ongoing\n"
                     + "FROM Project\n"
                     + "INNER JOIN Kunde ON Project.kundeId=Kunde.id;";
             Statement statement = con.createStatement();
@@ -134,10 +136,14 @@ public class ProjectDAO
             ArrayList<Project> allProjects = new ArrayList<>();
             while (rs.next())
             {
+                int id = rs.getInt("id");
                 String projektNavn = rs.getString("projektNavn");
                 String kundeNavn = rs.getString("kundeNavn");
+                String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
-                Project project = new Project(projektNavn, kundeNavn, brugtTid);
+                int ongoing = rs.getInt("ongoing");
+                int brugtTidMinutter = -1;
+                Project project = new Project(id, projektNavn, kundeNavn, brugtTid, startDato, ongoing, brugtTidMinutter);
                 allProjects.add(project);
             }
             return allProjects;
@@ -148,7 +154,7 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Project SET brugtTid = brugtTid + ? WHERE projektNavn = ?";
+            String sql = "UPDATE Project SET brugtTid = CEILING(brugtTid + ?) WHERE projektNavn = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, brugtTid);
             ps.setString(2, projektNavn);

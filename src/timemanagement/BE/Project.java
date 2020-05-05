@@ -5,6 +5,10 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.value.ObservableValue;
+
 /**
  *
  * @author The Cowboys
@@ -17,6 +21,8 @@ public class Project {
     private String kundeNavn;
     private String startDato;
     private int brugtTid;
+    private int ongoing;
+    private IntegerProperty brugtTidMinutter;
 
     /**
      * Constructor for Project
@@ -26,25 +32,33 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid, int ongoing, int brugtTidMinutter) {
         this.id = id;
         this.projektNavn = projektNavn;
         this.kundeId = kundeId;
         this.startDato = startDato;
         this.brugtTid = brugtTid;
+        this.ongoing = ongoing;
+        this.brugtTidMinutter = new SimpleIntegerProperty(brugtTidMinutter);
     }
 
+    
+
     /**
-     * Constructor for Porject
+     * Constructor for Project
      * @param projektNavn
      * @param kundeNavn
      * @param brugtTid 
      */
-    public Project(String projektNavn, String kundeNavn, int brugtTid)
+    public Project(int id, String projektNavn, String kundeNavn, int brugtTid, String startDato, int ongoing, int brugtTidMinutter)
     {
+        this.id = id;
         this.projektNavn = projektNavn;
         this.kundeNavn = kundeNavn;
         this.brugtTid = brugtTid;
+        this.startDato = startDato;
+        this.ongoing = ongoing;
+        this.brugtTidMinutter = new SimpleIntegerProperty(brugtTidMinutter);
     }
     
     /**
@@ -144,6 +158,34 @@ public class Project {
      */
     public void setBrugtTid(int brugtTid) {
         this.brugtTid = brugtTid;
+    }
+    
+    public int getOngoing() {
+        return ongoing;
+    }
+
+    public void setOngoing(int ongoing) {
+        this.ongoing = ongoing;
+    }
+
+    public int getBrugtTidMinutter() {
+        return brugtTidMinutter.get();
+    }
+    
+    /**
+     * getter for brugtTidMinutter
+     * @return brugtTidMinutter
+     */
+    public ObservableValue<Integer> brugtTidMinutter() {
+        return brugtTidMinutter.asObject();
+    }
+
+    /**
+     * setter for brugtTidMinutter
+     * @param brugtTidMinutter 
+     */
+    public void setBrugtTidMinutter(int brugtTidMinutter) {
+        this.brugtTidMinutter.set(brugtTidMinutter);
     }
 
     /**

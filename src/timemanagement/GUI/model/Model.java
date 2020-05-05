@@ -295,4 +295,15 @@ public class Model
         }
     }
     
+    public boolean updateUserRoles(int isAdmin, int id) throws ModelException
+    {
+        try
+        {
+            return bllManager.updateUserRoles(isAdmin, id);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
 }

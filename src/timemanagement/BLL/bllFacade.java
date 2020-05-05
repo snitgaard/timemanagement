@@ -62,4 +62,5 @@ public interface bllFacade
     
     void archiveProject(int id, int ongoing) throws bllException;
 
+    boolean updateUserRoles(int isAdmin, int id) throws bllException;
 }

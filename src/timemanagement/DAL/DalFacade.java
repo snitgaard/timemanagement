@@ -47,7 +47,6 @@ public interface DalFacade {
     
     boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
 
-    
     boolean createKunde(String kundeNavn) throws DalException;
     
     int getKundeId (String kundeNavn) throws DalException;
@@ -63,4 +62,5 @@ public interface DalFacade {
     int getIsAdminInt(String userLogin, String userPassword) throws DalException;
     
     void archiveProject(int id, int ongoing) throws DalException;
+    boolean updateUserRoles(int isAdmin, int id) throws DalException;
 }

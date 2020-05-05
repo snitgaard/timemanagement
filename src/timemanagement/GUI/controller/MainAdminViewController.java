@@ -156,7 +156,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User user;
-
     private TableColumn<Task, Integer> idColumn;
     @FXML
     private JFXDatePicker startDate;
@@ -166,6 +165,10 @@ public class MainAdminViewController implements Initializable
     private JFXButton btnTaskClearFilter;
     @FXML
     private TableColumn<User, String> userViewRolle;
+    @FXML
+    private JFXComboBox<String> userComboBox;
+
+    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
     @FXML
     private JFXCheckBox ongoingCheckbox;
 
@@ -182,6 +185,9 @@ public class MainAdminViewController implements Initializable
 
             model = model.getInstance();
             setProjects();
+
+            ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
+            userComboBox.setItems(roles);
 
             projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
@@ -266,38 +272,31 @@ public class MainAdminViewController implements Initializable
         setProjectTable();
 
         //User & Admin views
-        
+        fillUserAdminViews();
+    }
+
+    private void fillUserAdminViews() throws ModelException
+    {
         List<User> allUsersList = model.getAllUsers();
-        ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
         String isAdminString = "";
-        
 
         for (User users1 : allUsersList)
         {
             if (users1.getIsAdmin() == 0)
             {
-                System.out.println(users1.getIsAdmin() + "ER DET HER");
                 users1.setAdminRights("User");
-            } 
-            else 
+            } else
             {
-                System.out.println(users1.getIsAdmin() + "ER DET HER HER HER");
                 users1.setAdminRights("Admin");
-                
             }
-            
             allUsersResultList.add(users1);
         }
-        
         userView.setItems(allUsersResultList);
-        
-        System.out.println(model.getAllUsers().get(0).adminRighsProperty() + "ER DET HER");
 
         userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
         userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
-
     }
     
     private void setProjectTable() throws ModelException
@@ -643,12 +642,12 @@ public class MainAdminViewController implements Initializable
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
         {
-            
+
         }
-        
+
         List<Project> allProjects = model.getAllProjects();
         List<Project> result = new ArrayList();
-        
+
         for (Project projects : allProjects)
         {
             if (projects.getId() == selectedTask.getProjektId())
@@ -656,18 +655,19 @@ public class MainAdminViewController implements Initializable
                 result.add(projects);
             }
         }
-        
+
         result.get(0).setBrugtTid(0);
-        
-        for (Task tasks : model.getAllTasksByProject(result.get(0).getId())) {
+
+        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
+        {
             if (tasks.getProjektId() == result.get(0).getId())
             {
                 model.addProjectTime(tasks.getBrugtTid(), result.get(0).getProjektNavn());
             }
         }
-        
+
         projekterTableView.setItems(model.refreshProjects());
-    
+
     }
 
     @FXML
@@ -676,7 +676,8 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUser = userView.getSelectionModel().getSelectedItem();
         model.deleteUser(selectedUser);
-        userView.setItems(model.getAllUsers());
+        allUsersResultList.clear();
+        fillUserAdminViews();
     }
 
     private void dateFilter()
@@ -730,6 +731,26 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
     }
 
+
+    @FXML
+    private void updateUserRole(ActionEvent event) throws ModelException
+    {
+        userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        User selectedUserRole = userView.getSelectionModel().getSelectedItem();
+
+        if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin"))
+        {
+            model.updateUserRoles(1, selectedUserRole.getId());
+            allUsersResultList.clear();
+            fillUserAdminViews();
+        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User"))
+        {
+            model.updateUserRoles(0, selectedUserRole.getId());
+            allUsersResultList.clear();
+            fillUserAdminViews();
+        }
+    }
+    
     @FXML
     private void setOngoing(ActionEvent event) throws ModelException {
 

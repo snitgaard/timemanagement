@@ -8,9 +8,6 @@ package timemanagement.DAL;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -215,6 +212,12 @@ public class DalManager implements DalFacade
         projectDAO.archiveProject(id, ongoing);
     }
 
+    public boolean updateUserRoles(int isAdmin, int id) throws DalException
+    {
+        return userDAO.updateUserRoles(isAdmin, id);
+    }
+
+    
     
     
 }

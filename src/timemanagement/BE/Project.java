@@ -50,8 +50,9 @@ public class Project {
      * @param kundeNavn
      * @param brugtTid 
      */
-    public Project(String projektNavn, String kundeNavn, int brugtTid, String startDato, int ongoing, int brugtTidMinutter)
+    public Project(int id, String projektNavn, String kundeNavn, int brugtTid, String startDato, int ongoing, int brugtTidMinutter)
     {
+        this.id = id;
         this.projektNavn = projektNavn;
         this.kundeNavn = kundeNavn;
         this.brugtTid = brugtTid;

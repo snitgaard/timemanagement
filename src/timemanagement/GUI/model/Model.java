@@ -286,4 +286,13 @@ public class Model
         }
     }
     
+    public void archiveProject(int id, int ongoing) throws ModelException
+    {
+        try {
+            bllManager.archiveProject(id, ongoing);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
 }

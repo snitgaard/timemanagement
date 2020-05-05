@@ -210,6 +210,11 @@ public class DalManager implements DalFacade
         return userDAO.getIsAdminInt(userLogin, userPassword);
     }
 
+    @Override
+    public void archiveProject(int id, int ongoing) throws DalException {
+        projectDAO.archiveProject(id, ongoing);
+    }
+
     
     
 }

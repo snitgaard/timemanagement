@@ -61,4 +61,6 @@ public interface DalFacade {
     void deleteUser(User user) throws DalException;
     
     int getIsAdminInt(String userLogin, String userPassword) throws DalException;
+    
+    void archiveProject(int id, int ongoing) throws DalException;
 }

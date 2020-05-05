@@ -59,5 +59,7 @@ public interface bllFacade
     void deleteUser(User user) throws bllException;
     
     int getIsAdminInt(String userLogin, String userPassword) throws bllException;
+    
+    void archiveProject(int id, int ongoing) throws bllException;
 
 }

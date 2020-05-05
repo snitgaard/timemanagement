@@ -290,6 +290,11 @@
                            </font>
                         </JFXButton>
                         <JFXCheckBox fx:id="ongoingCheckbox" layoutX="23.0" layoutY="178.0" onAction="#setOngoing" text="Igangværende" />
+                        <JFXButton layoutX="257.0" layoutY="172.0" onAction="#handleArchiveProject" text="Arkiver projekt">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
                      </children>
                   </AnchorPane>
               </items>

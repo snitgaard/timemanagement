@@ -732,13 +732,17 @@ public class MainAdminViewController implements Initializable
 
     @FXML
     private void setOngoing(ActionEvent event) throws ModelException {
-        
-        
+
         setProjectTable();
-        
-        
-        
-        
+
+    }
+
+    @FXML
+    private void handleArchiveProject(ActionEvent event) throws ModelException {
+        projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+        model.archiveProject(selectedProject.getId(), 0);
+        setProjectTable();
     }
 
 }

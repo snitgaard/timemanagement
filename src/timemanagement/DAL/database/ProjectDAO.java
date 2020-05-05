@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import timemanagement.BE.Project;
 import timemanagement.DAL.DalException;
 
@@ -163,6 +165,20 @@ public class ProjectDAO
         } catch (SQLException ex)
         {
             System.out.println(ex);
+            throw new DalException("Could not fetch all classes");
+        }
+    }
+    
+    public void archiveProject (int id, int ongoing) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "UPDATE Project SET ongoing = ? WHERE id = ?";
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, ongoing);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
             throw new DalException("Could not fetch all classes");
         }
     }

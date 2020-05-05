@@ -169,6 +169,7 @@ public class MainAdminViewController implements Initializable
     private JFXComboBox<String> userComboBox;
 
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+    @FXML
     private JFXCheckBox ongoingCheckbox;
 
     /**

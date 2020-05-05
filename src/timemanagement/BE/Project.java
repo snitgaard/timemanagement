@@ -6,7 +6,9 @@
 package timemanagement.BE;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -22,9 +24,9 @@ public class Project {
     private IntegerProperty kundeId;
     private StringProperty kundeNavn;
     private StringProperty startDato;
-    private IntegerProperty brugtTid;
+    private LongProperty brugtTid;
     private IntegerProperty ongoing;
-    private IntegerProperty brugtTidMinutter;
+    private LongProperty brugtTidMinutter;
 
     /**
      * Constructor for Project
@@ -34,14 +36,14 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, int brugtTid, int ongoing, int brugtTidMinutter) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeId = new SimpleIntegerProperty(kundeId);
         this.startDato = new SimpleStringProperty(startDato);
-        this.brugtTid = new SimpleIntegerProperty(brugtTid);
+        this.brugtTid = new SimpleLongProperty(brugtTid);
         this.ongoing = new SimpleIntegerProperty(ongoing);
-        this.brugtTidMinutter = new SimpleIntegerProperty(brugtTidMinutter);
+        this.brugtTidMinutter = new SimpleLongProperty(brugtTidMinutter);
     }
 
     
@@ -52,15 +54,15 @@ public class Project {
      * @param kundeNavn
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, String kundeNavn, int brugtTid, String startDato, int ongoing, int brugtTidMinutter)
+    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int ongoing, long brugtTidMinutter)
     {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
-        this.brugtTid = new SimpleIntegerProperty(brugtTid);
+        this.brugtTid = new SimpleLongProperty(brugtTid);
         this.startDato = new SimpleStringProperty(startDato);
         this.ongoing = new SimpleIntegerProperty(ongoing);
-        this.brugtTidMinutter = new SimpleIntegerProperty(brugtTidMinutter);
+        this.brugtTidMinutter = new SimpleLongProperty(brugtTidMinutter);
     }
     
     /**
@@ -167,7 +169,7 @@ public class Project {
      * getter for brugtTid
      * @return brugtTid
      */
-    public int getBrugtTid() {
+    public long getBrugtTid() {
         return brugtTid.get();
     }
 
@@ -175,11 +177,11 @@ public class Project {
      * setter for brugtTid
      * @param brugtTid 
      */
-    public void setBrugtTid(int brugtTid) {
+    public void setBrugtTid(long brugtTid) {
         this.brugtTid.set(brugtTid);
     }
     
-    public ObservableValue<Integer> brugtTidObservable()
+    public ObservableValue<Long> brugtTidObservable()
     {
         return brugtTid.asObject();
     }
@@ -197,7 +199,7 @@ public class Project {
         return ongoing.asObject();
     }
 
-    public int getBrugtTidMinutter() {
+    public long getBrugtTidMinutter() {
         return brugtTidMinutter.get();
     }
     
@@ -205,7 +207,7 @@ public class Project {
      * getter for brugtTidMinutter
      * @return brugtTidMinutter
      */
-    public ObservableValue<Integer> brugtTidMinutter() {
+    public ObservableValue<Long> brugtTidMinutter() {
         return brugtTidMinutter.asObject();
     }
 
@@ -213,7 +215,7 @@ public class Project {
      * setter for brugtTidMinutter
      * @param brugtTidMinutter 
      */
-    public void setBrugtTidMinutter(int brugtTidMinutter) {
+    public void setBrugtTidMinutter(long brugtTidMinutter) {
         this.brugtTidMinutter.set(brugtTidMinutter);
     }
 

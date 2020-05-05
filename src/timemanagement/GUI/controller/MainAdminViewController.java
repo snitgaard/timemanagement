@@ -136,7 +136,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Project, String> projektNavnAdminColumn;
     @FXML
-    private TableColumn<Project, Integer> brugtTidAdminColumn;
+    private TableColumn<Project, Long> brugtTidAdminColumn;
     @FXML
     private JFXCheckBox opretAdminCheckBox;
     @FXML
@@ -172,7 +172,6 @@ public class MainAdminViewController implements Initializable
     ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
     @FXML
     private JFXCheckBox ongoingCheckbox;
-    @FXML
     private TableColumn<Project, Integer> archivedColumn;
 
     /**
@@ -324,8 +323,7 @@ public class MainAdminViewController implements Initializable
             
             
         }
-        
-        
+
         
         if (ongoingCheckbox.isSelected() == true)
         {
@@ -335,14 +333,13 @@ public class MainAdminViewController implements Initializable
         
         else
         {
-            projekterTableView.setItems(allProjectsResultList);
+            projekterTableView.setItems(model.getProjectKundeNavn());
             
         }
         
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
-        archivedColumn.setCellValueFactory(cellData -> cellData.getValue().ongoingObservable());
     }
             
 
@@ -629,9 +626,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0);
-        projekterTableView.setItems(model.refreshProjects());
-        setProjects();
+        model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0);
+//        projekterTableView.setItems(model.refreshProjects());
+//        setProjects();
     }
 
     @FXML

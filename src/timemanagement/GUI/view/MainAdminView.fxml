@@ -277,7 +277,6 @@
                             <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Projekt navn" />
                             <TableColumn fx:id="kundeColumn" prefWidth="127.0" text="Kunde" />
                               <TableColumn fx:id="brugtTidAdminColumn" prefWidth="178.0" text="Brugt tid" />
-                              <TableColumn fx:id="archivedColumn" prefWidth="174.0" text="Column X" />
                           </columns>
                         </TableView>
                         <JFXTextField fx:id="txt_projektNavn" layoutX="23.0" layoutY="63.0" prefHeight="25.0" prefWidth="224.0" promptText="Indtast projekt navn" />

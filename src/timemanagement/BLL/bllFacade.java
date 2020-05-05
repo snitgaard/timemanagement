@@ -60,7 +60,7 @@ public interface bllFacade
     
     int getIsAdminInt(String userLogin, String userPassword) throws bllException;
     
-    void archiveProject(int id, int ongoing) throws bllException;
+    void archiveProject(Project project) throws bllException;
 
     boolean updateUserRoles(int isAdmin, int id) throws bllException;
 }

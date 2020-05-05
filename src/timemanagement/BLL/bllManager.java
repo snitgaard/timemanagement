@@ -264,9 +264,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void archiveProject(int id, int ongoing) throws bllException {
+    public void archiveProject(Project project) throws bllException {
         try {
-            dalFacade.archiveProject(id, ongoing);
+            dalFacade.archiveProject(project);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

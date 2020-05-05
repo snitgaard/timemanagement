@@ -189,7 +189,7 @@ public class MainAdminViewController implements Initializable
             ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
             userComboBox.setItems(roles);
 
-            projekterTableView.setItems(model.getProjectKundeNavn());
+//            projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
 
         } catch (ModelException ex)
@@ -333,10 +333,8 @@ public class MainAdminViewController implements Initializable
             
         }
         
-        
-        projektNavnAdminColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        kundeColumn.setCellValueFactory(new PropertyValueFactory<>("kundeNavn"));
-        
+        projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
+        kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
     }
             
@@ -762,8 +760,11 @@ public class MainAdminViewController implements Initializable
     private void handleArchiveProject(ActionEvent event) throws ModelException {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-        model.archiveProject(selectedProject.getId(), 0);
-        setProjectTable();
+        System.out.println(selectedProject + "ER DET HER");
+        selectedProject.setOngoing(0);
+        model.archiveProject(selectedProject);
+        projekterTableView.refresh();
+//        setProjectTable();
     }
 
 }

@@ -169,14 +169,14 @@ public class ProjectDAO
         }
     }
     
-    public void archiveProject (int id, int ongoing) throws DalException
+    public void archiveProject (Project project) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Project SET ongoing = ? WHERE id = ?";
+            int id = project.getId();
+            String sql = "UPDATE Project SET ongoing = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, ongoing);
-            ps.setInt(2, id);
+            ps.setInt(1, project.getOngoing());
             ps.executeUpdate();
         } catch (SQLException ex) {
             throw new DalException("Could not fetch all classes");

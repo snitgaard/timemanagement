@@ -208,8 +208,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void archiveProject(int id, int ongoing) throws DalException {
-        projectDAO.archiveProject(id, ongoing);
+    public void archiveProject(Project project) throws DalException {
+        projectDAO.archiveProject(project);
     }
 
     public boolean updateUserRoles(int isAdmin, int id) throws DalException

@@ -61,6 +61,7 @@ public interface DalFacade {
     
     int getIsAdminInt(String userLogin, String userPassword) throws DalException;
     
-    void archiveProject(int id, int ongoing) throws DalException;
+    void archiveProject(Project project) throws DalException;
+    
     boolean updateUserRoles(int isAdmin, int id) throws DalException;
 }

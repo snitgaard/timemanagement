@@ -217,7 +217,10 @@ public class DalManager implements DalFacade
         return userDAO.updateUserRoles(isAdmin, id);
     }
 
-    
-    
-    
+    @Override
+    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws DalException
+    {
+        return taskDAO.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
+    }
+ 
 }

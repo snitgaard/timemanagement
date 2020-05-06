@@ -270,7 +270,6 @@ public class MainAdminViewController implements Initializable
         datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
 
         //Projekter tableview
-        
         setProjectTable();
 
         //User & Admin views
@@ -300,49 +299,42 @@ public class MainAdminViewController implements Initializable
         userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
-    
+
     private void setProjectTable() throws ModelException
     {
         List<Project> allProjectsList = model.getProjectKundeNavn();
         ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
         allProjectsFilteredList.clear();
-        
+
         int brugtTidMinutter = 0;
         for (Project project1 : allProjectsList)
         {
-            
+
             project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
-            
+
             if (project1.getOngoing() == 1)
             {
                 allProjectsFilteredList.add(project1);
-            } 
-            
+            }
+
             allProjectsResultList.add(project1);
-            
-            
-            
+
         }
 
-        
         if (ongoingCheckbox.isSelected() == true)
         {
-           projekterTableView.setItems(allProjectsFilteredList);
-        
-        }
-        
-        else
+            projekterTableView.setItems(allProjectsFilteredList);
+
+        } else
         {
             projekterTableView.setItems(model.getProjectKundeNavn());
-            
+
         }
-        
+
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
     }
-            
-
 
     /**
      * Uses the date filter method to find a start date
@@ -427,13 +419,12 @@ public class MainAdminViewController implements Initializable
             Date date2 = format.parse(slutTid);
             long difference = date2.getTime() - date1.getTime();
 
-            long input = difference / 1000;           
+            long input = difference / 1000;
             long hours = (input - input % 3600) / 3600;
             long minutes = (input % 3600 - input % 3600 % 60) / 60;
             long seconds = input % 3600 % 60;
             long variableNumber = input / 60 / 15;
 
-            
             if (variableNumber == 0)
             {
                 variableNumber = 1;
@@ -626,7 +617,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        if(model.createKunde(txt_kundeNavn.getText()) == true)
+        if (model.createKunde(txt_kundeNavn.getText()) == true)
         {
             model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0);
         }
@@ -734,7 +725,6 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
     }
 
-
     @FXML
     private void updateUserRole(ActionEvent event) throws ModelException
     {
@@ -753,16 +743,18 @@ public class MainAdminViewController implements Initializable
             fillUserAdminViews();
         }
     }
-    
+
     @FXML
-    private void setOngoing(ActionEvent event) throws ModelException {
+    private void setOngoing(ActionEvent event) throws ModelException
+    {
 
         setProjectTable();
 
     }
 
     @FXML
-    private void handleArchiveProject(ActionEvent event) throws ModelException {
+    private void handleArchiveProject(ActionEvent event) throws ModelException
+    {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
         selectedProject.setOngoing(0);
@@ -772,4 +764,28 @@ public class MainAdminViewController implements Initializable
 //        setProjectTable();
     }
 
+    @FXML
+    private void handleEditTask(ActionEvent event) throws ModelException
+    {
+
+        if (betaltCheckBox.isSelected() == true)
+        {
+            int betalt = 1;
+            String selectedTask = opgaveComboBox.getValue();
+            String opgaveTitel = titelField.getText();
+            String beskrivelse = beskrivelseTextArea.getText();
+            model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
+            projectData();
+
+        } else if (betaltCheckBox.isSelected() == false)
+        {
+            int betalt = 0;
+            String selectedTask = opgaveComboBox.getValue();
+            String opgaveTitel = titelField.getText();
+            String beskrivelse = beskrivelseTextArea.getText();
+            model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
+            projectData();
+        }
+
+    }
 }

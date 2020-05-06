@@ -64,4 +64,6 @@ public interface DalFacade {
     void archiveProject(Project project) throws DalException;
     
     boolean updateUserRoles(int isAdmin, int id) throws DalException;
+    
+    boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws DalException;
 }

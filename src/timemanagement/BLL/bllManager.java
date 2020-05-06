@@ -283,5 +283,18 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws bllException
+    {
+        try
+        {
+            return dalFacade.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
+        }
+        catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 
 }

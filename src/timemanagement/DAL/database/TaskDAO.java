@@ -131,7 +131,7 @@ public class TaskDAO
             String sql = "UPDATE Task SET brugtTid = brugtTid + ? WHERE opgaveNavn = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, brugtTid);
-            ps.setString(2, opgaveNavn);
+            ps.setObject(2, opgaveNavn);
             ps.executeUpdate();
 
         } catch (SQLException ex)
@@ -202,6 +202,26 @@ public class TaskDAO
             ps.executeUpdate();
             return true;
         } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            return false;
+        }
+    }
+    
+    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel)
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE opgaveNavn = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setString(1, opgaveNavn);
+            ps.setString(2, beskrivelse);
+            ps.setInt(3, betalt);
+            ps.setString(4, opgaveTitel);
+            ps.executeUpdate();
+            return true;
+        } 
+        catch (SQLException ex)
         {
             ex.printStackTrace();
             return false;

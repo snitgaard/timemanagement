@@ -308,4 +308,16 @@ public class Model
         }
     }
     
+    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws ModelException
+    {
+        try
+        {
+            return bllManager.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
+        }
+        catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
 }

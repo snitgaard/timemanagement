@@ -626,7 +626,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        model.createKunde(txt_kundeNavn.getText());
         if(model.createKunde(txt_kundeNavn.getText()) == true)
         {
             model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0);

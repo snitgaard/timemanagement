@@ -137,13 +137,13 @@ public class DalManager implements DalFacade
     }
     
     @Override
-    public boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
     {
         return userDAO.createUser(userLogin, userPassword, isAdmin, hourlyRate);
     }    
 
     @Override
-    public boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
     {
         return userDAO.createUserAdmin(userLogin, userPassword, isAdmin, hourlyRate);
     }   
@@ -212,9 +212,9 @@ public class DalManager implements DalFacade
         projectDAO.archiveProject(project);
     }
 
-    public boolean updateUserRoles(int isAdmin, int id) throws DalException
+    public void updateUserRoles(User user) throws DalException
     {
-        return userDAO.updateUserRoles(isAdmin, id);
+        userDAO.updateUserRoles(user);
     }
 
     

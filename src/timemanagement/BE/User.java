@@ -5,8 +5,13 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 /**
  *
@@ -15,10 +20,10 @@ import javafx.beans.property.StringProperty;
 public class User
 {
     private int id;
-    private String userLogin;
-    private String userPassword;
-    private int isAdmin;
-    private long hourlyRate;
+    private StringProperty userLogin;
+    private StringProperty userPassword;
+    private IntegerProperty isAdmin;
+    private LongProperty hourlyRate;
     private StringProperty adminRights; 
 
     
@@ -41,10 +46,10 @@ public class User
      */
     public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate, String adminRights) {
         this.id = id;
-        this.userLogin = userLogin;
-        this.userPassword = userPassword;
-        this.isAdmin = isAdmin;
-        this.hourlyRate = hourlyRate;   
+        this.userLogin = new SimpleStringProperty(userLogin);
+        this.userPassword = new SimpleStringProperty(userPassword);
+        this.isAdmin = new SimpleIntegerProperty(isAdmin);
+        this.hourlyRate = new SimpleLongProperty(hourlyRate);   
         this.adminRights = new SimpleStringProperty(adminRights);
     }
 
@@ -68,7 +73,7 @@ public class User
      * @return hourlyRate
      */
     public long getHourlyRate() {
-        return hourlyRate;
+        return hourlyRate.get();
     }
 
     /**
@@ -76,7 +81,12 @@ public class User
      * @param hourlyRate 
      */
     public void setHourlyRate(long hourlyRate) {
-        this.hourlyRate = hourlyRate;
+        this.hourlyRate.set(hourlyRate);
+    }
+    
+    public ObservableValue<Long> hourlyRateObservable()
+    {
+        return hourlyRate.asObject();
     }
 
     /**
@@ -100,7 +110,7 @@ public class User
      * @return userLogin
      */
     public String getUserLogin() {
-        return userLogin;
+        return userLogin.get();
     }
 
     /**
@@ -108,7 +118,12 @@ public class User
      * @param userLogin 
      */
     public void setUserLogin(String userLogin) {
-        this.userLogin = userLogin;
+        this.userLogin.set(userLogin);
+    }
+    
+    public StringProperty userLoginProperty()
+    {
+        return userLogin;
     }
 
     /**
@@ -116,7 +131,7 @@ public class User
      * @return userPassword
      */
     public String getUserPassword() {
-        return userPassword;
+        return userPassword.get();
     }
 
     /**
@@ -124,15 +139,20 @@ public class User
      * @param userPassword 
      */
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        this.userPassword.set(userPassword);
     } 
+    
+    public StringProperty userPasswordProperty()
+    {
+        return userPassword;
+    }
 
     /**
      * getter for isAdmin
      * @return isAdmin
      */
     public int getIsAdmin() {
-        return isAdmin;
+        return isAdmin.get();
     }
 
     /**
@@ -140,7 +160,12 @@ public class User
      * @param isAdmin 
      */
     public void setIsAdmin(int isAdmin) {
-        this.isAdmin = isAdmin;
+        this.isAdmin.set(isAdmin);
+    }
+    
+    public ObservableValue<Integer> isAdminObservable()
+    {
+        return isAdmin.asObject();
     }
 
     /**
@@ -150,7 +175,7 @@ public class User
     @Override
     public String toString()
     {
-        return userLogin;
+        return getUserLogin();
     }
     
     

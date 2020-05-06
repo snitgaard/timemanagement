@@ -42,9 +42,9 @@ public interface bllFacade
 
     List<Project> getProjectKundeNavn() throws bllException;
     
-    boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
+    User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
     
-    boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
+    User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
 
     boolean createKunde(String kundeNavn) throws bllException;
 
@@ -62,5 +62,5 @@ public interface bllFacade
     
     void archiveProject(Project project) throws bllException;
 
-    boolean updateUserRoles(int isAdmin, int id) throws bllException;
+    void updateUserRoles(User user) throws bllException;
 }

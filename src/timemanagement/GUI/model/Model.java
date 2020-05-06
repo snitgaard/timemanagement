@@ -173,17 +173,21 @@ public class Model
         return allTasksByProject;
     }
 
-    public boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws ModelException {
+    public void createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws ModelException {
         try {
-            return bllManager.createUser(userLogin, userPassword, isAdmin, hourlyRate);
+            User user = bllManager.createUser(userLogin, userPassword, isAdmin, hourlyRate);
+            user.setAdminRights("User");
+            allUsers.add(user);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public boolean createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws ModelException {
+    public void createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws ModelException {
         try {
-            return bllManager.createUserAdmin(userLogin, userPassword, adminId, hourlyRate);
+            User user = bllManager.createUserAdmin(userLogin, userPassword, adminId, hourlyRate);
+            user.setAdminRights("Admin");
+            allUsers.add(user);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
@@ -241,11 +245,24 @@ public class Model
 
     public ObservableList<User> getAllUsers() throws ModelException
     {
-        allUsers = FXCollections.observableArrayList();
-        allUsers.clear();
+        
+        
         try
         {
-            allUsers.addAll(bllManager.getAllUsers());
+            List<User> tempUserList = bllManager.getAllUsers();
+        allUsers = FXCollections.observableArrayList();
+            
+            for (User users1 : tempUserList)
+        {
+            if (users1.getIsAdmin() == 0)
+            {
+                users1.setAdminRights("User");
+            } else
+            {
+                users1.setAdminRights("Admin");
+            }
+            allUsers.add(users1);
+        }
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
@@ -274,6 +291,7 @@ public class Model
         try
         {
             bllManager.deleteUser(user);
+            allUsers.remove(user);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -297,11 +315,11 @@ public class Model
         }
     }
     
-    public boolean updateUserRoles(int isAdmin, int id) throws ModelException
+    public void updateUserRoles(User user) throws ModelException
     {
         try
         {
-            return bllManager.updateUserRoles(isAdmin, id);
+            bllManager.updateUserRoles(user);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

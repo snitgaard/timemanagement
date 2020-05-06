@@ -5,6 +5,10 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+
 /**
  *
  * @author The Cowboys
@@ -12,7 +16,7 @@ package timemanagement.BE;
 public class Kunde
 {
     private int id;
-    private String kundeNavn;
+    private StringProperty kundeNavn;
 
     /**
      * Constructor for Kunde
@@ -21,7 +25,7 @@ public class Kunde
      */
     public Kunde(int id, String kundeNavn) {
         this.id = id;
-        this.kundeNavn = kundeNavn;
+        this.kundeNavn = new SimpleStringProperty(kundeNavn);
     }
 
     /**
@@ -46,7 +50,7 @@ public class Kunde
      */
     public String getKundeNavn()
     {
-        return kundeNavn;
+        return kundeNavn.get();
     }
 
     /**
@@ -55,6 +59,11 @@ public class Kunde
      */
     public void setKundeNavn(String kundeNavn)
     {
-        this.kundeNavn = kundeNavn;
+        this.kundeNavn.set(kundeNavn);
+    }
+    
+    public StringProperty kundeNavnProperty()
+    {
+        return kundeNavn;
     }
 }

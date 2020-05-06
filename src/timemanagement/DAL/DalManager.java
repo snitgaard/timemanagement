@@ -123,8 +123,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) throws DalException {
-        return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter);
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws DalException {
+        return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
     }
 
     @Override

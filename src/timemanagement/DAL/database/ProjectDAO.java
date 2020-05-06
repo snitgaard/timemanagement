@@ -55,7 +55,8 @@ public class ProjectDAO
                 int brugtTid = rs.getInt("brugtTid");
                 int ongoing = rs.getInt("ongoing");
                 int brugtTidMinutter = 0;
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter);
+                String kundeNavn = "";
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
                 allProjects.add(project);
             }
             return allProjects;
@@ -98,7 +99,7 @@ public class ProjectDAO
      * @return
      * @throws DalException
      */
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) throws DalException
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -117,7 +118,7 @@ public class ProjectDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter);
+                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
                     return project;
                 }
             }

@@ -152,9 +152,9 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public void createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) throws ModelException {
+    public void createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws ModelException {
         try {
-            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter);
+            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
             allProjectsMedKunde.add(project);
             allProjects.add(project);
         } catch (bllException ex) {

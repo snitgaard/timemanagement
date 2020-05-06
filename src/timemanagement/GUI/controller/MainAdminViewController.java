@@ -631,8 +631,6 @@ public class MainAdminViewController implements Initializable
         {
             model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0);
         }
-        projekterTableView.setItems(model.refreshProjects());
-        setProjects();
     }
 
     @FXML

@@ -295,7 +295,7 @@ public class MainAdminViewController implements Initializable
         for (Project project1 : allProjectsList)
         {
             
-            project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
+            project1.setBrugtTidMinutter(project1.getBrugtTid()/15);
             
             if (project1.getOngoing() == 1)
             {
@@ -424,7 +424,7 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.addProjectTime(variableNumber, projektComboBox.getSelectionModel().getSelectedItem());
+            model.updateProjectTime(projektComboBox.getSelectionModel().getSelectedItem());
             opgaveData();
 //            opgaverTableView.setItems(model.refreshTasks());
 //            projekterTableView.setItems(model.refreshProjects());
@@ -621,13 +621,18 @@ public class MainAdminViewController implements Initializable
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
         int id = selectedTask.getId();
+        String projektNavn = selectedTask.getProjektNavn();
         try
         {
-            model.updateTask(brugtTid, id);
+            model.updateTask((brugtTid), id);
+            if(model.updateTask((brugtTid), id) == true)
+            {
+                model.updateProjectTime(projektNavn);
+            }
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
         {
-
+            System.out.println("yikes");
         }
 
         List<Project> allProjects = model.getAllProjects();
@@ -647,7 +652,7 @@ public class MainAdminViewController implements Initializable
         {
             if (tasks.getProjektId() == result.get(0).getId())
             {
-                model.addProjectTime(tasks.getBrugtTid(), result.get(0).getProjektNavn());
+                model.updateProjectTime(result.get(0).getProjektNavn());
             }
         }
 

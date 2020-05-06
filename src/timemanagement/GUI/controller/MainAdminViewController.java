@@ -591,14 +591,14 @@ public class MainAdminViewController implements Initializable
             String adminLogin = txt_userLogin.getText();
             String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUserAdmin(adminLogin, encryptThisString(adminPassword), 1, hourlyRate);
+            model.createUserAdmin(adminLogin, adminPassword, 1, hourlyRate);
             userView.setItems(model.getAllUsers());
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUser(userLogin, encryptThisString(userPassword), 0, hourlyRate);
+            model.createUser(userLogin, userPassword, 0, hourlyRate);
             userView.setItems(model.getAllUsers());
         }
     }

@@ -157,11 +157,12 @@ public class UserDAO
 
     /**
      * If called this method will create a connection between the database and
-     * the program. The SQL statement will be run afterwards. Checks the user
-     * credentials based on user login and password
+     * the program.The SQL statement will be run afterwards. Checks the user
+ credentials based on user login and password
      *
      * @param userLogin
      * @param userPassword
+     * @param isAdmin
      * @return true if credentials match with the database and false if not
      * @throws DalException
      */

@@ -140,7 +140,7 @@ public class ProjectDAO {
         }
     }
 
-    public void updateProjectTime(String projektNavn) throws DalException {
+    public void updateProjectTime() throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "UPDATE\n"
                     + "	P \n"
@@ -154,10 +154,9 @@ public class ProjectDAO {
                     + "		FROM Task\n"
                     + "		GROUP BY Task.projektId\n"
                     + "	) t\n"
-                    + "	ON t.projektId = p.id\n"
-                    + "WHERE projektNavn = (?)";
+                    + "	ON t.projektId = p.id\n";
+//                    + "WHERE projektNavn = (?)";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(2, projektNavn);
             ps.executeUpdate();
 
         } catch (SQLException ex) {

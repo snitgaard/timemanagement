@@ -424,7 +424,7 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.updateProjectTime(projektComboBox.getSelectionModel().getSelectedItem());
+            model.updateProjectTime();
             opgaveData();
 //            opgaverTableView.setItems(model.refreshTasks());
 //            projekterTableView.setItems(model.refreshProjects());
@@ -621,13 +621,13 @@ public class MainAdminViewController implements Initializable
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
         int id = selectedTask.getId();
-        String projektNavn = selectedTask.getProjektNavn();
+//        String projektNavn = selectedTask.getProjektNavn();
         try
         {
-            model.updateTask((brugtTid), id);
+
             if(model.updateTask((brugtTid), id) == true)
             {
-                model.updateProjectTime(projektNavn);
+                model.updateProjectTime();
             }
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
@@ -648,13 +648,13 @@ public class MainAdminViewController implements Initializable
 
         result.get(0).setBrugtTid(0);
 
-        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
-        {
-            if (tasks.getProjektId() == result.get(0).getId())
-            {
-                model.updateProjectTime(result.get(0).getProjektNavn());
-            }
-        }
+//        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
+//        {
+//            if (tasks.getProjektId() == result.get(0).getId())
+//            {
+//                model.updateProjectTime(result.get(0).getProjektNavn());
+//            }
+//        }
 
         projekterTableView.setItems(model.refreshProjects());
 

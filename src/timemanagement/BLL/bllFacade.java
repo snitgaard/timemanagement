@@ -52,7 +52,7 @@ public interface bllFacade
 
     List<User> getAllUsers() throws bllException;
     
-    void updateProjectTime(String projektNavn) throws bllException;
+    void updateProjectTime() throws bllException;
     
     boolean updateTask(int brugtTid, int id) throws bllException;
     

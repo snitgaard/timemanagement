@@ -36,7 +36,7 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeId = new SimpleIntegerProperty(kundeId);
@@ -44,6 +44,7 @@ public class Project {
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.ongoing = new SimpleIntegerProperty(ongoing);
         this.brugtTidMinutter = new SimpleLongProperty(brugtTidMinutter);
+        this.kundeNavn = new SimpleStringProperty(kundeNavn);
     }
 
     

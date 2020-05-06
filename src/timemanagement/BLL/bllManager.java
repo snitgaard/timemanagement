@@ -146,9 +146,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) throws bllException {
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -164,7 +164,7 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException {
+    public User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException {
         try {
             return dalFacade.createUser(userLogin, userPassword, isAdmin, hourlyRate);
         } catch (DalException ex) {
@@ -173,7 +173,7 @@ public class bllManager implements bllFacade {
     }
     
     @Override
-    public boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException {
+    public User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException {
         try {
             return dalFacade.createUserAdmin(userLogin, userPassword, isAdmin, hourlyRate);
         } catch (DalException ex) {
@@ -227,9 +227,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void addProjectTime(long brugtTid, String projektNavn) throws bllException {
+    public void updateProjectTime() throws bllException {
         try {
-            dalFacade.addProjektTime(brugtTid, projektNavn);
+            dalFacade.updateProjectTime();
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -272,11 +272,11 @@ public class bllManager implements bllFacade {
         }
     }
             
-    public boolean updateUserRoles(int isAdmin, int id) throws bllException
+    public void updateUserRoles(User user) throws bllException
     {
         try
         {
-            return dalFacade.updateUserRoles(isAdmin, id);
+            dalFacade.updateUserRoles(user);
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());

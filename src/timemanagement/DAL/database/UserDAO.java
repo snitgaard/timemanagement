@@ -97,7 +97,7 @@ public class UserDAO
      * @return
      * @throws DalException
      */
-    public boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -114,7 +114,9 @@ public class UserDAO
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next())
                 {
-                    return true;
+                    int id = (rs.getInt(1));
+                    User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, userLogin);
+                    return user;
                 }
             }
 
@@ -123,10 +125,10 @@ public class UserDAO
             ex.printStackTrace();
             throw new DalException("Could not create User");
         }
-        return false;
+        return null;
     }
 
-    public boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -143,7 +145,9 @@ public class UserDAO
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next())
                 {
-                    return true;
+                    int id = (rs.getInt(1));
+                    User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, userLogin);
+                    return user;
                 }
             }
 
@@ -152,7 +156,7 @@ public class UserDAO
             ex.printStackTrace();
             throw new DalException("Could not create User");
         }
-        return false;
+        return null;
     }
 
     /**
@@ -271,19 +275,18 @@ public class UserDAO
         }
     }
 
-    public boolean updateUserRoles(int isAdmin, int id) throws DalException
+    public void updateUserRoles(User user) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE [User] SET isAdmin = ? WHERE id = ?;";
+            int id = user.getId();
+            String sql = "UPDATE [User] SET isAdmin = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, isAdmin);
-            ps.setInt(2, id);
+            ps.setInt(1, user.getIsAdmin());
             ps.executeUpdate();
-            return true;
         } catch (SQLException ex)
         {
-            return false;
+            ex.printStackTrace();
         }
     }
 

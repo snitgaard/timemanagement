@@ -36,15 +36,15 @@ public interface bllFacade
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 
-    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) throws bllException;
+    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws bllException;
 
     List<Task> getAllTasksByProject(int projektId) throws bllException;
 
     List<Project> getProjectKundeNavn() throws bllException;
     
-    boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
+    User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
     
-    boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
+    User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException;
 
     boolean createKunde(String kundeNavn) throws bllException;
 
@@ -52,7 +52,7 @@ public interface bllFacade
 
     List<User> getAllUsers() throws bllException;
     
-    void addProjectTime(long brugtTid, String projektNavn) throws bllException;
+    void updateProjectTime() throws bllException;
     
     boolean updateTask(int brugtTid, int id) throws bllException;
     
@@ -61,8 +61,8 @@ public interface bllFacade
     int getIsAdminInt(String userLogin, String userPassword) throws bllException;
     
     void archiveProject(Project project) throws bllException;
-
-    boolean updateUserRoles(int isAdmin, int id) throws bllException;
     
     boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws bllException;
+    
+    void updateUserRoles(User user) throws bllException;
 }

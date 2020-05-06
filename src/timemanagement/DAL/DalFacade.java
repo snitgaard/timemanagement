@@ -37,15 +37,15 @@ public interface DalFacade {
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter) throws DalException;
+    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws DalException;
     
     List<Task> getAllTasksByProject(int projektId) throws DalException;
     
     List<Project> getProjectKundeNavn() throws DalException;
     
-    boolean createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
+    User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
     
-    boolean createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
+    User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException;
 
     boolean createKunde(String kundeNavn) throws DalException;
     
@@ -53,7 +53,7 @@ public interface DalFacade {
     
     List<User> getAllUsers() throws DalException;
     
-    void addProjektTime(long brugtTid, String projektNavn) throws DalException;
+    void updateProjectTime() throws DalException;
     
     boolean updateTask(int brugtTid, int id) throws DalException;
     
@@ -63,7 +63,7 @@ public interface DalFacade {
     
     void archiveProject(Project project) throws DalException;
     
-    boolean updateUserRoles(int isAdmin, int id) throws DalException;
-    
     boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws DalException;
+    
+    void updateUserRoles(User user) throws DalException;
 }

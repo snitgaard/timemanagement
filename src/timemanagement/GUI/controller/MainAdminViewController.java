@@ -145,7 +145,6 @@ public class MainAdminViewController implements Initializable
     private JFXDatePicker datePicker;
     @FXML
     private TableView<User> userView;
-    @FXML
     private TableColumn<User, Integer> userViewId;
     @FXML
     private TableColumn<User, String> userViewEmail;
@@ -277,26 +276,11 @@ public class MainAdminViewController implements Initializable
     }
 
     private void fillUserAdminViews() throws ModelException
-    {
-        List<User> allUsersList = model.getAllUsers();
-        String isAdminString = "";
-
-        for (User users1 : allUsersList)
-        {
-            if (users1.getIsAdmin() == 0)
-            {
-                users1.setAdminRights("User");
-            } else
-            {
-                users1.setAdminRights("Admin");
-            }
-            allUsersResultList.add(users1);
-        }
-        userView.setItems(allUsersResultList);
-
-        userViewId.setCellValueFactory(new PropertyValueFactory<>("id"));
-        userViewEmail.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
-        userViewRate.setCellValueFactory(new PropertyValueFactory<>("hourlyRate"));
+    { 
+        userView.setItems(model.getAllUsers());
+         
+        userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
+        userViewRate.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
 
@@ -309,9 +293,9 @@ public class MainAdminViewController implements Initializable
         int brugtTidMinutter = 0;
         for (Project project1 : allProjectsList)
         {
-
-            project1.setBrugtTidMinutter(project1.getBrugtTid() * 15);
-
+            
+            project1.setBrugtTidMinutter(project1.getBrugtTid()/15);
+            
             if (project1.getOngoing() == 1)
             {
                 allProjectsFilteredList.add(project1);
@@ -431,7 +415,7 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.addProjectTime(variableNumber, projektComboBox.getSelectionModel().getSelectedItem());
+            model.updateProjectTime();
             opgaveData();
 //            opgaverTableView.setItems(model.refreshTasks());
 //            projekterTableView.setItems(model.refreshProjects());
@@ -583,14 +567,12 @@ public class MainAdminViewController implements Initializable
             String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUserAdmin(adminLogin, adminPassword, 1, hourlyRate);
-            userView.setItems(model.getAllUsers());
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUser(userLogin, userPassword, 0, hourlyRate);
-            userView.setItems(model.getAllUsers());
         }
     }
 
@@ -619,7 +601,7 @@ public class MainAdminViewController implements Initializable
     {
         if (model.createKunde(txt_kundeNavn.getText()) == true)
         {
-            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0);
+            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0, txt_kundeNavn.getText());
         }
     }
 
@@ -630,13 +612,18 @@ public class MainAdminViewController implements Initializable
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
         int id = selectedTask.getId();
+//        String projektNavn = selectedTask.getProjektNavn();
         try
         {
-            model.updateTask(brugtTid, id);
+
+            if(model.updateTask((brugtTid), id) == true)
+            {
+                model.updateProjectTime();
+            }
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
         {
-
+            System.out.println("yikes");
         }
 
         List<Project> allProjects = model.getAllProjects();
@@ -652,13 +639,13 @@ public class MainAdminViewController implements Initializable
 
         result.get(0).setBrugtTid(0);
 
-        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
-        {
-            if (tasks.getProjektId() == result.get(0).getId())
-            {
-                model.addProjectTime(tasks.getBrugtTid(), result.get(0).getProjektNavn());
-            }
-        }
+//        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
+//        {
+//            if (tasks.getProjektId() == result.get(0).getId())
+//            {
+//                model.updateProjectTime(result.get(0).getProjektNavn());
+//            }
+//        }
 
         projekterTableView.setItems(model.refreshProjects());
 
@@ -670,8 +657,6 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUser = userView.getSelectionModel().getSelectedItem();
         model.deleteUser(selectedUser);
-        allUsersResultList.clear();
-        fillUserAdminViews();
     }
 
     private void dateFilter()
@@ -729,18 +714,16 @@ public class MainAdminViewController implements Initializable
     private void updateUserRole(ActionEvent event) throws ModelException
     {
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        User selectedUserRole = userView.getSelectionModel().getSelectedItem();
+        User selectedUser = userView.getSelectionModel().getSelectedItem();
 
         if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin"))
         {
-            model.updateUserRoles(1, selectedUserRole.getId());
-            allUsersResultList.clear();
-            fillUserAdminViews();
+            selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
+            model.updateUserRoles(selectedUser);
         } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User"))
         {
-            model.updateUserRoles(0, selectedUserRole.getId());
-            allUsersResultList.clear();
-            fillUserAdminViews();
+            selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
+            model.updateUserRoles(selectedUser);
         }
     }
 

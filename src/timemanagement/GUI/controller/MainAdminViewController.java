@@ -641,7 +641,7 @@ public class MainAdminViewController implements Initializable
         int id = selectedTask.getId();
         try
         {
-            model.updateTask(brugtTid, id);
+            model.updateTask((brugtTid / 15), id);
             opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
         {

@@ -591,14 +591,14 @@ public class MainAdminViewController implements Initializable
             String adminLogin = txt_userLogin.getText();
             String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUserAdmin(adminLogin, encryptThisString(adminPassword), 1, hourlyRate);
+            model.createUserAdmin(adminLogin, adminPassword, 1, hourlyRate);
             userView.setItems(model.getAllUsers());
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUser(userLogin, encryptThisString(userPassword), 0, hourlyRate);
+            model.createUser(userLogin, userPassword, 0, hourlyRate);
             userView.setItems(model.getAllUsers());
         }
     }
@@ -626,7 +626,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        model.createKunde(txt_kundeNavn.getText());
         if(model.createKunde(txt_kundeNavn.getText()) == true)
         {
             model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0, txt_kundeNavn.getText());

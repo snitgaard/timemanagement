@@ -99,13 +99,13 @@ public class LoginController implements Initializable {
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
-        System.out.println(model.getSpecificUser(username));
+        System.out.println(model.getSpecificUser(username).getId());
         int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
         System.out.println("username =" + username);
+        System.out.println("unencrypted password =" + password);
         System.out.println("password =" + password);
         System.out.println("isAdmin =" + isAdmin);
         if (model.checkUserCredentials(username, password, 0)) {
-            User selectedUser = model.getSpecificUser(username);
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdminController = fxmlLoader.getController();

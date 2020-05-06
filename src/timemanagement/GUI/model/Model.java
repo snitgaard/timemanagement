@@ -252,9 +252,9 @@ public class Model
         return allUsers;
     }
 
-    public void addProjectTime(long brugtTid, String projektNavn) throws ModelException {
+    public void updateProjectTime(String projektNavn) throws ModelException {
         try {
-            bllManager.addProjectTime(brugtTid, projektNavn);
+            bllManager.updateProjectTime(projektNavn);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

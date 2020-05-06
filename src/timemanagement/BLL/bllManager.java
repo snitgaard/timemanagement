@@ -227,9 +227,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void addProjectTime(long brugtTid, String projektNavn) throws bllException {
+    public void updateProjectTime(String projektNavn) throws bllException {
         try {
-            dalFacade.addProjektTime(brugtTid, projektNavn);
+            dalFacade.updateProjectTime(projektNavn);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

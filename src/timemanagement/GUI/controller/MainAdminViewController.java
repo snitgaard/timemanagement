@@ -579,9 +579,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void createOpgave(ActionEvent event) throws ModelException
     {
-
         int projektId = Integer.parseInt(sagsNrField.getText());
-
         if (betaltCheckBox.isSelected() == true)
         {
             model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
@@ -589,11 +587,9 @@ public class MainAdminViewController implements Initializable
         {
             model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
         }
-
         projectData();
         opgaveComboBox.getSelectionModel().select(titelField.getText());
         fillColumns();
-
     }
 
     @FXML
@@ -750,7 +746,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleEditTask(ActionEvent event) throws ModelException
     {
-
         if (betaltCheckBox.isSelected() == true)
         {
             int betalt = 1;
@@ -769,6 +764,5 @@ public class MainAdminViewController implements Initializable
             model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
             projectData();
         }
-
     }
 }

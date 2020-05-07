@@ -233,6 +233,8 @@
                               <Font size="15.0" />
                            </font>
                         </JFXButton>
+                        <Label layoutX="44.0" layoutY="87.0" prefHeight="17.0" prefWidth="60.0" text="Projekter" />
+                        <Label layoutX="44.0" layoutY="167.0" prefHeight="17.0" prefWidth="79.0" text="Opgaver" />
                      </children>
                   </AnchorPane>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">

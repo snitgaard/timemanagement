@@ -133,7 +133,7 @@ public class ProjectDAO {
                 int ongoing = rs.getInt("ongoing");
                 long brugtTidMinutter = 0;
                 Project project = new Project(id, projektNavn, kundeNavn, brugtTid, startDato, ongoing, brugtTidMinutter);
-                project.setBrugtTidMinutter(project.getBrugtTid() * 15);
+                project.setBrugtTidMinutter(project.getBrugtTid());
                 allProjects.add(project);
             }
             return allProjects;

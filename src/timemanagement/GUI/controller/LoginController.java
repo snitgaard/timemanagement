@@ -110,7 +110,7 @@ public class LoginController implements Initializable {
             MainAdminViewController mainAdminController = fxmlLoader.getController();
             // Here the StudentAttendanceController is given important data objects,
             // This secures that it is the correct ones we are working with.
-//            mainUserController.ApplyImportantData(model, this, selectedUser);
+            mainAdminController.ApplyImportantData(model.getSpecificUser(username));
 
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();

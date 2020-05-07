@@ -58,6 +58,11 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
+    void ApplyImportantData(User selectedUser) {
+        this.user = selectedUser;
+        System.out.println("it works I think = " + selectedUser);
+    }
+
     @FXML
     private JFXButton timeLoggerButton;
     @FXML
@@ -94,12 +99,10 @@ public class MainAdminViewController implements Initializable
     private JFXTextField slutTidField;
     @FXML
     private JFXTextField brugtTidField;
-    private JFXTextField sagsNrField;
     @FXML
     private JFXCheckBox betaltCheckBox;
     @FXML
     private JFXTextField kundeField;
-    private JFXTextField timeField;
     @FXML
     private JFXTextField titelField;
     @FXML
@@ -139,7 +142,6 @@ public class MainAdminViewController implements Initializable
     private JFXCheckBox opretAdminCheckBox;
     @FXML
     private JFXButton nyOpgaveButton;
-    private JFXDatePicker datePicker;
     @FXML
     private TableView<User> userView;
     @FXML
@@ -468,16 +470,13 @@ public class MainAdminViewController implements Initializable
             }
         }
 
-        sagsNrField.setText(result.get(0).getId() + "");
         kundeField.setText(result.get(0).getKundeNavn() + "");
-        LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
-        datePicker.setValue(localDate);
+//        LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
 
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
             opgaveComboBox.setDisable(false);
             titelField.setDisable(false);
-            timeField.setDisable(false);
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
@@ -485,7 +484,6 @@ public class MainAdminViewController implements Initializable
         {
             opgaveComboBox.setDisable(true);
             titelField.setDisable(true);
-            timeField.setDisable(true);
             beskrivelseTextArea.setDisable(true);
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
@@ -503,7 +501,7 @@ public class MainAdminViewController implements Initializable
     private void setOpgaveData(ActionEvent event) throws ModelException
     {
         opgaveData();
-        if (titelField.getText() != null && timeField.getText() != null && beskrivelseTextArea.getText() != null)
+        if (titelField.getText() != null && beskrivelseTextArea.getText() != null)
         {
             btn_start.setDisable(false);
         }
@@ -527,11 +525,10 @@ public class MainAdminViewController implements Initializable
         {
             titelField.setText(result.get(0).getOpgaveNavn());
 
-            long hours = (result.get(0).getBrugtTid() - result.get(0).getBrugtTid() % 3600) / 3600;
-            long minutes = (result.get(0).getBrugtTid() % 3600 - result.get(0).getBrugtTid() % 3600 % 60) / 60;
-            long seconds = result.get(0).getBrugtTid() % 3600 % 60;
-            NumberFormat f = new DecimalFormat("00");
-            timeField.setText(f.format(hours) + ":" + f.format(minutes) + ":" + f.format(seconds));
+//            long hours = (result.get(0).getBrugtTid() - result.get(0).getBrugtTid() % 3600) / 3600;
+//            long minutes = (result.get(0).getBrugtTid() % 3600 - result.get(0).getBrugtTid() % 3600 % 60) / 60;
+//            long seconds = result.get(0).getBrugtTid() % 3600 % 60;
+//            NumberFormat f = new DecimalFormat("00");
             beskrivelseTextArea.setText(result.get(0).getBeskrivelse());
 
             if (result.get(0).getBetalt() == 1)
@@ -541,7 +538,6 @@ public class MainAdminViewController implements Initializable
         } else
         {
             titelField.clear();
-            timeField.clear();
             beskrivelseTextArea.clear();
             betaltCheckBox.setSelected(false);
 
@@ -562,13 +558,11 @@ public class MainAdminViewController implements Initializable
         {
             String adminLogin = txt_userLogin.getText();
             String adminPassword = encryptThisString(txt_userPassword.getText());
-            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUserAdmin(adminLogin, adminPassword, 1);
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = encryptThisString(txt_userPassword.getText());
-            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUser(userLogin, userPassword, 0);
         }
     }
@@ -576,17 +570,17 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void createOpgave(ActionEvent event) throws ModelException
     {
-        int projektId = Integer.parseInt(sagsNrField.getText());
-        if (betaltCheckBox.isSelected() == true)
-        {
-            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
-        } else
-        {
-            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
-        }
-        projectData();
-        opgaveComboBox.getSelectionModel().select(titelField.getText());
-        fillColumns();
+//       int projektId = Integer.parseInt(sagsNrField.getText());
+//        if (betaltCheckBox.isSelected() == true)
+//        {
+//            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
+//        } else
+//        {
+//            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
+//        }
+//        projectData();
+//        opgaveComboBox.getSelectionModel().select(titelField.getText());
+//        fillColumns();
     }
 
     @FXML

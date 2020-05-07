@@ -42,7 +42,10 @@ public class KundeDAO {
             while (rs.next()) {
                 int id = rs.getInt("Id");
                 String kundeNavn = rs.getString("kundeNavn");
-                Kunde kunde = new Kunde(id, kundeNavn);
+                String kontaktPerson = rs.getString("kontaktPerson");
+                String email = rs.getString("email");
+                double hourlyRate = rs.getInt("hourlyRate");
+                Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate);
                 allKunder.add(kunde);
             }
             return allKunder;

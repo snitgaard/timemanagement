@@ -7,6 +7,7 @@ package timemanagement.BE;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
@@ -26,13 +27,16 @@ public class Kunde
      * Constructor for Kunde
      * @param id
      * @param kundeNavn 
+     * @param kontaktPerson 
+     * @param email 
+     * @param hourlyRate 
      */
-    public Kunde(int id, StringProperty kundeNavn, StringProperty kontaktPerson, StringProperty email, DoubleProperty hourlyRate) {    
+    public Kunde(int id, String kundeNavn, String kontaktPerson, String email, Double hourlyRate) {    
         this.id = id;
-        this.kundeNavn = kundeNavn;
-        this.kontaktPerson = kontaktPerson;
-        this.email = email;
-        this.hourlyRate = hourlyRate;
+        this.kundeNavn = new SimpleStringProperty(kundeNavn);
+        this.kontaktPerson = new SimpleStringProperty(kontaktPerson);
+        this.email = new SimpleStringProperty(email);
+        this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
     }
 
     public int getId()

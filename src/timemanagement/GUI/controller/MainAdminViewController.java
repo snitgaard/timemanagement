@@ -32,6 +32,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -167,6 +168,10 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXCheckBox ongoingCheckbox;
     private TableColumn<Project, Integer> archivedColumn;
+    @FXML
+    private Label loginTextField;
+    private LoginController controller;
+    private String username;
 
     /**
      * Initializes the controller class.
@@ -193,6 +198,14 @@ public class MainAdminViewController implements Initializable
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void applyImportantData(String username, LoginController controller)
+    {
+        this.username = username;
+        this.controller = controller;
+        
+        
     }
 
     /**
@@ -271,9 +284,9 @@ public class MainAdminViewController implements Initializable
     }
 
     private void fillUserAdminViews() throws ModelException
-    { 
+    {
         userView.setItems(model.getAllUsers());
-         
+
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
@@ -287,9 +300,9 @@ public class MainAdminViewController implements Initializable
         int brugtTidMinutter = 0;
         for (Project project1 : allProjectsList)
         {
-            
+
             project1.setBrugtTidMinutter(project1.getBrugtTid());
-            
+
             if (project1.getOngoing() == 1)
             {
                 allProjectsFilteredList.add(project1);
@@ -600,7 +613,7 @@ public class MainAdminViewController implements Initializable
         try
         {
 
-            if(model.updateTask((brugtTid), id) == true)
+            if (model.updateTask((brugtTid), id) == true)
             {
                 model.updateProjectTime();
             }
@@ -630,7 +643,6 @@ public class MainAdminViewController implements Initializable
 //                model.updateProjectTime(result.get(0).getProjektNavn());
 //            }
 //        }
-
         projekterTableView.setItems(model.refreshProjects());
 
     }
@@ -753,4 +765,5 @@ public class MainAdminViewController implements Initializable
             projectData();
         }
     }
+
 }

@@ -99,19 +99,18 @@ public class LoginController implements Initializable {
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
+        
+        
         System.out.println(model.getSpecificUser(username).getId());
         int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
-        System.out.println("username =" + username);
-        System.out.println("unencrypted password =" + password);
-        System.out.println("password =" + password);
-        System.out.println("isAdmin =" + isAdmin);
+        
         if (model.checkUserCredentials(username, password, 0)) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdminController = fxmlLoader.getController();
             // Here the StudentAttendanceController is given important data objects,
             // This secures that it is the correct ones we are working with.
-//            mainUserController.ApplyImportantData(model, this, selectedUser);
+            mainAdminController.applyImportantData(username, this);
 
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
@@ -158,6 +157,11 @@ public class LoginController implements Initializable {
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
+    }
+    
+    private void getUsername()
+    {
+        emailField.getText();
     }
 
 }

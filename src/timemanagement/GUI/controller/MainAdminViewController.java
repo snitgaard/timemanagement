@@ -261,10 +261,10 @@ public class MainAdminViewController implements Initializable
     {
         //Opgaver tableview
         opgaverTableView.setItems(model.getAllTasksProjektNavn());
-        opgaveNavnColumn.setCellValueFactory(new PropertyValueFactory<>("opgaveNavn"));
-        projektNavnColumn.setCellValueFactory(new PropertyValueFactory<>("projektNavn"));
-        brugtTidColumn.setCellValueFactory(new PropertyValueFactory<>("brugtTid"));
-        datoColumn.setCellValueFactory(new PropertyValueFactory<>("dato"));
+        opgaveNavnColumn.setCellValueFactory(cellData -> cellData.getValue().opgaveNavnProperty());
+        projektNavnColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
+        brugtTidColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservableValue());
+        datoColumn.setCellValueFactory(cellData -> cellData.getValue().datoProperty());
 
         //Projekter tableview
         setProjectTable();
@@ -603,17 +603,17 @@ public class MainAdminViewController implements Initializable
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
-        int brugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
-        int id = selectedTask.getId();
+        int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
+        
 //        String projektNavn = selectedTask.getProjektNavn();
         try
         {
 
-            if(model.updateTask((brugtTid), id) == true)
+            if(model.updateTask(selectedTask) == true)
             {
+                selectedTask.setBrugtTid(nyBrugtTid);
                 model.updateProjectTime();
             }
-            opgaverTableView.setItems(model.refreshTasks());
         } catch (ModelException ex)
         {
             System.out.println("yikes");
@@ -631,16 +631,6 @@ public class MainAdminViewController implements Initializable
         }
 
         result.get(0).setBrugtTid(0);
-
-//        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
-//        {
-//            if (tasks.getProjektId() == result.get(0).getId())
-//            {
-//                model.updateProjectTime(result.get(0).getProjektNavn());
-//            }
-//        }
-
-        projekterTableView.setItems(model.refreshProjects());
 
     }
 

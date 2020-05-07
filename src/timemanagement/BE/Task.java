@@ -5,6 +5,12 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
+
 /**
  *
  * @author The Cowboys
@@ -12,13 +18,13 @@ package timemanagement.BE;
 public class Task
 {
     private int id;
-    private String opgaveNavn;
-    private String projektNavn;
-    private int projektId;
-    private int brugtTid;
-    private String dato;
-    private String beskrivelse;
-    private int betalt;
+    private StringProperty opgaveNavn;
+    private StringProperty projektNavn;
+    private IntegerProperty projektId;
+    private IntegerProperty brugtTid;
+    private StringProperty dato;
+    private StringProperty beskrivelse;
+    private IntegerProperty betalt;
 
     /**
      * Constructor for Task
@@ -31,12 +37,12 @@ public class Task
     public Task(int id, String opgaveNavn, int projektId, int brugtTid, String dato, String beskrivelse, int betalt)
     {
         this.id = id;
-        this.opgaveNavn = opgaveNavn;
-        this.projektId = projektId;
-        this.brugtTid = brugtTid;
-        this.dato = dato;
-        this.beskrivelse = beskrivelse;
-        this.betalt = betalt;
+        this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
+        this.projektId = new SimpleIntegerProperty(projektId);
+        this.brugtTid = new SimpleIntegerProperty(brugtTid);
+        this.dato = new SimpleStringProperty(dato);
+        this.beskrivelse = new SimpleStringProperty(beskrivelse);
+        this.betalt = new SimpleIntegerProperty(betalt);
     }
 
     /**
@@ -50,11 +56,11 @@ public class Task
     public Task(int id, String opgaveNavn, String projektNavn,  int brugtTid, String dato, int projektId)
     {
         this.id = id;
-        this.opgaveNavn = opgaveNavn;
-        this.projektNavn = projektNavn;
-        this.brugtTid = brugtTid;
-        this.dato = dato;
-        this.projektId = projektId;
+        this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
+        this.projektNavn = new SimpleStringProperty(projektNavn);
+        this.brugtTid = new SimpleIntegerProperty(brugtTid);
+        this.dato = new SimpleStringProperty(dato);
+        this.projektId = new SimpleIntegerProperty(projektId);
     }
 
     /**
@@ -81,7 +87,7 @@ public class Task
      */
     public String getOpgaveNavn()
     {
-        return opgaveNavn;
+        return opgaveNavn.get();
     }
 
     /**
@@ -90,25 +96,33 @@ public class Task
      */
     public void setOpgaveNavn(String opgaveNavn)
     {
-        this.opgaveNavn = opgaveNavn;
+        this.opgaveNavn.set(opgaveNavn);
+    }
+    
+    public StringProperty opgaveNavnProperty()
+    {
+        return opgaveNavn;
     }
 
     /**
      * getter for projektNavn
      * @return projektNavn
      */
-    public String getProjektNavn()
-    {
-        return projektNavn;
+    
+    public String getProjektNavn() {
+        return projektNavn.get();
     }
 
     /**
-     * setter for projektNavn
+     * Setter for projektNavn
      * @param projektNavn 
      */
-    public void setProjektNavn(String projektNavn)
-    {
-        this.projektNavn = projektNavn;
+    public void setProjektNavn(String projektNavn) {
+        this.projektNavn.set(projektNavn);
+    }
+    
+    public StringProperty projektNavnProperty() {
+        return projektNavn;
     }
 
     /**
@@ -117,7 +131,7 @@ public class Task
      */
     public int getProjektId()
     {
-        return projektId;
+        return projektId.get();
     }
 
     /**
@@ -126,7 +140,12 @@ public class Task
      */
     public void setProjektId(int projektId)
     {
-        this.projektId = projektId;
+        this.projektId.set(projektId);
+    }
+    
+    public ObservableValue<Integer> projektIdObservable()
+    {
+        return projektId.asObject();
     }
 
 
@@ -136,7 +155,7 @@ public class Task
      */
     public int getBrugtTid()
     {
-        return brugtTid;
+        return brugtTid.get();
     }
 
     /**
@@ -145,7 +164,12 @@ public class Task
      */
     public void setBrugtTid(int brugtTid)
     {
-        this.brugtTid = brugtTid;
+        this.brugtTid.set(brugtTid);
+    }
+    
+    public ObservableValue<Integer> brugtTidObservableValue()
+    {
+        return brugtTid.asObject();
     }
 
     /**
@@ -154,7 +178,7 @@ public class Task
      */
     public String getDato()
     {
-        return dato;
+        return dato.get();
     }
 
     /**
@@ -163,7 +187,12 @@ public class Task
      */
     public void setDato(String dato)
     {
-        this.dato = dato;
+        this.dato.set(dato);
+    }
+    
+    public StringProperty datoProperty()
+    {
+        return dato;
     }
 
     /**
@@ -173,7 +202,7 @@ public class Task
     @Override
     public String toString()
     {
-        return opgaveNavn;
+        return getOpgaveNavn();
     }
 
     /**
@@ -181,7 +210,7 @@ public class Task
      * @return beskrivelse
      */
     public String getBeskrivelse() {
-        return beskrivelse;
+        return beskrivelse.get();
     }
 
     /**
@@ -189,7 +218,12 @@ public class Task
      * @param beskrivelse 
      */
     public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse = beskrivelse;
+        this.beskrivelse.set(beskrivelse);
+    }
+    
+    public StringProperty beskrivelseProperty()
+    {
+        return beskrivelse;
     }
 
     /**
@@ -197,7 +231,7 @@ public class Task
      * @return betalt
      */
     public int getBetalt() {
-        return betalt;
+        return betalt.get();
     }
 
     /**
@@ -205,7 +239,12 @@ public class Task
      * @param betalt 
      */
     public void setBetalt(int betalt) {
-        this.betalt = betalt;
+        this.betalt.set(betalt);
+    }
+    
+    public ObservableValue<Integer> betaltObservable()
+    {
+        return betalt.asObject();
     }
     
     

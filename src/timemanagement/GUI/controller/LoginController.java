@@ -99,7 +99,6 @@ public class LoginController implements Initializable {
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
-        System.out.println(model.getSpecificUser(username).getId());
         int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
         System.out.println("username =" + username);
         System.out.println("unencrypted password =" + password);

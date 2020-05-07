@@ -55,7 +55,7 @@ public interface DalFacade {
     
     void updateProjectTime() throws DalException;
     
-    boolean updateTask(int brugtTid, int id) throws DalException;
+    boolean updateTask(Task task) throws DalException;
     
     void deleteUser(User user) throws DalException;
     

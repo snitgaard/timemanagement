@@ -191,14 +191,14 @@ public class TaskDAO
         }
     }
 
-    public boolean updateTask(int brugtTid, int id)
+    public boolean updateTask(Task task)
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id = ?;";
+            int id = task.getId();
+            String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, brugtTid);
-            ps.setInt(2, id);
+            ps.setInt(1, task.getBrugtTid());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex)

@@ -278,9 +278,9 @@ public class Model
 
     }
 
-    public boolean updateTask(int brugtTid, int id) throws ModelException {
+    public boolean updateTask(Task task) throws ModelException {
         try {
-            return bllManager.updateTask(brugtTid, id);
+            return bllManager.updateTask(task);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

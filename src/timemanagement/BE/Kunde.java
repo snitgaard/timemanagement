@@ -5,6 +5,7 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,53 +18,74 @@ public class Kunde
 {
     private int id;
     private StringProperty kundeNavn;
+    private StringProperty kontaktPerson;
+    private StringProperty email;
+    private DoubleProperty hourlyRate;
 
     /**
      * Constructor for Kunde
      * @param id
      * @param kundeNavn 
      */
-    public Kunde(int id, String kundeNavn) {
+    public Kunde(int id, StringProperty kundeNavn, StringProperty kontaktPerson, StringProperty email, DoubleProperty hourlyRate) {    
         this.id = id;
-        this.kundeNavn = new SimpleStringProperty(kundeNavn);
+        this.kundeNavn = kundeNavn;
+        this.kontaktPerson = kontaktPerson;
+        this.email = email;
+        this.hourlyRate = hourlyRate;
     }
 
-    /**
-     * Getter for id
-     * @return Id
-     */
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
-    /**
-     * setter for id
-     * @param id 
-     */
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
-    /**
-     * getter for kundeNavn
-     * @return kundeNavn
-     */
-    public String getKundeNavn()
-    {
-        return kundeNavn.get();
-    }
-
-    /**
-     * setter for kundeNavn
-     * @param kundeNavn 
-     */
-    public void setKundeNavn(String kundeNavn)
-    {
-        this.kundeNavn.set(kundeNavn);
-    }
-    
-    public StringProperty kundeNavnProperty()
+    public StringProperty getKundeNavn()
     {
         return kundeNavn;
     }
+
+    public void setKundeNavn(StringProperty kundeNavn)
+    {
+        this.kundeNavn = kundeNavn;
+    }
+
+    public StringProperty getKontaktPerson()
+    {
+        return kontaktPerson;
+    }
+
+    public void setKontaktPerson(StringProperty kontaktPerson)
+    {
+        this.kontaktPerson = kontaktPerson;
+    }
+
+    public StringProperty getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(StringProperty email)
+    {
+        this.email = email;
+    }
+
+    public DoubleProperty getHourlyRate()
+    {
+        return hourlyRate;
+    }
+
+    public void setHourlyRate(DoubleProperty hourlyRate)
+    {
+        this.hourlyRate = hourlyRate;
+    }
+    
+    
+    
+    
 }

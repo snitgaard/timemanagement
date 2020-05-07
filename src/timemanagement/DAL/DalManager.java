@@ -192,8 +192,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public boolean updateTask(int brugtTid, int id) throws DalException {
-        return taskDAO.updateTask(brugtTid, id);
+    public boolean updateTask(Task task) throws DalException {
+        return taskDAO.updateTask(task);
     }
 
     @Override

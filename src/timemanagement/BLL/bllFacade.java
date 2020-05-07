@@ -54,7 +54,7 @@ public interface bllFacade
     
     void updateProjectTime() throws bllException;
     
-    boolean updateTask(int brugtTid, int id) throws bllException;
+    boolean updateTask(Task task) throws bllException;
     
     void deleteUser(User user) throws bllException;
     

@@ -215,16 +215,6 @@
                               <Font size="14.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="13.0" layoutY="252.0" text="Brugt tid i alt">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="timeField" disable="true" editable="false" layoutX="105.0" layoutY="247.0" prefHeight="30.0" prefWidth="159.0">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXTextField>
                         <Label layoutX="359.0" layoutY="57.0" text="Beskrivelse">
                            <font>
                               <Font size="14.0" />
@@ -261,11 +251,6 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label layoutX="9.0" layoutY="115.0" text="Start dato">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
                         <JFXTextField fx:id="kundeField" disable="true" editable="false" layoutX="114.0" layoutY="70.0" prefHeight="30.0" prefWidth="159.0">
                            <font>
                               <Font size="14.0" />
@@ -273,7 +258,6 @@
                         </JFXTextField>
                         <Line endX="626.0" layoutX="98.0" layoutY="3.0" startX="-105.0" stroke="#b9b9b9" AnchorPane.rightAnchor="0.0" />
                         <Line endX="316.0" endY="315.5736083984375" startX="316.0" startY="25.881206512451172" stroke="#b9b9b9" AnchorPane.bottomAnchor="0.0" />
-                        <JFXDatePicker fx:id="datePicker" disable="true" editable="false" layoutX="107.0" layoutY="109.0" prefHeight="28.0" prefWidth="193.0" />
                         <JFXButton fx:id="btn_start" disable="true" layoutX="331.0" layoutY="18.0" onAction="#handleTime" prefHeight="41.0" prefWidth="107.0" text="Start tid">
                            <graphic>
                               <FontAwesomeIconView fx:id="startIcon" glyphName="PLAY" size="15" text="" />

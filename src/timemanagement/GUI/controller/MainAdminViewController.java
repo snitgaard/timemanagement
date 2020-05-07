@@ -294,7 +294,7 @@ public class MainAdminViewController implements Initializable
         for (Project project1 : allProjectsList)
         {
             
-            project1.setBrugtTidMinutter(project1.getBrugtTid()/15);
+            project1.setBrugtTidMinutter(project1.getBrugtTid());
             
             if (project1.getOngoing() == 1)
             {
@@ -407,7 +407,7 @@ public class MainAdminViewController implements Initializable
             long hours = (input - input % 3600) / 3600;
             long minutes = (input % 3600 - input % 3600 % 60) / 60;
             long seconds = input % 3600 % 60;
-            long variableNumber = input / 60 / 15;
+            long variableNumber = input / 60;
 
             if (variableNumber == 0)
             {

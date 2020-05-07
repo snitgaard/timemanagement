@@ -59,6 +59,11 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
+    void ApplyImportantData(User selectedUser) {
+        this.user = selectedUser;
+        System.out.println("it works I think = " + selectedUser);
+    }
+
     @FXML
     private JFXButton timeLoggerButton;
     @FXML
@@ -566,13 +571,11 @@ public class MainAdminViewController implements Initializable
         {
             String adminLogin = txt_userLogin.getText();
             String adminPassword = encryptThisString(txt_userPassword.getText());
-            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUserAdmin(adminLogin, adminPassword, 1);
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = encryptThisString(txt_userPassword.getText());
-            long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
             model.createUser(userLogin, userPassword, 0);
         }
     }

@@ -94,13 +94,11 @@ public class MainAdminViewController implements Initializable
     private JFXTextField slutTidField;
     @FXML
     private JFXTextField brugtTidField;
-    @FXML
     private JFXTextField sagsNrField;
     @FXML
     private JFXCheckBox betaltCheckBox;
     @FXML
     private JFXTextField kundeField;
-    @FXML
     private JFXTextField timeField;
     @FXML
     private JFXTextField titelField;
@@ -141,10 +139,10 @@ public class MainAdminViewController implements Initializable
     private JFXCheckBox opretAdminCheckBox;
     @FXML
     private JFXButton nyOpgaveButton;
-    @FXML
     private JFXDatePicker datePicker;
     @FXML
     private TableView<User> userView;
+    @FXML
     private TableColumn<User, Integer> userViewId;
     @FXML
     private TableColumn<User, String> userViewEmail;

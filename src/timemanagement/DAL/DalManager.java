@@ -137,15 +137,15 @@ public class DalManager implements DalFacade
     }
     
     @Override
-    public User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUser(String userLogin, String userPassword, int isAdmin) throws DalException
     {
-        return userDAO.createUser(userLogin, userPassword, isAdmin, hourlyRate);
+        return userDAO.createUser(userLogin, userPassword, isAdmin);
     }    
 
     @Override
-    public User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUserAdmin(String userLogin, String userPassword, int isAdmin) throws DalException
     {
-        return userDAO.createUserAdmin(userLogin, userPassword, isAdmin, hourlyRate);
+        return userDAO.createUserAdmin(userLogin, userPassword, isAdmin);
     }   
     
     

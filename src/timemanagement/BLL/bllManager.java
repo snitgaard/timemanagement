@@ -164,18 +164,18 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException {
+    public User createUser(String userLogin, String userPassword, int isAdmin) throws bllException {
         try {
-            return dalFacade.createUser(userLogin, userPassword, isAdmin, hourlyRate);
+            return dalFacade.createUser(userLogin, userPassword, isAdmin);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
     
     @Override
-    public User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws bllException {
+    public User createUserAdmin(String userLogin, String userPassword, int isAdmin) throws bllException {
         try {
-            return dalFacade.createUserAdmin(userLogin, userPassword, isAdmin, hourlyRate);
+            return dalFacade.createUserAdmin(userLogin, userPassword, isAdmin);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

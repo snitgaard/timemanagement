@@ -173,9 +173,9 @@ public class Model
         return allTasksByProject;
     }
 
-    public void createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws ModelException {
+    public void createUser(String userLogin, String userPassword, int isAdmin) throws ModelException {
         try {
-            User user = bllManager.createUser(userLogin, userPassword, isAdmin, hourlyRate);
+            User user = bllManager.createUser(userLogin, userPassword, isAdmin);
             user.setAdminRights("User");
             allUsers.add(user);
         } catch (bllException ex) {
@@ -183,9 +183,9 @@ public class Model
         }
     }
 
-    public void createUserAdmin(String userLogin, String userPassword, int adminId, long hourlyRate) throws ModelException {
+    public void createUserAdmin(String userLogin, String userPassword, int adminId) throws ModelException {
         try {
-            User user = bllManager.createUserAdmin(userLogin, userPassword, adminId, hourlyRate);
+            User user = bllManager.createUserAdmin(userLogin, userPassword, adminId);
             user.setAdminRights("Admin");
             allUsers.add(user);
         } catch (bllException ex) {

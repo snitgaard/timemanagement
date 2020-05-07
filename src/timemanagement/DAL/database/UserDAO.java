@@ -51,10 +51,9 @@ public class UserDAO
                 String userLogin = rs.getString("userLogin");
                 String userPassword = rs.getString("userPassword");
                 int isAdmin = rs.getInt("isAdmin");
-                long hourlyRate = rs.getLong("hourlyRate");
                 String adminRights = "";
 
-                User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, adminRights);
+                User user = new User(id, userLogin, userPassword, isAdmin, adminRights);
                 allUsers.add(user);
             }
             return allUsers;
@@ -97,16 +96,15 @@ public class UserDAO
      * @return
      * @throws DalException
      */
-    public User createUser(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUser(String userLogin, String userPassword, int isAdmin) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO [User] (userLogin, userPassword, isAdmin, hourlyRate) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO [User] (userLogin, userPassword, isAdmin) VALUES (?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, userLogin);
             ps.setString(2, userPassword);
             ps.setInt(3, isAdmin);
-            ps.setLong(4, hourlyRate);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1)
@@ -115,7 +113,7 @@ public class UserDAO
                 if (rs.next())
                 {
                     int id = (rs.getInt(1));
-                    User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, userLogin);
+                    User user = new User(id, userLogin, userPassword, isAdmin, userLogin);
                     return user;
                 }
             }
@@ -128,16 +126,15 @@ public class UserDAO
         return null;
     }
 
-    public User createUserAdmin(String userLogin, String userPassword, int isAdmin, long hourlyRate) throws DalException
+    public User createUserAdmin(String userLogin, String userPassword, int isAdmin) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO [User] (userLogin, userPassword, isAdmin, hourlyRate) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO [User] (userLogin, userPassword, isAdmin) VALUES (?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, userLogin);
             ps.setString(2, userPassword);
             ps.setInt(3, isAdmin);
-            ps.setLong(4, hourlyRate);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1)
@@ -146,7 +143,7 @@ public class UserDAO
                 if (rs.next())
                 {
                     int id = (rs.getInt(1));
-                    User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, userLogin);
+                    User user = new User(id, userLogin, userPassword, isAdmin, userLogin);
                     return user;
                 }
             }
@@ -221,10 +218,9 @@ public class UserDAO
                 userLogin = rs.getString("userLogin");
                 String userPassword = rs.getString("userPassword");
                 int isAdmin = rs.getInt("isAdmin");
-                long hourlyRate = rs.getLong("hourlyRate");
                 String adminRights = "";
 
-                User user = new User(id, userLogin, userPassword, isAdmin, hourlyRate, adminRights);
+                User user = new User(id, userLogin, userPassword, isAdmin, adminRights);
                 selectedUser.add(user);
             }
             return selectedUser;

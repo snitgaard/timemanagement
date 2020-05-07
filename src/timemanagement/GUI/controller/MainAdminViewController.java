@@ -280,7 +280,6 @@ public class MainAdminViewController implements Initializable
         userView.setItems(model.getAllUsers());
          
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
-        userViewRate.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
 
@@ -566,13 +565,13 @@ public class MainAdminViewController implements Initializable
             String adminLogin = txt_userLogin.getText();
             String adminPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUserAdmin(adminLogin, adminPassword, 1, hourlyRate);
+            model.createUserAdmin(adminLogin, adminPassword, 1);
         } else
         {
             String userLogin = txt_userLogin.getText();
             String userPassword = encryptThisString(txt_userPassword.getText());
             long hourlyRate = Long.parseLong(txt_hourlyRate.getText());
-            model.createUser(userLogin, userPassword, 0, hourlyRate);
+            model.createUser(userLogin, userPassword, 0);
         }
     }
 

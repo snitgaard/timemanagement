@@ -23,7 +23,6 @@ public class User
     private StringProperty userLogin;
     private StringProperty userPassword;
     private IntegerProperty isAdmin;
-    private LongProperty hourlyRate;
     private StringProperty adminRights; 
 
     
@@ -44,12 +43,11 @@ public class User
      * @param hourlyRate
      * @param adminRights
      */
-    public User(int id, String userLogin, String userPassword, int isAdmin, long hourlyRate, String adminRights) {
+    public User(int id, String userLogin, String userPassword, int isAdmin, String adminRights) {
         this.id = id;
         this.userLogin = new SimpleStringProperty(userLogin);
         this.userPassword = new SimpleStringProperty(userPassword);
         this.isAdmin = new SimpleIntegerProperty(isAdmin);
-        this.hourlyRate = new SimpleLongProperty(hourlyRate);   
         this.adminRights = new SimpleStringProperty(adminRights);
     }
 
@@ -67,28 +65,7 @@ public class User
     public StringProperty adminRighsProperty() {
         return adminRights;
     }
-
-    /**
-     * getter for hourlyRate
-     * @return hourlyRate
-     */
-    public long getHourlyRate() {
-        return hourlyRate.get();
-    }
-
-    /**
-     * setter for hourlyRate
-     * @param hourlyRate 
-     */
-    public void setHourlyRate(long hourlyRate) {
-        this.hourlyRate.set(hourlyRate);
-    }
     
-    public ObservableValue<Long> hourlyRateObservable()
-    {
-        return hourlyRate.asObject();
-    }
-
     /**
      * getter for Id
      * @return 

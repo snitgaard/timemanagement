@@ -49,6 +49,8 @@ public interface DalFacade {
 
     boolean createKunde(String kundeNavn) throws DalException;
     
+    List<Kunde> getAllKunder() throws DalException;
+    
     int getKundeId (String kundeNavn) throws DalException;
     
     List<User> getAllUsers() throws DalException;
@@ -66,4 +68,5 @@ public interface DalFacade {
     boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws DalException;
     
     void updateUserRoles(User user) throws DalException;
+    
 }

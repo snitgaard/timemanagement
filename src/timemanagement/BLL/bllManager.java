@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -291,6 +292,18 @@ public class bllManager implements bllFacade {
             return dalFacade.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
         }
         catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public List<Kunde> getAllKunder() throws bllException
+    {
+        try
+        {
+            return dalFacade.getAllKunder();
+        } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());
         }

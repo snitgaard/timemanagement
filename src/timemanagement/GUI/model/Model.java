@@ -110,19 +110,6 @@ public class Model
         return allTasks;
     }
 
-    public ObservableList<Task> refreshTasks() throws ModelException
-    {
-        allTasks.clear();
-        try
-        {
-            allTasks.addAll(bllManager.getAllTasksProjektNavn());
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-        return allTasks;
-    }
-
     public void addTime(long brugtTid, String opgaveNavn) throws ModelException
     {
         try
@@ -253,19 +240,6 @@ public class Model
         {
             allProjectsMedKunde = FXCollections.observableArrayList();
 
-            allProjectsMedKunde.addAll(bllManager.getProjectKundeNavn());
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-        return allProjectsMedKunde;
-    }
-
-    public ObservableList<Project> refreshProjects() throws ModelException
-    {
-        allProjectsMedKunde.clear();
-        try
-        {
             allProjectsMedKunde.addAll(bllManager.getProjectKundeNavn());
         } catch (bllException ex)
         {

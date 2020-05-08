@@ -456,8 +456,6 @@ public class MainAdminViewController implements Initializable
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
 //            model.updateProjectTime();
             opgaveData();
-//            opgaverTableView.setItems(model.refreshTasks());
-//            projekterTableView.setItems(model.refreshProjects());
 
         } catch (Exception e)
         {

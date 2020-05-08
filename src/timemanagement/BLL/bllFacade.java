@@ -6,6 +6,7 @@
 package timemanagement.BLL;
 
 import java.util.List;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -48,6 +49,8 @@ public interface bllFacade
 
     boolean createKunde(String kundeNavn) throws bllException;
 
+    List<Kunde> getAllKunder() throws bllException;
+    
     int getKundeId(String kundeNavn) throws bllException;
 
     List<User> getAllUsers() throws bllException;

@@ -49,6 +49,8 @@ public interface DalFacade {
 
     boolean createKunde(String kundeNavn) throws DalException;
     
+    List<Kunde> getAllKunder() throws DalException;
+    
     int getKundeId (String kundeNavn) throws DalException;
     
     List<User> getAllUsers() throws DalException;

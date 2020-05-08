@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BLL.bllManager;
@@ -30,6 +31,7 @@ public class Model
     private ObservableList<Task> allTasksByProject;
     private ObservableList<Project> allProjectsMedKunde;
     private ObservableList<User> allUsers;
+    private ObservableList<Kunde> allKunder;
 
     private static Model instance = new Model();
 
@@ -95,9 +97,11 @@ public class Model
         }
     }
 
-    public ObservableList<Task> getAllTasks() throws ModelException {
+    public ObservableList<Task> getAllTasks() throws ModelException
+    {
         allTasks = FXCollections.observableArrayList();
-        try {
+        try
+        {
             allTasks.addAll(bllManager.getAllTasks());
         } catch (bllException ex)
         {
@@ -106,7 +110,8 @@ public class Model
         return allTasks;
     }
 
-    public ObservableList<Task> refreshTasks() throws ModelException {
+    public ObservableList<Task> refreshTasks() throws ModelException
+    {
         allTasks.clear();
         try
         {
@@ -118,15 +123,19 @@ public class Model
         return allTasks;
     }
 
-    public void addTime(long brugtTid, String opgaveNavn) throws ModelException {
-        try {
+    public void addTime(long brugtTid, String opgaveNavn) throws ModelException
+    {
+        try
+        {
             bllManager.addTime(brugtTid, opgaveNavn);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public ObservableList<Task> getAllTasksProjektNavn() throws ModelException {
+    public ObservableList<Task> getAllTasksProjektNavn() throws ModelException
+    {
         allTasks = FXCollections.observableArrayList();
         try
         {
@@ -152,58 +161,74 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public void createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws ModelException {
-        try {
+    public void createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws ModelException
+    {
+        try
+        {
             Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
             allProjectsMedKunde.add(project);
             allProjects.add(project);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public ObservableList<Task> getAllTasksByProject(int projektId) throws ModelException {
-        try {
+    public ObservableList<Task> getAllTasksByProject(int projektId) throws ModelException
+    {
+        try
+        {
             allTasksByProject = FXCollections.observableArrayList();
 
             allTasksByProject.addAll(bllManager.getAllTasksByProject(projektId));
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
         return allTasksByProject;
     }
 
-    public void createUser(String userLogin, String userPassword, int isAdmin) throws ModelException {
-        try {
+    public void createUser(String userLogin, String userPassword, int isAdmin) throws ModelException
+    {
+        try
+        {
             User user = bllManager.createUser(userLogin, userPassword, isAdmin);
             user.setAdminRights("User");
             allUsers.add(user);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public void createUserAdmin(String userLogin, String userPassword, int adminId) throws ModelException {
-        try {
+    public void createUserAdmin(String userLogin, String userPassword, int adminId) throws ModelException
+    {
+        try
+        {
             User user = bllManager.createUserAdmin(userLogin, userPassword, adminId);
             user.setAdminRights("Admin");
             allUsers.add(user);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
 
-
-    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws ModelException {
-        try {
+    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws ModelException
+    {
+        try
+        {
             return bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public boolean createKunde(String kundeNavn) throws ModelException {
-        try {
+    public boolean createKunde(String kundeNavn) throws ModelException
+    {
+        try
+        {
             return bllManager.createKunde(kundeNavn);
         } catch (bllException ex)
         {
@@ -211,26 +236,33 @@ public class Model
         }
     }
 
-    public int getKundeId(String kundeNavn) throws ModelException {
-        try {
+    public int getKundeId(String kundeNavn) throws ModelException
+    {
+        try
+        {
             return bllManager.getKundeId(kundeNavn);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public ObservableList<Project> getProjectKundeNavn() throws ModelException {
-        try {
+    public ObservableList<Project> getProjectKundeNavn() throws ModelException
+    {
+        try
+        {
             allProjectsMedKunde = FXCollections.observableArrayList();
 
             allProjectsMedKunde.addAll(bllManager.getProjectKundeNavn());
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
         return allProjectsMedKunde;
     }
 
-    public ObservableList<Project> refreshProjects() throws ModelException {
+    public ObservableList<Project> refreshProjects() throws ModelException
+    {
         allProjectsMedKunde.clear();
         try
         {
@@ -242,50 +274,55 @@ public class Model
         return allProjectsMedKunde;
     }
 
-
     public ObservableList<User> getAllUsers() throws ModelException
     {
-        
-        
+
         try
         {
             List<User> tempUserList = bllManager.getAllUsers();
-        allUsers = FXCollections.observableArrayList();
-            
+            allUsers = FXCollections.observableArrayList();
+
             for (User users1 : tempUserList)
-        {
-            if (users1.getIsAdmin() == 0)
             {
-                users1.setAdminRights("User");
-            } else
-            {
-                users1.setAdminRights("Admin");
+                if (users1.getIsAdmin() == 0)
+                {
+                    users1.setAdminRights("User");
+                } else
+                {
+                    users1.setAdminRights("Admin");
+                }
+                allUsers.add(users1);
             }
-            allUsers.add(users1);
-        }
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
         return allUsers;
     }
 
-    public void updateProjectTime() throws ModelException {
-        try {
+    public void updateProjectTime() throws ModelException
+    {
+        try
+        {
             bllManager.updateProjectTime();
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
 
     }
 
-    public boolean updateTask(Task task) throws ModelException {
-        try {
+    public boolean updateTask(Task task) throws ModelException
+    {
+        try
+        {
             return bllManager.updateTask(task);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void deleteUser(User user) throws ModelException
     {
         try
@@ -297,24 +334,29 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-    
-    public int getIsAdminInt(String userLogin, String userPassword) throws ModelException {
-        try {
+
+    public int getIsAdminInt(String userLogin, String userPassword) throws ModelException
+    {
+        try
+        {
             return bllManager.getIsAdminInt(userLogin, userPassword);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void archiveProject(Project project) throws ModelException
     {
-        try {
+        try
+        {
             bllManager.archiveProject(project);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void updateUserRoles(User user) throws ModelException
     {
         try
@@ -325,17 +367,30 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws ModelException
     {
         try
         {
             return bllManager.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
-        }
-        catch (bllException ex)
+        } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
+    public ObservableList<Kunde> getAllKunder() throws ModelException
+    {
+        allKunder.clear();
+        try
+        {
+            allKunder = FXCollections.observableArrayList();
+            allKunder.addAll(bllManager.getAllKunder());
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+        return allKunder;
+    }
+
 }

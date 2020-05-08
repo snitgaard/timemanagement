@@ -67,7 +67,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Kunde, String> clientEmailColumn;
     @FXML
-    private TableColumn<Kunde, Long> clientHourlyRateColumn;
+    private TableColumn<Kunde, Double> clientHourlyRateColumn;
     @FXML
     private JFXButton timeLoggerButton;
     @FXML
@@ -302,10 +302,18 @@ public class MainAdminViewController implements Initializable
 
         //User & Admin views
         fillUserAdminViews();
+        
+        //Client view
+        fillClientView();
     }
     
-    private void fillClientView()
+    private void fillClientView() throws ModelException
     {
+        clientTableView.setItems(model.getAllKunder());
+        clientNameColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
+        clientContactColumn.setCellValueFactory(cellData -> cellData.getValue().kontaktPersonProperty());
+        clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
     }
     
 

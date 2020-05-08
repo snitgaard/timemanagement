@@ -647,19 +647,6 @@ public class MainAdminViewController implements Initializable
             System.out.println("yikes");
         }
 
-        List<Project> allProjects = model.getAllProjects();
-        List<Project> result = new ArrayList();
-
-        for (Project projects : allProjects)
-        {
-            if (projects.getId() == selectedTask.getProjektId())
-            {
-                result.add(projects);
-            }
-        }
-
-        result.get(0).setBrugtTid(0);
-
     }
 
     @FXML

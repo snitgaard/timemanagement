@@ -59,6 +59,23 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
+    @FXML
+    private TableColumn<?, ?> clientNameColumn;
+    @FXML
+    private TableColumn<?, ?> clientContactColumn;
+    @FXML
+    private TableColumn<?, ?> clientEmailColumn;
+    @FXML
+    private TableColumn<?, ?> clientHourlyRateColumn;
+    @FXML
+    private TableColumn<?, ?> clientProjektNavn;
+    @FXML
+    private JFXTextField txt_Contact;
+    @FXML
+    private JFXTextField txt_Email;
+    @FXML
+    private JFXTextField txt_Client;
+
     void ApplyImportantData(User selectedUser)
     {
         this.user = selectedUser;

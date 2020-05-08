@@ -10,6 +10,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.beans.value.ObservableValue;
 
 /**
  *
@@ -49,47 +50,65 @@ public class Kunde
         this.id = id;
     }
 
-    public StringProperty getKundeNavn()
+    public String getKundeNavn()
+    {
+        return kundeNavn.get();
+    }
+
+    public void setKundeNavn(String kundeNavn)
+    {
+        this.kundeNavn.set(kundeNavn);
+    }
+    
+    public StringProperty kundeNavnProperty()
     {
         return kundeNavn;
     }
 
-    public void setKundeNavn(StringProperty kundeNavn)
+    public String getKontaktPerson()
     {
-        this.kundeNavn = kundeNavn;
+        return kontaktPerson.get();
     }
 
-    public StringProperty getKontaktPerson()
+    public void setKontaktPerson(String kontaktPerson)
+    {
+        this.kontaktPerson.set(kontaktPerson);
+    }
+    
+    public StringProperty kontaktPersonProperty()
     {
         return kontaktPerson;
     }
 
-    public void setKontaktPerson(StringProperty kontaktPerson)
+    public String getEmail()
     {
-        this.kontaktPerson = kontaktPerson;
+        return email.get();
     }
 
-    public StringProperty getEmail()
+    public void setEmail(String email)
+    {
+        this.email.set(email);
+    }
+    
+    public StringProperty emailProperty()
     {
         return email;
     }
 
-    public void setEmail(StringProperty email)
+    public double getHourlyRate()
     {
-        this.email = email;
+        return hourlyRate.get();
     }
 
-    public DoubleProperty getHourlyRate()
+    public void setHourlyRate(double hourlyRate)
     {
-        return hourlyRate;
-    }
-
-    public void setHourlyRate(DoubleProperty hourlyRate)
-    {
-        this.hourlyRate = hourlyRate;
+        this.hourlyRate.set(hourlyRate);
     }
     
-    
+    public ObservableValue<Double> hourlyRateObservable()
+    {
+        return hourlyRate.asObject();
+    }
     
     
 }

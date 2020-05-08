@@ -42,6 +42,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -59,12 +60,16 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
-    void ApplyImportantData(User selectedUser)
-    {
-        this.user = selectedUser;
-        loginTextField.setText(selectedUser + "");
-    }
-
+    @FXML
+    private TableColumn<Kunde, String> clientNameColumn;
+    @FXML
+    private TableColumn<Kunde, String> clientContactColumn;
+    @FXML
+    private TableColumn<Kunde, String> clientEmailColumn;
+    @FXML
+    private TableColumn<Kunde, Long> clientHourlyRateColumn;
+    @FXML
+    private TableColumn<Kunde, String> clientProjektNavn;
     @FXML
     private JFXButton timeLoggerButton;
     @FXML
@@ -164,9 +169,6 @@ public class MainAdminViewController implements Initializable
     private TableColumn<User, String> userViewRolle;
     @FXML
     private JFXComboBox<String> userComboBox;
-
-    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
-    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
     @FXML
     private JFXCheckBox ongoingCheckbox;
     private TableColumn<Project, Integer> archivedColumn;
@@ -174,6 +176,8 @@ public class MainAdminViewController implements Initializable
     private Label loginTextField;
     private LoginController controller;
     private String username;
+    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -200,6 +204,12 @@ public class MainAdminViewController implements Initializable
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
+    }
+
+    public void ApplyImportantData(User selectedUser)
+    {
+        this.user = selectedUser;
+        loginTextField.setText(selectedUser + "");
     }
 
     /**

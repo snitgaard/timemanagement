@@ -14,8 +14,6 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -32,12 +30,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -47,7 +46,6 @@ import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
 import timemanagement.DAL.DalException;
-import timemanagement.DAL.database.UserDAO;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 import static utilities.encryptThisString.encryptThisString;
@@ -628,6 +626,19 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
+                List<Kunde> tempKundeList = new ArrayList<>();
+        tempKundeList.addAll(model.getAllKunder());
+
+        
+        for (int i = 0; i < tempKundeList.size(); i++) {
+            if (tempKundeList.get(i).toString().trim().equalsIgnoreCase(txt_kundeNavn.getText()))
+            {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Name already exists noob", ButtonType.OK);
+                alert.showAndWait();
+                System.out.println("well");
+                return;
+            }
+        }
         if (model.createKunde(txt_kundeNavn.getText()) == true)
         {
             model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0, txt_kundeNavn.getText());

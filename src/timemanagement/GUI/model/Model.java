@@ -392,5 +392,13 @@ public class Model
         }
         return allKunder;
     }
-
+    
+    public List<Kunde> getAllKunder() throws ModelException
+    {
+        try {
+            return bllManager.getAllKunder();
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 }

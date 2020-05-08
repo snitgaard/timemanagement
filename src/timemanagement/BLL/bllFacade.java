@@ -68,4 +68,6 @@ public interface bllFacade
     boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws bllException;
     
     void updateUserRoles(User user) throws bllException;
+    
+    List<Kunde> getAllKunder() throws bllException;
 }

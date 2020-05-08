@@ -59,9 +59,10 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
-    void ApplyImportantData(User selectedUser) {
+    void ApplyImportantData(User selectedUser)
+    {
         this.user = selectedUser;
-        System.out.println("it works I think = " + selectedUser);
+        loginTextField.setText(selectedUser + "");
     }
 
     @FXML
@@ -146,13 +147,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableView<User> userView;
     @FXML
-    private TableColumn<User, Integer> userViewId;
-    @FXML
     private TableColumn<User, String> userViewEmail;
     @FXML
     private JFXTextField txt_hourlyRate;
-    @FXML
-    private TableColumn<User, Long> userViewRate;
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User user;
@@ -203,14 +200,6 @@ public class MainAdminViewController implements Initializable
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-    }
-
-    public void applyImportantData(String username, LoginController controller)
-    {
-        this.username = username;
-        this.controller = controller;
-        
-        
     }
 
     /**
@@ -611,12 +600,12 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
-        
+
 //        String projektNavn = selectedTask.getProjektNavn();
         try
         {
 
-            if(model.updateTask(selectedTask) == true)
+            if (model.updateTask(selectedTask) == true)
             {
                 selectedTask.setBrugtTid(nyBrugtTid);
                 model.updateProjectTime();

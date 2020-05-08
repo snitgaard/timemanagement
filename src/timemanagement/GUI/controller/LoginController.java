@@ -115,11 +115,12 @@ public class LoginController implements Initializable {
         } else if (model.checkUserCredentials(username, password, 1)) {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
-            MainAdminViewController mainAdmincontroller = fxmlLoader.getController();
-            mainAdmincontroller.showAdminButtons();
+            MainAdminViewController mainAdminController = fxmlLoader.getController();
+            mainAdminController.showAdminButtons();
 //            // Here the TeacherMainController is given important data objects,
 //            // This secures that it is the correct ones we are working with.
 //            teachercontroller.ApplyImportantData(model, this, selectedTeacher);
+            mainAdminController.ApplyImportantData(model.getSpecificUser(username));
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
         } else {
@@ -154,11 +155,6 @@ public class LoginController implements Initializable {
                 stage.setY(event.getScreenY() - yOffset);
             }
         });
-    }
-    
-    private void getUsername()
-    {
-        emailField.getText();
     }
 
 }

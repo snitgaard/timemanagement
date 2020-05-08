@@ -130,9 +130,7 @@
                         </JFXCheckBox>
                         <TableView fx:id="userView" layoutY="233.0" prefHeight="356.0" prefWidth="452.0">
                           <columns>
-                            <TableColumn fx:id="userViewId" prefWidth="75.0" text="Bruger ID" />
                             <TableColumn fx:id="userViewEmail" prefWidth="163.0" text="Bruger email" />
-                              <TableColumn fx:id="userViewRate" prefWidth="108.0" text="Timeløn" />
                               <TableColumn fx:id="userViewRolle" prefWidth="104.0" text="Rolle" />
                           </columns>
                         </TableView>
@@ -288,6 +286,33 @@
                      </children>
                   </AnchorPane>
                </items>
+            </SplitPane>
+            <SplitPane orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView layoutY="221.0" prefHeight="369.0" prefWidth="906.0">
+                          <columns>
+                            <TableColumn fx:id="clientNameColumn" prefWidth="190.0" text="Client name" />
+                            <TableColumn fx:id="clientContactColumn" prefWidth="177.0" text="Contact person" />
+                              <TableColumn fx:id="clientEmailColumn" prefWidth="184.0" text="Email" />
+                              <TableColumn fx:id="clientHourlyRateColumn" prefWidth="165.0" text="Hourly rate" />
+                              <TableColumn fx:id="clientProjektNavn" prefWidth="189.0" text="Projekt navn" />
+                          </columns>
+                        </TableView>
+                        <JFXTextField fx:id="txt_Contact" layoutX="91.0" layoutY="81.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_Email" layoutX="91.0" layoutY="113.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField layoutX="91.0" layoutY="148.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_Client" layoutX="91.0" layoutY="50.0" prefHeight="25.0" prefWidth="202.0" />
+                        <Label layoutX="20.0" layoutY="93.0" prefHeight="17.0" prefWidth="60.0" text="Contact" />
+                        <Label layoutX="20.0" layoutY="117.0" prefHeight="17.0" prefWidth="60.0" text="Email" />
+                        <Label layoutX="20.0" layoutY="152.0" prefHeight="17.0" prefWidth="60.0" text="Hourly rate" />
+                        <Label layoutX="20.0" layoutY="54.0" prefHeight="17.0" prefWidth="60.0" text="Client" />
+                        <Label layoutX="17.0" layoutY="184.0" text="Projekt navn" />
+                        <JFXTextField layoutX="91.0" layoutY="180.0" prefHeight="25.0" prefWidth="202.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
             </SplitPane>
          </children>
       </StackPane>

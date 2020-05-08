@@ -42,6 +42,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -59,11 +60,16 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
-    void ApplyImportantData(User selectedUser) {
-        this.user = selectedUser;
-        System.out.println("it works I think = " + selectedUser);
-    }
-
+    @FXML
+    private TableColumn<Kunde, String> clientNameColumn;
+    @FXML
+    private TableColumn<Kunde, String> clientContactColumn;
+    @FXML
+    private TableColumn<Kunde, String> clientEmailColumn;
+    @FXML
+    private TableColumn<Kunde, Long> clientHourlyRateColumn;
+    @FXML
+    private TableColumn<Kunde, String> clientProjektNavn;
     @FXML
     private JFXButton timeLoggerButton;
     @FXML
@@ -146,13 +152,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableView<User> userView;
     @FXML
-    private TableColumn<User, Integer> userViewId;
-    @FXML
     private TableColumn<User, String> userViewEmail;
     @FXML
     private JFXTextField txt_hourlyRate;
-    @FXML
-    private TableColumn<User, Long> userViewRate;
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User user;
@@ -167,9 +169,6 @@ public class MainAdminViewController implements Initializable
     private TableColumn<User, String> userViewRolle;
     @FXML
     private JFXComboBox<String> userComboBox;
-
-    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
-    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
     @FXML
     private JFXCheckBox ongoingCheckbox;
     private TableColumn<Project, Integer> archivedColumn;
@@ -177,6 +176,8 @@ public class MainAdminViewController implements Initializable
     private Label loginTextField;
     private LoginController controller;
     private String username;
+    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
 
     /**
      * Initializes the controller class.
@@ -205,12 +206,10 @@ public class MainAdminViewController implements Initializable
 
     }
 
-    public void applyImportantData(String username, LoginController controller)
+    public void ApplyImportantData(User selectedUser)
     {
-        this.username = username;
-        this.controller = controller;
-        
-        
+        this.user = selectedUser;
+        loginTextField.setText(selectedUser + "");
     }
 
     /**
@@ -611,12 +610,12 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
-        
+
 //        String projektNavn = selectedTask.getProjektNavn();
         try
         {
 
-            if(model.updateTask(selectedTask) == true)
+            if (model.updateTask(selectedTask) == true)
             {
                 selectedTask.setBrugtTid(nyBrugtTid);
                 model.updateProjectTime();

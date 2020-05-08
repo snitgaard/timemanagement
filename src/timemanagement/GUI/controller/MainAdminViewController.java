@@ -69,8 +69,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Kunde, Long> clientHourlyRateColumn;
     @FXML
-    private TableColumn<Kunde, String> clientProjektNavn;
-    @FXML
     private JFXButton timeLoggerButton;
     @FXML
     private JFXButton opgaverButton;
@@ -178,6 +176,20 @@ public class MainAdminViewController implements Initializable
     private String username;
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
     ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+    @FXML
+    private JFXButton clientButton;
+    @FXML
+    private TableView<Kunde> clientTableView;
+    @FXML
+    private JFXTextField txt_Contact;
+    @FXML
+    private JFXTextField txt_Email;
+    @FXML
+    private JFXTextField txt_Client;
+    @FXML
+    private SplitPane clientPane;
+    @FXML
+    private JFXTextField txt_HourlyRate;
 
     /**
      * Initializes the controller class.
@@ -240,6 +252,10 @@ public class MainAdminViewController implements Initializable
         {
             opretBrugerPane.toFront();
         }
+        if (actionEvent.getSource() == clientButton)
+        {
+            clientPane.toFront();
+        }
     }
 
     /**
@@ -250,6 +266,7 @@ public class MainAdminViewController implements Initializable
         analyseButton.setVisible(true);
         projekterButton.setVisible(true);
         opretBrugerButton.setVisible(true);
+        clientButton.setVisible(true);
     }
 
     /**
@@ -286,6 +303,11 @@ public class MainAdminViewController implements Initializable
         //User & Admin views
         fillUserAdminViews();
     }
+    
+    private void fillClientView()
+    {
+    }
+    
 
     private void fillUserAdminViews() throws ModelException
     {
@@ -757,6 +779,11 @@ public class MainAdminViewController implements Initializable
             model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
             projectData();
         }
+    }
+
+    @FXML
+    private void handleCreateClient(ActionEvent event)
+    {
     }
 
 }

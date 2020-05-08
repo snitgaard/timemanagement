@@ -650,26 +650,29 @@ public class MainAdminViewController implements Initializable
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        Project selectedProject = null;
         int gammelBrugtTid = selectedTask.getBrugtTid();
         int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
-        List<Project> allProjects = model.getAllProjects();
 
 //        String projektNavn = selectedTask.getProjektNavn();
         try
         {
 
-                model.updateTask(selectedTask);
-                selectedTask.setBrugtTid(nyBrugtTid);
-            
-            
-            for (Project projects : allProjects) {
-                    if (projects.getId() == selectedTask.getProjektId())
+            selectedTask.setBrugtTid(nyBrugtTid);    
+            model.updateTask(selectedTask);
+                
+                
+                for (int i = 0; i < projekterTableView.getItems().size(); i++) {
+                    if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
                     {
-                        projects.setBrugtTid(projects.getBrugtTid() + (nyBrugtTid - gammelBrugtTid));
-                        model.updateProjectTime(projects);
-                        
+                        selectedProject = projekterTableView.getItems().get(i);
+                        selectedProject.setBrugtTidMinutter(selectedProject.getBrugtTid() + (nyBrugtTid - gammelBrugtTid));
+                        model.updateProjectTime(selectedProject);
                     }
+                
             }
+            
+            
         
         } catch (ModelException ex)
         {

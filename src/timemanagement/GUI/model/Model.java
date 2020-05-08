@@ -381,7 +381,6 @@ public class Model
 
     public ObservableList<Kunde> getAllKunder() throws ModelException
     {
-        allKunder.clear();
         try
         {
             allKunder = FXCollections.observableArrayList();
@@ -391,14 +390,5 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
         return allKunder;
-    }
-    
-    public List<Kunde> getAllKunder() throws ModelException
-    {
-        try {
-            return bllManager.getAllKunder();
-        } catch (bllException ex) {
-            throw new ModelException(ex.getMessage());
-        }
     }
 }

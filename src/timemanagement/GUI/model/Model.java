@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BLL.bllManager;
@@ -338,4 +339,12 @@ public class Model
         }
     }
     
+    public List<Kunde> getAllKunder() throws ModelException
+    {
+        try {
+            return bllManager.getAllKunder();
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 }

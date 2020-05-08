@@ -269,9 +269,9 @@ public class Model
         return allUsers;
     }
 
-    public void updateProjectTime() throws ModelException {
+    public void updateProjectTime(Project project) throws ModelException {
         try {
-            bllManager.updateProjectTime();
+            bllManager.updateProjectTime(project);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

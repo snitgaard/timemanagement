@@ -426,7 +426,7 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.updateProjectTime();
+//            model.updateProjectTime();
             opgaveData();
 //            opgaverTableView.setItems(model.refreshTasks());
 //            projekterTableView.setItems(model.refreshProjects());
@@ -609,17 +609,27 @@ public class MainAdminViewController implements Initializable
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        int gammelBrugtTid = selectedTask.getBrugtTid();
         int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
+        List<Project> allProjects = model.getAllProjects();
 
 //        String projektNavn = selectedTask.getProjektNavn();
         try
         {
 
-            if (model.updateTask(selectedTask) == true)
-            {
+                model.updateTask(selectedTask);
                 selectedTask.setBrugtTid(nyBrugtTid);
-                model.updateProjectTime();
+            
+            
+            for (Project projects : allProjects) {
+                    if (projects.getId() == selectedTask.getProjektId())
+                    {
+                        projects.setBrugtTid(projects.getBrugtTid() + (nyBrugtTid - gammelBrugtTid));
+                        model.updateProjectTime(projects);
+                        
+                    }
             }
+        
         } catch (ModelException ex)
         {
             System.out.println("yikes");

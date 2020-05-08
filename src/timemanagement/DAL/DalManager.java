@@ -187,8 +187,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void updateProjectTime() throws DalException {
-        projectDAO.updateProjectTime();
+    public void updateProjectTime(Project project) throws DalException {
+        projectDAO.updateProjectTime(project);
     }
 
     @Override

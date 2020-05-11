@@ -17,6 +17,7 @@ import timemanagement.BE.Task;
 import timemanagement.BLL.bllManager;
 import timemanagement.BE.User;
 import timemanagement.BLL.bllException;
+import timemanagement.DAL.DalException;
 
 /**
  *
@@ -225,17 +226,6 @@ public class Model
         }
     }
 
-    public boolean createKunde(String kundeNavn) throws ModelException
-    {
-        try
-        {
-            return bllManager.createKunde(kundeNavn);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
-
     public int getKundeId(String kundeNavn) throws ModelException
     {
         try
@@ -391,4 +381,16 @@ public class Model
         }
         return allKunder;
     }
+    
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws ModelException
+    {
+        try
+        {
+            return bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
 }

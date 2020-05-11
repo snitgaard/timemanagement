@@ -100,35 +100,6 @@
                   </AnchorPane>
               </items>
             </SplitPane>
-            <SplitPane fx:id="clientPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <TableView fx:id="clientTableView" layoutY="221.0" prefHeight="369.0" prefWidth="717.0">
-                          <columns>
-                            <TableColumn fx:id="clientNameColumn" prefWidth="190.0" text="Client name" />
-                            <TableColumn fx:id="clientContactColumn" prefWidth="177.0" text="Contact person" />
-                              <TableColumn fx:id="clientEmailColumn" prefWidth="184.0" text="Email" />
-                              <TableColumn fx:id="clientHourlyRateColumn" prefWidth="165.0" text="Hourly rate" />
-                          </columns>
-                        </TableView>
-                        <JFXTextField fx:id="txt_Contact" layoutX="102.0" layoutY="81.0" prefHeight="25.0" prefWidth="202.0" />
-                        <JFXTextField fx:id="txt_Email" layoutX="102.0" layoutY="121.0" prefHeight="25.0" prefWidth="202.0" />
-                        <JFXTextField fx:id="txt_HourlyRate" layoutX="102.0" layoutY="157.0" prefHeight="25.0" prefWidth="202.0" />
-                        <JFXTextField fx:id="txt_Client" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="202.0" />
-                        <Label layoutX="20.0" layoutY="93.0" prefHeight="17.0" prefWidth="60.0" text="Contact" />
-                        <Label layoutX="20.0" layoutY="125.0" prefHeight="17.0" prefWidth="60.0" text="Email" />
-                        <Label layoutX="20.0" layoutY="161.0" prefHeight="17.0" prefWidth="60.0" text="Hourly rate" />
-                        <Label layoutX="20.0" layoutY="54.0" prefHeight="17.0" prefWidth="60.0" text="Client" />
-                        <JFXButton layoutX="330.0" layoutY="182.0" onAction="#handleCreateClient" style="-fx-border-color: grey;" text="Create client">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
             <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -323,6 +294,35 @@
                      </children>
                   </AnchorPane>
                </items>
+            </SplitPane>
+            <SplitPane fx:id="clientPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView fx:id="clientTableView" layoutY="221.0" prefHeight="369.0" prefWidth="717.0">
+                          <columns>
+                            <TableColumn fx:id="clientNameColumn" prefWidth="190.0" text="Client name" />
+                            <TableColumn fx:id="clientContactColumn" prefWidth="177.0" text="Contact person" />
+                              <TableColumn fx:id="clientEmailColumn" prefWidth="184.0" text="Email" />
+                              <TableColumn fx:id="clientHourlyRateColumn" prefWidth="165.0" text="Hourly rate" />
+                          </columns>
+                        </TableView>
+                        <JFXTextField fx:id="txt_Contact" layoutX="102.0" layoutY="81.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_Email" layoutX="102.0" layoutY="121.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_ClientHourlyRate" layoutX="102.0" layoutY="157.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_Client" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="202.0" />
+                        <Label layoutX="20.0" layoutY="93.0" prefHeight="17.0" prefWidth="60.0" text="Contact" />
+                        <Label layoutX="20.0" layoutY="125.0" prefHeight="17.0" prefWidth="60.0" text="Email" />
+                        <Label layoutX="20.0" layoutY="161.0" prefHeight="17.0" prefWidth="60.0" text="Hourly rate" />
+                        <Label layoutX="20.0" layoutY="54.0" prefHeight="17.0" prefWidth="60.0" text="Client" />
+                        <JFXButton layoutX="330.0" layoutY="182.0" onAction="#handleCreateClient" style="-fx-border-color: grey;" text="Create client">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+              </items>
             </SplitPane>
          </children>
       </StackPane>

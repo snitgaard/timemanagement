@@ -20,10 +20,13 @@ import timemanagement.DAL.DalException;
  *
  * @author The Cowboys
  */
-public class KundeDAO {
+public class KundeDAO
+{
+
     private DatabaseConnector dbCon;
 
-    public KundeDAO() throws IOException {
+    public KundeDAO() throws IOException
+    {
         dbCon = new DatabaseConnector();
     }
 
@@ -33,13 +36,16 @@ public class KundeDAO {
      * @return
      * @throws SQLException
      */
-    public List<Kunde> getAllKunder() throws SQLException {
-        try ( Connection con = dbCon.getConnection()) {
+    public List<Kunde> getAllKunder() throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "SELECT * FROM Kunde;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Kunde> allKunder = new ArrayList<>();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 int id = rs.getInt("Id");
                 String kundeNavn = rs.getString("kundeNavn");
                 String kontaktPerson = rs.getString("kontaktPerson");
@@ -58,17 +64,21 @@ public class KundeDAO {
      * @param user
      * @throws DalException
      */
-    public void deleteKunde(Kunde kunde) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public void deleteKunde(Kunde kunde) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             int id = kunde.getId();
             String sql = "DELETE FROM Kunde WHERE id=?;";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, id);
             int affectedRows = ps.executeUpdate();
-            if (affectedRows != 1) {
+            if (affectedRows != 1)
+            {
                 throw new DalException("Could not delete User");
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
             throw new DalException("Could not delete User");
         }
@@ -80,54 +90,68 @@ public class KundeDAO {
      * @return
      * @throws DalException
      */
-    public boolean createKunde(String kundeNavn) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Kunde (kundeNavn) VALUES (?);";
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "INSERT INTO Kunde (kundeNavn, kontaktPerson, email, hourlyRate) VALUES (?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, kundeNavn);
+            ps.setString(2, kontaktPerson);
+            ps.setString(3, email);
+            ps.setDouble(4, hourlyRate);
             int affectedRows = ps.executeUpdate();
 
-            if (affectedRows == 1) {
+            if (affectedRows == 1)
+            {
                 ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    return true;
+                if (rs.next())
+                {
+                    int id = rs.getInt(1);
+                    Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate);
+                    return kunde;
                 }
             }
 
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
-            throw new DalException("Could not create User");
+            throw new DalException("Could not create Client");
         }
-        return false;
+        return null;
     }
-    
+
     /**
      * If called this method will create a connection between the database and
-     * the program. The SQL statement will be run afterwards. 
-     * using the name of a customer, this method will get the id.
-     * 
+     * the program. The SQL statement will be run afterwards. using the name of
+     * a customer, this method will get the id.
+     *
      * @param kundeNavn
      * @return kundeId
      * @throws DalException
      */
-    public int getKundeId(String kundeNavn) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public int getKundeId(String kundeNavn) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
 
             String sql = "SELECT * FROM Kunde WHERE kundeNavn = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, kundeNavn);
             ResultSet rs = ps.executeQuery();
             int kundeId = 0;
-            while (rs.next()) {
+            while (rs.next())
+            {
                 kundeId = rs.getInt("id");
 
             }
             return kundeId;
 
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             System.out.println(ex);
             throw new DalException("Could not get user");
         }
     }
-    
+
 }

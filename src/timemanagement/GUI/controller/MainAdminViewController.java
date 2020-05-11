@@ -33,6 +33,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -121,7 +122,6 @@ public class MainAdminViewController implements Initializable
     private JFXComboBox<String> projektComboBox2;
     @FXML
     private JFXTextField txt_projektNavn;
-    @FXML
     private JFXTextField txt_kundeNavn;
     @FXML
     private JFXButton btn_start;
@@ -187,8 +187,11 @@ public class MainAdminViewController implements Initializable
     @FXML
     private SplitPane clientPane;
     private JFXTextField txt_HourlyRate;
+    ListView<String> onGoing = new ListView<>();
     @FXML
     private JFXTextField txt_ClientHourlyRate;
+    @FXML
+    private JFXComboBox<?> clientComboBox;
 
     /**
      * Initializes the controller class.
@@ -209,6 +212,7 @@ public class MainAdminViewController implements Initializable
 
 //            projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
+            fillChart();
 
         } catch (ModelException ex)
         {
@@ -795,5 +799,26 @@ public class MainAdminViewController implements Initializable
         model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
         
     }
+    
+    
+    private void fillChart() throws ModelException
+    {       
+        int number = -1;
+        
+        for (Project allProject : model.getAllProjects())        
+        {
+            try {
+                number = number + 1;
+                model.getAllProjects().get(number);
+                System.out.println(model.getAllProjects().get(number));
+                
+                
+            } catch (ModelException ex) {
+                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+            
+        }
 
+    
 }

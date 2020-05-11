@@ -121,7 +121,6 @@ public class MainAdminViewController implements Initializable
     private JFXComboBox<String> projektComboBox2;
     @FXML
     private JFXTextField txt_projektNavn;
-    @FXML
     private JFXTextField txt_kundeNavn;
     @FXML
     private JFXButton btn_start;
@@ -189,6 +188,8 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_HourlyRate;
     @FXML
     private JFXTextField txt_ClientHourlyRate;
+    @FXML
+    private JFXComboBox<?> clientComboBox;
 
     /**
      * Initializes the controller class.

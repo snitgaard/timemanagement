@@ -55,7 +55,7 @@ public interface DalFacade {
     
     List<User> getAllUsers() throws DalException;
     
-    void updateProjectTime() throws DalException;
+    void updateProjectTime(Project project) throws DalException;
     
     boolean updateTask(Task task) throws DalException;
     

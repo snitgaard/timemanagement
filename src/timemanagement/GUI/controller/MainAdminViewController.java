@@ -455,10 +455,8 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
-            model.updateProjectTime();
+//            model.updateProjectTime();
             opgaveData();
-//            opgaverTableView.setItems(model.refreshTasks());
-//            projekterTableView.setItems(model.refreshProjects());
 
         } catch (Exception e)
         {
@@ -651,17 +649,30 @@ public class MainAdminViewController implements Initializable
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        Project selectedProject = null;
+        int gammelBrugtTid = selectedTask.getBrugtTid();
         int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
 
 //        String projektNavn = selectedTask.getProjektNavn();
         try
         {
 
-            if (model.updateTask(selectedTask) == true)
-            {
-                selectedTask.setBrugtTid(nyBrugtTid);
-                model.updateProjectTime();
+            selectedTask.setBrugtTid(nyBrugtTid);    
+            model.updateTask(selectedTask);
+                
+                
+                for (int i = 0; i < projekterTableView.getItems().size(); i++) {
+                    if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
+                    {
+                        selectedProject = projekterTableView.getItems().get(i);
+                        selectedProject.setBrugtTidMinutter(selectedProject.getBrugtTid() + (nyBrugtTid - gammelBrugtTid));
+                        model.updateProjectTime(selectedProject);
+                    }
+                
             }
+            
+            
+        
         } catch (ModelException ex)
         {
             System.out.println("yikes");

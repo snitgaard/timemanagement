@@ -55,7 +55,7 @@ public interface bllFacade
 
     List<User> getAllUsers() throws bllException;
     
-    void updateProjectTime() throws bllException;
+    void updateProjectTime(Project project) throws bllException;
     
     boolean updateTask(Task task) throws bllException;
     

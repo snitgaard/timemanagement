@@ -47,7 +47,7 @@ public interface bllFacade
     
     User createUserAdmin(String userLogin, String userPassword, int isAdmin) throws bllException;
 
-    boolean createKunde(String kundeNavn) throws bllException;
+    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws bllException;
 
     List<Kunde> getAllKunder() throws bllException;
     

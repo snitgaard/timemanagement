@@ -151,13 +151,6 @@ public class DalManager implements DalFacade
         return userDAO.createUserAdmin(userLogin, userPassword, isAdmin);
     }   
     
-    
-    @Override
-    public boolean createKunde(String kundeNavn) throws DalException
-    {
-        return kundeDAO.createKunde(kundeNavn);
-    }
-    
     @Override
     public int getKundeId(String kundeNavn) throws DalException
     {
@@ -236,6 +229,12 @@ public class DalManager implements DalFacade
         {
             throw new DalException(ex.getMessage());
         }
+    }
+
+    @Override
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws DalException
+    {
+        return kundeDAO.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
     }
  
 }

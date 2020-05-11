@@ -800,12 +800,20 @@ public class MainAdminViewController implements Initializable
     
     private void fillChart() throws ModelException
     {       
-        System.out.println(model.getAllProjects());
+        int number = -1;
         
-        model.getAllProjects().forEach((project) ->
+        for (Project allProject : model.getAllProjects())        
         {
-            System.out.println("tilt123");
-        });
+            try {
+                number = number + 1;
+                model.getAllProjects().get(number);
+                System.out.println(model.getAllProjects().get(number));
+                
+                
+            } catch (ModelException ex) {
+                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
             
         }
 

@@ -186,8 +186,9 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_Client;
     @FXML
     private SplitPane clientPane;
-    @FXML
     private JFXTextField txt_HourlyRate;
+    @FXML
+    private JFXTextField txt_ClientHourlyRate;
 
     /**
      * Initializes the controller class.
@@ -619,10 +620,10 @@ public class MainAdminViewController implements Initializable
                 return;
             }
         }
-        if (model.createKunde(txt_kundeNavn.getText()) == true)
-        {
-            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0, txt_kundeNavn.getText());
-        }
+//        if (model.createKunde(txt_kundeNavn.getText()) == true)
+//        {
+//            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0, txt_kundeNavn.getText());
+//        }
     }
 
     @FXML
@@ -781,8 +782,15 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleCreateClient(ActionEvent event)
+    private void handleCreateClient(ActionEvent event) throws ModelException
     {
+        String kundeNavn = txt_Client.getText();
+        String contactPerson = txt_Contact.getText();
+        String email = txt_Email.getText();   
+        Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
+        
+        model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
+        
     }
 
 }

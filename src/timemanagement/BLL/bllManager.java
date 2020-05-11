@@ -181,18 +181,7 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
-    
-    @Override
-    public boolean createKunde(String kundeNavn) throws bllException
-    {
-        try
-        {
-            return dalFacade.createKunde(kundeNavn);
-        } catch (DalException ex) {
-            throw new bllException(ex.getMessage());
-        }
-    }
-    
+
     @Override
     public int getKundeId(String kundeNavn) throws bllException
     {
@@ -303,6 +292,18 @@ public class bllManager implements bllFacade {
         try
         {
             return dalFacade.getAllKunder();
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws bllException
+    {
+        try
+        {
+            return dalFacade.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());

@@ -202,7 +202,6 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
-            fillChart();
             timeLoggerPane.toFront();
 
             model = model.getInstance();
@@ -213,6 +212,7 @@ public class MainAdminViewController implements Initializable
 
 //            projekterTableView.setItems(model.getProjectKundeNavn());
             fillColumns();
+            fillChart();
 
         } catch (ModelException ex)
         {
@@ -800,6 +800,14 @@ public class MainAdminViewController implements Initializable
     
     private void fillChart() throws ModelException
     {       
-    }
+        System.out.println(model.getAllProjects());
+        
+        model.getAllProjects().forEach((project) ->
+        {
+            System.out.println("tilt123");
+        });
+            
+        }
+
     
 }

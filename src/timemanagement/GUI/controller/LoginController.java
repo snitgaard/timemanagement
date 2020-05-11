@@ -14,6 +14,8 @@ import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -59,6 +61,8 @@ public class LoginController implements Initializable {
     private Model model;
     private User selectedUser;
 
+    private ExecutorService executor;
+    private Runnable fillChart;
 
     private double xOffset = 0;
     private double yOffset = 0;
@@ -108,6 +112,8 @@ public class LoginController implements Initializable {
             // Here the StudentAttendanceController is given important data objects,
             // This secures that it is the correct ones we are working with.
             mainAdminController.ApplyImportantData(model.getSpecificUser(username));
+            executor = Executors.newSingleThreadExecutor();
+            executor.submit(fillChart);
 
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();

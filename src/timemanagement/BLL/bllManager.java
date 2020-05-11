@@ -274,11 +274,11 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public boolean editTask(Task task) throws bllException
+    public void editTask(Task task) throws bllException
     {
         try
         {
-            return dalFacade.editTask(task);
+            dalFacade.editTask(task);
         }
         catch (DalException ex)
         {

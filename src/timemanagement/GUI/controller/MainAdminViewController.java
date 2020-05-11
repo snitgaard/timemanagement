@@ -761,6 +761,7 @@ public class MainAdminViewController implements Initializable
     {
         
         Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
+        opgaveComboBox.getItems().remove(selectedTask);
         
         if (betaltCheckBox.isSelected() == true)
         {
@@ -778,6 +779,8 @@ public class MainAdminViewController implements Initializable
             selectedTask.setBetalt(betalt);
             model.editTask(selectedTask);
         }
+        
+        opgaveComboBox.getItems().add(selectedTask);
     }
 
     @FXML

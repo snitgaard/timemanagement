@@ -212,23 +212,21 @@ public class TaskDAO
         }
     }
     
-    public boolean editTask(Task task)
+    public void editTask(Task task)
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE opgaveNavn = ?;";
+            int id = task.getId();
+            String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, task.getOpgaveNavn());
             ps.setString(2, task.getBeskrivelse());
             ps.setInt(3, task.getBetalt());
-            ps.setString(4, task.getOpgaveNavn());
             ps.executeUpdate();
-            return true;
         } 
         catch (SQLException ex)
         {
             ex.printStackTrace();
-            return false;
         }
     }
 }

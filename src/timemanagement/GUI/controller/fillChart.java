@@ -5,57 +5,73 @@
  */
 package timemanagement.GUI.controller;
 
+import java.lang.System.Logger;
+import java.lang.System.Logger.Level;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.concurrent.TimeUnit;
+import javafx.application.Platform;
+import timemanagement.BE.Project;
 import timemanagement.gui.model.Model;
-
+import timemanagement.gui.model.ModelException;
 
 /**
  *
  * @author The Cowboys
  */
-public class fillChart implements Runnable {
+public class fillChart implements Runnable
+{
 
     private Model model;
     private final long DELAY = 1;
     private int index = 0;
-    
+
     public void initialize(URL url, ResourceBundle rb)
     {
         model = model.getInstance();
     }
-    
-    @Override
-    public void run() {
 
-        try {
-            
-            while (!Thread.currentThread().isInterrupted()) {
-                Platform.runLater(()
-                        -> {
-                    
+    @Override
+    public void run()
+    {
+
+        while (!Thread.currentThread().isInterrupted())
+        {
+            Platform.runLater(()
+                    ->
+            {
                 
-                        int number = -1;
-                        long DELAY = 1;
-                        int index = 0;
-                    for (Project allProject : model.getAllProjects()) {
-                        try {
+                int number = -1;
+                try
+                {
+                    for (Project allProject : model.getAllProjects())
+                    {
+                        try
+                        {
                             number = number + 1;
                             model.getAllProjects().get(number);
                             System.out.println(model.getAllProjects().get(number));
-
-                        } catch (ModelException ex) {
-                            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                            
+                        } catch (ModelException ex)
+                        {
+                            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.ERROR, null, ex);
                         }
                     }
-                    
-                    index = (index + 1) % images.size();
+                } catch (ModelException ex)
+                {
+                    java.util.logging.Logger.getLogger(fillChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+                
+                try
+                {
                     TimeUnit.SECONDS.sleep(DELAY);
-                });
-                        }
-            }catch (InterruptedException ex)
-            {
-                System.out.println(ex);
-            }  
+                } catch (InterruptedException ex)
+                {
+                    java.util.logging.Logger.getLogger(fillChart.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            });
+        }
     }
 }
+
+

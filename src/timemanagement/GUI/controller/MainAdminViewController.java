@@ -33,6 +33,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
@@ -188,6 +189,7 @@ public class MainAdminViewController implements Initializable
     private SplitPane clientPane;
     @FXML
     private JFXTextField txt_HourlyRate;
+    ListView<String> onGoing = new ListView<>();
 
     /**
      * Initializes the controller class.
@@ -198,6 +200,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
+            fillChart();
             timeLoggerPane.toFront();
 
             model = model.getInstance();
@@ -802,5 +805,11 @@ public class MainAdminViewController implements Initializable
     private void handleCreateClient(ActionEvent event)
     {
     }
-
+    
+    
+    private void fillChart() throws ModelException
+    {       
+        System.out.println(model.getAllTasksProjektNavn());
+    }
+    
 }

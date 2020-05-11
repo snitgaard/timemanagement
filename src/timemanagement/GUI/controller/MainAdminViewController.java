@@ -87,7 +87,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Task, String> projektNavnColumn;
     @FXML
-    private TableColumn<Task, Integer> brugtTidColumn;
+    private TableColumn<Task, Long> brugtTidColumn;
     @FXML
     private TableColumn<Task, String> datoColumn;
     @FXML
@@ -591,17 +591,20 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void createOpgave(ActionEvent event) throws ModelException
     {
-//       int projektId = Integer.parseInt(sagsNrField.getText());
-//        if (betaltCheckBox.isSelected() == true)
-//        {
-//            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1);
-//        } else
-//        {
-//            model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0);
-//        }
-//        projectData();
+       int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
+       Task selectedTask = null;
+       
+        if (betaltCheckBox.isSelected() == true)
+        {
+            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn());
+        } else
+        {
+            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn());
+        }
+        
+        opgaveComboBox.getItems().add(selectedTask);
+        
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
-//        fillColumns();
     }
 
     @FXML
@@ -632,7 +635,7 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
-        int gammelBrugtTid = selectedTask.getBrugtTid();
+        long gammelBrugtTid = selectedTask.getBrugtTid();
         int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
 
 //        String projektNavn = selectedTask.getProjektNavn();

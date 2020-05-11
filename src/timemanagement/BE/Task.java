@@ -6,7 +6,9 @@
 package timemanagement.BE;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.LongProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -21,7 +23,7 @@ public class Task
     private StringProperty opgaveNavn;
     private StringProperty projektNavn;
     private IntegerProperty projektId;
-    private IntegerProperty brugtTid;
+    private LongProperty brugtTid;
     private StringProperty dato;
     private StringProperty beskrivelse;
     private IntegerProperty betalt;
@@ -34,15 +36,16 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, int projektId, int brugtTid, String dato, String beskrivelse, int betalt)
+    public Task(int id, String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn)
     {
         this.id = id;
         this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
         this.projektId = new SimpleIntegerProperty(projektId);
-        this.brugtTid = new SimpleIntegerProperty(brugtTid);
+        this.brugtTid = new SimpleLongProperty(brugtTid);
         this.dato = new SimpleStringProperty(dato);
         this.beskrivelse = new SimpleStringProperty(beskrivelse);
         this.betalt = new SimpleIntegerProperty(betalt);
+        this.projektNavn = new SimpleStringProperty(projektNavn);
     }
 
     /**
@@ -53,12 +56,12 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, String projektNavn,  int brugtTid, String dato, int projektId)
+    public Task(int id, String opgaveNavn, String projektNavn, long brugtTid, String dato, int projektId)
     {
         this.id = id;
         this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
         this.projektNavn = new SimpleStringProperty(projektNavn);
-        this.brugtTid = new SimpleIntegerProperty(brugtTid);
+        this.brugtTid = new SimpleLongProperty(brugtTid);
         this.dato = new SimpleStringProperty(dato);
         this.projektId = new SimpleIntegerProperty(projektId);
     }
@@ -153,7 +156,7 @@ public class Task
      * getter for brugtTid
      * @return brugtTid
      */
-    public int getBrugtTid()
+    public long getBrugtTid()
     {
         return brugtTid.get();
     }
@@ -167,7 +170,7 @@ public class Task
         this.brugtTid.set(brugtTid);
     }
     
-    public ObservableValue<Integer> brugtTidObservableValue()
+    public ObservableValue<Long> brugtTidObservableValue()
     {
         return brugtTid.asObject();
     }

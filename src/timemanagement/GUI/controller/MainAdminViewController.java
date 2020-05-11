@@ -189,7 +189,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_ClientHourlyRate;
     @FXML
-    private JFXComboBox<?> clientComboBox;
+    private JFXComboBox<Kunde> clientComboBox;
 
     /**
      * Initializes the controller class.
@@ -303,11 +303,11 @@ public class MainAdminViewController implements Initializable
 
         //User & Admin views
         fillUserAdminViews();
-        
+
         //Client view
         fillClientView();
     }
-    
+
     private void fillClientView() throws ModelException
     {
         clientTableView.setItems(model.getAllKunder());
@@ -316,7 +316,6 @@ public class MainAdminViewController implements Initializable
         clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
     }
-    
 
     private void fillUserAdminViews() throws ModelException
     {
@@ -328,6 +327,7 @@ public class MainAdminViewController implements Initializable
 
     private void setProjectTable() throws ModelException
     {
+        clientComboBox.setItems(model.getAllKunder());
         List<Project> allProjectsList = model.getProjectKundeNavn();
         ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
         allProjectsFilteredList.clear();
@@ -335,8 +335,6 @@ public class MainAdminViewController implements Initializable
         int brugtTidMinutter = 0;
         for (Project project1 : allProjectsList)
         {
-
-            project1.setBrugtTidMinutter(project1.getBrugtTid());
 
             if (project1.getOngoing() == 1)
             {
@@ -359,7 +357,7 @@ public class MainAdminViewController implements Initializable
 
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
-        brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidMinutter());
+        brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());
     }
 
     /**
@@ -608,23 +606,18 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-                List<Kunde> tempKundeList = new ArrayList<>();
-        tempKundeList.addAll(model.getAllKunder());
-
-        
-        for (int i = 0; i < tempKundeList.size(); i++) {
-            if (tempKundeList.get(i).toString().trim().equalsIgnoreCase(txt_kundeNavn.getText()))
-            {
-                Alert alert = new Alert(Alert.AlertType.WARNING, "Name already exists noob", ButtonType.OK);
-                alert.showAndWait();
-                System.out.println("well");
-                return;
-            }
+        Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
+        System.out.println(txt_projektNavn.getText());
+        System.out.println(model.getKundeId(selectedClient.getKundeNavn()));
+        System.out.println(selectedClient.getKundeNavn());
+        if (txt_projektNavn.getText().isEmpty() || clientComboBox == null)
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not create project. Please fill out both Project name and select a client.", ButtonType.OK);
+            alert.showAndWait();
+        } else
+        {
+            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn());
         }
-//        if (model.createKunde(txt_kundeNavn.getText()) == true)
-//        {
-//            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(txt_kundeNavn.getText()), LocalDate.now().toString(), 0, 1, 0, txt_kundeNavn.getText());
-//        }
     }
 
     @FXML
@@ -640,22 +633,19 @@ public class MainAdminViewController implements Initializable
         try
         {
 
-            selectedTask.setBrugtTid(nyBrugtTid);    
+            selectedTask.setBrugtTid(nyBrugtTid);
             model.updateTask(selectedTask);
-                
-                
-                for (int i = 0; i < projekterTableView.getItems().size(); i++) {
-                    if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
-                    {
-                        selectedProject = projekterTableView.getItems().get(i);
-                        selectedProject.setBrugtTidMinutter(selectedProject.getBrugtTid() + (nyBrugtTid - gammelBrugtTid));
-                        model.updateProjectTime(selectedProject);
-                    }
-                
+
+            for (int i = 0; i < projekterTableView.getItems().size(); i++)
+            {
+                if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
+                {
+                    selectedProject = projekterTableView.getItems().get(i);
+                    model.updateProjectTime(selectedProject);
+                }
+
             }
-            
-            
-        
+
         } catch (ModelException ex)
         {
             System.out.println("yikes");
@@ -787,11 +777,11 @@ public class MainAdminViewController implements Initializable
     {
         String kundeNavn = txt_Client.getText();
         String contactPerson = txt_Contact.getText();
-        String email = txt_Email.getText();   
+        String email = txt_Email.getText();
         Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-        
+
         model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
-        
+
     }
 
 }

@@ -49,9 +49,8 @@ public class ProjectDAO {
                 String startDato = rs.getString("startDato");
                 int brugtTid = rs.getInt("brugtTid");
                 int ongoing = rs.getInt("ongoing");
-                int brugtTidMinutter = 0;
                 String kundeNavn = "";
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
                 allProjects.add(project);
             }
             return allProjects;
@@ -90,7 +89,7 @@ public class ProjectDAO {
      * @return
      * @throws DalException
      */
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) throws DalException {
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, ongoing) VALUES (?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -105,7 +104,7 @@ public class ProjectDAO {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, brugtTidMinutter, kundeNavn);
+                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
                     return project;
                 }
             }
@@ -131,9 +130,7 @@ public class ProjectDAO {
                 String startDato = rs.getString("startDato");
                 long brugtTid = rs.getLong("brugtTid");
                 int ongoing = rs.getInt("ongoing");
-                long brugtTidMinutter = 0;
-                Project project = new Project(id, projektNavn, kundeNavn, brugtTid, startDato, ongoing, brugtTidMinutter);
-                project.setBrugtTidMinutter(project.getBrugtTid());
+                Project project = new Project(id, projektNavn, kundeNavn, brugtTid, startDato, ongoing);
                 allProjects.add(project);
             }
             return allProjects;

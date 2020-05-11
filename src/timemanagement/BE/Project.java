@@ -36,14 +36,13 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, long brugtTidMinutter, String kundeNavn) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeId = new SimpleIntegerProperty(kundeId);
         this.startDato = new SimpleStringProperty(startDato);
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.ongoing = new SimpleIntegerProperty(ongoing);
-        this.brugtTidMinutter = new SimpleLongProperty(brugtTidMinutter);
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
     }
 
@@ -55,7 +54,7 @@ public class Project {
      * @param kundeNavn
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int ongoing, long brugtTidMinutter)
+    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int ongoing)
     {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
@@ -63,7 +62,6 @@ public class Project {
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.startDato = new SimpleStringProperty(startDato);
         this.ongoing = new SimpleIntegerProperty(ongoing);
-        this.brugtTidMinutter = new SimpleLongProperty(brugtTidMinutter);
     }
     
     /**
@@ -198,26 +196,6 @@ public class Project {
     public ObservableValue<Integer> ongoingObservable()
     {
         return ongoing.asObject();
-    }
-
-    public long getBrugtTidMinutter() {
-        return brugtTidMinutter.get();
-    }
-    
-    /**
-     * getter for brugtTidMinutter
-     * @return brugtTidMinutter
-     */
-    public ObservableValue<Long> brugtTidMinutter() {
-        return brugtTidMinutter.asObject();
-    }
-
-    /**
-     * setter for brugtTidMinutter
-     * @param brugtTidMinutter 
-     */
-    public void setBrugtTidMinutter(long brugtTidMinutter) {
-        this.brugtTidMinutter.set(brugtTidMinutter);
     }
 
     /**

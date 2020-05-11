@@ -109,6 +109,14 @@ public class Kunde
     {
         return hourlyRate.asObject();
     }
+
+    @Override
+    public String toString()
+    {
+        return getKundeNavn();
+    }
+    
+    
     
     
 }

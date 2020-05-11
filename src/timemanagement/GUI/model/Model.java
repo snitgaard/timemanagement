@@ -264,10 +264,13 @@ public class Model
         return allUsers;
     }
 
-    public void updateProjectTime(Project project) throws ModelException {
-        try {
+    public void updateProjectTime(Project project) throws ModelException
+    {
+        try
+        {
             bllManager.updateProjectTime(project);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
 
@@ -352,16 +355,17 @@ public class Model
         }
         return allKunder;
     }
-    
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws ModelException
+
+    public void createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws ModelException
     {
         try
         {
-            return bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
+            Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
+            allKunder.add(kunde);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
 }

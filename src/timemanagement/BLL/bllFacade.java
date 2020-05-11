@@ -65,7 +65,7 @@ public interface bllFacade
     
     void archiveProject(Project project) throws bllException;
     
-    boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws bllException;
+    boolean editTask(Task task) throws bllException;
     
     void updateUserRoles(User user) throws bllException;
 }

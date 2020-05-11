@@ -212,16 +212,16 @@ public class TaskDAO
         }
     }
     
-    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel)
+    public boolean editTask(Task task)
     {
         try (Connection con = dbCon.getConnection())
         {
             String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE opgaveNavn = ?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, opgaveNavn);
-            ps.setString(2, beskrivelse);
-            ps.setInt(3, betalt);
-            ps.setString(4, opgaveTitel);
+            ps.setString(1, task.getOpgaveNavn());
+            ps.setString(2, task.getBeskrivelse());
+            ps.setInt(3, task.getBetalt());
+            ps.setString(4, task.getOpgaveNavn());
             ps.executeUpdate();
             return true;
         } 

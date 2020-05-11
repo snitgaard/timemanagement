@@ -149,12 +149,13 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public void createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws ModelException
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws ModelException
     {
         try
         {
             Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
             allProjectsMedKunde.add(project);
+            return project;
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -334,11 +335,11 @@ public class Model
         }
     }
 
-    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws ModelException
+    public void editTask(Task task) throws ModelException
     {
         try
         {
-            return bllManager.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
+            bllManager.editTask(task);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

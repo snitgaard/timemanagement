@@ -613,16 +613,17 @@ public class MainAdminViewController implements Initializable
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
         Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
-        System.out.println(txt_projektNavn.getText());
-        System.out.println(model.getKundeId(selectedClient.getKundeNavn()));
-        System.out.println(selectedClient.getKundeNavn());
+        
+        Project selectedProject = null;
+        
         if (txt_projektNavn.getText().isEmpty() || clientComboBox == null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING, "Could not create project. Please fill out both Project name and select a client.", ButtonType.OK);
             alert.showAndWait();
         } else
         {
-            model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn());
+            selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn());
+            projektComboBox.getItems().add(selectedProject);
         }
     }
 
@@ -758,23 +759,24 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleEditTask(ActionEvent event) throws ModelException
     {
+        
+        Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
+        
         if (betaltCheckBox.isSelected() == true)
         {
             int betalt = 1;
-            String selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn();
-            String opgaveTitel = titelField.getText();
-            String beskrivelse = beskrivelseTextArea.getText();
-            model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
-            projectData();
+            selectedTask.setOpgaveNavn(titelField.getText());
+            selectedTask.setBeskrivelse(beskrivelseTextArea.getText());
+            selectedTask.setBetalt(betalt);
+            model.editTask(selectedTask);
 
         } else if (betaltCheckBox.isSelected() == false)
         {
             int betalt = 0;
-            String selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn();
-            String opgaveTitel = titelField.getText();
-            String beskrivelse = beskrivelseTextArea.getText();
-            model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
-            projectData();
+            selectedTask.setOpgaveNavn(titelField.getText());
+            selectedTask.setBeskrivelse(beskrivelseTextArea.getText());
+            selectedTask.setBetalt(betalt);
+            model.editTask(selectedTask);
         }
     }
 

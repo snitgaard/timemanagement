@@ -214,9 +214,9 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public boolean editTask(String opgaveNavn, String beskrivelse, int betalt, String opgaveTitel) throws DalException
+    public boolean editTask(Task task) throws DalException
     {
-        return taskDAO.editTask(opgaveNavn, beskrivelse, betalt, opgaveTitel);
+        return taskDAO.editTask(task);
     }
 
     @Override

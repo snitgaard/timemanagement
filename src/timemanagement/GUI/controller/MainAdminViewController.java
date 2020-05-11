@@ -800,7 +800,6 @@ public class MainAdminViewController implements Initializable
     
     private void fillChart() throws ModelException
     {       
-        System.out.println(model.getAllTasksProjektNavn());
     }
     
 }

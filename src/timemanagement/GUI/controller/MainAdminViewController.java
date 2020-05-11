@@ -761,7 +761,16 @@ public class MainAdminViewController implements Initializable
     {
         
         Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
-        opgaveComboBox.getItems().remove(selectedTask);
+        Task selectedTaskTwo = null;
+        
+        for (int i = 0; i < opgaverTableView.getItems().size(); i++) {
+            
+            if (opgaverTableView.getItems().get(i).getId() == selectedTask.getId())
+            {
+                selectedTaskTwo = opgaverTableView.getItems().get(i);
+            }
+        }
+        
         
         if (betaltCheckBox.isSelected() == true)
         {
@@ -769,7 +778,11 @@ public class MainAdminViewController implements Initializable
             selectedTask.setOpgaveNavn(titelField.getText());
             selectedTask.setBeskrivelse(beskrivelseTextArea.getText());
             selectedTask.setBetalt(betalt);
+            selectedTaskTwo.setOpgaveNavn(titelField.getText());
             model.editTask(selectedTask);
+            opgaveComboBox.getItems().remove(selectedTask);
+            opgaveComboBox.getItems().add(selectedTask);
+            opgaveComboBox.setValue(selectedTask);
 
         } else if (betaltCheckBox.isSelected() == false)
         {
@@ -777,10 +790,14 @@ public class MainAdminViewController implements Initializable
             selectedTask.setOpgaveNavn(titelField.getText());
             selectedTask.setBeskrivelse(beskrivelseTextArea.getText());
             selectedTask.setBetalt(betalt);
+            selectedTaskTwo.setOpgaveNavn(titelField.getText());
             model.editTask(selectedTask);
+            opgaveComboBox.getItems().remove(selectedTask);
+            opgaveComboBox.getItems().add(selectedTask);
+            opgaveComboBox.setValue(selectedTask);
         }
         
-        opgaveComboBox.getItems().add(selectedTask);
+        
     }
 
     @FXML

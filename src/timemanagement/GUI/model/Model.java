@@ -201,11 +201,14 @@ public class Model
         }
     }
 
-    public boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws ModelException
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn) throws ModelException
     {
         try
         {
-            return bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt);
+            Task task = bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn);
+            allTasks.add(task);
+            allTasksByProject.add(task);
+            return task;
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

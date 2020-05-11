@@ -31,7 +31,7 @@ public interface DalFacade {
     
     void deleteTask(Task task) throws DalException;
     
-    boolean createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt) throws DalException;
+    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn) throws DalException;
     
     void addTime(long brugtTid, String opgaveNavn) throws DalException;
     

@@ -93,9 +93,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private SplitPane timeLoggerPane;
     @FXML
-    private JFXComboBox<String> projektComboBox;
+    private JFXComboBox<Project> projektComboBox;
     @FXML
-    private JFXComboBox<String> opgaveComboBox;
+    private JFXComboBox<Task> opgaveComboBox;
     @FXML
     private JFXTextField startTidField;
     @FXML
@@ -274,10 +274,11 @@ public class MainAdminViewController implements Initializable
      */
     private void setProjects() throws ModelException
     {
-        for (Project projects : model.getAllProjects())
-        {
-            projektComboBox.getItems().add(projects.getProjektNavn());
-        }
+        projektComboBox.setItems(model.getProjectKundeNavn());
+//        for (Project projects : model.getAllProjects())
+//        {
+//            projektComboBox.getItems().add(projects.ge);
+//        }
     }
 
     /**
@@ -453,7 +454,7 @@ public class MainAdminViewController implements Initializable
                 variableNumber = 1;
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
-            model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem());
+            model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 //            model.updateProjectTime();
             opgaveData();
 
@@ -496,19 +497,10 @@ public class MainAdminViewController implements Initializable
 
     private void projectData() throws ModelException
     {
-        List<Project> projectNames = model.getProjectKundeNavn();
-        List<Project> result = new ArrayList<>();
+        Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
 
-        for (Project projects : projectNames)
-        {
-            if (projects.getProjektNavn().equals(projektComboBox.getSelectionModel().getSelectedItem()))
-            {
-
-                result.add(projects);
-            }
-        }
-
-        kundeField.setText(result.get(0).getKundeNavn() + "");
+//        kundeField.setText(result.get(0).getKundeNavn() + "");
+        kundeField.setText(selectedProject.getKundeNavn());
 //        LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
 
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
@@ -529,9 +521,9 @@ public class MainAdminViewController implements Initializable
 
         opgaveComboBox.getItems().clear();
 
-        for (Task tasks : model.getAllTasksByProject(result.get(0).getId()))
+        for (Task tasks : model.getAllTasksByProject(selectedProject.getId()))
         {
-            opgaveComboBox.getItems().add(tasks.getOpgaveNavn());
+            opgaveComboBox.getItems().add(tasks);
         }
     }
 
@@ -547,29 +539,19 @@ public class MainAdminViewController implements Initializable
 
     private void opgaveData() throws ModelException
     {
-        List<Task> taskNames = model.getAllTasks();
-        List<Task> result = new ArrayList<>();
-
-        for (Task tasks : taskNames)
-        {
-            if (tasks.getOpgaveNavn().equals(opgaveComboBox.getSelectionModel().getSelectedItem()))
-            {
-
-                result.add(tasks);
-            }
-        }
+        Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
 
         if (opgaveComboBox.getSelectionModel().getSelectedItem() != null)
         {
-            titelField.setText(result.get(0).getOpgaveNavn());
+            titelField.setText(selectedTask.getOpgaveNavn());
 
 //            long hours = (result.get(0).getBrugtTid() - result.get(0).getBrugtTid() % 3600) / 3600;
 //            long minutes = (result.get(0).getBrugtTid() % 3600 - result.get(0).getBrugtTid() % 3600 % 60) / 60;
 //            long seconds = result.get(0).getBrugtTid() % 3600 % 60;
 //            NumberFormat f = new DecimalFormat("00");
-            beskrivelseTextArea.setText(result.get(0).getBeskrivelse());
+            beskrivelseTextArea.setText(selectedTask.getBeskrivelse());
 
-            if (result.get(0).getBetalt() == 1)
+            if (selectedTask.getBetalt() == 1)
             {
                 betaltCheckBox.setSelected(true);
             }
@@ -781,7 +763,7 @@ public class MainAdminViewController implements Initializable
         if (betaltCheckBox.isSelected() == true)
         {
             int betalt = 1;
-            String selectedTask = opgaveComboBox.getValue();
+            String selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn();
             String opgaveTitel = titelField.getText();
             String beskrivelse = beskrivelseTextArea.getText();
             model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);
@@ -790,7 +772,7 @@ public class MainAdminViewController implements Initializable
         } else if (betaltCheckBox.isSelected() == false)
         {
             int betalt = 0;
-            String selectedTask = opgaveComboBox.getValue();
+            String selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn();
             String opgaveTitel = titelField.getText();
             String beskrivelse = beskrivelseTextArea.getText();
             model.editTask(opgaveTitel, beskrivelse, betalt, selectedTask);

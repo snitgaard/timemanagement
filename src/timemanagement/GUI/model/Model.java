@@ -29,7 +29,6 @@ public class Model
     private bllManager bllManager;
     private ObservableList<Project> allProjects;
     private ObservableList<Task> allTasks;
-    private ObservableList<Task> allTasksByProject;
     private ObservableList<Project> allProjectsMedKunde;
     private ObservableList<User> allUsers;
     private ObservableList<Kunde> allKunder;
@@ -162,20 +161,6 @@ public class Model
         }
     }
 
-    public ObservableList<Task> getAllTasksByProject(int projektId) throws ModelException
-    {
-        try
-        {
-            allTasksByProject = FXCollections.observableArrayList();
-
-            allTasksByProject.addAll(bllManager.getAllTasksByProject(projektId));
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-        return allTasksByProject;
-    }
-
     public void createUser(String userLogin, String userPassword, int isAdmin) throws ModelException
     {
         try
@@ -202,13 +187,12 @@ public class Model
         }
     }
 
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn) throws ModelException
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws ModelException
     {
         try
         {
-            Task task = bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn);
+            Task task = bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
             allTasks.add(task);
-            allTasksByProject.add(task);
             return task;
         } catch (bllException ex)
         {

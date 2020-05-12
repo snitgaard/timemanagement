@@ -120,9 +120,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn) throws bllException {
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws bllException {
         try {
-            return dalFacade.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn);
+            return dalFacade.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -150,15 +150,6 @@ public class bllManager implements bllFacade {
     public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws bllException {
         try {
             return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
-        } catch (DalException ex) {
-            throw new bllException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public List<Task> getAllTasksByProject(int projektId) throws bllException {
-        try {
-            return dalFacade.getAllTasksByProject(projektId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

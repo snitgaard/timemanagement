@@ -153,7 +153,7 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_hourlyRate;
     @FXML
     private JFXTextField txt_nyBrugtTid;
-    private User user;
+    private User selectedUser;
     private TableColumn<Task, Integer> idColumn;
     @FXML
     private JFXDatePicker startDate;
@@ -192,6 +192,7 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_ClientHourlyRate;
     @FXML
     private JFXComboBox<Kunde> clientComboBox;
+    
 
     /**
      * Initializes the controller class.
@@ -223,7 +224,7 @@ public class MainAdminViewController implements Initializable
 
     public void ApplyImportantData(User selectedUser)
     {
-        this.user = selectedUser;
+        this.selectedUser = selectedUser;
         loginTextField.setText(selectedUser + "");
     }
 
@@ -433,6 +434,11 @@ public class MainAdminViewController implements Initializable
      */
     private void stopTidMethod() throws ParseException
     {
+        Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
+        Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
+        long gammelBrugtTid = selectedTask.getBrugtTid();
+        long gammelProjektTid = selectedProject.getBrugtTid();
+        
         try
         {
             java.util.Date date = new java.util.Date();
@@ -458,8 +464,22 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
-//            model.updateProjectTime();
-            opgaveData();
+            
+            for (int i = 0; i < opgaverTableView.getItems().size(); i++) {
+                if (selectedTask.getId() == opgaverTableView.getItems().get(i).getId())
+                {
+                    opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + variableNumber);
+                }
+                
+            }
+            
+            for (int i = 0; i < projekterTableView.getItems().size(); i++) {
+                if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
+                {
+                    projekterTableView.getItems().get(i).setBrugtTid(gammelProjektTid + variableNumber);
+                    model.updateProjectTime(selectedProject);
+                }
+            }
 
         } catch (Exception e)
         {
@@ -524,9 +544,13 @@ public class MainAdminViewController implements Initializable
 
         opgaveComboBox.getItems().clear();
 
-        for (Task tasks : model.getAllTasksByProject(selectedProject.getId()))
+        for (Task tasks : model.getAllTasks())
         {
-            opgaveComboBox.getItems().add(tasks);
+            if (tasks.getProjektId() == selectedProject.getId())
+            {
+                opgaveComboBox.getItems().add(tasks);
+            }
+            
         }
     }
 
@@ -598,10 +622,10 @@ public class MainAdminViewController implements Initializable
        
         if (betaltCheckBox.isSelected() == true)
         {
-            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn());
+            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
         } else
         {
-            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn());
+            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
         }
         
         opgaveComboBox.getItems().add(selectedTask);

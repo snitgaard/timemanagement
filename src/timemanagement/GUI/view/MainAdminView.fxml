@@ -315,10 +315,10 @@
                      <children>
                         <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
                           <xAxis>
-                            <CategoryAxis side="BOTTOM" />
+                            <CategoryAxis side="BOTTOM" fx:id="x" />
                           </xAxis>
                           <yAxis>
-                            <NumberAxis side="LEFT" />
+                            <NumberAxis fx:id="y" side="LEFT" />
                           </yAxis>
                         </BarChart>
                         <JFXComboBox fx:id="projektComboBox2" layoutX="42.0" layoutY="36.0" promptText="Select Project" />

@@ -625,6 +625,7 @@ public class MainAdminViewController implements Initializable
         }
 
         opgaveComboBox.getItems().add(selectedTask);
+        opgaveComboBox.getSelectionModel().select(selectedTask);
 
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }

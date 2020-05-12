@@ -23,6 +23,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,6 +31,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -193,7 +197,11 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXComboBox<Kunde> clientComboBox;
     @FXML
-    private BarChart<?, ?> barChart;
+    private BarChart<String, Long> barChart;
+    @FXML
+    private NumberAxis y;
+    @FXML
+    private CategoryAxis x;
 
     /**
      * Initializes the controller class.
@@ -839,7 +847,10 @@ public class MainAdminViewController implements Initializable
             
             int number = -1;
             try {
-                BarChart.Series series1 = new BarChart.Series();
+            XYChart.Series set1 = new XYChart.Series<>();
+            barChart.setAnimated(false);
+            Platform.runLater(() -> barChart.getData().addAll(set1));
+
             for (Project allProject : model.getAllProjects())        
             {
                 
@@ -847,10 +858,7 @@ public class MainAdminViewController implements Initializable
                     model.getAllProjects().get(number);
                     System.out.println(model.getAllProjects().get(number));
                     
-                    series1.getData().add(new BarChart.Data(allProject.getProjektNavn(), 42));
-                    
-                    barChart.getData().addAll(series1);
-                     
+                    set1.getData().add(new BarChart.Data(allProject.getProjektNavn(), allProject.getBrugtTid()));
                 } 
             
             }catch (ModelException ex) {
@@ -861,6 +869,11 @@ public class MainAdminViewController implements Initializable
             });
             
             thread.start();
+            try {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         };
     
     @FXML

@@ -502,17 +502,18 @@ public class MainAdminViewController implements Initializable
     {
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
 
-//        kundeField.setText(result.get(0).getKundeNavn() + "");
-        kundeField.setText(selectedProject.getKundeNavn());
-//        LocalDate localDate = LocalDate.parse(result.get(0).getStartDato());
-
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
+            kundeField.setText(selectedProject.getKundeNavn());
             opgaveComboBox.setDisable(false);
             titelField.setDisable(false);
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
+            for (Task tasks : model.getAllTasksByProject(selectedProject.getId()))
+            {
+                opgaveComboBox.getItems().add(tasks);
+            }
         } else
         {
             opgaveComboBox.setDisable(true);
@@ -521,13 +522,7 @@ public class MainAdminViewController implements Initializable
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
         }
-
         opgaveComboBox.getItems().clear();
-
-        for (Task tasks : model.getAllTasksByProject(selectedProject.getId()))
-        {
-            opgaveComboBox.getItems().add(tasks);
-        }
     }
 
     @FXML
@@ -593,9 +588,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void createOpgave(ActionEvent event) throws ModelException
     {
-       int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
-       Task selectedTask = null;
-       
+        int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
+        Task selectedTask = null;
+
         if (betaltCheckBox.isSelected() == true)
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn());
@@ -603,9 +598,9 @@ public class MainAdminViewController implements Initializable
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn());
         }
-        
+
         opgaveComboBox.getItems().add(selectedTask);
-        
+
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }
 
@@ -613,17 +608,16 @@ public class MainAdminViewController implements Initializable
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
         Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
-        
         Project selectedProject = null;
-        
-        if (txt_projektNavn.getText().isEmpty() || clientComboBox == null)
-        {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not create project. Please fill out both Project name and select a client.", ButtonType.OK);
-            alert.showAndWait();
-        } else
+
+        if (!txt_projektNavn.getText().isEmpty() || clientComboBox != null)
         {
             selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn());
             projektComboBox.getItems().add(selectedProject);
+        } else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not create project. Please fill out both Project name and select a client.", ButtonType.OK);
+            alert.showAndWait();
         }
     }
 
@@ -759,19 +753,19 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleEditTask(ActionEvent event) throws ModelException
     {
-        
+
         Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
         Task selectedTaskTwo = null;
-        
-        for (int i = 0; i < opgaverTableView.getItems().size(); i++) {
-            
+
+        for (int i = 0; i < opgaverTableView.getItems().size(); i++)
+        {
+
             if (opgaverTableView.getItems().get(i).getId() == selectedTask.getId())
             {
                 selectedTaskTwo = opgaverTableView.getItems().get(i);
             }
         }
-        
-        
+
         if (betaltCheckBox.isSelected() == true)
         {
             int betalt = 1;
@@ -796,8 +790,7 @@ public class MainAdminViewController implements Initializable
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.setValue(selectedTask);
         }
-        
-        
+
     }
 
     @FXML
@@ -811,10 +804,9 @@ public class MainAdminViewController implements Initializable
         model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
 
     }
-    
-    
+
     private void fillChart() throws ModelException
-    {       
+    {
 //        int number = -1;
 //        
 //        for (Project allProject : model.getAllProjects())        
@@ -830,7 +822,38 @@ public class MainAdminViewController implements Initializable
 //            }
 //        }
 //            
-        }
+    }
 
-    
+    @FXML
+    private void handleDeleteProject(ActionEvent event) throws ModelException
+    {
+        projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+        model.deleteProject(selectedProject);
+
+        for (int i = 0; i < projektComboBox.getItems().size(); i++)
+        {
+            if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
+            {
+                try
+                {
+                    projektComboBox.getItems().remove(i);
+                    projektComboBox.getSelectionModel().clearSelection();
+                    kundeField.clear();
+                    opgaveComboBox.getSelectionModel().clearSelection();
+                    opgaveComboBox.setDisable(true);
+                    titelField.setDisable(true);
+                    titelField.clear();
+                    beskrivelseTextArea.setDisable(true);
+                    beskrivelseTextArea.clear();
+                    betaltCheckBox.setDisable(true);
+                    nyOpgaveButton.setDisable(true);
+                } catch (NullPointerException ex)
+                {
+
+                }
+
+            }
+        }
+    }
 }

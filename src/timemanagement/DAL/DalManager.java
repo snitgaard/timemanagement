@@ -236,5 +236,11 @@ public class DalManager implements DalFacade
     {
         return kundeDAO.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
     }
+
+    @Override
+    public void deleteProject(Project project) throws DalException
+    {
+        projectDAO.deleteProject(project);
+    }
  
 }

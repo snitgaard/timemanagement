@@ -181,6 +181,7 @@ public class Model
         try
         {
             User user = bllManager.createUser(userLogin, userPassword, isAdmin);
+       
             user.setAdminRights("User");
             allUsers.add(user);
         } catch (bllException ex)
@@ -365,6 +366,18 @@ public class Model
         {
             Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
             allKunder.add(kunde);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+
+    public void deleteProject(Project project) throws ModelException
+    {
+        try
+        {
+            bllManager.deleteProject(project);
+            allProjectsMedKunde.remove(project);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

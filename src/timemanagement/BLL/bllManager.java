@@ -310,5 +310,17 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public void deleteProject(Project project) throws bllException
+    {
+        try
+        {
+            dalFacade.deleteProject(project);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 
 }

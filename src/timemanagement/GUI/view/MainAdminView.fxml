@@ -29,7 +29,7 @@
    <children>
       <VBox layoutX="-1.0" layoutY="125.0" prefHeight="466.0" prefWidth="224.0">
          <children>
-            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="146.0" text="Time Logger">
+            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="140.0" text="Time Logger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -37,7 +37,7 @@
                   <FontAwesomeIconView glyphName="HOURGLASS" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="127.0" text="Tasks">
+            <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="91.0" text="Tasks">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -45,15 +45,15 @@
                   <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="124.0" text="Analysis" visible="false">
+            <JFXButton fx:id="clientButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="94.0" text="Clients">
+               <graphic>
+                  <FontAwesomeIconView size="20" text="" />
+               </graphic>
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
-               <graphic>
-                  <FontAwesomeIconView glyphName="´" size="20" text="" />
-               </graphic>
             </JFXButton>
-            <JFXButton fx:id="projekterButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="134.0" text="Projects" visible="false">
+            <JFXButton fx:id="projekterButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="102.0" text="Projects">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -61,21 +61,21 @@
                   <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
                </graphic>
             </JFXButton>
-            <JFXButton fx:id="opretBrugerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="162.0" text="Account Creation" visible="false">
+            <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="106.0" text="Analysis">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIconView glyphName="´" size="20" text="" />
+               </graphic>
+            </JFXButton>
+            <JFXButton fx:id="opretBrugerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="113.0" text="Accounts">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
                   <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
                </graphic>
-            </JFXButton>
-            <JFXButton fx:id="clientButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="119.0" text="Clients" visible="false">
-               <graphic>
-                  <FontAwesomeIconView size="20" text="" />
-               </graphic>
-               <font>
-                  <Font name="System Bold" size="15.0" />
-               </font>
             </JFXButton>
          </children>
       </VBox>
@@ -308,18 +308,22 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Label>
-                        <JFXButton layoutX="145.0" layoutY="172.0" onAction="#handleCreateProjekt" text="Create Project">
+                        <JFXButton layoutX="30.0" layoutY="172.0" onAction="#handleCreateProjekt" style="-fx-border-color: grey;" text="Create Project">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="23.0" layoutY="178.0" onAction="#setOngoing" text="Ongoing" />
-                        <JFXButton layoutX="257.0" layoutY="172.0" onAction="#handleArchiveProject" text="Archive Project">
+                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="555.0" layoutY="192.0" onAction="#setOngoing" text="Show ongoing projects" />
+                        <JFXButton layoutX="167.0" layoutY="172.0" onAction="#handleArchiveProject" style="-fx-border-color: grey;" text="Archive Project">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
                         <JFXComboBox fx:id="clientComboBox" layoutX="23.0" layoutY="113.0" prefHeight="25.0" prefWidth="224.0" promptText="Select customer" />
+                        <JFXButton layoutX="314.0" layoutY="172.0" onAction="#handleDeleteProject" style="-fx-border-color: grey;" text="Delete project">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
                      </children>
                   </AnchorPane>
               </items>

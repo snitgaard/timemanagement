@@ -17,7 +17,6 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -30,6 +29,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.chart.BarChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -192,6 +192,8 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_ClientHourlyRate;
     @FXML
     private JFXComboBox<Kunde> clientComboBox;
+    @FXML
+    private BarChart<?, ?> barChart;
 
     /**
      * Initializes the controller class.
@@ -821,6 +823,7 @@ public class MainAdminViewController implements Initializable
         
         int number = -1;
         try {
+            BarChart.Series series1 = new BarChart.Series();
         for (Project allProject : model.getAllProjects())        
         {
             
@@ -828,7 +831,10 @@ public class MainAdminViewController implements Initializable
                 model.getAllProjects().get(number);
                 System.out.println(model.getAllProjects().get(number));
                 
+                series1.getData().add(new BarChart.Data(allProject.getProjektNavn(), allProject.getBrugtTid()));
                 
+                
+                 barChart.getData().addAll(series1);
             } 
         }catch (ModelException ex) {
                 Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);

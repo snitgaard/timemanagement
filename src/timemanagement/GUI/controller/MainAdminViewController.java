@@ -831,17 +831,19 @@ public class MainAdminViewController implements Initializable
                 model.getAllProjects().get(number);
                 System.out.println(model.getAllProjects().get(number));
                 
-                series1.getData().add(new BarChart.Data(allProject.getProjektNavn(), allProject.getBrugtTid()));
+                series1.getData().add(new BarChart.Data(allProject.getProjektNavn(), 42));
                 
-                
-                 barChart.getData().addAll(series1);
+                barChart.getData().addAll(series1);
+                 
             } 
+        
         }catch (ModelException ex) {
                 Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
             }
             }
             
         });
+        
         thread.start();
     };
 

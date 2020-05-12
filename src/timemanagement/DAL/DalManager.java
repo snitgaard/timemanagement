@@ -102,9 +102,9 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn) throws DalException
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws DalException
     {
-        return taskDAO.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn);
+        return taskDAO.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
     }
 
     @Override
@@ -130,14 +130,6 @@ public class DalManager implements DalFacade
         return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
     }
 
-    @Override
-    public List<Task> getAllTasksByProject(int projektId) throws DalException {
-        try {
-            return taskDAO.getAllTasksByProject(projektId);
-        } catch (SQLException ex) {
-            throw new DalException(ex.getMessage());
-        }
-    }
     
     @Override
     public User createUser(String userLogin, String userPassword, int isAdmin) throws DalException

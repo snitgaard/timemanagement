@@ -81,25 +81,6 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
-            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <BarChart layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <JFXComboBox fx:id="projektComboBox2" layoutX="42.0" layoutY="36.0" promptText="Select Project" />
-                        <JFXDatePicker layoutX="42.0" layoutY="131.0" promptText="Select Start Date" />
-                        <JFXDatePicker layoutX="257.0" layoutY="131.0" promptText="Select End Date" />
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
             <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -324,6 +305,25 @@
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></JFXButton>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <JFXComboBox fx:id="projektComboBox2" layoutX="42.0" layoutY="36.0" promptText="Select Project" />
+                        <JFXDatePicker layoutX="42.0" layoutY="131.0" promptText="Select Start Date" />
+                        <JFXDatePicker layoutX="257.0" layoutY="131.0" promptText="Select End Date" />
                      </children>
                   </AnchorPane>
               </items>

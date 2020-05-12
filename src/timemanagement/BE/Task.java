@@ -27,6 +27,8 @@ public class Task
     private StringProperty dato;
     private StringProperty beskrivelse;
     private IntegerProperty betalt;
+    private IntegerProperty ongoing;
+    private IntegerProperty userId;
 
     /**
      * Constructor for Task
@@ -36,7 +38,7 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn)
+    public Task(int id, String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId)
     {
         this.id = id;
         this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
@@ -46,6 +48,8 @@ public class Task
         this.beskrivelse = new SimpleStringProperty(beskrivelse);
         this.betalt = new SimpleIntegerProperty(betalt);
         this.projektNavn = new SimpleStringProperty(projektNavn);
+        this.ongoing = new SimpleIntegerProperty(ongoing);
+        this.userId = new SimpleIntegerProperty(userId);
     }
 
     /**
@@ -165,7 +169,7 @@ public class Task
      * setter for brugtTid
      * @param brugtTid 
      */
-    public void setBrugtTid(int brugtTid)
+    public void setBrugtTid(long brugtTid)
     {
         this.brugtTid.set(brugtTid);
     }
@@ -250,7 +254,35 @@ public class Task
         return betalt.asObject();
     }
     
+    public int getOngoing()
+    {
+        return ongoing.get();
+    }
     
+    public void setOngoing(int ongoing)
+    {
+        this.ongoing.set(ongoing);
+    }
+    
+    public ObservableValue<Integer> ongoingObservable()
+    {
+        return ongoing.asObject();
+    }
+    
+    public int getUserId()
+    {
+        return userId.get();
+    }
+    
+    public void setUserId(int userId)
+    {
+        this.userId.set(userId);
+    }
+    
+    public ObservableValue<Integer> userIdObservableValue()
+    {
+        return userId.asObject();
+    }
     
     
 }

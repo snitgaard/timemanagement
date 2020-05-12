@@ -861,7 +861,7 @@ public class MainAdminViewController implements Initializable
             
             thread.start();
         };
-    }       
+    
     @FXML
     private void handleDeleteProject(ActionEvent event) throws ModelException
     {

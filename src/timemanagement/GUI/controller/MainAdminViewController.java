@@ -815,22 +815,29 @@ public class MainAdminViewController implements Initializable
     
     private void fillChart() throws ModelException
     {       
-//        int number = -1;
-//        
-//        for (Project allProject : model.getAllProjects())        
-//        {
-//            try {
-//                number = number + 1;
-//                model.getAllProjects().get(number);
-//                System.out.println(model.getAllProjects().get(number));
-//                
-//                
-//            } catch (ModelException ex) {
-//                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//            
-        }
+        Thread thread = new Thread(new Runnable(){
+            public void run()
+            {
+        
+        int number = -1;
+        try {
+        for (Project allProject : model.getAllProjects())        
+        {
+            
+                number = number + 1;
+                model.getAllProjects().get(number);
+                System.out.println(model.getAllProjects().get(number));
+                
+                
+            } 
+        }catch (ModelException ex) {
+                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            }
+            
+        });
+        thread.start();
+    };
 
     
 }

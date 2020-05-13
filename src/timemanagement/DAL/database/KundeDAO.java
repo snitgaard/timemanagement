@@ -90,7 +90,7 @@ public class KundeDAO
      * @return
      * @throws DalException
      */
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws DalException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {

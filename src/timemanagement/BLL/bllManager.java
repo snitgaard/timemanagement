@@ -290,7 +290,7 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws bllException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws bllException
     {
         try
         {
@@ -322,5 +322,15 @@ public class bllManager implements bllFacade {
         }
     }
 
-
+    @Override
+    public void deleteKunde(Kunde kunde) throws bllException
+    {
+        try
+        {
+            dalFacade.deleteKunde(kunde);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
 }

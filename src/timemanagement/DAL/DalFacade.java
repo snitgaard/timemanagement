@@ -47,7 +47,9 @@ public interface DalFacade {
     
     User createUserAdmin(String userLogin, String userPassword, int isAdmin) throws DalException;
 
-    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws DalException;
+    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException;
+    
+    void deleteKunde(Kunde kunde) throws DalException;
     
     List<Kunde> getAllKunder() throws DalException;
     

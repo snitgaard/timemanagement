@@ -224,7 +224,7 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws DalException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException
     {
         return kundeDAO.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
     }
@@ -242,6 +242,12 @@ public class DalManager implements DalFacade
         } catch (SQLException ex) {
             throw new DalException(ex.getMessage());
         }
+    }
+
+    @Override
+    public void deleteKunde(Kunde kunde) throws DalException
+    {
+        kundeDAO.deleteKunde(kunde);
     }
  
 }

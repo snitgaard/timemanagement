@@ -148,11 +148,11 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws ModelException
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws ModelException
     {
         try
         {
-            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
+            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
             allProjectsMedKunde.add(project);
             return project;
         } catch (bllException ex)
@@ -367,5 +367,16 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-
+    
+    public void deleteTask(Task task) throws ModelException
+    {
+        try
+        {
+            bllManager.deleteTask(task);
+            allTasks.remove(task);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 }

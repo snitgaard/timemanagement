@@ -37,7 +37,7 @@ public interface bllFacade
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 
-    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws bllException;
+    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws bllException;
     
     void deleteProject(Project project) throws bllException;
 

@@ -147,9 +147,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws bllException {
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

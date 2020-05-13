@@ -37,7 +37,7 @@ public interface DalFacade {
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws DalException;
+    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException;
     
     void deleteProject(Project project) throws DalException;
     

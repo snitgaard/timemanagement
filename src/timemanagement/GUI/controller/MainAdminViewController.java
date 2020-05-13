@@ -202,6 +202,8 @@ public class MainAdminViewController implements Initializable
     private NumberAxis y;
     @FXML
     private CategoryAxis x;
+    @FXML
+    private JFXTextField txt_HourlyRateProject;
 
     /**
      * Initializes the controller class.
@@ -371,6 +373,7 @@ public class MainAdminViewController implements Initializable
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());
+        
     }
 
     /**
@@ -447,7 +450,7 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
         long gammelBrugtTid = selectedTask.getBrugtTid();
         long gammelProjektTid = selectedProject.getBrugtTid();
-        
+
         try
         {
             java.util.Date date = new java.util.Date();
@@ -473,16 +476,18 @@ public class MainAdminViewController implements Initializable
             }
             brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
-            
-            for (int i = 0; i < opgaverTableView.getItems().size(); i++) {
+
+            for (int i = 0; i < opgaverTableView.getItems().size(); i++)
+            {
                 if (selectedTask.getId() == opgaverTableView.getItems().get(i).getId())
                 {
                     opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + variableNumber);
                 }
-                
+
             }
-            
-            for (int i = 0; i < projekterTableView.getItems().size(); i++) {
+
+            for (int i = 0; i < projekterTableView.getItems().size(); i++)
+            {
                 if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
                 {
                     projekterTableView.getItems().get(i).setBrugtTid(gammelProjektTid + variableNumber);
@@ -531,6 +536,7 @@ public class MainAdminViewController implements Initializable
     {
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
 
+        opgaveComboBox.getItems().clear();
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
             kundeField.setText(selectedProject.getKundeNavn());
@@ -545,7 +551,6 @@ public class MainAdminViewController implements Initializable
                 {
                     opgaveComboBox.getItems().add(tasks);
                 }
-                
             }
         } else
         {
@@ -555,7 +560,6 @@ public class MainAdminViewController implements Initializable
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
         }
-        opgaveComboBox.getItems().clear();
     }
 
     @FXML
@@ -643,10 +647,12 @@ public class MainAdminViewController implements Initializable
     {
         Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
+        Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
+        
 
-        if (!txt_projektNavn.getText().isEmpty() || clientComboBox != null)
+        if (!txt_projektNavn.getText().isEmpty() || selectedClient != null || !txt_HourlyRateProject.getText().isEmpty())
         {
-            selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn());
+            selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
             projektComboBox.getItems().add(selectedProject);
         } else
         {
@@ -841,40 +847,47 @@ public class MainAdminViewController implements Initializable
 
     private void fillChart() throws ModelException
     {
-            Thread thread = new Thread(new Runnable(){
-                public void run()
-                {
-            
-            int number = -1;
-            try {
-            XYChart.Series set1 = new XYChart.Series<>();
-            barChart.setAnimated(false);
-            Platform.runLater(() -> barChart.getData().addAll(set1));
-
-            for (Project allProject : model.getAllProjects())        
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
             {
-                
-                    number = number + 1;
-                    model.getAllProjects().get(number);
-                    System.out.println(model.getAllProjects().get(number));
-                    
-                    set1.getData().add(new BarChart.Data(allProject.getProjektNavn(), allProject.getBrugtTid()));
-                } 
-            
-            }catch (ModelException ex) {
+
+                int number = -1;
+                try
+                {
+                    XYChart.Series set1 = new XYChart.Series<>();
+                    barChart.setAnimated(false);
+                    Platform.runLater(() -> barChart.getData().addAll(set1));
+
+                    for (Project allProject : model.getAllProjects())
+                    {
+
+                        number = number + 1;
+                        model.getAllProjects().get(number);
+                        System.out.println(model.getAllProjects().get(number));
+
+                        set1.getData().add(new BarChart.Data(allProject.getProjektNavn(), allProject.getBrugtTid()));
+                    }
+
+                } catch (ModelException ex)
+                {
                     Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                }
-                
-            });
-            
-            thread.start();
-            try {
+            }
+
+        });
+
+        thread.start();
+        try
+        {
             Thread.sleep(1000);
-        } catch (InterruptedException ex) {
+        } catch (InterruptedException ex)
+        {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        };
+    }
+
+    ;
     
     @FXML
     private void handleDeleteProject(ActionEvent event) throws ModelException
@@ -902,8 +915,10 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleDeleteTask(ActionEvent event)
+    private void handleDeleteTask(ActionEvent event) throws ModelException
     {
-        
+        opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Task selecetedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        model.deleteTask(selecetedTask);
     }
 }

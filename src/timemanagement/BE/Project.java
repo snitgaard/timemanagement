@@ -5,8 +5,10 @@
  */
 package timemanagement.BE;
 
+import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.LongProperty;
+import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -26,7 +28,7 @@ public class Project {
     private StringProperty startDato;
     private LongProperty brugtTid;
     private IntegerProperty ongoing;
-    private LongProperty brugtTidMinutter;
+    private DoubleProperty hourlyRate;
 
     /**
      * Constructor for Project
@@ -36,7 +38,7 @@ public class Project {
      * @param startDato
      * @param brugtTid 
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, Double hourlyRate) {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeId = new SimpleIntegerProperty(kundeId);
@@ -44,6 +46,7 @@ public class Project {
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.ongoing = new SimpleIntegerProperty(ongoing);
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
+        this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
     }
 
     
@@ -198,6 +201,21 @@ public class Project {
         return ongoing.asObject();
     }
 
+    public double getHourlyRate()
+    {
+        return hourlyRate.get();
+    }
+
+    public void setHourlyRate(double hourlyRate)
+    {
+        this.hourlyRate.set(hourlyRate);
+    }
+    
+    public ObservableValue<Double> hourlyRateObservable()
+    {
+        return hourlyRate.asObject();
+    }
+    
     /**
      * toString method for Project
      * @return projektNavn

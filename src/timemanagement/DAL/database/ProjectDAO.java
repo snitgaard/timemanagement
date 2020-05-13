@@ -50,7 +50,8 @@ public class ProjectDAO {
                 int brugtTid = rs.getInt("brugtTid");
                 int ongoing = rs.getInt("ongoing");
                 String kundeNavn = "";
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
+                double hourlyRate = rs.getDouble("hourlyRate");
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
                 allProjects.add(project);
             }
             return allProjects;
@@ -89,7 +90,7 @@ public class ProjectDAO {
      * @return
      * @throws DalException
      */
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn) throws DalException {
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, ongoing) VALUES (?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -98,13 +99,14 @@ public class ProjectDAO {
             ps.setString(3, startDato);
             ps.setLong(4, brugtTid);
             ps.setInt(5, ongoing);
+            ps.setDouble(6, hourlyRate);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn);
+                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
                     return project;
                 }
             }

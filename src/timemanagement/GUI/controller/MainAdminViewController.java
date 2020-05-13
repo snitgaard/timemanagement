@@ -502,7 +502,7 @@ public class MainAdminViewController implements Initializable
             {
                 variableNumber = 1;
             }
-            brugtTidField.setText(hours + " Hours  " + minutes + " Minutes  " + seconds + " Seconds  ");
+            brugtTidField.setText(hours + ":" + minutes);
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)

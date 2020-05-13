@@ -124,7 +124,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableView<Task> opgaverTableView;
     @FXML
-    private JFXComboBox<String> projektComboBox2;
+    private JFXComboBox<Project> projektComboBox2;
     @FXML
     private JFXTextField txt_projektNavn;
     private JFXTextField txt_kundeNavn;
@@ -297,6 +297,7 @@ public class MainAdminViewController implements Initializable
     private void setProjects() throws ModelException
     {
         projektComboBox.setItems(model.getProjectKundeNavn());
+        projektComboBox2.setItems(model.getAllProjects());
 //        for (Project projects : model.getAllProjects())
 //        {
 //            projektComboBox.getItems().add(projects.ge);
@@ -870,26 +871,21 @@ public class MainAdminViewController implements Initializable
 
     private void fillChart() throws ModelException
     {
+        Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();
         Thread thread = new Thread(new Runnable()
         {
             public void run()
             {
-
                 int number = -1;
                 try
                 {
                     XYChart.Series set1 = new XYChart.Series<>();
                     barChart.setAnimated(false);
                     Platform.runLater(() -> barChart.getData().addAll(set1));
-
-                    for (Project allProject : model.getAllProjects())
+                    for (Task allTasks : model.getAllTasks())
                     {
-
                         number = number + 1;
-                        model.getAllProjects().get(number);
-                        System.out.println(model.getAllProjects().get(number));
-
-                        set1.getData().add(new BarChart.Data(allProject.getProjektNavn(), allProject.getBrugtTid()));
+                        set1.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
                     }
 
                 } catch (ModelException ex)
@@ -899,7 +895,6 @@ public class MainAdminViewController implements Initializable
             }
 
         });
-
         thread.start();
         try
         {
@@ -908,6 +903,7 @@ public class MainAdminViewController implements Initializable
         {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     ;

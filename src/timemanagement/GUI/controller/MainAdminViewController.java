@@ -904,14 +904,6 @@ public class MainAdminViewController implements Initializable
                     projektComboBox.getItems().remove(i);
                     projektComboBox.getSelectionModel().clearSelection();
                     kundeField.clear();
-                    opgaveComboBox.getSelectionModel().clearSelection();
-                    opgaveComboBox.setDisable(true);
-                    titelField.setDisable(true);
-                    titelField.clear();
-                    beskrivelseTextArea.setDisable(true);
-                    beskrivelseTextArea.clear();
-                    betaltCheckBox.setDisable(true);
-                    nyOpgaveButton.setDisable(true);
                 } catch (NullPointerException ex)
                 {
 
@@ -919,5 +911,11 @@ public class MainAdminViewController implements Initializable
 
             }
         }
+    }
+
+    @FXML
+    private void handleDeleteTask(ActionEvent event)
+    {
+        
     }
 }

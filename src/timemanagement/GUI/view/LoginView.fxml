@@ -15,9 +15,9 @@
 
 <AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="376.0" prefWidth="402.0" stylesheets="@../../../../../../../../../../Desktop/Attendance-Automation/src/attendance/automation/gui/css/Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.LoginController">
    <children>
-      <JFXTextField fx:id="emailField" layoutX="79.0" layoutY="155.0" prefHeight="25.0" prefWidth="293.0" promptText="Indtast email" styleClass="text-field" />
-      <JFXPasswordField fx:id="passwordField" layoutX="79.0" layoutY="220.0" prefHeight="25.0" prefWidth="293.0" promptText="Indtast kode" />
-      <Label layoutX="91.0" layoutY="65.0" text="Velkommen tilbage">
+      <JFXTextField fx:id="emailField" layoutX="79.0" layoutY="155.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter email" styleClass="text-field" />
+      <JFXPasswordField fx:id="passwordField" layoutX="79.0" layoutY="220.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter password" />
+      <Label layoutX="114.0" layoutY="65.0" prefHeight="35.0" prefWidth="175.0" text="Welcome back!">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

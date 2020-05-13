@@ -17,6 +17,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -305,7 +306,18 @@ public class MainAdminViewController implements Initializable
     private void fillColumns() throws ModelException
     {
         //Opgaver tableview
-        opgaverTableView.setItems(model.getAllTasksProjektNavn());
+        List<Task> taskList = model.getAllTasksProjektNavn();
+        ObservableList<Task> filteredTaskList = FXCollections.observableArrayList();
+        
+        for (Task task : taskList) {
+            if (task.getUserId() == this.selectedUser.getId())
+            {
+                filteredTaskList.add(task);
+            }
+        }
+        
+        projekterTableView.setItems(allProjectsFilteredList);
+        
         opgaveNavnColumn.setCellValueFactory(cellData -> cellData.getValue().opgaveNavnProperty());
         projektNavnColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         brugtTidColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservableValue());

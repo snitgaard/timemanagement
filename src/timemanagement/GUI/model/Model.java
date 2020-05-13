@@ -376,7 +376,7 @@ public class Model
             allTasks.remove(task);
         } catch (bllException ex)
         {
-            throw new ModelException(ex.getMessage));
+            throw new ModelException(ex.getMessage());
         }
     }
     public List<Task> getAllTasksOnProject(int projektId) throws ModelException

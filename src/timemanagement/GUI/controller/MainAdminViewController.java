@@ -940,4 +940,8 @@ public class MainAdminViewController implements Initializable
         Task selecetedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         model.deleteTask(selecetedTask);
     }
+
+    @FXML
+    private void handleDeleteClient(ActionEvent event) {
+    }
 }

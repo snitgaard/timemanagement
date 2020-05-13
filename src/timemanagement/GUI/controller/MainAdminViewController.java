@@ -882,7 +882,6 @@ public class MainAdminViewController implements Initializable
 
     private void fillChart() throws ModelException
     {
-        Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();
         Thread thread = new Thread(new Runnable()
         {
             public void run()
@@ -914,12 +913,8 @@ public class MainAdminViewController implements Initializable
         {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        List<Project> projectList = model.getAllProjects();
-        for (Project project : projectList)
-            if (project.getId() == selectedProject.getId())
-            {
-                
-            }
+//        List<Project> projectList = model.getAllProjects();
+        
     }
     
     @FXML
@@ -961,5 +956,28 @@ public class MainAdminViewController implements Initializable
         Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         model.deleteKunde(selectedClient);
         
+    }
+
+    @FXML
+    private void handleFilterCharts(ActionEvent event) throws ModelException {
+        Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();
+        if (selectedProject != null)
+            {
+                barChart.getData().clear();
+                System.out.println("gør den overhovedet det her?");
+                int number = -1;
+                XYChart.Series set2 = new XYChart.Series<>();
+                barChart.setAnimated(false);
+                System.out.println("hvad er det her  = " + selectedProject.getId());
+                for (Task allTasks : model.getAllTasks())
+                    {
+                        if(allTasks.getProjektId() == selectedProject.getId())
+                        {
+                        number = number + 1;
+                        set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                        }
+                        }
+                barChart.getData().addAll(set2);
+            }
     }
 }

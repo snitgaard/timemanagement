@@ -14,6 +14,8 @@ import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 import java.net.URL;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -502,7 +504,14 @@ public class MainAdminViewController implements Initializable
             {
                 variableNumber = 1;
             }
-            brugtTidField.setText(hours + ":" + minutes);
+            
+            NumberFormat formatter = new DecimalFormat("00");
+            
+            
+            String h = formatter.format(hours); 
+            String m = formatter.format(minutes);
+            
+            brugtTidField.setText(h + ":" + m);
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)

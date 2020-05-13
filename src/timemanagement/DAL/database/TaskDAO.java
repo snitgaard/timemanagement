@@ -225,6 +225,7 @@ public class TaskDAO
             {
                 int id = rs.getInt("Id");
                 String opgaveNavn = rs.getString("opgaveNavn");
+                
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
                 String beskrivelse = rs.getString("beskrivelse");

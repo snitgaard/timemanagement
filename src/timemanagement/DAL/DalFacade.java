@@ -69,4 +69,5 @@ public interface DalFacade {
     
     void updateUserRoles(User user) throws DalException;
     
+    List<Task> getAllTasksOnProject(int projektId) throws DalException;
 }

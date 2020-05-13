@@ -17,6 +17,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -178,6 +179,7 @@ public class MainAdminViewController implements Initializable
     private String username;
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
     ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+    ObservableList<Task> filteredTaskList = FXCollections.observableArrayList();
     @FXML
     private JFXButton clientButton;
     @FXML
@@ -223,7 +225,7 @@ public class MainAdminViewController implements Initializable
             userComboBox.setItems(roles);
 
 //            projekterTableView.setItems(model.getProjectKundeNavn());
-            fillColumns();
+            
             fillChart();
 
         } catch (ModelException ex)
@@ -233,10 +235,11 @@ public class MainAdminViewController implements Initializable
 
     }
 
-    public void ApplyImportantData(User selectedUser)
+    public void ApplyImportantData(User selectedUser) throws ModelException
     {
         this.selectedUser = selectedUser;
         loginTextField.setText(selectedUser + "");
+        fillColumns();
     }
 
     /**
@@ -307,7 +310,18 @@ public class MainAdminViewController implements Initializable
     private void fillColumns() throws ModelException
     {
         //Opgaver tableview
-        opgaverTableView.setItems(model.getAllTasksProjektNavn());
+        List<Task> taskList = model.getAllTasksProjektNavn();
+        
+        
+        for (Task task : taskList) {
+            if (task.getUserId() == selectedUser.getId())
+            {
+                filteredTaskList.add(task);
+            }
+        }
+        
+        opgaverTableView.setItems(filteredTaskList);
+        
         opgaveNavnColumn.setCellValueFactory(cellData -> cellData.getValue().opgaveNavnProperty());
         projektNavnColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         brugtTidColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservableValue());
@@ -537,6 +551,10 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
 
         opgaveComboBox.getItems().clear();
+<<<<<<< HEAD
+=======
+        
+>>>>>>> bfd696b42ca30d65a093dc25cfcb307b4272dd66
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
             kundeField.setText(selectedProject.getKundeNavn());
@@ -545,7 +563,8 @@ public class MainAdminViewController implements Initializable
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
-            for (Task tasks : model.getAllTasks())
+            
+            for (Task tasks : filteredTaskList)
             {
                 if (tasks.getProjektId() == selectedProject.getId())
                 {
@@ -559,7 +578,12 @@ public class MainAdminViewController implements Initializable
             beskrivelseTextArea.setDisable(true);
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
+            
         }
+<<<<<<< HEAD
+=======
+        
+>>>>>>> bfd696b42ca30d65a093dc25cfcb307b4272dd66
     }
 
     @FXML
@@ -638,6 +662,7 @@ public class MainAdminViewController implements Initializable
 
         opgaveComboBox.getItems().add(selectedTask);
         opgaveComboBox.getSelectionModel().select(selectedTask);
+        filteredTaskList.add(selectedTask);
 
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }

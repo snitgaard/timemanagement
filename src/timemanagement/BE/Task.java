@@ -60,7 +60,7 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, String projektNavn, long brugtTid, String dato, int projektId)
+    public Task(int id, String opgaveNavn, String projektNavn, long brugtTid, String dato, int projektId, int userId, String beskrivelse, int betalt)
     {
         this.id = id;
         this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
@@ -68,6 +68,9 @@ public class Task
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.dato = new SimpleStringProperty(dato);
         this.projektId = new SimpleIntegerProperty(projektId);
+        this.userId = new SimpleIntegerProperty(userId);
+        this.beskrivelse = new SimpleStringProperty(beskrivelse);
+        this.betalt = new SimpleIntegerProperty(betalt);
     }
 
     /**

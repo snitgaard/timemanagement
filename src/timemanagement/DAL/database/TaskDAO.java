@@ -152,7 +152,7 @@ public class TaskDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Project.projektNavn\n"
+            String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Task.userId, Task.beskrivelse, Task.betalt, Project.projektNavn\n"
                     + "FROM Task \n"
                     + "INNER JOIN Project ON Task.projektId=Project.id;";
             Statement statement = con.createStatement();
@@ -166,7 +166,10 @@ public class TaskDAO
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
                 int projektId = rs.getInt("projektId");
-                Task task = new Task(id, opgaveNavn, projektNavn, brugtTid, dato, projektId);
+                int userId = rs.getInt("userId");
+                String beskrivelse = rs.getString("beskrivelse");
+                int betalt = rs.getInt("betalt");
+                Task task = new Task(id, opgaveNavn, projektNavn, brugtTid, dato, projektId, userId, beskrivelse, betalt);
                 allProjects.add(task);
             }
             return allProjects;
@@ -205,6 +208,34 @@ public class TaskDAO
         catch (SQLException ex)
         {
             ex.printStackTrace();
+        }
+    }
+    
+    public List<Task> getAllTasksOnProject(int projektId) throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "SELECT * FROM Task WHERE Task.projektId = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            ArrayList<Task> allProjects = new ArrayList<>();
+            ps.setInt(1, projektId);
+            while (rs.next())
+            {
+                int id = rs.getInt("Id");
+                String opgaveNavn = rs.getString("opgaveNavn");
+                int brugtTid = rs.getInt("brugtTid");
+                String dato = rs.getString("dato");
+                String beskrivelse = rs.getString("beskrivelse");
+                int betalt = rs.getInt("betalt");
+                String projektNavn = "";
+                int ongoing = rs.getInt("ongoing");
+                int userId = rs.getInt("userId");
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+                allProjects.add(task);
+            }
+            return allProjects;
         }
     }
 }

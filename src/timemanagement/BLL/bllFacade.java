@@ -68,4 +68,6 @@ public interface bllFacade
     void editTask(Task task) throws bllException;
     
     void updateUserRoles(User user) throws bllException;
+    
+    List<Task> getAllTasksOnProject(int projektId) throws bllException;
 }

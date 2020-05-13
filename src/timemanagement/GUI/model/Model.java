@@ -367,6 +367,7 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+<<<<<<< HEAD
     
     public void deleteTask(Task task) throws ModelException
     {
@@ -376,6 +377,14 @@ public class Model
             allTasks.remove(task);
         } catch (bllException ex)
         {
+=======
+
+    public List<Task> getAllTasksOnProject(int projektId) throws ModelException
+    {
+        try {
+            return bllManager.getAllTasksOnProject(projektId);
+        } catch (bllException ex) {
+>>>>>>> bfd696b42ca30d65a093dc25cfcb307b4272dd66
             throw new ModelException(ex.getMessage());
         }
     }

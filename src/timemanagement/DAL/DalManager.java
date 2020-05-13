@@ -234,5 +234,14 @@ public class DalManager implements DalFacade
     {
         projectDAO.deleteProject(project);
     }
+
+    @Override
+    public List<Task> getAllTasksOnProject(int projektId) throws DalException {
+        try {
+            return taskDAO.getAllTasksOnProject(projektId);
+        } catch (SQLException ex) {
+            throw new DalException(ex.getMessage());
+        }
+    }
  
 }

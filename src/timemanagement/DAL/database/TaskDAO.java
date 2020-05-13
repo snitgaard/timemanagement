@@ -210,4 +210,32 @@ public class TaskDAO
             ex.printStackTrace();
         }
     }
+    
+    public List<Task> getAllTasksOnProject(int projektId) throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "SELECT * FROM Task WHERE Task.projektId = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            Statement statement = con.createStatement();
+            ResultSet rs = statement.executeQuery(sql);
+            ArrayList<Task> allProjects = new ArrayList<>();
+            ps.setInt(1, projektId);
+            while (rs.next())
+            {
+                int id = rs.getInt("Id");
+                String opgaveNavn = rs.getString("opgaveNavn");
+                int brugtTid = rs.getInt("brugtTid");
+                String dato = rs.getString("dato");
+                String beskrivelse = rs.getString("beskrivelse");
+                int betalt = rs.getInt("betalt");
+                String projektNavn = "";
+                int ongoing = rs.getInt("ongoing");
+                int userId = rs.getInt("userId");
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+                allProjects.add(task);
+            }
+            return allProjects;
+        }
+    }
 }

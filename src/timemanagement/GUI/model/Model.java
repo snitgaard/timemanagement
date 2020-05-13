@@ -368,4 +368,12 @@ public class Model
         }
     }
 
+    public List<Task> getAllTasksOnProject(int projektId) throws ModelException
+    {
+        try {
+            return bllManager.getAllTasksOnProject(projektId);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 }

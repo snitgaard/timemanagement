@@ -313,5 +313,14 @@ public class bllManager implements bllFacade {
         }
     }
 
+    @Override
+    public List<Task> getAllTasksOnProject(int projektId) throws bllException {
+        try {
+            return dalFacade.getAllTasksOnProject(projektId);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
 
 }

@@ -903,7 +903,12 @@ public class MainAdminViewController implements Initializable
         {
             Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+        List<Project> projectList = model.getAllProjects();
+        for (Project project : projectList)
+            if (project.getId() == selectedProject.getId())
+            {
+                
+            }
     }
     
     @FXML

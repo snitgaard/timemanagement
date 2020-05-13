@@ -551,10 +551,7 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
 
         opgaveComboBox.getItems().clear();
-<<<<<<< HEAD
-=======
-        
->>>>>>> bfd696b42ca30d65a093dc25cfcb307b4272dd66
+
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
             kundeField.setText(selectedProject.getKundeNavn());
@@ -580,10 +577,7 @@ public class MainAdminViewController implements Initializable
             nyOpgaveButton.setDisable(true);
             
         }
-<<<<<<< HEAD
-=======
-        
->>>>>>> bfd696b42ca30d65a093dc25cfcb307b4272dd66
+
     }
 
     @FXML

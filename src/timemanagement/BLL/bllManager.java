@@ -290,7 +290,7 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws bllException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws bllException
     {
         try
         {

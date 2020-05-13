@@ -32,7 +32,7 @@ public class Kunde
      * @param email 
      * @param hourlyRate 
      */
-    public Kunde(int id, String kundeNavn, String kontaktPerson, String email, Double hourlyRate) {    
+    public Kunde(int id, String kundeNavn, String kontaktPerson, String email, double hourlyRate) {    
         this.id = id;
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
         this.kontaktPerson = new SimpleStringProperty(kontaktPerson);
@@ -115,8 +115,5 @@ public class Kunde
     {
         return getKundeNavn();
     }
-    
-    
-    
-    
+
 }

@@ -92,7 +92,7 @@ public class ProjectDAO {
      */
     public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, ongoing) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, ongoing, hourlyRate) VALUES (?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projektNavn);
             ps.setInt(2, kundeId);
@@ -119,7 +119,7 @@ public class ProjectDAO {
 
     public List<Project> getProjectKundeNavn() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Kunde.kundeNavn, Project.startDato, Project.ongoing\n"
+            String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Kunde.kundeNavn, Project.startDato, Project.ongoing, Project.hourlyRate\n"
                     + "FROM Project\n"
                     + "INNER JOIN Kunde ON Project.kundeId=Kunde.id;";
             Statement statement = con.createStatement();
@@ -132,7 +132,8 @@ public class ProjectDAO {
                 String startDato = rs.getString("startDato");
                 long brugtTid = rs.getLong("brugtTid");
                 int ongoing = rs.getInt("ongoing");
-                Project project = new Project(id, projektNavn, kundeNavn, brugtTid, startDato, ongoing);
+                double hourlyRate = rs.getDouble("hourlyRate");
+                Project project = new Project(id, projektNavn, kundeNavn, brugtTid, startDato, ongoing, hourlyRate);
                 allProjects.add(project);
             }
             return allProjects;

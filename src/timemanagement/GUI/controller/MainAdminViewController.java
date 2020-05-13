@@ -206,6 +206,8 @@ public class MainAdminViewController implements Initializable
     private CategoryAxis x;
     @FXML
     private JFXTextField txt_HourlyRateProject;
+    @FXML
+    private TableColumn<Project, Double> hourlyRateAdminColumn;
 
     /**
      * Initializes the controller class.
@@ -381,12 +383,14 @@ public class MainAdminViewController implements Initializable
         } else
         {
             projekterTableView.setItems(model.getProjectKundeNavn());
-
+            
         }
 
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());
+        hourlyRateAdminColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
+        
         
     }
 

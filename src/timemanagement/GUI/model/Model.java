@@ -344,7 +344,7 @@ public class Model
         return allKunder;
     }
 
-    public void createKunde(String kundeNavn, String kontaktPerson, String email, Double hourlyRate) throws ModelException
+    public void createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws ModelException
     {
         try
         {
@@ -376,7 +376,7 @@ public class Model
             allTasks.remove(task);
         } catch (bllException ex)
         {
-            throw new ModelException(ex.getMessage));
+            throw new ModelException(ex.getMessage());
         }
     }
     public List<Task> getAllTasksOnProject(int projektId) throws ModelException

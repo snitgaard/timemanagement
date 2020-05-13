@@ -19,7 +19,8 @@ import javafx.beans.value.ObservableValue;
  *
  * @author The Cowboys
  */
-public class Project {
+public class Project
+{
 
     private int id;
     private StringProperty projektNavn;
@@ -32,13 +33,15 @@ public class Project {
 
     /**
      * Constructor for Project
+     *
      * @param id
      * @param projektNavn
      * @param kundeId
      * @param startDato
-     * @param brugtTid 
+     * @param brugtTid
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, Double hourlyRate) {
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate)
+    {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeId = new SimpleIntegerProperty(kundeId);
@@ -49,15 +52,14 @@ public class Project {
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
     }
 
-    
-
     /**
      * Constructor for Project
+     *
      * @param projektNavn
      * @param kundeNavn
-     * @param brugtTid 
+     * @param brugtTid
      */
-    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int ongoing)
+    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int ongoing, double hourlyRate)
     {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
@@ -65,60 +67,74 @@ public class Project {
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.startDato = new SimpleStringProperty(startDato);
         this.ongoing = new SimpleIntegerProperty(ongoing);
+        this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
     }
-    
+
     /**
      * getter for Id
+     *
      * @return id
      */
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
     /**
      * Setter for Id
+     *
      * @param id
      */
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
     /**
      * Getter for projektNavn
+     *
      * @return projektNavn
      */
-    public String getProjektNavn() {
+    public String getProjektNavn()
+    {
         return projektNavn.get();
     }
 
     /**
      * Setter for projektNavn
-     * @param projektNavn 
+     *
+     * @param projektNavn
      */
-    public void setProjektNavn(String projektNavn) {
+    public void setProjektNavn(String projektNavn)
+    {
         this.projektNavn.set(projektNavn);
     }
-    
-    public StringProperty projektNavnProperty() {
+
+    public StringProperty projektNavnProperty()
+    {
         return projektNavn;
     }
-    
+
     /**
      * getter for kundeId
+     *
      * @return kundeId
      */
-    public int getKundeId() {
+    public int getKundeId()
+    {
         return kundeId.get();
     }
 
     /**
      * Setter for kundeId
+     *
      * @param kundeId
      */
-    public void setKundeId(int kundeId) {
+    public void setKundeId(int kundeId)
+    {
         this.kundeId.set(kundeId);
     }
-    
+
     public ObservableValue<Integer> kundeIdObservable()
     {
         return kundeId.asObject();
@@ -126,6 +142,7 @@ public class Project {
 
     /**
      * getter for kundeNavn
+     *
      * @return kundeNavn
      */
     public String getKundeNavn()
@@ -135,67 +152,79 @@ public class Project {
 
     /**
      * setter for kundeNavn
-     * @param kundeNavn 
+     *
+     * @param kundeNavn
      */
     public void setKundeNavn(String kundeNavn)
     {
         this.kundeNavn.set(kundeNavn);
     }
-    
-    public StringProperty kundeNavnProperty() {
+
+    public StringProperty kundeNavnProperty()
+    {
         return kundeNavn;
     }
 
-    
     /**
      * getter for startDato
+     *
      * @return startDato
      */
-    public String getStartDato() {
+    public String getStartDato()
+    {
         return startDato.get();
     }
 
     /**
      * setter for startDato
-     * @param startDato 
+     *
+     * @param startDato
      */
-    public void setStartDato(String startDato) {
+    public void setStartDato(String startDato)
+    {
         this.startDato.set(startDato);
     }
-    
-    public StringProperty startDatoProperty() {
+
+    public StringProperty startDatoProperty()
+    {
         return startDato;
     }
 
     /**
      * getter for brugtTid
+     *
      * @return brugtTid
      */
-    public long getBrugtTid() {
+    public long getBrugtTid()
+    {
         return brugtTid.get();
     }
 
     /**
      * setter for brugtTid
-     * @param brugtTid 
+     *
+     * @param brugtTid
      */
-    public void setBrugtTid(long brugtTid) {
+    public void setBrugtTid(long brugtTid)
+    {
         this.brugtTid.set(brugtTid);
     }
-    
+
     public ObservableValue<Long> brugtTidObservable()
     {
         return brugtTid.asObject();
     }
-    
-    public int getOngoing() {
+
+    public int getOngoing()
+    {
         return ongoing.get();
     }
 
-    public void setOngoing(int ongoing) {
+    public void setOngoing(int ongoing)
+    {
         this.ongoing.set(ongoing);
     }
-    
+
     public ObservableValue<Integer> ongoingObservable()
     {
         return ongoing.asObject();
@@ -210,19 +239,21 @@ public class Project {
     {
         this.hourlyRate.set(hourlyRate);
     }
-    
+
     public ObservableValue<Double> hourlyRateObservable()
     {
         return hourlyRate.asObject();
     }
-    
+
     /**
      * toString method for Project
+     *
      * @return projektNavn
      */
     @Override
-    public String toString() {
+    public String toString()
+    {
         return getProjektNavn();
     }
-    
+
 }

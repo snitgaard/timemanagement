@@ -243,5 +243,11 @@ public class DalManager implements DalFacade
             throw new DalException(ex.getMessage());
         }
     }
+
+    @Override
+    public void deleteKunde(Kunde kunde) throws DalException
+    {
+        kundeDAO.deleteKunde(kunde);
+    }
  
 }

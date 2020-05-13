@@ -166,7 +166,7 @@ public class Model
         try
         {
             User user = bllManager.createUser(userLogin, userPassword, isAdmin);
-       
+
             user.setAdminRights("User");
             allUsers.add(user);
         } catch (bllException ex)
@@ -367,7 +367,7 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void deleteTask(Task task) throws ModelException
     {
         try
@@ -379,11 +379,26 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+
     public List<Task> getAllTasksOnProject(int projektId) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.getAllTasksOnProject(projektId);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+
+    public void deleteKunde(Kunde kunde) throws ModelException
+    {
+        try
+        {
+            bllManager.deleteKunde(kunde);
+            allKunder.remove(kunde);
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }

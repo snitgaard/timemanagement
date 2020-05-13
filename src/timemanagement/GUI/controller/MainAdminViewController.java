@@ -905,8 +905,6 @@ public class MainAdminViewController implements Initializable
         }
         
     }
-
-    ;
     
     @FXML
     private void handleDeleteProject(ActionEvent event) throws ModelException
@@ -928,7 +926,6 @@ public class MainAdminViewController implements Initializable
                 {
 
                 }
-
             }
         }
     }
@@ -939,5 +936,14 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selecetedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         model.deleteTask(selecetedTask);
+    }
+
+    @FXML
+    private void handleDeleteClient(ActionEvent event) throws ModelException
+    {
+        clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        model.deleteKunde(selectedClient);
+        
     }
 }

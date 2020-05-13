@@ -322,5 +322,15 @@ public class bllManager implements bllFacade {
         }
     }
 
-
+    @Override
+    public void deleteKunde(Kunde kunde) throws bllException
+    {
+        try
+        {
+            dalFacade.deleteKunde(kunde);
+        } catch (DalException ex)
+        {
+            throw new bllException(ex.getMessage());
+        }
+    }
 }

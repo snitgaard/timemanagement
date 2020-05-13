@@ -179,6 +179,7 @@ public class MainAdminViewController implements Initializable
     private String username;
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
     ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+    ObservableList<Task> filteredTaskList = FXCollections.observableArrayList();
     @FXML
     private JFXButton clientButton;
     @FXML
@@ -222,7 +223,7 @@ public class MainAdminViewController implements Initializable
             userComboBox.setItems(roles);
 
 //            projekterTableView.setItems(model.getProjectKundeNavn());
-            fillColumns();
+            
             fillChart();
 
         } catch (ModelException ex)
@@ -232,10 +233,11 @@ public class MainAdminViewController implements Initializable
 
     }
 
-    public void ApplyImportantData(User selectedUser)
+    public void ApplyImportantData(User selectedUser) throws ModelException
     {
         this.selectedUser = selectedUser;
         loginTextField.setText(selectedUser + "");
+        fillColumns();
     }
 
     /**
@@ -307,16 +309,16 @@ public class MainAdminViewController implements Initializable
     {
         //Opgaver tableview
         List<Task> taskList = model.getAllTasksProjektNavn();
-        ObservableList<Task> filteredTaskList = FXCollections.observableArrayList();
+        
         
         for (Task task : taskList) {
-            if (task.getUserId() == this.selectedUser.getId())
+            if (task.getUserId() == selectedUser.getId())
             {
                 filteredTaskList.add(task);
             }
         }
         
-        projekterTableView.setItems(allProjectsFilteredList);
+        opgaverTableView.setItems(filteredTaskList);
         
         opgaveNavnColumn.setCellValueFactory(cellData -> cellData.getValue().opgaveNavnProperty());
         projektNavnColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
@@ -543,6 +545,8 @@ public class MainAdminViewController implements Initializable
     {
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
 
+        opgaveComboBox.getItems().clear();
+        
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
             kundeField.setText(selectedProject.getKundeNavn());
@@ -551,7 +555,8 @@ public class MainAdminViewController implements Initializable
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
-            for (Task tasks : model.getAllTasks())
+            
+            for (Task tasks : filteredTaskList)
             {
                 if (tasks.getProjektId() == selectedProject.getId())
                 {
@@ -566,8 +571,9 @@ public class MainAdminViewController implements Initializable
             beskrivelseTextArea.setDisable(true);
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
+            
         }
-        opgaveComboBox.getItems().clear();
+        
     }
 
     @FXML
@@ -646,6 +652,7 @@ public class MainAdminViewController implements Initializable
 
         opgaveComboBox.getItems().add(selectedTask);
         opgaveComboBox.getSelectionModel().select(selectedTask);
+        filteredTaskList.add(selectedTask);
 
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }

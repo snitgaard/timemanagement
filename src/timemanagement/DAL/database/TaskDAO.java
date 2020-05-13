@@ -152,7 +152,7 @@ public class TaskDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Project.projektNavn\n"
+            String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Task.userId, Task.beskrivelse, Task.betalt, Project.projektNavn\n"
                     + "FROM Task \n"
                     + "INNER JOIN Project ON Task.projektId=Project.id;";
             Statement statement = con.createStatement();
@@ -166,7 +166,10 @@ public class TaskDAO
                 int brugtTid = rs.getInt("brugtTid");
                 String dato = rs.getString("dato");
                 int projektId = rs.getInt("projektId");
-                Task task = new Task(id, opgaveNavn, projektNavn, brugtTid, dato, projektId);
+                int userId = rs.getInt("userId");
+                String beskrivelse = rs.getString("beskrivelse");
+                int betalt = rs.getInt("betalt");
+                Task task = new Task(id, opgaveNavn, projektNavn, brugtTid, dato, projektId, userId, beskrivelse, betalt);
                 allProjects.add(task);
             }
             return allProjects;

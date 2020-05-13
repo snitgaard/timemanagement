@@ -192,8 +192,11 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_Client;
     @FXML
     private SplitPane clientPane;
+    
     private JFXTextField txt_HourlyRate;
+    
     ListView<String> onGoing = new ListView<>();
+    
     @FXML
     private JFXTextField txt_ClientHourlyRate;
     @FXML
@@ -420,7 +423,13 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleEndDate(ActionEvent event)
     {
-        dateFilter();
+        try
+        {
+            dateFilter();
+        } catch (Exception e)
+        {
+
+        }
     }
 
     /**
@@ -730,7 +739,7 @@ public class MainAdminViewController implements Initializable
     {
         try
         {
-            List<Task> taskNames = model.getAllTasks();
+            List<Task> taskNames = model.getAllTasksProjektNavn();
             ObservableList<Task> result = FXCollections.observableArrayList();
             Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate.getValue().toString());
 
@@ -753,7 +762,7 @@ public class MainAdminViewController implements Initializable
                 calendar1.setTime(date1);
                 calendar1.add(Calendar.DATE, 1);
                 Date x = calendar1.getTime();
-                if (x.after(sDate) && x.before(eDate) || x.equals(sDate) || x.equals(eDate))
+                if (x.after(sDate) && x.before(eDate) && tasks.getUserId() == this.selectedUser.getId() || x.equals(sDate) || x.equals(eDate))
                 {
                     result.add(tasks);
                 }
@@ -774,7 +783,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void taskClearFilter(ActionEvent event) throws ModelException
     {
-        opgaverTableView.setItems(model.getAllTasksProjektNavn());
+        opgaverTableView.setItems(filteredTaskList);
+        startDate.setValue(null);
+        endDate.setValue(null);
     }
 
     @FXML
@@ -931,7 +942,6 @@ public class MainAdminViewController implements Initializable
                 {
 
                 }
-
             }
         }
     }
@@ -945,6 +955,11 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
-    private void handleDeleteClient(ActionEvent event) {
+    private void handleDeleteClient(ActionEvent event) throws ModelException
+    {
+        clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        model.deleteKunde(selectedClient);
+        
     }
 }

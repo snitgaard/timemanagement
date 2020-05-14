@@ -689,9 +689,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    /**
-     *
-     *
+     /**
+     *  Creates a task, makeing it a paid or unpaid task depending if the checkbox is checked or not. 
+     * 
      * @throws ModelException
      */
     @FXML
@@ -722,9 +722,10 @@ public class MainAdminViewController implements Initializable
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }
 
-    /**
-     *
-     *
+    
+     /**
+     *  Creates a project with all the inputted information
+     * 
      * @throws ModelException
      */
     @FXML
@@ -745,9 +746,10 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    /**
-     *
-     *
+    
+     /**
+     * Updates / replaces the time used of the selected task. 
+     * 
      * @throws ModelException
      */
     @FXML
@@ -798,10 +800,10 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
-    /**
-     *
-     *
+    
+     /**
+     * Sorting the task list, based on the selected dates. 
+     * 
      * @throws ModelException DalException
      */
     private void dateFilter()
@@ -849,10 +851,11 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
-    /**
-     *
-     *
+    
+    
+     /**
+     * Clears the task by re-setting the list task list. 
+     * 
      * @throws ModelException DalException
      */
     @FXML
@@ -869,10 +872,10 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
-    /**
-     *
-     *
+    
+     /**
+     * Update the selected user role, from the selcted role in combobox. 
+     * 
      * @throws ModelException DalException
      */
     @FXML

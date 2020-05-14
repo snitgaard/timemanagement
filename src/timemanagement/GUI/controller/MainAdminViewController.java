@@ -47,7 +47,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
@@ -194,11 +197,11 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_Client;
     @FXML
     private SplitPane clientPane;
-    
+
     private JFXTextField txt_HourlyRate;
-    
+
     ListView<String> onGoing = new ListView<>();
-    
+
     @FXML
     private JFXTextField txt_ClientHourlyRate;
     @FXML
@@ -213,6 +216,7 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_HourlyRateProject;
     @FXML
     private TableColumn<Project, Double> hourlyRateAdminColumn;
+    String alertString = "Generic Warning";
 
     /**
      * Initializes the controller class.
@@ -232,7 +236,6 @@ public class MainAdminViewController implements Initializable
             userComboBox.setItems(roles);
 
 //            projekterTableView.setItems(model.getProjectKundeNavn());
-            
             fillChart();
 
         } catch (ModelException ex)
@@ -319,17 +322,17 @@ public class MainAdminViewController implements Initializable
     {
         //Opgaver tableview
         List<Task> taskList = model.getAllTasksProjektNavn();
-        
-        
-        for (Task task : taskList) {
+
+        for (Task task : taskList)
+        {
             if (task.getUserId() == selectedUser.getId())
             {
                 filteredTaskList.add(task);
             }
         }
-        
+
         opgaverTableView.setItems(filteredTaskList);
-        
+
         opgaveNavnColumn.setCellValueFactory(cellData -> cellData.getValue().opgaveNavnProperty());
         projektNavnColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         brugtTidColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservableValue());
@@ -389,15 +392,14 @@ public class MainAdminViewController implements Initializable
         } else
         {
             projekterTableView.setItems(model.getProjectKundeNavn());
-            
+
         }
 
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());
         hourlyRateAdminColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
-        
-        
+
     }
 
     /**
@@ -413,7 +415,8 @@ public class MainAdminViewController implements Initializable
             dateFilter();
         } catch (Exception e)
         {
-
+            alertString = "Could not start date. Please try again.";
+            showAlert();
         }
     }
 
@@ -430,7 +433,8 @@ public class MainAdminViewController implements Initializable
             dateFilter();
         } catch (Exception e)
         {
-
+            alertString = "Could not stop time. Please try again.";
+            showAlert();
         }
     }
 
@@ -464,6 +468,8 @@ public class MainAdminViewController implements Initializable
                 brugtTidField.clear();
             } catch (Exception e)
             {
+                alertString = "Could not format time difference.";
+                showAlert();
             }
         }
     }
@@ -504,13 +510,12 @@ public class MainAdminViewController implements Initializable
             {
                 variableNumber = 1;
             }
-            
+
             NumberFormat formatter = new DecimalFormat("00");
-            
-            
-            String h = formatter.format(hours); 
+
+            String h = formatter.format(hours);
             String m = formatter.format(minutes);
-            
+
             brugtTidField.setText(h + ":" + m);
             model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
@@ -534,6 +539,8 @@ public class MainAdminViewController implements Initializable
 
         } catch (Exception e)
         {
+            alertString = "Could not calculate the time used on task.";
+            showAlert();
         }
     }
 
@@ -583,7 +590,7 @@ public class MainAdminViewController implements Initializable
             beskrivelseTextArea.setDisable(false);
             betaltCheckBox.setDisable(false);
             nyOpgaveButton.setDisable(false);
-            
+
             for (Task tasks : filteredTaskList)
             {
                 if (tasks.getProjektId() == selectedProject.getId())
@@ -598,9 +605,7 @@ public class MainAdminViewController implements Initializable
             beskrivelseTextArea.setDisable(true);
             betaltCheckBox.setDisable(true);
             nyOpgaveButton.setDisable(true);
-            
         }
-
     }
 
     @FXML
@@ -636,7 +641,6 @@ public class MainAdminViewController implements Initializable
             titelField.clear();
             beskrivelseTextArea.clear();
             betaltCheckBox.setSelected(false);
-
         }
     }
 
@@ -650,16 +654,23 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
-        if (opretAdminCheckBox.isSelected())
+        try
         {
-            String adminLogin = txt_userLogin.getText();
-            String adminPassword = encryptThisString(txt_userPassword.getText());
-            model.createUserAdmin(adminLogin, adminPassword, 1);
-        } else
+            if (opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
+            {
+                String adminLogin = txt_userLogin.getText();
+                String adminPassword = encryptThisString(txt_userPassword.getText());
+                model.createUserAdmin(adminLogin, adminPassword, 1);
+            } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
+            {
+                String userLogin = txt_userLogin.getText();
+                String userPassword = encryptThisString(txt_userPassword.getText());
+                model.createUser(userLogin, userPassword, 0);
+            }
+        } catch (Exception e)
         {
-            String userLogin = txt_userLogin.getText();
-            String userPassword = encryptThisString(txt_userPassword.getText());
-            model.createUser(userLogin, userPassword, 0);
+            alertString = "Could not create user or admin. Please try again";
+            showAlert();
         }
     }
 
@@ -669,12 +680,19 @@ public class MainAdminViewController implements Initializable
         int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
         Task selectedTask = null;
 
-        if (betaltCheckBox.isSelected() == true)
+        try
         {
-            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
-        } else
+            if (betaltCheckBox.isSelected() == true)
+            {
+                selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+            } else
+            {
+                selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+            }
+        } catch (Exception e)
         {
-            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+            alertString = "Could not create task. Plesae try again.";
+            showAlert();
         }
 
         opgaveComboBox.getItems().add(selectedTask);
@@ -689,17 +707,16 @@ public class MainAdminViewController implements Initializable
     {
         Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
-        Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
-        
 
-        if (!txt_projektNavn.getText().isEmpty() || selectedClient != null || !txt_HourlyRateProject.getText().isEmpty())
+        if (!txt_projektNavn.getText().isEmpty() && selectedClient != null && !txt_HourlyRateProject.getText().isEmpty())
         {
+            Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
             selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
             projektComboBox.getItems().add(selectedProject);
-        } else
+        } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
         {
-            Alert alert = new Alert(Alert.AlertType.WARNING, "Could not create project. Please fill out both Project name and select a client.", ButtonType.OK);
-            alert.showAndWait();
+            alertString = "Could not create project. Please try again";
+            showAlert();
         }
     }
 
@@ -709,16 +726,13 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
-        long gammelBrugtTid = selectedTask.getBrugtTid();
-        int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
+//        long gammelBrugtTid = selectedTask.getBrugtTid();
 
-//        String projektNavn = selectedTask.getProjektNavn();
-        try
+        if (selectedTask != null && !txt_nyBrugtTid.getText().isEmpty())
         {
-
+            int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
             selectedTask.setBrugtTid(nyBrugtTid);
             model.updateTask(selectedTask);
-
             for (int i = 0; i < projekterTableView.getItems().size(); i++)
             {
                 if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
@@ -726,14 +740,12 @@ public class MainAdminViewController implements Initializable
                     selectedProject = projekterTableView.getItems().get(i);
                     model.updateProjectTime(selectedProject);
                 }
-
             }
-
-        } catch (ModelException ex)
+        } else if (selectedTask == null && txt_nyBrugtTid.getText().isEmpty())
         {
-            System.out.println("yikes");
+            alertString = "Could not update time. Please try again.";
+            showAlert();
         }
-
     }
 
     @FXML
@@ -741,7 +753,15 @@ public class MainAdminViewController implements Initializable
     {
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUser = userView.getSelectionModel().getSelectedItem();
-        model.deleteUser(selectedUser);
+
+        if (selectedUser != null)
+        {
+            model.deleteUser(selectedUser);
+        } else
+        {
+            alertString = "Could not delete user. Please try again.";
+            showAlert();
+        }
     }
 
     private void dateFilter()
@@ -780,21 +800,29 @@ public class MainAdminViewController implements Initializable
             opgaverTableView.setItems(result);
         } catch (ParseException ex)
         {
-            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            alertString = "Could not parse to date format. Please try again.";
+            showAlert();
 
         } catch (ModelException ex)
         {
-            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            alertString = "Could not get all tasks from database. Please try again.";
+            showAlert();
         }
-
     }
 
     @FXML
     private void taskClearFilter(ActionEvent event) throws ModelException
     {
-        opgaverTableView.setItems(filteredTaskList);
-        startDate.setValue(null);
-        endDate.setValue(null);
+        try
+        {
+            opgaverTableView.setItems(filteredTaskList);
+            startDate.setValue(null);
+            endDate.setValue(null);
+        } catch (Exception e)
+        {
+            alertString = "Could not clear filter. Please try again.";
+            showAlert();
+        }
     }
 
     @FXML
@@ -803,35 +831,44 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUser = userView.getSelectionModel().getSelectedItem();
 
-        if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin"))
+        if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin") && selectedUser != null)
         {
             selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
             model.updateUserRoles(selectedUser);
-        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User"))
+        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User") && selectedUser != null)
         {
             selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
             model.updateUserRoles(selectedUser);
+        } else if (userComboBox.getSelectionModel().getSelectedItem() == null && selectedUser == null)
+        {
+            alertString = "Could not update user role. Please try again.";
+            showAlert();
         }
     }
 
     @FXML
     private void setOngoing(ActionEvent event) throws ModelException
     {
-
         setProjectTable();
-
     }
 
     @FXML
     private void handleArchiveProject(ActionEvent event) throws ModelException
     {
-        projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-        selectedProject.setOngoing(0);
-        model.archiveProject(selectedProject);
-        allProjectsFilteredList.remove(selectedProject);
-        projekterTableView.setItems(allProjectsFilteredList);
-//        setProjectTable();
+        try
+        {
+            projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+            selectedProject.setOngoing(0);
+            model.archiveProject(selectedProject);
+            allProjectsFilteredList.remove(selectedProject);
+            projekterTableView.setItems(allProjectsFilteredList);
+        } catch (Exception e)
+        {
+            alertString = "Could not archive project. Please try again.";
+            showAlert();
+        }
+
     }
 
     @FXML
@@ -874,19 +911,26 @@ public class MainAdminViewController implements Initializable
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.setValue(selectedTask);
         }
-
     }
 
     @FXML
     private void handleCreateClient(ActionEvent event) throws ModelException
     {
-        String kundeNavn = txt_Client.getText();
-        String contactPerson = txt_Contact.getText();
-        String email = txt_Email.getText();
-        Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-
-        model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
-
+        if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && txt_ClientHourlyRate.getText().isEmpty())
+        {
+            {
+                String kundeNavn = txt_Client.getText();
+                String contactPerson = txt_Contact.getText();
+                String email = txt_Email.getText();
+                Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
+                model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
+            }
+        }
+        else
+        {
+            alertString = "Could not creat client. Please try again.";
+            showAlert();
+        }
     }
 
     private void fillChart() throws ModelException
@@ -909,7 +953,8 @@ public class MainAdminViewController implements Initializable
 
                 } catch (ModelException ex)
                 {
-                    Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MainAdminViewController.class
+                            .getName()).log(Level.SEVERE, null, ex);
                 }
             }
 
@@ -920,32 +965,35 @@ public class MainAdminViewController implements Initializable
             Thread.sleep(1000);
         } catch (InterruptedException ex)
         {
-            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            alertString = "Could not fill charts on startup. Please try again.";
+            showAlert();
         }
 //        List<Project> projectList = model.getAllProjects();
-        
+
     }
-    
+
     @FXML
     private void handleDeleteProject(ActionEvent event) throws ModelException
     {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-        model.deleteProject(selectedProject);
+
+        if (selectedProject != null)
+        {
+            model.deleteProject(selectedProject);
+        } else
+        {
+            alertString = "Could not delete project. Please try again.";
+            showAlert();
+        }
 
         for (int i = 0; i < projektComboBox.getItems().size(); i++)
         {
             if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
             {
-                try
-                {
-                    projektComboBox.getItems().remove(i);
-                    projektComboBox.getSelectionModel().clearSelection();
-                    kundeField.clear();
-                } catch (NullPointerException ex)
-                {
-
-                }
+                projektComboBox.getItems().remove(i);
+                projektComboBox.getSelectionModel().clearSelection();
+                kundeField.clear();
             }
         }
     }
@@ -955,7 +1003,14 @@ public class MainAdminViewController implements Initializable
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selecetedTask = opgaverTableView.getSelectionModel().getSelectedItem();
-        model.deleteTask(selecetedTask);
+        if (selecetedTask != null)
+        {
+            model.deleteTask(selecetedTask);
+        } else
+        {
+            alertString = "Could not delete task. Please try again.";
+            showAlert();
+        }
     }
 
     @FXML
@@ -963,30 +1018,50 @@ public class MainAdminViewController implements Initializable
     {
         clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
-        model.deleteKunde(selectedClient);
-        
+        if (selectedClient != null)
+        {
+            model.deleteKunde(selectedClient);
+        } else
+        {
+            alertString = "Could not delete client. Please try again.";
+            showAlert();
+        }
     }
 
     @FXML
-    private void handleFilterCharts(ActionEvent event) throws ModelException {
+    private void handleFilterCharts(ActionEvent event) throws ModelException
+    {
         Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();
         if (selectedProject != null)
+        {
+            barChart.getData().clear();
+            System.out.println("gør den overhovedet det her?");
+            int number = -1;
+            XYChart.Series set2 = new XYChart.Series<>();
+            barChart.setAnimated(false);
+            System.out.println("hvad er det her  = " + selectedProject.getId());
+            for (Task allTasks : model.getAllTasks())
             {
-                barChart.getData().clear();
-                System.out.println("gør den overhovedet det her?");
-                int number = -1;
-                XYChart.Series set2 = new XYChart.Series<>();
-                barChart.setAnimated(false);
-                System.out.println("hvad er det her  = " + selectedProject.getId());
-                for (Task allTasks : model.getAllTasks())
-                    {
-                        if(allTasks.getProjektId() == selectedProject.getId())
-                        {
-                        number = number + 1;
-                        set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
-                        }
-                        }
-                barChart.getData().addAll(set2);
+                if (allTasks.getProjektId() == selectedProject.getId())
+                {
+                    number = number + 1;
+                    set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                }
             }
+            barChart.getData().addAll(set2);
+        } else
+        {
+            alertString = "Could not filter charts. Please try again.";
+            showAlert();
+        }
+    }
+
+    private void showAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.WARNING, alertString, ButtonType.OK);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.setAlwaysOnTop(true);
+        stage.showAndWait();
+        stage.toFront();
     }
 }

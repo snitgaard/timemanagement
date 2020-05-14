@@ -30,8 +30,8 @@
          <font>
             <Font size="14.0" />
          </font></Label>
-      <FontAwesomeIconView glyphName="USER" layoutX="51.0" layoutY="185.0" size="25" />
-      <FontAwesomeIconView glyphName="LOCK" layoutX="51.0" layoutY="256.0" size="25" />
+      <FontAwesomeIconView glyphName="USER" layoutX="51.0" layoutY="185.0" size="25" styleClass="pane-glyph-icon" />
+      <FontAwesomeIconView glyphName="LOCK" layoutX="51.0" layoutY="256.0" size="25" styleClass="pane-glyph-icon" />
       <Pane layoutX="-14.0" prefHeight="47.0" prefWidth="410.0" stylesheets="@../controller/TimeManagementCSS.css">
          <children>
             <ImageView fx:id="btn_close" fitHeight="18.0" fitWidth="15.0" layoutX="389.0" layoutY="7.0" onMouseClicked="#close_app" pickOnBounds="true" preserveRatio="true">

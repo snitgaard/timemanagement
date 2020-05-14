@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 {
     -fx-primary : #435a9a;
-    -fx-secondary : #81DAF5; /* #FFFF8D */
+    -fx-secondary : #A9BCF5; 
     -fx-primarytext: #FFFFFF; 
 }
 
@@ -23,7 +23,7 @@ and open the template in the editor.
     -fx-background-color: -fx-primary; 
 }
 
-.glyph-icon
+.pane-glyph-icon
 {
     -fx-fill: -fx-primarytext; 
 }
@@ -60,9 +60,17 @@ and open the template in the editor.
 .login-text-field
 {
     -fx-text-fill: -fx-primarytext;
+    -fx-border-color: -fx-primarytext;
+    -fx-border-width: 0 0 1 0;
     -fx-font-size: 13pt;
     -fx-prompt-text-fill: -fx-primarytext;
     -jfx-focus-color: -fx-secondary;
+    
+}
+
+.login-text-field: focused
+{
+    -fx-border-width: 0 0 0 0;
 }
 
 

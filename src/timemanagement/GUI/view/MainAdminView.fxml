@@ -34,7 +34,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="HOURGLASS" size="20" text="" />
+                  <FontAwesomeIconView glyphName="HOURGLASS" size="20" styleClass="pane-glyph-icon" text="" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="opgaverButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="114.0" styleClass="pane-button" text="Tasks">
@@ -42,12 +42,12 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="BRIEFCASE" size="25" text="" />
+                  <FontAwesomeIconView glyphName="BRIEFCASE" size="25" styleClass="pane-glyph-icon" text="" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="clientButton" onAction="#handleClicks" prefHeight="32.0" prefWidth="119.0" styleClass="pane-button" text="Clients" visible="false">
                <graphic>
-                  <FontAwesomeIconView size="20" text="" />
+                  <FontAwesomeIconView size="20" styleClass="pane-glyph-icon" text="" />
                </graphic>
                <font>
                   <Font name="System Bold" size="15.0" />
@@ -58,7 +58,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
+                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" styleClass="pane-glyph-icon" text="" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="analyseButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="127.0" styleClass="pane-button" text="Analysis" visible="false">
@@ -66,7 +66,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="´" size="20" text="" />
+                  <FontAwesomeIconView glyphName="´" size="20" styleClass="pane-glyph-icon" text="" />
                </graphic>
             </JFXButton>
             <JFXButton fx:id="opretBrugerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="136.0" styleClass="pane-button" text="Accounts" visible="false">
@@ -74,7 +74,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
                <graphic>
-                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" text="" />
+                  <FontAwesomeIconView glyphName="BRIEFCASE" size="20" styleClass="pane-glyph-icon" text="" />
                </graphic>
             </JFXButton>
          </children>

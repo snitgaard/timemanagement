@@ -260,9 +260,25 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleClicks(ActionEvent actionEvent)
     {
+        List<JFXButton> dashBoardButtons = new ArrayList<>();
+        dashBoardButtons.add(timeLoggerButton);
+        dashBoardButtons.add(opgaverButton);
+        dashBoardButtons.add(analyseButton);
+        dashBoardButtons.add(projekterButton);
+        dashBoardButtons.add(opretBrugerButton);
+        dashBoardButtons.add(clientButton);
+        
+        for (JFXButton dashBoardButton : dashBoardButtons) {
+            dashBoardButton.getStyleClass().removeAll("pane-buttonSelected");
+            dashBoardButton.getStyleClass().add("pane-button");
+        }
+        
+        
         if (actionEvent.getSource() == timeLoggerButton)
         {
             timeLoggerPane.toFront();
+            timeLoggerButton.getStyleClass().removeAll("pane-button");
+            timeLoggerButton.getStyleClass().add("pane-buttonSelected");
         }
         if (actionEvent.getSource() == opgaverButton)
         {
@@ -273,18 +289,26 @@ public class MainAdminViewController implements Initializable
         if (actionEvent.getSource() == analyseButton)
         {
             analysePane.toFront();
+            analyseButton.getStyleClass().removeAll("pane-button");
+            analyseButton.getStyleClass().add("pane-buttonSelected");
         }
         if (actionEvent.getSource() == projekterButton)
         {
             projektPane.toFront();
+            projekterButton.getStyleClass().removeAll("pane-button");
+            projekterButton.getStyleClass().add("pane-buttonSelected");
         }
         if (actionEvent.getSource() == opretBrugerButton)
         {
             opretBrugerPane.toFront();
+            opretBrugerButton.getStyleClass().removeAll("pane-button");
+            opretBrugerButton.getStyleClass().add("pane-buttonSelected");
         }
         if (actionEvent.getSource() == clientButton)
         {
             clientPane.toFront();
+            clientButton.getStyleClass().removeAll("pane-button");
+            clientButton.getStyleClass().add("pane-buttonSelected");
         }
     }
 

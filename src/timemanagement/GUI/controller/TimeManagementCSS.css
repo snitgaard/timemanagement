@@ -8,23 +8,61 @@ and open the template in the editor.
     Author     : Mads
 */
 {
-    -fx-primary: #DADADA;
-    -fx-secondary: #000000;
+    -fx-primary : #435a9a;
+    -fx-secondary : #81DAF5; /* #FFFF8D */
+    -fx-primarytext: #FFFFFF; 
 }
 
 .split-pane *.split-pane-divider {
     -fx-padding: 1 0 1 0;  
+    
 }
 
-.button:hover
+.root
 {
-    -fx-border-color: -fx-primary; 
-    -fx-background-color: -fx-primary;
-    -fx-text-fill: -fx-secondary; 
+    -fx-background-color: -fx-primary; 
+    -fx-border-color: -fx-secondary;
 }
-.button:active
+
+.glyph-icon
 {
-    -fx-border-color: -fx-primary; 
+    -fx-fill: -fx-primarytext; 
+}
+
+.pane-button
+{
+    -fx-text-fill: -fx-primarytext; 
+    -fx-border-color: -fx-secondary; 
+    -fx-border-radius: 20px; 
+    -fx-background-radius: 20px; 
+}
+
+.pane-button:hover
+{
+    -fx-border-color: -fx-secondary; 
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary; 
+}
+
+.login-label
+{
+    -fx-text-fill: -fx-primarytext; 
+}
+
+.login-text-field
+{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size: 13pt;
+    -jfx-focus-color: -fx-secondary;
+}
+
+
+.jfx-date-picker > .text-field  
+{
+    -fx-alignment: center;
+}
+
+
+.vbox {
     -fx-background-color: -fx-primary;
-    -fx-text-fill: -fx-secondary; 
 }

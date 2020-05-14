@@ -480,45 +480,21 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
         long gammelBrugtTid = selectedTask.getBrugtTid();
         long gammelProjektTid = selectedProject.getBrugtTid();
+        
+        java.util.Date date = new java.util.Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        slutTidField.setText(sdf.format(date));
 
         try
         {
-            java.util.Date date = new java.util.Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            slutTidField.setText(sdf.format(date));
-
-            String startTid = startTidField.getText();
-            String slutTid = slutTidField.getText();
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-            Date date1 = format.parse(startTid);
-            Date date2 = format.parse(slutTid);
-            long difference = date2.getTime() - date1.getTime();
-
-            long input = difference / 1000;
-            long hours = (input - input % 3600) / 3600;
-            long minutes = (input % 3600 - input % 3600 % 60) / 60;
-            long seconds = input % 3600 % 60;
-            long variableNumber = input / 60;
-
-            if (variableNumber == 0)
-            {
-                variableNumber = 1;
-            }
-            
-            NumberFormat formatter = new DecimalFormat("00");
-            
-            
-            String h = formatter.format(hours); 
-            String m = formatter.format(minutes);
-            
-            brugtTidField.setText(h + ":" + m);
-            model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
+            brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
+            model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)
             {
                 if (selectedTask.getId() == opgaverTableView.getItems().get(i).getId())
                 {
-                    opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + variableNumber);
+                    opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                 }
 
             }
@@ -527,7 +503,7 @@ public class MainAdminViewController implements Initializable
             {
                 if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
                 {
-                    projekterTableView.getItems().get(i).setBrugtTid(gammelProjektTid + variableNumber);
+                    projekterTableView.getItems().get(i).setBrugtTid(gammelProjektTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                     model.updateProjectTime(selectedProject);
                 }
             }

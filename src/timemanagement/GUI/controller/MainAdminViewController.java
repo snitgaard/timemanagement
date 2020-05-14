@@ -373,12 +373,11 @@ public class MainAdminViewController implements Initializable
         //Client view
         fillClientView();
     }
-    
-    
-     /**
-     * Fills the columns in the ClientView with proper data. Seperates the columns and
-     * the data within the columns.
-     * 
+
+    /**
+     * Fills the columns in the ClientView with proper data. Seperates the
+     * columns and the data within the columns.
+     *
      * @throws ModelException
      */
     private void fillClientView() throws ModelException
@@ -390,10 +389,10 @@ public class MainAdminViewController implements Initializable
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
     }
 
-     /**
-     * Fills the columns in the UserAdminView with proper data. Seperates the columns and
-     * the data within the columns.
-     * 
+    /**
+     * Fills the columns in the UserAdminView with proper data. Seperates the
+     * columns and the data within the columns.
+     *
      * @throws ModelException
      */
     private void fillUserAdminViews() throws ModelException
@@ -403,11 +402,11 @@ public class MainAdminViewController implements Initializable
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
-    
-         /**
-     * Fills the columns in the Projectview with proper data. Seperates the columns and
-     * the data within the columns.
-     * 
+
+    /**
+     * Fills the columns in the Projectview with proper data. Seperates the
+     * columns and the data within the columns.
+     *
      * @throws ModelException
      */
     private void setProjectTable() throws ModelException
@@ -460,8 +459,6 @@ public class MainAdminViewController implements Initializable
             dateFilter();
         } catch (Exception e)
         {
-            alertString = "Could not start date. Please try again.";
-            showAlert();
         }
     }
 
@@ -478,8 +475,6 @@ public class MainAdminViewController implements Initializable
             dateFilter();
         } catch (Exception e)
         {
-            alertString = "Could not stop time. Please try again.";
-            showAlert();
         }
     }
 
@@ -531,7 +526,7 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
         long gammelBrugtTid = selectedTask.getBrugtTid();
         long gammelProjektTid = selectedProject.getBrugtTid();
-        
+
         java.util.Date date = new java.util.Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         slutTidField.setText(sdf.format(date));
@@ -592,9 +587,9 @@ public class MainAdminViewController implements Initializable
         stage.close();
     }
 
-     /**
-     * Calls the projectData method as an action event. 
-     * 
+    /**
+     * Calls the projectData method as an action event.
+     *
      * @throws ModelException
      */
     @FXML
@@ -602,11 +597,11 @@ public class MainAdminViewController implements Initializable
     {
         projectData();
     }
-    
-     /**
-     * Displays the customer data from the selected project 
-     * and enable/disables buttons, textfield  and checkbox depending on the true/false outcome. 
-     * 
+
+    /**
+     * Displays the customer data from the selected project and enable/disables
+     * buttons, textfield and checkbox depending on the true/false outcome.
+     *
      * @throws ModelException
      */
     private void projectData() throws ModelException
@@ -640,9 +635,11 @@ public class MainAdminViewController implements Initializable
             nyOpgaveButton.setDisable(true);
         }
     }
-     /**
-     * Calls the opgaveData method as an action event, and disables start button if titlefield and beskrivelsetextarea is filled.
-     * 
+
+    /**
+     * Calls the opgaveData method as an action event, and disables start button
+     * if titlefield and beskrivelsetextarea is filled.
+     *
      * @throws ModelException
      */
     @FXML
@@ -654,11 +651,12 @@ public class MainAdminViewController implements Initializable
             btn_start.setDisable(false);
         }
     }
-    
-     /**
-     * If there is a selected item in the combobox, sets the textfield to the name of the task and description.
-     * And check if the checkbox is checked. Else clear the title and description. 
-     * 
+
+    /**
+     * If there is a selected item in the combobox, sets the textfield to the
+     * name of the task and description. And check if the checkbox is checked.
+     * Else clear the title and description.
+     *
      * @throws ModelException
      */
     private void opgaveData() throws ModelException
@@ -808,10 +806,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    
-     /**
-     * 
-     * 
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -890,12 +887,12 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void taskClearFilter(ActionEvent event) throws ModelException
     {
-        try
+        if (startDate.getValue() != null && endDate.getValue() != null)
         {
             opgaverTableView.setItems(filteredTaskList);
             startDate.setValue(null);
             endDate.setValue(null);
-        } catch (Exception e)
+        } else
         {
             alertString = "Could not clear filter. Please try again.";
             showAlert();
@@ -911,26 +908,29 @@ public class MainAdminViewController implements Initializable
     private void updateUserRole(ActionEvent event) throws ModelException
     {
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        User selectedUser = userView.getSelectionModel().getSelectedItem();
+        User selectedUserView = userView.getSelectionModel().getSelectedItem();
+        String selectedUserCombobox = userComboBox.getSelectionModel().getSelectedItem();
+        System.out.println(userComboBox.getSelectionModel().getSelectedItem());
+        System.out.println(selectedUserView);
 
-        if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin"))
+        if (selectedUserView != null && selectedUserCombobox == "Admin")
         {
-            selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
-            model.updateUserRoles(selectedUser);
-        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User"))
+            selectedUserView.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
+            model.updateUserRoles(selectedUserView);
+        } else if (selectedUserView != null && selectedUserCombobox == "User")
         {
-            selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
-            model.updateUserRoles(selectedUser);
-        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("List Of Roles"))
+            selectedUserView.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
+            model.updateUserRoles(selectedUserView);
+        } else
         {
             alertString = "Could not update user role. Please try again.";
             showAlert();
         }
     }
-    
-     /**
-     * 
-     * 
+
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -938,11 +938,10 @@ public class MainAdminViewController implements Initializable
     {
         setProjectTable();
     }
-    
-    
-     /**
-     * 
-     * 
+
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -964,10 +963,9 @@ public class MainAdminViewController implements Initializable
 
     }
 
-    
-     /**
-     * 
-     * 
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1012,10 +1010,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    
-     /**
-     * 
-     * 
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1030,8 +1027,7 @@ public class MainAdminViewController implements Initializable
                 Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
                 model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
             }
-        }
-        else
+        } else
         {
             alertString = "Could not creat client. Please try again.";
             showAlert();
@@ -1076,6 +1072,7 @@ public class MainAdminViewController implements Initializable
 //        List<Project> projectList = model.getAllProjects();
 
     }
+
     @FXML
     private void handleDeleteProject(ActionEvent event) throws ModelException
     {
@@ -1101,10 +1098,10 @@ public class MainAdminViewController implements Initializable
             }
         }
     }
-    
-     /**
-     * 
-     * 
+
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1122,10 +1119,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    
-     /**
-     * 
-     * 
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1143,9 +1139,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-     /**
-     * 
-     * 
+    /**
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML

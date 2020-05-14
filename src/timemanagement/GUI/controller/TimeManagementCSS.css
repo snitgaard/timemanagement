@@ -21,7 +21,6 @@ and open the template in the editor.
 .root
 {
     -fx-background-color: -fx-primary; 
-    -fx-border-color: -fx-secondary;
 }
 
 .glyph-icon
@@ -44,6 +43,15 @@ and open the template in the editor.
     -fx-text-fill: -fx-primary; 
 }
 
+.pane-buttonSelected
+{
+    -fx-background-color: -fx-secondary;
+    -fx-border-color: -fx-secondary;
+    -fx-text-fill: -fx-primary;
+    -fx-border-radius: 20px; 
+    -fx-background-radius: 20px; 
+}
+
 .login-label
 {
     -fx-text-fill: -fx-primarytext; 
@@ -53,6 +61,7 @@ and open the template in the editor.
 {
     -fx-text-fill: -fx-primarytext;
     -fx-font-size: 13pt;
+    -fx-prompt-text-fill: -fx-primarytext;
     -jfx-focus-color: -fx-secondary;
 }
 

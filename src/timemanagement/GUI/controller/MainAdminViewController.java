@@ -267,6 +267,8 @@ public class MainAdminViewController implements Initializable
         if (actionEvent.getSource() == opgaverButton)
         {
             opgaverPane.toFront();
+            opgaverButton.getStyleClass().removeAll("pane-button");
+            opgaverButton.getStyleClass().add("pane-buttonSelected");
         }
         if (actionEvent.getSource() == analyseButton)
         {

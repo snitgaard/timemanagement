@@ -17,7 +17,7 @@
    <children>
       <JFXTextField fx:id="emailField" layoutX="79.0" layoutY="155.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter email" styleClass="login-text-field" />
       <JFXPasswordField fx:id="passwordField" layoutX="79.0" layoutY="220.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter password" styleClass="login-text-field" />
-      <Label layoutX="114.0" layoutY="65.0" prefHeight="35.0" prefWidth="175.0" text="Welcome back!">
+      <Label layoutX="114.0" layoutY="65.0" prefHeight="35.0" prefWidth="175.0" styleClass="login-label" text="Welcome back!">
          <font>
             <Font name="System Bold" size="24.0" />
          </font>

@@ -35,7 +35,7 @@ public class Model
 
     private static Model instance = new Model();
 
-    private Model()
+    public Model()
     {
         try
         {
@@ -399,6 +399,24 @@ public class Model
             allKunder.remove(kunde);
         } catch (bllException ex)
         {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public String timeFormatter(String startTid, String slutTid) throws ModelException
+    {
+        try {
+            return bllManager.timeFormatter(startTid, slutTid);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public long timeCalculator(String startTid, String slutTid) throws ModelException
+    {
+        try {
+            return bllManager.timeCalculator(startTid, slutTid);
+        } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }

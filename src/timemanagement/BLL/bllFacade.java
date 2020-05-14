@@ -72,4 +72,8 @@ public interface bllFacade
     void updateUserRoles(User user) throws bllException;
     
     List<Task> getAllTasksOnProject(int projektId) throws bllException;
+    
+    String timeFormatter(String startTid, String slutTid) throws bllException;
+    
+    long timeCalculator(String startTid, String slutTid) throws bllException;
 }

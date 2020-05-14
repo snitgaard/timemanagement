@@ -347,7 +347,14 @@ public class MainAdminViewController implements Initializable
         //Client view
         fillClientView();
     }
-
+    
+    
+     /**
+     * Fills the columns in the ClientView with proper data. Seperates the columns and
+     * the data within the columns.
+     * 
+     * @throws ModelException
+     */
     private void fillClientView() throws ModelException
     {
         clientTableView.setItems(model.getAllKunder());
@@ -357,6 +364,12 @@ public class MainAdminViewController implements Initializable
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
     }
 
+     /**
+     * Fills the columns in the UserAdminView with proper data. Seperates the columns and
+     * the data within the columns.
+     * 
+     * @throws ModelException
+     */
     private void fillUserAdminViews() throws ModelException
     {
         userView.setItems(model.getAllUsers());
@@ -364,7 +377,13 @@ public class MainAdminViewController implements Initializable
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
     }
-
+    
+         /**
+     * Fills the columns in the Projectview with proper data. Seperates the columns and
+     * the data within the columns.
+     * 
+     * @throws ModelException
+     */
     private void setProjectTable() throws ModelException
     {
         clientComboBox.setItems(model.getAllKunder());
@@ -486,44 +505,21 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
         long gammelBrugtTid = selectedTask.getBrugtTid();
         long gammelProjektTid = selectedProject.getBrugtTid();
+        
+        java.util.Date date = new java.util.Date();
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        slutTidField.setText(sdf.format(date));
 
         try
         {
-            java.util.Date date = new java.util.Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-            slutTidField.setText(sdf.format(date));
-
-            String startTid = startTidField.getText();
-            String slutTid = slutTidField.getText();
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-            Date date1 = format.parse(startTid);
-            Date date2 = format.parse(slutTid);
-            long difference = date2.getTime() - date1.getTime();
-
-            long input = difference / 1000;
-            long hours = (input - input % 3600) / 3600;
-            long minutes = (input % 3600 - input % 3600 % 60) / 60;
-            long seconds = input % 3600 % 60;
-            long variableNumber = input / 60;
-
-            if (variableNumber == 0)
-            {
-                variableNumber = 1;
-            }
-
-            NumberFormat formatter = new DecimalFormat("00");
-
-            String h = formatter.format(hours);
-            String m = formatter.format(minutes);
-
-            brugtTidField.setText(h + ":" + m);
-            model.addTime(variableNumber, opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
+            brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
+            model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)
             {
                 if (selectedTask.getId() == opgaverTableView.getItems().get(i).getId())
                 {
-                    opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + variableNumber);
+                    opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                 }
 
             }
@@ -532,7 +528,7 @@ public class MainAdminViewController implements Initializable
             {
                 if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
                 {
-                    projekterTableView.getItems().get(i).setBrugtTid(gammelProjektTid + variableNumber);
+                    projekterTableView.getItems().get(i).setBrugtTid(gammelProjektTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                     model.updateProjectTime(selectedProject);
                 }
             }
@@ -570,12 +566,23 @@ public class MainAdminViewController implements Initializable
         stage.close();
     }
 
+     /**
+     * Calls the projectData method as an action event. 
+     * 
+     * @throws ModelException
+     */
     @FXML
     private void setProjectData(ActionEvent event) throws ModelException
     {
         projectData();
     }
-
+    
+     /**
+     * Displays the customer data from the selected project 
+     * and enable/disables buttons, textfield  and checkbox depending on the true/false outcome. 
+     * 
+     * @throws ModelException
+     */
     private void projectData() throws ModelException
     {
         Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
@@ -607,7 +614,11 @@ public class MainAdminViewController implements Initializable
             nyOpgaveButton.setDisable(true);
         }
     }
-
+     /**
+     * Calls the opgaveData method as an action event, and disables start button if titlefield and beskrivelsetextarea is filled.
+     * 
+     * @throws ModelException
+     */
     @FXML
     private void setOpgaveData(ActionEvent event) throws ModelException
     {
@@ -617,7 +628,13 @@ public class MainAdminViewController implements Initializable
             btn_start.setDisable(false);
         }
     }
-
+    
+     /**
+     * If there is a selected item in the combobox, sets the textfield to the name of the task and description.
+     * And check if the checkbox is checked. Else clear the title and description. 
+     * 
+     * @throws ModelException
+     */
     private void opgaveData() throws ModelException
     {
         Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
@@ -674,6 +691,11 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+     /**
+     *  
+     * 
+     * @throws ModelException
+     */
     @FXML
     private void createOpgave(ActionEvent event) throws ModelException
     {
@@ -702,6 +724,12 @@ public class MainAdminViewController implements Initializable
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }
 
+    
+     /**
+     * 
+     * 
+     * @throws ModelException
+     */
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
@@ -720,6 +748,12 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    
+     /**
+     * 
+     * 
+     * @throws ModelException
+     */
     @FXML
     private void handleUpdateTime(ActionEvent event) throws ModelException
     {
@@ -748,6 +782,12 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void deleteUser(ActionEvent event) throws DalException, ModelException
     {
@@ -763,7 +803,12 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     private void dateFilter()
     {
         try
@@ -809,7 +854,13 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
+    
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void taskClearFilter(ActionEvent event) throws ModelException
     {
@@ -824,7 +875,12 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void updateUserRole(ActionEvent event) throws ModelException
     {
@@ -845,13 +901,24 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void setOngoing(ActionEvent event) throws ModelException
     {
         setProjectTable();
     }
-
+    
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void handleArchiveProject(ActionEvent event) throws ModelException
     {
@@ -871,6 +938,12 @@ public class MainAdminViewController implements Initializable
 
     }
 
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void handleEditTask(ActionEvent event) throws ModelException
     {
@@ -913,6 +986,12 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void handleCreateClient(ActionEvent event) throws ModelException
     {
@@ -971,7 +1050,6 @@ public class MainAdminViewController implements Initializable
 //        List<Project> projectList = model.getAllProjects();
 
     }
-
     @FXML
     private void handleDeleteProject(ActionEvent event) throws ModelException
     {
@@ -997,7 +1075,12 @@ public class MainAdminViewController implements Initializable
             }
         }
     }
-
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void handleDeleteTask(ActionEvent event) throws ModelException
     {
@@ -1013,6 +1096,12 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void handleDeleteClient(ActionEvent event) throws ModelException
     {
@@ -1028,6 +1117,11 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+     /**
+     * 
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
     private void handleFilterCharts(ActionEvent event) throws ModelException
     {

@@ -6,6 +6,11 @@
 package timemanagement.BLL;
 
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -330,6 +335,57 @@ public class bllManager implements bllFacade {
             dalFacade.deleteKunde(kunde);
         } catch (DalException ex)
         {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public String timeFormatter(String startTid, String slutTid) throws bllException {
+ 
+        try {
+            
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            Date date1 = format.parse(startTid);
+            Date date2 = format.parse(slutTid);
+            long difference = date2.getTime() - date1.getTime();
+
+            long input = difference / 1000;
+            long hours = (input - input % 3600) / 3600;
+            long minutes = (input % 3600 - input % 3600 % 60) / 60;
+           
+            NumberFormat formatter = new DecimalFormat("00");
+                   
+            String h = formatter.format(hours); 
+            String m = formatter.format(minutes);
+            
+            return h + ":" + m;
+            
+        } catch (ParseException ex) {
+            throw new bllException(ex.getMessage());
+        }
+            
+
+    }
+
+    @Override
+    public long timeCalculator(String startTid, String slutTid) throws bllException {
+        
+        try {
+            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
+            Date date1 = format.parse(startTid);
+            Date date2 = format.parse(slutTid);
+            long difference = date2.getTime() - date1.getTime();
+
+            long input = difference / 1000;
+            long minuteTime = input / 60;
+            
+            if (minuteTime == 0)
+            {
+                minuteTime = 1;
+            }
+            
+            return minuteTime;
+        } catch (ParseException ex) {
             throw new bllException(ex.getMessage());
         }
     }

@@ -35,7 +35,7 @@ public class Model
 
     private static Model instance = new Model();
 
-    private Model()
+    public Model()
     {
         try
         {

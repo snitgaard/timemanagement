@@ -8,23 +8,207 @@ and open the template in the editor.
     Author     : Mads
 */
 {
-    -fx-primary: #DADADA;
-    -fx-secondary: #000000;
+    -fx-primary : #435a9a;
+    -fx-secondary : #81DAF5; /* #FFFF8D */
+    -fx-primarytext: #FFFFFF; 
 }
 
 .split-pane *.split-pane-divider {
     -fx-padding: 1 0 1 0;  
+    
 }
 
-.button:hover
+
+.jfx-progress-bar > .bar
 {
-    -fx-border-color: -fx-primary; 
-    -fx-background-color: -fx-primary;
-    -fx-text-fill: -fx-secondary; 
+    -fx-background-color: -fx-secondary;
 }
-.button:active
-{
-    -fx-border-color: -fx-primary; 
+
+.combo-box-base .arrow-button {
     -fx-background-color: -fx-primary;
-    -fx-text-fill: -fx-secondary; 
+    -fx-border-color: -fx-secondary;
+}
+
+.combo-box-base .arrow {
+    -fx-background-color: -fx-secondary;
+}
+
+.root
+{
+    -fx-background-color: -fx-primary; 
+    -fx-border-color: -fx-secondary;
+}
+
+.glyph-icon
+{
+    -fx-fill: -fx-primarytext; 
+}
+
+.pane-button
+{
+    -fx-text-fill: -fx-primarytext; 
+    -fx-border-color: -fx-secondary; 
+    -fx-border-radius: 20px; 
+    -fx-background-radius: 20px; 
+}
+
+.pane-button:hover
+{
+    -fx-border-color: -fx-secondary; 
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary; 
+}
+
+
+.text-field
+{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-size: 13pt;
+    -jfx-focus-color: -fx-secondary;
+}
+
+.jfx-toggle-button
+{
+    -fx-text-fill: -fx-primarytext;
+    -jfx-toggle-line-color: -fx-secondary; 
+    -jfx-toggle-color: -fx-primarytext;
+}
+
+.jfx-date-picker > .text-field  
+{
+    -fx-alignment: center;
+}
+
+
+.chart
+{
+    -fx-padding: 10px;
+}
+
+.chart-plot-background
+{
+   -fx-background-color: -fx-primary;
+}
+
+.axis
+{
+    -fx-tick-label-fill: -fx-primarytext;
+}
+
+/*
+Teacher specific css
+*/
+
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.scroll-pane
+{
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-background-insets: 0;
+}
+
+.scroll-pane .button, .homebutton {
+    -fx-background-color: #525b6e;
+    -fx-border-color: -fx-secondary; 
+    -fx-border-radius: 20px; 
+    -fx-background-radius: 20px; 
+}
+
+.scroll-pane .button:hover, .homebutton:hover
+{
+    -fx-border-color: -fx-secondary; 
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary; 
+}
+
+.box, personbox {
+    -fx-background-color: #383e4a;  
+    -fx-border-color: #555;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.personbox {
+    -fx-padding: 10px;
+}
+
+.personbox .label {
+    -fx-padding: 0 0 5px 0;
+}
+
+.personbox .button {
+    -fx-padding: 5px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.progress-bar > .bar {
+    -fx-accent: -fx-secondary;
+    -fx-background-color: linear-gradient(
+        from 0px .75em to .75em 0px,
+        repeat,
+        -fx-accent 0%,
+        -fx-accent 49%,
+        derive(-fx-accent, 30%) 50%,
+        derive(-fx-accent, 30%) 99%
+        );
+}
+
+.progress-bar {
+    -fx-background-color: #555;
+}
+
+.scroll-bar:horizontal, .scroll-bar:vertical{
+    -fx-background-color:transparent;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:horizontal .thumb,
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #B2B2B2;
+    -fx-background-radius: 5em;
+}
+
+.list-cell {
+    -fx-padding: 0px;
+    -fx-background-color: -fx-primary;
+    -fx-border-color: -fx-secondary;
+    -fx-text-fill: -fx-primarytext;
+}
+
+.table-row-cell{
+    -fx-padding: 0px;
+    -fx-background-color: -fx-primary;
+    -fx-border-color: -fx-secondary;
+}
+
+.table-view .table-cell{
+    -fx-text-fill: -fx-primarytext;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: -fx-primary;
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-primarytext;
+}
+
+.vbox {
+    -fx-background-color: -fx-primary;
 }

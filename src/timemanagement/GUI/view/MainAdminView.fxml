@@ -29,7 +29,7 @@
    <children>
       <VBox layoutX="-1.0" layoutY="125.0" prefHeight="466.0" prefWidth="224.0" styleClass="vbox" stylesheets="@../controller/TimeManagementCSS.css">
          <children>
-            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="162.0" styleClass="pane-button" text="Time Logger">
+            <JFXButton fx:id="timeLoggerButton" onAction="#handleClicks" prefHeight="31.0" prefWidth="162.0" styleClass="pane-buttonSelected" text="Time Logger">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

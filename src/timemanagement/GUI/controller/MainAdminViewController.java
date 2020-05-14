@@ -694,7 +694,7 @@ public class MainAdminViewController implements Initializable
     }
 
      /**
-     *  
+     *  Creates a task, makeing it a paid or unpaid task depending if the checkbox is checked or not. 
      * 
      * @throws ModelException
      */
@@ -728,7 +728,7 @@ public class MainAdminViewController implements Initializable
 
     
      /**
-     * 
+     *  Creates a project with all the inputted information
      * 
      * @throws ModelException
      */
@@ -752,7 +752,7 @@ public class MainAdminViewController implements Initializable
 
     
      /**
-     * 
+     * Updates / replaces the time used of the selected task. 
      * 
      * @throws ModelException
      */
@@ -807,7 +807,7 @@ public class MainAdminViewController implements Initializable
     }
     
      /**
-     * 
+     * Sorting the task list, based on the selected dates. 
      * 
      * @throws ModelException DalException
      */
@@ -859,7 +859,7 @@ public class MainAdminViewController implements Initializable
     
     
      /**
-     * 
+     * Clears the task by re-setting the list task list. 
      * 
      * @throws ModelException DalException
      */
@@ -879,7 +879,7 @@ public class MainAdminViewController implements Initializable
     }
     
      /**
-     * 
+     * Update the selected user role, from the selcted role in combobox. 
      * 
      * @throws ModelException DalException
      */
@@ -889,15 +889,15 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUser = userView.getSelectionModel().getSelectedItem();
 
-        if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin") && selectedUser != null)
+        if (userComboBox.getSelectionModel().getSelectedItem().equals("Admin"))
         {
             selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
             model.updateUserRoles(selectedUser);
-        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User") && selectedUser != null)
+        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("User"))
         {
             selectedUser.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
             model.updateUserRoles(selectedUser);
-        } else if (userComboBox.getSelectionModel().getSelectedItem() == null && selectedUser == null)
+        } else if (userComboBox.getSelectionModel().getSelectedItem().equals("List Of Roles"))
         {
             alertString = "Could not update user role. Please try again.";
             showAlert();

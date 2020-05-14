@@ -58,7 +58,7 @@ public class NewEmptyJUnitTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testLoginCredentials() throws UnknownHostException, ModelException {
-        System.out.println("attendanceAutomationTest:TestLoginCredentials");
+        System.out.println("timeMangement:TestLoginCredentials");
 
         String username = "3";
         String password = encryptThisString("3");
@@ -77,7 +77,7 @@ public class NewEmptyJUnitTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void testIfEncryptWorks() throws UnknownHostException {
-        System.out.println("attendanceAutomationTest:testIfEncryptWorks");
+        System.out.println("timeMangement:testIfEncryptWorks");
         String password = encryptThisString("3");
 
         if (password == "3") {

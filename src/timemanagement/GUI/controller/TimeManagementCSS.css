@@ -23,6 +23,19 @@ and open the template in the editor.
     -fx-background-color: -fx-primary; 
 }
 
+.button
+{
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border-color: grey;
+}
+
+.button:hover
+{
+    -fx-background-color: -fx-primary;
+    -fx-text-fill: -fx-primarytext;
+}
+
 .pane-glyph-icon
 {
     -fx-fill: -fx-primarytext; 

@@ -141,7 +141,7 @@ public class LoginController implements Initializable {
         Stage stage = new Stage();
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initStyle(StageStyle.TRANSPARENT);
-        stage.setAlwaysOnTop(true);
+        stage.setAlwaysOnTop(false);
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();

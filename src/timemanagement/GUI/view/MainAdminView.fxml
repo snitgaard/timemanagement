@@ -378,9 +378,9 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
                      <children>
-                        <JFXTextField fx:id="txt_userPassword" layoutX="113.0" layoutY="112.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Password" />
-                        <JFXTextField fx:id="txt_userLogin" layoutX="113.0" layoutY="65.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter Username" />
-                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="22.0" layoutY="201.0" text="Admin">
+                        <JFXTextField fx:id="txt_userPassword" layoutX="115.0" layoutY="145.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Password" />
+                        <JFXTextField fx:id="txt_userLogin" layoutX="115.0" layoutY="98.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter Username" />
+                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="115.0" layoutY="205.0" text="Admin">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -391,8 +391,7 @@
                               <TableColumn fx:id="userViewRolle" prefWidth="133.0" text="Role" />
                           </columns>
                         </TableView>
-                        <JFXTextField fx:id="txt_hourlyRate" layoutX="112.0" layoutY="162.0" prefHeight="25.0" prefWidth="224.0" promptText="Enter Hourly Rate" />
-                        <JFXButton layoutX="370.0" layoutY="161.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">
+                        <JFXButton layoutX="219.0" layoutY="199.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font>
@@ -405,8 +404,8 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXComboBox fx:id="userComboBox" layoutX="371.0" layoutY="67.0" promptText="List Of Roles" />
-                        <JFXButton layoutX="491.0" layoutY="67.0" onAction="#updateUserRole" style="-fx-border-color: black;" text="Update">
+                        <JFXComboBox fx:id="userComboBox" layoutX="372.0" layoutY="101.0" promptText="List Of Roles" />
+                        <JFXButton layoutX="498.0" layoutY="97.0" onAction="#updateUserRole" style="-fx-border-color: black;" text="Update">
                            <font>
                               <Font name="System Bold" size="13.0" />
                            </font></JFXButton>
@@ -415,12 +414,8 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="22.0" layoutY="72.0" prefHeight="25.0" prefWidth="67.0" text="Username" />
-                        <Label layoutX="21.0" layoutY="115.0" prefHeight="25.0" prefWidth="71.0" text="Password">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="19.0" layoutY="162.0" prefHeight="25.0" prefWidth="87.0" text="Hourly Rate">
+                        <Label layoutX="24.0" layoutY="100.0" prefHeight="25.0" prefWidth="67.0" text="Username" />
+                        <Label layoutX="22.0" layoutY="148.0" prefHeight="25.0" prefWidth="71.0" text="Password">
                            <font>
                               <Font size="14.0" />
                            </font></Label>

@@ -220,7 +220,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXButton editButton;
 
-    boolean buttonState = true;
+    private boolean buttonState = true;
 
     /**
      * Initializes the controller class.

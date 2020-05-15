@@ -354,7 +354,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="kundeField" disable="true" editable="false" layoutX="105.0" layoutY="161.0" prefHeight="30.0" prefWidth="124.0" promptText="Enter Customer">
+                        <JFXTextField fx:id="kundeField" disable="true" editable="false" layoutX="105.0" layoutY="161.0" prefHeight="30.0" prefWidth="124.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -382,7 +382,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="startTidField" editable="false" layoutX="138.0" layoutY="142.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="startTidField" disable="true" editable="false" layoutX="138.0" layoutY="142.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -392,7 +392,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="slutTidField" editable="false" layoutX="138.0" layoutY="181.0" prefHeight="25.0" prefWidth="89.0">
+                        <JFXTextField fx:id="slutTidField" disable="true" editable="false" layoutX="138.0" layoutY="181.0" prefHeight="25.0" prefWidth="89.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -402,7 +402,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="brugtTidField" editable="false" layoutX="388.0" layoutY="152.0" prefHeight="30.0" prefWidth="231.0">
+                        <JFXTextField fx:id="brugtTidField" disable="true" editable="false" layoutX="388.0" layoutY="152.0" prefHeight="30.0" prefWidth="231.0">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -412,7 +412,7 @@
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <JFXButton layoutX="523.0" layoutY="20.0" onAction="#handleEditTask" style="-fx-border-color: black;" text="Edit">
+                        <JFXButton fx:id="editButton" disable="true" layoutX="523.0" layoutY="20.0" onAction="#handleEditTask" style="-fx-border-color: black;" text="Edit">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>

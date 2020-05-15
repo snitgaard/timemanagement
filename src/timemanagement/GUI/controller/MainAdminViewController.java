@@ -217,6 +217,10 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<Project, Double> hourlyRateAdminColumn;
     String alertString = "Generic Warning";
+    @FXML
+    private JFXButton editButton;
+
+    boolean buttonState = true;
 
     /**
      * Initializes the controller class.
@@ -267,13 +271,13 @@ public class MainAdminViewController implements Initializable
         dashBoardButtons.add(projekterButton);
         dashBoardButtons.add(opretBrugerButton);
         dashBoardButtons.add(clientButton);
-        
-        for (JFXButton dashBoardButton : dashBoardButtons) {
+
+        for (JFXButton dashBoardButton : dashBoardButtons)
+        {
             dashBoardButton.getStyleClass().removeAll("pane-buttonSelected");
             dashBoardButton.getStyleClass().add("pane-button");
         }
-        
-        
+
         if (actionEvent.getSource() == timeLoggerButton)
         {
             timeLoggerPane.toFront();
@@ -613,11 +617,8 @@ public class MainAdminViewController implements Initializable
         if (projektComboBox.getSelectionModel().getSelectedItem() != null)
         {
             kundeField.setText(selectedProject.getKundeNavn());
-            opgaveComboBox.setDisable(false);
-            titelField.setDisable(false);
-            beskrivelseTextArea.setDisable(false);
-            betaltCheckBox.setDisable(false);
-            nyOpgaveButton.setDisable(false);
+            buttonState = false;
+            disableTimeLoggerButtons();
 
             for (Task tasks : filteredTaskList)
             {
@@ -626,19 +627,26 @@ public class MainAdminViewController implements Initializable
                     opgaveComboBox.getItems().add(tasks);
                 }
             }
-        } else
-        {
-            opgaveComboBox.setDisable(true);
-            titelField.setDisable(true);
-            beskrivelseTextArea.setDisable(true);
-            betaltCheckBox.setDisable(true);
-            nyOpgaveButton.setDisable(true);
         }
+    }
+
+    private void disableTimeLoggerButtons()
+    {
+        opgaveComboBox.setDisable(buttonState);
+        titelField.setDisable(buttonState);
+        beskrivelseTextArea.setDisable(buttonState);
+        betaltCheckBox.setDisable(buttonState);
+        nyOpgaveButton.setDisable(buttonState);
+        btn_start.setDisable(buttonState);
+        editButton.setDisable(buttonState);
+        startTidField.setDisable(buttonState);
+        slutTidField.setDisable(buttonState);
+        brugtTidField.setDisable(buttonState);
     }
 
     /**
      * Calls the opgaveData method as an action event, and disables start button
-     * if titlefield and beskrivelsetextarea is filled.
+     * if titlefield and beskrivelsetextarea is not empty.
      *
      * @throws ModelException
      */
@@ -646,9 +654,15 @@ public class MainAdminViewController implements Initializable
     private void setOpgaveData(ActionEvent event) throws ModelException
     {
         opgaveData();
+        Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
         if (titelField.getText() != null && beskrivelseTextArea.getText() != null)
         {
-            btn_start.setDisable(false);
+            buttonState = false;
+            disableTimeLoggerButtons();
+        } else if (titelField.getText() == null && beskrivelseTextArea.getText() == null && selectedTask == null)
+        {
+            buttonState = true;
+            disableTimeLoggerButtons();
         }
     }
 
@@ -715,9 +729,10 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-     /**
-     *  Creates a task, makeing it a paid or unpaid task depending if the checkbox is checked or not. 
-     * 
+    /**
+     * Creates a task, makeing it a paid or unpaid task depending if the
+     * checkbox is checked or not.
+     *
      * @throws ModelException
      */
     @FXML
@@ -726,16 +741,15 @@ public class MainAdminViewController implements Initializable
         int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
         Task selectedTask = null;
 
-        try
+        if (betaltCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
-            if (betaltCheckBox.isSelected() == true)
-            {
-                selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
-            } else
-            {
-                selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
-            }
-        } catch (Exception e)
+            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
+                    1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+        } else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
+        {
+            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
+                    projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+        } else
         {
             alertString = "Could not create task. Plesae try again.";
             showAlert();
@@ -748,10 +762,9 @@ public class MainAdminViewController implements Initializable
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }
 
-    
-     /**
-     *  Creates a project with all the inputted information
-     * 
+    /**
+     * Creates a project with all the inputted information
+     *
      * @throws ModelException
      */
     @FXML
@@ -772,10 +785,9 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    
-     /**
-     * Updates / replaces the time used of the selected task. 
-     * 
+    /**
+     * Updates / replaces the time used of the selected task.
+     *
      * @throws ModelException
      */
     @FXML
@@ -826,10 +838,10 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-    
-     /**
-     * Sorting the task list, based on the selected dates. 
-     * 
+
+    /**
+     * Sorting the task list, based on the selected dates.
+     *
      * @throws ModelException DalException
      */
     private void dateFilter()
@@ -877,11 +889,10 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-    
-    
-     /**
-     * Clears the task by re-setting the list task list. 
-     * 
+
+    /**
+     * Clears the task by re-setting the list task list.
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -898,10 +909,10 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-    
-     /**
-     * Update the selected user role, from the selcted role in combobox. 
-     * 
+
+    /**
+     * Update the selected user role, from the selcted role in combobox.
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -975,6 +986,12 @@ public class MainAdminViewController implements Initializable
         Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
         Task selectedTaskTwo = null;
 
+        if (titelField.getText().isEmpty() && beskrivelseTextArea.getText().isEmpty())
+        {
+            alertString = "Could not edit task. Please try again.";
+            showAlert();
+        }
+
         for (int i = 0; i < opgaverTableView.getItems().size(); i++)
         {
 
@@ -1008,6 +1025,7 @@ public class MainAdminViewController implements Initializable
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.setValue(selectedTask);
         }
+
     }
 
     /**
@@ -1108,10 +1126,10 @@ public class MainAdminViewController implements Initializable
     private void handleDeleteTask(ActionEvent event) throws ModelException
     {
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        Task selecetedTask = opgaverTableView.getSelectionModel().getSelectedItem();
-        if (selecetedTask != null)
+        Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
+        if (selectedTask != null)
         {
-            model.deleteTask(selecetedTask);
+            model.deleteTask(selectedTask);
         } else
         {
             alertString = "Could not delete task. Please try again.";
@@ -1144,7 +1162,6 @@ public class MainAdminViewController implements Initializable
      *
      * @throws ModelException DalException
      */
-    @FXML
     private void handleFilterCharts(ActionEvent event) throws ModelException
     {
         Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();

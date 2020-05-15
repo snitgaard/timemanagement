@@ -415,7 +415,10 @@ public class MainAdminViewController implements Initializable
      */
     private void setProjectTable() throws ModelException
     {
-        clientComboBox.setItems(model.getAllKunder());
+        if (clientComboBox.getSelectionModel().getSelectedItem() == null)
+        {
+            clientComboBox.setItems(model.getAllKunder());
+        }     
         List<Project> allProjectsList = model.getProjectKundeNavn();
         ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
         allProjectsFilteredList.clear();
@@ -778,6 +781,7 @@ public class MainAdminViewController implements Initializable
             Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
             selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
             projektComboBox.getItems().add(selectedProject);
+            allProjectsFilteredList.add(selectedProject);
         } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
         {
             alertString = "Could not create project. Please try again";
@@ -965,7 +969,6 @@ public class MainAdminViewController implements Initializable
             selectedProject.setOngoing(0);
             model.archiveProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
-            projekterTableView.setItems(allProjectsFilteredList);
         } catch (Exception e)
         {
             alertString = "Could not archive project. Please try again.";

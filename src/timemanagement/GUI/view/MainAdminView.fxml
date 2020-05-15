@@ -104,7 +104,7 @@
                               <Font name="System Bold" size="13.0" />
                            </font>
                         </JFXButton>
-                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="555.0" layoutY="192.0" onAction="#setOngoing" text="Show ongoing projects" />
+                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="555.0" layoutY="192.0" onAction="#setOngoing" selected="true" text="Show ongoing projects" />
                         <JFXButton layoutX="470.0" layoutY="551.0" onAction="#handleArchiveProject" style="-fx-border-color: grey;" text="Archive Project">
                            <font>
                               <Font name="System Bold" size="13.0" />
@@ -144,7 +144,7 @@
                             <NumberAxis fx:id="y" side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" promptText="Select Project" />
+                        <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
                         <JFXDatePicker layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
                         <JFXDatePicker layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
                         <Label layoutX="32.0" layoutY="81.0" text="Project">

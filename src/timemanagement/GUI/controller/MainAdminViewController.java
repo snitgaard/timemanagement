@@ -954,7 +954,6 @@ public class MainAdminViewController implements Initializable
             selectedProject.setOngoing(0);
             model.archiveProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
-            projekterTableView.setItems(allProjectsFilteredList);
         } catch (Exception e)
         {
             alertString = "Could not archive project. Please try again.";

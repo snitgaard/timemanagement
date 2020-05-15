@@ -13,16 +13,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="anchorPane" prefHeight="376.0" prefWidth="402.0" stylesheets="@../controller/TimeManagementCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.LoginController">
+<AnchorPane fx:id="anchorPane" prefHeight="376.0" prefWidth="402.0" styleClass="AnchorPaneLogin" stylesheets="@../controller/TimeManagementCSS.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="timemanagement.gui.controller.LoginController">
    <children>
       <JFXTextField fx:id="emailField" layoutX="79.0" layoutY="155.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter email" styleClass="login-text-field" />
       <JFXPasswordField fx:id="passwordField" layoutX="79.0" layoutY="220.0" prefHeight="25.0" prefWidth="293.0" promptText="Enter password" styleClass="login-text-field" />
-      <Label layoutX="114.0" layoutY="65.0" prefHeight="35.0" prefWidth="175.0" styleClass="login-label" text="Welcome back!">
-         <font>
-            <Font name="System Bold" size="24.0" />
-         </font>
-      </Label>
-      <JFXButton fx:id="btnLogin" layoutX="139.0" layoutY="305.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="124.0" styleClass="pane-button" text="Login">
+      <JFXButton fx:id="btnLogin" layoutX="139.0" layoutY="312.0" onAction="#handleLoginButton" prefHeight="40.0" prefWidth="124.0" styleClass="pane-button" text="Login">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></JFXButton>
@@ -53,7 +48,17 @@
                   <ColorAdjust brightness="0.21" />
                </effect>
             </ImageView>
+            <Label layoutX="118.0" layoutY="6.0" prefHeight="35.0" prefWidth="175.0" styleClass="login-label" text="Welcome back!">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
+      <ImageView fx:id="imageViewLogin" fitHeight="58.0" fitWidth="281.0" layoutX="99.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../Images/grumsenLogo.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

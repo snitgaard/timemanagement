@@ -1165,6 +1165,7 @@ public class MainAdminViewController implements Initializable
      *
      * @throws ModelException DalException
      */
+    @FXML
     private void handleFilterCharts(ActionEvent event) throws ModelException
     {
         Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();

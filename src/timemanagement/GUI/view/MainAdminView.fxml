@@ -144,7 +144,7 @@
                             <NumberAxis fx:id="y" side="LEFT" />
                           </yAxis>
                         </BarChart>
-                        <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" promptText="Select Project" />
+                        <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
                         <JFXDatePicker layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
                         <JFXDatePicker layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
                         <Label layoutX="32.0" layoutY="81.0" text="Project">

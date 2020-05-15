@@ -20,7 +20,7 @@ and open the template in the editor.
 
 .root
 {
-    background-color: -fx-primary; 
+    -fx-background-color: -fx-primary; 
 }
 
 .AnchorPaneLogin

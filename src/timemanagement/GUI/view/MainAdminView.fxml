@@ -81,96 +81,6 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
-            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" fx:id="x" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis fx:id="y" side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
-                        <JFXDatePicker layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
-                        <JFXDatePicker layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
-                        <Label layoutX="32.0" layoutY="81.0" text="Project">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="171.0" text="Analysis">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="32.0" layoutY="135.0" text="Start Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="328.0" layoutY="135.0" text="End Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
-            <SplitPane fx:id="projektPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <TableView fx:id="projekterTableView" layoutY="220.0" prefHeight="324.0" prefWidth="717.0">
-                          <columns>
-                            <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Project Name" />
-                            <TableColumn fx:id="kundeColumn" prefWidth="127.0" text="Customer" />
-                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="207.0" text="Used Time" />
-                              <TableColumn fx:id="hourlyRateAdminColumn" prefWidth="145.0" text="Hourly rate" />
-                          </columns>
-                        </TableView>
-                        <JFXTextField fx:id="txt_projektNavn" layoutX="138.0" layoutY="75.0" prefHeight="25.0" prefWidth="224.0" />
-                        <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="171.0" text="Create New Project">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <JFXButton layoutX="393.0" layoutY="176.0" onAction="#handleCreateProjekt" text="Create Project">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="555.0" layoutY="192.0" onAction="#setOngoing" selected="true" text="Show ongoing projects" />
-                        <JFXButton layoutX="470.0" layoutY="551.0" onAction="#handleArchiveProject" style="-fx-border-color: grey;" text="Archive Project">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXComboBox fx:id="clientComboBox" layoutX="134.0" layoutY="121.0" prefHeight="25.0" prefWidth="224.0" />
-                        <JFXButton layoutX="603.0" layoutY="551.0" onAction="#handleDeleteProject" style="-fx-border-color: grey;" text="Delete project">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></JFXButton>
-                        <JFXTextField fx:id="txt_HourlyRateProject" layoutX="137.0" layoutY="165.0" prefHeight="25.0" prefWidth="224.0" />
-                        <Label layoutX="15.0" layoutY="78.0" text="Enter Project Name">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="15.0" layoutY="124.0" text="Select customer">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="13.0" layoutY="168.0" text="Enter hourly rate">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
             <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
@@ -422,6 +332,98 @@
                      </children>
                   </AnchorPane>
                </items>
+            </SplitPane>
+            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="x" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="y" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
+                        <JFXDatePicker layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
+                        <JFXDatePicker layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
+                        <Label layoutX="32.0" layoutY="81.0" text="Project">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="171.0" text="Analysis">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="32.0" layoutY="135.0" text="Start Date">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="328.0" layoutY="135.0" text="End Date">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane fx:id="projektPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView fx:id="projekterTableView" layoutY="220.0" prefHeight="324.0" prefWidth="717.0">
+                          <columns>
+                            <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Project Name" />
+                            <TableColumn fx:id="kundeColumn" prefWidth="127.0" text="Customer" />
+                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="207.0" text="Used Time" />
+                              <TableColumn fx:id="hourlyRateAdminColumn" prefWidth="145.0" text="Hourly rate" />
+                          </columns>
+                        </TableView>
+                        <JFXTextField fx:id="txt_projektNavn" layoutX="138.0" layoutY="75.0" prefHeight="25.0" prefWidth="224.0" />
+                        <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="171.0" text="Create New Project">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="393.0" layoutY="176.0" onAction="#handleCreateProjekt" text="Create Project">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXCheckBox fx:id="ongoingCheckbox" layoutX="555.0" layoutY="192.0" onAction="#setOngoing" selected="true" text="Show ongoing projects" />
+                        <JFXButton layoutX="470.0" layoutY="551.0" onAction="#handleArchiveProject" style="-fx-border-color: grey;" text="Archive Project">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXComboBox fx:id="clientComboBox" layoutX="134.0" layoutY="121.0" prefHeight="25.0" prefWidth="224.0" />
+                        <JFXButton layoutX="603.0" layoutY="551.0" onAction="#handleDeleteProject" style="-fx-border-color: grey;" text="Delete project">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
+                        <JFXTextField fx:id="txt_HourlyRateProject" layoutX="137.0" layoutY="165.0" prefHeight="25.0" prefWidth="224.0" />
+                        <Label layoutX="15.0" layoutY="78.0" text="Enter Project Name">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="124.0" text="Select customer">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="13.0" layoutY="168.0" text="Enter hourly rate">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="458.0" layoutY="118.0" prefHeight="17.0" prefWidth="84.0" text="Chost Price" />
+                        <JFXTextField fx:id="chostPrice" layoutX="547.0" layoutY="114.0" prefHeight="25.0" prefWidth="124.0" />
+                     </children>
+                  </AnchorPane>
+              </items>
             </SplitPane>
          </children>
       </StackPane>

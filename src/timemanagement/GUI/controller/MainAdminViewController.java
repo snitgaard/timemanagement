@@ -160,8 +160,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<User, String> userViewEmail;
     @FXML
-    private JFXTextField txt_hourlyRate;
-    @FXML
     private JFXTextField txt_nyBrugtTid;
     private User selectedUser;
     private TableColumn<Task, Integer> idColumn;
@@ -221,6 +219,8 @@ public class MainAdminViewController implements Initializable
     private JFXButton editButton;
 
     private boolean buttonState = true;
+    @FXML
+    private JFXTextField chostPrice;
 
     /**
      * Initializes the controller class.
@@ -231,6 +231,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
+            calculateChostPrice();
             timeLoggerPane.toFront();
 
             model = model.getInstance();
@@ -796,6 +797,7 @@ public class MainAdminViewController implements Initializable
             Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
             selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
             projektComboBox.getItems().add(selectedProject);
+            projektComboBox2.getItems().add(selectedProject);
             allProjectsFilteredList.add(selectedProject);
         } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
         {
@@ -1118,6 +1120,8 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             model.deleteProject(selectedProject);
+            allProjectsFilteredList.remove(selectedProject);
+            
         } else
         {
             alertString = "Could not delete project. Please try again.";
@@ -1148,6 +1152,7 @@ public class MainAdminViewController implements Initializable
         if (selectedTask != null)
         {
             model.deleteTask(selectedTask);
+            filteredTaskList.remove(selectedTask);
         } else
         {
             alertString = "Could not delete task. Please try again.";
@@ -1216,4 +1221,17 @@ public class MainAdminViewController implements Initializable
         stage.showAndWait();
         stage.toFront();
     }
+
+
+    private void calculateChostPrice() 
+    {
+     projekterTableView.setOnMousePressed((MouseEvent event) -> {
+       chostPrice.clear();
+       double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
+       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
+       double estimatedChostPrice = usedTime * hourlyRate;
+       chostPrice.setText(estimatedChostPrice+"");
+     });
+    }
+        
 }

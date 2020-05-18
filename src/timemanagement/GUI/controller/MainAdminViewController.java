@@ -938,17 +938,15 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUserView = userView.getSelectionModel().getSelectedItem();
         String selectedUserCombobox = userComboBox.getSelectionModel().getSelectedItem();
-        System.out.println(userComboBox.getSelectionModel().getSelectedItem());
-        System.out.println(selectedUserView);
-
+        
         if (selectedUserView != null && selectedUserCombobox == "Admin")
         {
-            selectedUserView.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
-            model.updateUserRoles(selectedUserView);
+            selectedUserView.setAdminRights(selectedUserCombobox);
+            model.updateUserRoles(selectedUserView, 1);
         } else if (selectedUserView != null && selectedUserCombobox == "User")
         {
-            selectedUserView.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
-            model.updateUserRoles(selectedUserView);
+            selectedUserView.setAdminRights(selectedUserCombobox);
+            model.updateUserRoles(selectedUserView, 0);
         } else
         {
             alertString = "Could not update user role. Please try again.";
@@ -1052,6 +1050,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateClient(ActionEvent event) throws ModelException
     {
+        Kunde selectedKunde = null;
         if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
         {
             {
@@ -1059,7 +1058,8 @@ public class MainAdminViewController implements Initializable
                 String contactPerson = txt_Contact.getText();
                 String email = txt_Email.getText();
                 Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-                model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
+                selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
+                clientComboBox.getItems().add(selectedKunde);
             }
         } else
         {

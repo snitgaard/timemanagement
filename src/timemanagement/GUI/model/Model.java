@@ -309,11 +309,11 @@ public class Model
         }
     }
 
-    public void updateUserRoles(User user) throws ModelException
+    public void updateUserRoles(User user, int isAdmin) throws ModelException
     {
         try
         {
-            bllManager.updateUserRoles(user);
+            bllManager.updateUserRoles(user, isAdmin);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -344,12 +344,13 @@ public class Model
         return allKunder;
     }
 
-    public void createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws ModelException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws ModelException
     {
         try
         {
             Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
             allKunder.add(kunde);
+            return kunde;
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

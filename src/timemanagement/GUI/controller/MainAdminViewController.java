@@ -1222,7 +1222,10 @@ public class MainAdminViewController implements Initializable
         stage.toFront();
     }
 
-
+    /**
+     * Gets the selected project, and calculate the estimated chost price, from the hourly rate and the time used
+     * Formated correctly. 
+     */
     private void calculateChostPrice() 
     {
        projekterTableView.setOnMousePressed((MouseEvent event) -> {
@@ -1230,7 +1233,6 @@ public class MainAdminViewController implements Initializable
        double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
        double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
        double estimatedChostPrice = usedTime * hourlyRate;
-           System.out.println(estimatedChostPrice);
        
        String pattern = "####,####,###.##";
        DecimalFormat decimalFormat = new DecimalFormat(pattern);

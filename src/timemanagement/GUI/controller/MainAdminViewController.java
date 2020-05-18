@@ -712,14 +712,13 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
+        
         try
         {
-            List<User> userList = new ArrayList<>();
-            userList.addAll(model.getAllUsers());
             
-            for (int i = 0; i < userList.size(); i++)
+            for (int i = 0; i < userView.getItems().size(); i++)
             {
-                if (userList.get(i).toString().equalsIgnoreCase(txt_userLogin.getText()))
+                if (userView.getItems().get(i).toString().equalsIgnoreCase(txt_userLogin.getText()))
                 {
                     alertString = "Could not create user, user already exists.";
                     showAlert();

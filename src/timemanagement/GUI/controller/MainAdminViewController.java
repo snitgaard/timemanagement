@@ -926,17 +926,15 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUserView = userView.getSelectionModel().getSelectedItem();
         String selectedUserCombobox = userComboBox.getSelectionModel().getSelectedItem();
-        System.out.println(userComboBox.getSelectionModel().getSelectedItem());
-        System.out.println(selectedUserView);
-
+        
         if (selectedUserView != null && selectedUserCombobox == "Admin")
         {
-            selectedUserView.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
-            model.updateUserRoles(selectedUserView);
+            selectedUserView.setAdminRights(selectedUserCombobox);
+            model.updateUserRoles(selectedUserView, 1);
         } else if (selectedUserView != null && selectedUserCombobox == "User")
         {
-            selectedUserView.setAdminRights(userComboBox.getSelectionModel().getSelectedItem());
-            model.updateUserRoles(selectedUserView);
+            selectedUserView.setAdminRights(selectedUserCombobox);
+            model.updateUserRoles(selectedUserView, 0);
         } else
         {
             alertString = "Could not update user role. Please try again.";

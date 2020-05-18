@@ -309,11 +309,11 @@ public class Model
         }
     }
 
-    public void updateUserRoles(User user) throws ModelException
+    public void updateUserRoles(User user, int isAdmin) throws ModelException
     {
         try
         {
-            bllManager.updateUserRoles(user);
+            bllManager.updateUserRoles(user, isAdmin);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

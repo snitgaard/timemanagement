@@ -1264,6 +1264,7 @@ public class MainAdminViewController implements Initializable
     private void calculateCostPrice() 
     {
        projekterTableView.setOnMousePressed((MouseEvent event) -> {
+           try{
        costPrice.clear();
        double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
        double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
@@ -1273,7 +1274,10 @@ public class MainAdminViewController implements Initializable
        DecimalFormat decimalFormat = new DecimalFormat(pattern);
        String number = decimalFormat.format(estimatedChostPrice);
        costPrice.setText(number);
-     });
+           }catch(NullPointerException ex)
+           {
+               System.out.println("yo");
+           }});
     }
 
 }

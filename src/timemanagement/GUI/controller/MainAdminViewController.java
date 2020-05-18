@@ -419,7 +419,7 @@ public class MainAdminViewController implements Initializable
         if (clientComboBox.getSelectionModel().getSelectedItem() == null)
         {
             clientComboBox.setItems(model.getAllKunder());
-        }     
+        }
         List<Project> allProjectsList = model.getProjectKundeNavn();
         ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
         allProjectsFilteredList.clear();
@@ -713,10 +713,8 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateUser(ActionEvent event) throws ModelException
     {
-        
         try
         {
-            
             for (int i = 0; i < userView.getItems().size(); i++)
             {
                 if (userView.getItems().get(i).toString().equalsIgnoreCase(txt_userLogin.getText()))
@@ -746,8 +744,8 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Creates a task, making it a paid or unpaid task depending if the
-     * checkbox is checked or not.
+     * Creates a task, making it a paid or unpaid task depending if the checkbox
+     * is checked or not.
      *
      * @throws ModelException
      */
@@ -761,19 +759,24 @@ public class MainAdminViewController implements Initializable
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
                     1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
-        } else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
+            
+            opgaveComboBox.getItems().add(selectedTask);
+            opgaveComboBox.getSelectionModel().select(selectedTask);
+            filteredTaskList.add(selectedTask);
+        } 
+        else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
                     projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+            
+            opgaveComboBox.getItems().add(selectedTask);
+            opgaveComboBox.getSelectionModel().select(selectedTask);
+            filteredTaskList.add(selectedTask);
         } else
         {
             alertString = "Could not create task. Plesae try again.";
             showAlert();
         }
-
-        opgaveComboBox.getItems().add(selectedTask);
-        opgaveComboBox.getSelectionModel().select(selectedTask);
-        filteredTaskList.add(selectedTask);
 
 //        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }
@@ -939,7 +942,7 @@ public class MainAdminViewController implements Initializable
         userView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         User selectedUserView = userView.getSelectionModel().getSelectedItem();
         String selectedUserCombobox = userComboBox.getSelectionModel().getSelectedItem();
-        
+
         if (selectedUserView != null && selectedUserCombobox == "Admin")
         {
             selectedUserView.setAdminRights(selectedUserCombobox);
@@ -1117,6 +1120,8 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             model.deleteProject(selectedProject);
+            allProjectsFilteredList.remove(selectedProject);
+            
         } else
         {
             alertString = "Could not delete project. Please try again.";
@@ -1147,6 +1152,7 @@ public class MainAdminViewController implements Initializable
         if (selectedTask != null)
         {
             model.deleteTask(selectedTask);
+            filteredTaskList.remove(selectedTask);
         } else
         {
             alertString = "Could not delete task. Please try again.";

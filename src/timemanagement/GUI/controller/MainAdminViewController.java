@@ -1041,7 +1041,7 @@ public class MainAdminViewController implements Initializable
     private void handleCreateClient(ActionEvent event) throws ModelException
     {
         Kunde selectedKunde = null;
-        if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && txt_ClientHourlyRate.getText().isEmpty())
+        if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
         {
             {
                 String kundeNavn = txt_Client.getText();

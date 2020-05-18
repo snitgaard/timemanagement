@@ -1225,12 +1225,17 @@ public class MainAdminViewController implements Initializable
 
     private void calculateChostPrice() 
     {
-     projekterTableView.setOnMousePressed((MouseEvent event) -> {
+       projekterTableView.setOnMousePressed((MouseEvent event) -> {
        chostPrice.clear();
        double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
        double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
        double estimatedChostPrice = usedTime * hourlyRate;
-       chostPrice.setText(estimatedChostPrice+"");
+           System.out.println(estimatedChostPrice);
+       
+       String pattern = "####,####,###.##";
+       DecimalFormat decimalFormat = new DecimalFormat(pattern);
+       String number = decimalFormat.format(estimatedChostPrice);
+       chostPrice.setText(number);
      });
     }
         

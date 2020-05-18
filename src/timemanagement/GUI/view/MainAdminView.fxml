@@ -380,7 +380,7 @@
                           <columns>
                             <TableColumn fx:id="projektNavnAdminColumn" prefWidth="237.0" text="Project Name" />
                             <TableColumn fx:id="kundeColumn" prefWidth="127.0" text="Customer" />
-                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="207.0" text="Used Time" />
+                              <TableColumn fx:id="brugtTidAdminColumn" prefWidth="207.0" text="Used Time In Minutes" />
                               <TableColumn fx:id="hourlyRateAdminColumn" prefWidth="145.0" text="Hourly rate" />
                           </columns>
                         </TableView>

@@ -530,17 +530,17 @@ public class MainAdminViewController implements Initializable
      */
     private void stopTidMethod() throws ParseException
     {
-        Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
-        Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
-        long gammelBrugtTid = selectedTask.getBrugtTid();
-        long gammelProjektTid = selectedProject.getBrugtTid();
-
-        java.util.Date date = new java.util.Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        slutTidField.setText(sdf.format(date));
-
         try
         {
+            Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
+            Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
+            long gammelBrugtTid = selectedTask.getBrugtTid();
+            long gammelProjektTid = selectedProject.getBrugtTid();
+
+            java.util.Date date = new java.util.Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            slutTidField.setText(sdf.format(date));
+            
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
             model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
@@ -562,9 +562,14 @@ public class MainAdminViewController implements Initializable
                 }
             }
 
-        } catch (Exception e)
+        } catch (ModelException e)
         {
             alertString = "Could not calculate the time used on task.";
+            showAlert();
+        }
+        catch (NullPointerException e)
+        {
+            alertString = "Could not stop time if a task has not been selected. Please try again.";
             showAlert();
         }
     }
@@ -791,16 +796,23 @@ public class MainAdminViewController implements Initializable
         Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
 
-        if (!txt_projektNavn.getText().isEmpty() && selectedClient != null && !txt_HourlyRateProject.getText().isEmpty())
+        try
         {
-            Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
-            selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
-            projektComboBox.getItems().add(selectedProject);
-            projektComboBox2.getItems().add(selectedProject);
-            allProjectsFilteredList.add(selectedProject);
-        } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
+            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null && !txt_HourlyRateProject.getText().isEmpty())
+            {
+                Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
+                selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
+                projektComboBox.getItems().add(selectedProject);
+                projektComboBox2.getItems().add(selectedProject);
+                allProjectsFilteredList.add(selectedProject);
+            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
+            {
+                alertString = "Could not create project. Please try again";
+                showAlert();
+            }
+        } catch (NumberFormatException e)
         {
-            alertString = "Could not create project. Please try again";
+            alertString = "Could not create project as a non-numeric number was detected. Please try again.";
             showAlert();
         }
     }
@@ -816,24 +828,30 @@ public class MainAdminViewController implements Initializable
         opgaverTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
-//        long gammelBrugtTid = selectedTask.getBrugtTid();
 
-        if (selectedTask != null && !txt_nyBrugtTid.getText().isEmpty())
+        try
         {
-            int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
-            selectedTask.setBrugtTid(nyBrugtTid);
-            model.updateTask(selectedTask);
-            for (int i = 0; i < projekterTableView.getItems().size(); i++)
+            if (selectedTask != null && !txt_nyBrugtTid.getText().isEmpty())
             {
-                if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
+                int nyBrugtTid = Integer.parseInt(txt_nyBrugtTid.getText());
+                selectedTask.setBrugtTid(nyBrugtTid);
+                model.updateTask(selectedTask);
+                for (int i = 0; i < projekterTableView.getItems().size(); i++)
                 {
-                    selectedProject = projekterTableView.getItems().get(i);
-                    model.updateProjectTime(selectedProject);
+                    if (selectedTask.getProjektId() == projekterTableView.getItems().get(i).getId())
+                    {
+                        selectedProject = projekterTableView.getItems().get(i);
+                        model.updateProjectTime(selectedProject);
+                    }
                 }
+            } else if (selectedTask == null && txt_nyBrugtTid.getText().isEmpty())
+            {
+                alertString = "Could not update time. Please try again.";
+                showAlert();
             }
-        } else if (selectedTask == null && txt_nyBrugtTid.getText().isEmpty())
+        } catch (NumberFormatException e)
         {
-            alertString = "Could not update time. Please try again.";
+            alertString = "Could not udpate time as a non-numeric input was detected. Please try again.";
             showAlert();
         }
     }
@@ -1073,7 +1091,7 @@ public class MainAdminViewController implements Initializable
             }
         } catch (NumberFormatException e)
         {
-            alertString = "Hourly rate only allows numeric input. Please try again.";
+            alertString = "Could not create client as a non-numeric number was detected. Please try again.";
             showAlert();
         }
     }

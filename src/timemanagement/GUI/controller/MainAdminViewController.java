@@ -980,9 +980,20 @@ public class MainAdminViewController implements Initializable
         {
             projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+            
+            if(selectedProject.getOngoing() != 0)
+            {
             selectedProject.setOngoing(0);
             model.archiveProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
+        }
+            else if (selectedProject.getOngoing() == 0)
+                {
+                    selectedProject.setOngoing(1);
+            model.archiveProject(selectedProject);
+            allProjectsFilteredList.add(selectedProject);
+                }
+                    
         } catch (Exception e)
         {
             alertString = "Could not archive project. Please try again.";

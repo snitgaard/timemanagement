@@ -235,7 +235,6 @@ public class MainAdminViewController implements Initializable
 
             model = model.getInstance();
             setProjects();
-            userView.getItems();
 
             ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
             userComboBox.setItems(roles);
@@ -715,6 +714,19 @@ public class MainAdminViewController implements Initializable
     {
         try
         {
+            List<User> userList = new ArrayList<>();
+            userList.addAll(model.getAllUsers());
+            
+            for (int i = 0; i < userList.size(); i++)
+            {
+                if (userList.get(i).toString().equalsIgnoreCase(txt_userLogin.getText()))
+                {
+                    alertString = "Could not create user, user already exists.";
+                    showAlert();
+                    return;
+                }
+            }
+
             if (opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
             {
                 String adminLogin = txt_userLogin.getText();

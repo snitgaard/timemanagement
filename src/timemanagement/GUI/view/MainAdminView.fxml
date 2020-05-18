@@ -419,9 +419,8 @@
                            <font>
                               <Font size="14.0" />
                            </font></Label>
-                        <Label layoutX="405.0" layoutY="103.0" prefHeight="17.0" prefWidth="84.0" text="Chost Price" />
-                        <JFXTextField fx:id="chostPrice" layoutX="465.0" layoutY="99.0" prefHeight="25.0" prefWidth="124.0" />
-                        <JFXButton fx:id="btnUpdateChostPrice" layoutX="608.0" layoutY="98.0" onAction="#calculateChostPrice" prefHeight="27.0" prefWidth="97.0" text="Update Price" />
+                        <Label layoutX="458.0" layoutY="118.0" prefHeight="17.0" prefWidth="84.0" text="Chost Price" />
+                        <JFXTextField fx:id="chostPrice" layoutX="547.0" layoutY="114.0" prefHeight="25.0" prefWidth="124.0" />
                      </children>
                   </AnchorPane>
               </items>

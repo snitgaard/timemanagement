@@ -231,6 +231,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
+            calculateChostPrice();
             timeLoggerPane.toFront();
 
             model = model.getInstance();
@@ -1218,14 +1219,16 @@ public class MainAdminViewController implements Initializable
         stage.toFront();
     }
 
-    @FXML
-    private void calculateChostPrice(ActionEvent event) 
+
+    private void calculateChostPrice() 
     {
+     projekterTableView.setOnMousePressed((MouseEvent event) -> {
        chostPrice.clear();
        double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
-       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate();
+       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
        double estimatedChostPrice = usedTime * hourlyRate;
        chostPrice.setText(estimatedChostPrice+"");
-        
+     });
     }
+        
 }

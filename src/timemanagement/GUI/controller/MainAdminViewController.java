@@ -1276,7 +1276,6 @@ public class MainAdminViewController implements Initializable
        costPrice.setText(number);
            }catch(NullPointerException ex)
            {
-               System.out.println("yo");
            }});
     }
 

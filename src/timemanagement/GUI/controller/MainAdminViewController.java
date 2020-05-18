@@ -1116,6 +1116,8 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             model.deleteProject(selectedProject);
+            allProjectsFilteredList.remove(selectedProject);
+            
         } else
         {
             alertString = "Could not delete project. Please try again.";
@@ -1146,6 +1148,7 @@ public class MainAdminViewController implements Initializable
         if (selectedTask != null)
         {
             model.deleteTask(selectedTask);
+            filteredTaskList.remove(selectedTask);
         } else
         {
             alertString = "Could not delete task. Please try again.";

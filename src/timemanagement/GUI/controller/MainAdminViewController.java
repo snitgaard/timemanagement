@@ -160,8 +160,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableColumn<User, String> userViewEmail;
     @FXML
-    private JFXTextField txt_hourlyRate;
-    @FXML
     private JFXTextField txt_nyBrugtTid;
     private User selectedUser;
     private TableColumn<Task, Integer> idColumn;
@@ -221,6 +219,8 @@ public class MainAdminViewController implements Initializable
     private JFXButton editButton;
 
     private boolean buttonState = true;
+    @FXML
+    private JFXTextField chostPrice;
 
     /**
      * Initializes the controller class.
@@ -1213,5 +1213,16 @@ public class MainAdminViewController implements Initializable
         stage.setAlwaysOnTop(true);
         stage.showAndWait();
         stage.toFront();
+    }
+
+    @FXML
+    private void calculateChostPrice(ActionEvent event) 
+    {
+       chostPrice.clear();
+       double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
+       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate();
+       double estimatedChostPrice = usedTime * hourlyRate;
+       chostPrice.setText(estimatedChostPrice+"");
+        
     }
 }

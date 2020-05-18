@@ -220,7 +220,7 @@ public class MainAdminViewController implements Initializable
 
     private boolean buttonState = true;
     @FXML
-    private JFXTextField chostPrice;
+    private JFXTextField costPrice;
 
     /**
      * Initializes the controller class.
@@ -231,7 +231,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
-            calculateChostPrice();
+            calculateCostPrice();
             timeLoggerPane.toFront();
 
             model = model.getInstance();
@@ -1243,10 +1243,10 @@ public class MainAdminViewController implements Initializable
      * Gets the selected project, and calculate the estimated chost price, from the hourly rate and the time used
      * Formated correctly. 
      */
-    private void calculateChostPrice() 
+    private void calculateCostPrice() 
     {
        projekterTableView.setOnMousePressed((MouseEvent event) -> {
-       chostPrice.clear();
+       costPrice.clear();
        double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
        double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
        double estimatedChostPrice = usedTime * hourlyRate;
@@ -1254,7 +1254,7 @@ public class MainAdminViewController implements Initializable
        String pattern = "####,####,###.##";
        DecimalFormat decimalFormat = new DecimalFormat(pattern);
        String number = decimalFormat.format(estimatedChostPrice);
-       chostPrice.setText(number);
+       costPrice.setText(number);
      });
     }
 

@@ -235,6 +235,7 @@ public class MainAdminViewController implements Initializable
 
             model = model.getInstance();
             setProjects();
+            userView.getItems();
 
             ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
             userComboBox.setItems(roles);
@@ -733,7 +734,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Creates a task, makeing it a paid or unpaid task depending if the
+     * Creates a task, making it a paid or unpaid task depending if the
      * checkbox is checked or not.
      *
      * @throws ModelException
@@ -1039,7 +1040,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateClient(ActionEvent event) throws ModelException
     {
-        if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && txt_ClientHourlyRate.getText().isEmpty())
+        if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
         {
             {
                 String kundeNavn = txt_Client.getText();

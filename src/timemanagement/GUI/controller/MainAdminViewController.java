@@ -220,7 +220,7 @@ public class MainAdminViewController implements Initializable
 
     private boolean buttonState = true;
     @FXML
-    private JFXTextField chostPrice;
+    private JFXTextField costPrice;
 
     /**
      * Initializes the controller class.
@@ -231,7 +231,7 @@ public class MainAdminViewController implements Initializable
         // TODO
         try
         {
-            calculateChostPrice();
+            calculateCostPrice();
             timeLoggerPane.toFront();
 
             model = model.getInstance();
@@ -998,9 +998,20 @@ public class MainAdminViewController implements Initializable
         {
             projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+            
+            if(selectedProject.getOngoing() != 0)
+            {
             selectedProject.setOngoing(0);
             model.archiveProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
+        }
+            else if (selectedProject.getOngoing() == 0)
+                {
+                    selectedProject.setOngoing(1);
+            model.archiveProject(selectedProject);
+            allProjectsFilteredList.add(selectedProject);
+                }
+                    
         } catch (Exception e)
         {
             alertString = "Could not archive project. Please try again.";
@@ -1246,16 +1257,23 @@ public class MainAdminViewController implements Initializable
         stage.toFront();
     }
 
-    private void calculateChostPrice()
+    /**
+     * Gets the selected project, and calculate the estimated chost price, from the hourly rate and the time used
+     * Formated correctly. 
+     */
+    private void calculateCostPrice() 
     {
-        projekterTableView.setOnMousePressed((MouseEvent event) ->
-        {
-            chostPrice.clear();
-            double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
-            double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
-            double estimatedChostPrice = usedTime * hourlyRate;
-            chostPrice.setText(estimatedChostPrice + "");
-        });
+       projekterTableView.setOnMousePressed((MouseEvent event) -> {
+       costPrice.clear();
+       double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
+       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
+       double estimatedChostPrice = usedTime * hourlyRate;
+       
+       String pattern = "####,####,###.##";
+       DecimalFormat decimalFormat = new DecimalFormat(pattern);
+       String number = decimalFormat.format(estimatedChostPrice);
+       costPrice.setText(number);
+     });
     }
 
 }

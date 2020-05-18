@@ -794,6 +794,7 @@ public class MainAdminViewController implements Initializable
             Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
             selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
             projektComboBox.getItems().add(selectedProject);
+            projektComboBox2.getItems().add(selectedProject);
             allProjectsFilteredList.add(selectedProject);
         } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
         {

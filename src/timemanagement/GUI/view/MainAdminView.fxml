@@ -319,8 +319,8 @@
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="717.0">
                      <children>
-                        <JFXComboBox fx:id="projektComboBox" layoutX="105.0" layoutY="54.0" onAction="#setProjectData" prefHeight="25.0" prefWidth="107.0" promptText="Select Project" />
-                        <JFXComboBox fx:id="opgaveComboBox" disable="true" layoutX="105.0" layoutY="108.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="107.0" promptText="Select task" />
+                        <JFXComboBox fx:id="projektComboBox" layoutX="105.0" layoutY="54.0" onAction="#setProjectData" prefHeight="25.0" prefWidth="171.0" promptText="Select Project" />
+                        <JFXComboBox fx:id="opgaveComboBox" disable="true" layoutX="105.0" layoutY="108.0" onAction="#setOpgaveData" prefHeight="25.0" prefWidth="171.0" promptText="Select task" />
                         <Label layoutX="14.0" layoutY="58.0" prefHeight="20.0" prefWidth="60.0" text="Project">
                            <font>
                               <Font size="14.0" />
@@ -352,7 +352,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="kundeField" disable="true" editable="false" layoutX="105.0" layoutY="161.0" prefHeight="30.0" prefWidth="124.0" promptText="Customer">
+                        <JFXTextField fx:id="kundeField" disable="true" editable="false" layoutX="105.0" layoutY="161.0" prefHeight="30.0" prefWidth="171.0" promptText="Customer">
                            <font>
                               <Font size="14.0" />
                            </font>

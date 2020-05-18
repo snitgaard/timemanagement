@@ -1222,7 +1222,7 @@ public class MainAdminViewController implements Initializable
      projekterTableView.setOnMousePressed((MouseEvent event) -> {
        chostPrice.clear();
        double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
-       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate();
+       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
        double estimatedChostPrice = usedTime * hourlyRate;
        chostPrice.setText(estimatedChostPrice+"");
      });

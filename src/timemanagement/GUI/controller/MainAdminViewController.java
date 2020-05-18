@@ -759,16 +759,15 @@ public class MainAdminViewController implements Initializable
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
                     1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
-            
+
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
             filteredTaskList.add(selectedTask);
-        } 
-        else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
+        } else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
                     projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
-            
+
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
             filteredTaskList.add(selectedTask);
@@ -981,9 +980,20 @@ public class MainAdminViewController implements Initializable
         {
             projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+            
+            if(selectedProject.getOngoing() != 0)
+            {
             selectedProject.setOngoing(0);
             model.archiveProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
+        }
+            else if (selectedProject.getOngoing() == 0)
+                {
+                    selectedProject.setOngoing(1);
+            model.archiveProject(selectedProject);
+            allProjectsFilteredList.add(selectedProject);
+                }
+                    
         } catch (Exception e)
         {
             alertString = "Could not archive project. Please try again.";
@@ -1054,20 +1064,27 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateClient(ActionEvent event) throws ModelException
     {
-        Kunde selectedKunde = null;
-        if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
+        try
         {
+            Kunde selectedKunde = null;
+            if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
             {
-                String kundeNavn = txt_Client.getText();
-                String contactPerson = txt_Contact.getText();
-                String email = txt_Email.getText();
-                Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-                selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
-                clientComboBox.getItems().add(selectedKunde);
+                {
+                    String kundeNavn = txt_Client.getText();
+                    String contactPerson = txt_Contact.getText();
+                    String email = txt_Email.getText();
+                    Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
+                    selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
+                    clientComboBox.getItems().add(selectedKunde);
+                }
+            } else
+            {
+                alertString = "Could not creat client. Please try again.";
+                showAlert();
             }
-        } else
+        } catch (NumberFormatException e)
         {
-            alertString = "Could not creat client. Please try again.";
+            alertString = "Hourly rate only allows numeric input. Please try again.";
             showAlert();
         }
     }
@@ -1121,7 +1138,7 @@ public class MainAdminViewController implements Initializable
         {
             model.deleteProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
-            
+
         } else
         {
             alertString = "Could not delete project. Please try again.";
@@ -1240,5 +1257,5 @@ public class MainAdminViewController implements Initializable
        chostPrice.setText(number);
      });
     }
-        
+
 }

@@ -344,12 +344,13 @@ public class Model
         return allKunder;
     }
 
-    public void createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws ModelException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws ModelException
     {
         try
         {
             Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
             allKunder.add(kunde);
+            return kunde;
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

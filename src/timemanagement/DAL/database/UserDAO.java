@@ -271,19 +271,22 @@ public class UserDAO
         }
     }
 
-    public void updateUserRoles(User user) throws DalException
+    public void updateUserRoles(User user, int isAdmin) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
             int id = user.getId();
             String sql = "UPDATE [User] SET isAdmin = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setInt(1, user.getIsAdmin());
+            
+            ps.setInt(1, isAdmin);
             ps.executeUpdate();
         } catch (SQLException ex)
         {
             ex.printStackTrace();
         }
     }
+
+
 
 }

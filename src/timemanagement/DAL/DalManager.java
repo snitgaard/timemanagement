@@ -200,9 +200,9 @@ public class DalManager implements DalFacade
         projectDAO.archiveProject(project);
     }
 
-    public void updateUserRoles(User user) throws DalException
+    public void updateUserRoles(User user, int isAdmin) throws DalException
     {
-        userDAO.updateUserRoles(user);
+        userDAO.updateUserRoles(user, isAdmin);
     }
 
     @Override

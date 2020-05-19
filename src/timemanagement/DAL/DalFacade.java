@@ -43,9 +43,7 @@ public interface DalFacade {
     
     List<Project> getProjectKundeNavn() throws DalException;
     
-    User createUser(String userLogin, String userPassword, int isAdmin) throws DalException;
-    
-    User createUserAdmin(String userLogin, String userPassword, int isAdmin) throws DalException;
+    User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws DalException;
 
     Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException;
     

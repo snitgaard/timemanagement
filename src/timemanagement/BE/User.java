@@ -24,6 +24,8 @@ public class User
     private StringProperty userPassword;
     private IntegerProperty isAdmin;
     private StringProperty adminRights; 
+    private StringProperty email;
+    private StringProperty fullName;
 
     
     /**
@@ -40,19 +42,45 @@ public class User
      * @param userLogin
      * @param userPassword
      * @param isAdmin
-     * @param hourlyRate
+     * @param email
+     * @param fullName
      * @param adminRights
      */
-    public User(int id, String userLogin, String userPassword, int isAdmin, String adminRights) {
+    public User(int id, String userLogin, String userPassword, int isAdmin, String adminRights, String email, String fullName) {
         this.id = id;
         this.userLogin = new SimpleStringProperty(userLogin);
         this.userPassword = new SimpleStringProperty(userPassword);
         this.isAdmin = new SimpleIntegerProperty(isAdmin);
         this.adminRights = new SimpleStringProperty(adminRights);
+        this.email = new SimpleStringProperty(email);
+        this.fullName = new SimpleStringProperty(fullName);
     }
 
     
 
+    public String getEmail() {
+        return email.get();
+    }
+
+    public void setEmail(String email) {
+        this.fullName.set(email);
+    }
+    
+    public StringProperty emailProperty() {
+        return email;
+    }
+    
+    public String getFullName() {
+        return fullName.get();
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName.set(fullName);
+    }
+    
+    public StringProperty fullNameProperty() {
+        return fullName;
+    }
     
     public String getAdminRights() {
         return adminRights.get();
@@ -62,7 +90,7 @@ public class User
         this.adminRights.set(adminRights);
     }
     
-    public StringProperty adminRighsProperty() {
+    public StringProperty adminRightsProperty() {
         return adminRights;
     }
     

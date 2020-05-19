@@ -161,11 +161,11 @@ public class Model
         }
     }
 
-    public void createUser(String userLogin, String userPassword, int isAdmin) throws ModelException
+    public void createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws ModelException
     {
         try
         {
-            User user = bllManager.createUser(userLogin, userPassword, isAdmin);
+            User user = bllManager.createUser(userLogin, userPassword, isAdmin, email, fullName);
 
             user.setAdminRights("User");
             allUsers.add(user);
@@ -175,18 +175,7 @@ public class Model
         }
     }
 
-    public void createUserAdmin(String userLogin, String userPassword, int adminId) throws ModelException
-    {
-        try
-        {
-            User user = bllManager.createUserAdmin(userLogin, userPassword, adminId);
-            user.setAdminRights("Admin");
-            allUsers.add(user);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
+
 
     public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws ModelException
     {

@@ -109,3 +109,7 @@ and open the template in the editor.
 .vbox {
     -fx-background-color: -fx-primary;
 }
+
+.chart-bar {
+    -fx-bar-bill: red;
+}

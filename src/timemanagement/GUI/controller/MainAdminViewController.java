@@ -30,6 +30,7 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -37,6 +38,8 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.chart.XYChart.Data;
+import javafx.scene.chart.XYChart.Series;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
@@ -46,6 +49,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
@@ -582,7 +586,7 @@ public class MainAdminViewController implements Initializable
             java.util.Date date = new java.util.Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             slutTidField.setText(sdf.format(date));
-            
+
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
             model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
 
@@ -592,7 +596,6 @@ public class MainAdminViewController implements Initializable
                 {
                     opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                 }
-
             }
 
             for (int i = 0; i < projekterTableView.getItems().size(); i++)
@@ -608,10 +611,9 @@ public class MainAdminViewController implements Initializable
         {
             alertString = "Could not calculate the time used on task.";
             showAlert();
-        }
-        catch (NullPointerException e)
+        } catch (NullPointerException e)
         {
-            alertString = "Could not stop time if a task has not been selected. Please try again.";
+            alertString = "Can not stop time if a task has not been selected. Please try again.";
             showAlert();
         }
     }
@@ -1048,20 +1050,19 @@ public class MainAdminViewController implements Initializable
         {
             projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-            
-            if(selectedProject.getOngoing() != 0)
+
+            if (selectedProject.getOngoing() != 0)
             {
-            selectedProject.setOngoing(0);
-            model.archiveProject(selectedProject);
-            allProjectsFilteredList.remove(selectedProject);
-        }
-            else if (selectedProject.getOngoing() == 0)
-                {
-                    selectedProject.setOngoing(1);
-            model.archiveProject(selectedProject);
-            allProjectsFilteredList.add(selectedProject);
-                }
-                    
+                selectedProject.setOngoing(0);
+                model.archiveProject(selectedProject);
+                allProjectsFilteredList.remove(selectedProject);
+            } else if (selectedProject.getOngoing() == 0)
+            {
+                selectedProject.setOngoing(1);
+                model.archiveProject(selectedProject);
+                allProjectsFilteredList.add(selectedProject);
+            }
+
         } catch (Exception e)
         {
             alertString = "Could not archive project. Please try again.";
@@ -1173,8 +1174,13 @@ public class MainAdminViewController implements Initializable
                     {
                         number = number + 1;
                         set1.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
-                    }
 
+                        if (allTasks.getBetalt() == 1)
+                        {
+                            
+
+                        }
+                    }
                 } catch (ModelException ex)
                 {
                     Logger.getLogger(MainAdminViewController.class
@@ -1197,6 +1203,7 @@ public class MainAdminViewController implements Initializable
     }
 
     @FXML
+
     private void handleDeleteProject(ActionEvent event) throws ModelException
     {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -1308,25 +1315,28 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Gets the selected project, and calculate the estimated cost price, from the hourly rate and the time used
-     * Formated correctly. 
+     * Gets the selected project, and calculate the estimated chost price, from
+     * the hourly rate and the time used Formated correctly.
      */
-    private void calculateCostPrice() 
+    private void calculateCostPrice()
     {
-       projekterTableView.setOnMousePressed((MouseEvent event) -> {
-           try{
-       costPrice.clear();
-       double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
-       double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
-       double estimatedChostPrice = usedTime * hourlyRate;
-       
-       String pattern = "####,####,###.##";
-       DecimalFormat decimalFormat = new DecimalFormat(pattern);
-       String number = decimalFormat.format(estimatedChostPrice);
-       costPrice.setText(number);
-           }catch(NullPointerException ex)
-           {
-           }});
+        projekterTableView.setOnMousePressed((MouseEvent event) ->
+        {
+            try
+            {
+                costPrice.clear();
+                double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getBrugtTid();
+                double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
+                double estimatedChostPrice = usedTime * hourlyRate;
+
+                String pattern = "####,####,###.##";
+                DecimalFormat decimalFormat = new DecimalFormat(pattern);
+                String number = decimalFormat.format(estimatedChostPrice);
+                costPrice.setText(number);
+            } catch (NullPointerException ex)
+            {
+            }
+        });
     }
 
     

@@ -43,6 +43,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.SplitPane;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.image.ImageView;
@@ -400,6 +401,22 @@ public class MainAdminViewController implements Initializable
         clientContactColumn.setCellValueFactory(cellData -> cellData.getValue().kontaktPersonProperty());
         clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
+        clientHourlyRateColumn.setCellFactory(tc -> new TableCell<Kunde, Double>()
+                {
+                   @Override
+                   protected void updateItem(Double hourlyRate, boolean empty)
+                   {
+                       super.updateItem(hourlyRate, empty);
+                       if (empty)
+                       {
+                           setText(null);
+                       }
+                       else
+                       {
+                           setText(String.format("%.2f", hourlyRate.doubleValue()));
+                       }
+                   }
+                });
     }
 
     /**
@@ -460,6 +477,22 @@ public class MainAdminViewController implements Initializable
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());
         hourlyRateAdminColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
+        hourlyRateAdminColumn.setCellFactory(tc -> new TableCell<Project, Double>()
+                {
+                   @Override
+                   protected void updateItem(Double hourlyRate, boolean empty)
+                   {
+                       super.updateItem(hourlyRate, empty);
+                       if (empty)
+                       {
+                           setText(null);
+                       }
+                       else
+                       {
+                           setText(String.format("%.2f", hourlyRate.doubleValue()));
+                       }
+                   }
+                });
 
     }
 

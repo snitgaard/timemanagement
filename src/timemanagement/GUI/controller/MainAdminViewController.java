@@ -221,6 +221,12 @@ public class MainAdminViewController implements Initializable
     private boolean buttonState = true;
     @FXML
     private JFXTextField costPrice;
+    @FXML
+    private TableColumn<?, ?> userViewFullName;
+    @FXML
+    private JFXTextField txt_userEmail;
+    @FXML
+    private JFXTextField txt_userFullName;
 
     /**
      * Initializes the controller class.
@@ -406,6 +412,8 @@ public class MainAdminViewController implements Initializable
 
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
+        userViewEmail.setCellValueFactory(cellData -> cellData.getValue().XXXX());
+        userViewFullName.setCellValueFactory(cellData -> cellData.getValue().XXXX());
     }
 
     /**
@@ -446,7 +454,6 @@ public class MainAdminViewController implements Initializable
             projekterTableView.setItems(model.getProjectKundeNavn());
 
         }
-
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());

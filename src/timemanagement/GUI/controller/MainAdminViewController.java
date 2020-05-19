@@ -412,8 +412,8 @@ public class MainAdminViewController implements Initializable
 
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRightsProperty());
-        userViewEmail.setCellValueFactory(cellData -> cellData.getValue().XXXX());
-        userViewFullName.setCellValueFactory(cellData -> cellData.getValue().XXXX());
+        userViewEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
+        userViewFullName.setCellValueFactory(cellData -> cellData.getValue().fullNameProperty());
     }
 
     /**

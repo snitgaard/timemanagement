@@ -798,14 +798,23 @@ public class MainAdminViewController implements Initializable
 
         try
         {
-            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null && !txt_HourlyRateProject.getText().isEmpty())
+            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null)
             {
+               if (txt_HourlyRateProject.getText().isEmpty()){
+                Double doubleHourlyRate = selectedClient.getHourlyRate();
+                System.out.println(doubleHourlyRate);
+                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
+                 } else 
+               {
                 Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
+                System.out.println(doubleHourlyRate);
                 selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
+               }
+                
                 projektComboBox.getItems().add(selectedProject);
                 projektComboBox2.getItems().add(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
-            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null || txt_HourlyRateProject.getText().isEmpty())
+            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null)
             {
                 alertString = "Could not create project. Please try again";
                 showAlert();

@@ -510,7 +510,7 @@ public class MainAdminViewController implements Initializable
             try
             {
                 java.util.Date date = new java.util.Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
                 startTidField.setText(sdf.format(date));
                 slutTidField.clear();
                 brugtTidField.clear();
@@ -538,7 +538,7 @@ public class MainAdminViewController implements Initializable
             long gammelProjektTid = selectedProject.getBrugtTid();
 
             java.util.Date date = new java.util.Date();
-            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
             slutTidField.setText(sdf.format(date));
             
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
@@ -1258,7 +1258,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Gets the selected project, and calculate the estimated chost price, from the hourly rate and the time used
+     * Gets the selected project, and calculate the estimated cost price, from the hourly rate and the time used
      * Formated correctly. 
      */
     private void calculateCostPrice() 
@@ -1278,5 +1278,8 @@ public class MainAdminViewController implements Initializable
            {
            }});
     }
+
+    
+   
 
 }

@@ -405,7 +405,7 @@ public class MainAdminViewController implements Initializable
         userView.setItems(model.getAllUsers());
 
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
-        userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRighsProperty());
+        userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRightsProperty());
     }
 
     /**
@@ -734,7 +734,7 @@ public class MainAdminViewController implements Initializable
             {
                 String adminLogin = txt_userLogin.getText();
                 String adminPassword = encryptThisString(txt_userPassword.getText());
-                model.createUserAdmin(adminLogin, adminPassword, 1);
+                model.createUser(adminLogin, adminPassword, 1);
             } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
             {
                 String userLogin = txt_userLogin.getText();

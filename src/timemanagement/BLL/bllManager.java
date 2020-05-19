@@ -10,6 +10,8 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -333,27 +335,52 @@ public class bllManager implements bllFacade {
     @Override
     public String timeFormatter(String startTid, String slutTid) throws bllException {
  
-        try {
+       
             
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-            Date date1 = format.parse(startTid);
-            Date date2 = format.parse(slutTid);
-            long difference = date2.getTime() - date1.getTime();
-
-            long input = difference / 1000;
-            long hours = (input - input % 3600) / 3600;
-            long minutes = (input % 3600 - input % 3600 % 60) / 60;
-           
-            NumberFormat formatter = new DecimalFormat("00");
+            LocalTime start = LocalTime.parse(startTid);
+            LocalTime slut = LocalTime.parse(slutTid);
+            
+            if (start.isBefore(slut))
+            {
+                long difference = Duration.between(start, slut).toMillis();
+                System.out.println(difference + "ER DET MON HER?");
+                long input = difference / 1000;
+                long hours = (input - input % 3600) / 3600;
+                long minutes = (input % 3600 - input % 3600 % 60) / 60;
+                
+                NumberFormat formatter = new DecimalFormat("00");
                    
-            String h = formatter.format(hours); 
-            String m = formatter.format(minutes);
+                String h = formatter.format(hours); 
+                String m = formatter.format(minutes);
+                
+                return h + ":" + m;
+                
+            }
             
-            return h + ":" + m;
+            else if (start.equals(slut))
+            {
+                return "00:00"; //Ohterwise returns 24:00
+            }
             
-        } catch (ParseException ex) {
-            throw new bllException(ex.getMessage());
-        }
+            else
+            {
+                long differenceTwo = Duration.ofHours(24).minus(Duration.between(slut, start)).toMillis();
+                long input = differenceTwo / 1000;
+                long hours = (input - input % 3600) / 3600;
+                long minutes = (input % 3600 - input % 3600 % 60) / 60;
+                
+                NumberFormat formatter = new DecimalFormat("00");
+                   
+                String h = formatter.format(hours); 
+                String m = formatter.format(minutes);
+                
+                return h + ":" + m;
+                           
+            }
+            
+            
+            
+        
             
 
     }
@@ -361,23 +388,54 @@ public class bllManager implements bllFacade {
     @Override
     public long timeCalculator(String startTid, String slutTid) throws bllException {
         
-        try {
-            SimpleDateFormat format = new SimpleDateFormat("HH:mm:ss");
-            Date date1 = format.parse(startTid);
-            Date date2 = format.parse(slutTid);
-            long difference = date2.getTime() - date1.getTime();
+        
+            LocalTime start = LocalTime.parse(startTid);
+            LocalTime slut = LocalTime.parse(slutTid);
+            
+            if (start.isBefore(slut))
+            {
+                long duration = Duration.between(start, slut).toMillis();
+                
+                
+                
 
-            long input = difference / 1000;
+            long input = duration / 1000;
             long minuteTime = input / 60;
             
             if (minuteTime == 0)
             {
                 minuteTime = 1;
             }
+                
+                return minuteTime;
+                
+            }
             
-            return minuteTime;
-        } catch (ParseException ex) {
-            throw new bllException(ex.getMessage());
-        }
+            else if (start.equals(slut))
+            {
+                long minuteTime = 0;
+                return minuteTime;
+            }
+            
+            else
+            {
+                long durationAfterMidnight = Duration.ofHours(24).minus(Duration.between(slut, start)).toMillis();
+                
+                
+
+            long input = durationAfterMidnight / 1000;
+            long minuteTime = input / 60;
+            
+            if (minuteTime == 0)
+            {
+                minuteTime = 1;
+            }
+                
+                return minuteTime;
+            }
+            
+            
+            
+        
     }
 }

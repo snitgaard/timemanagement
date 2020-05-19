@@ -389,10 +389,10 @@
                         </JFXCheckBox>
                         <TableView fx:id="userView" layoutX="12.0" layoutY="309.0" prefHeight="239.0" prefWidth="717.0">
                           <columns>
-                            <TableColumn fx:id="userViewEmail" prefWidth="163.0" text="User Email" />
+                            <TableColumn fx:id="userViewUsername" prefWidth="163.0" text="Username" />
                               <TableColumn fx:id="userViewRolle" prefWidth="133.0" text="Role" />
-                              <TableColumn fx:id="userViewEmail" prefWidth="133.0" text="Email" />
-                              <TableColumn fx:id="userViewFullName" prefWidth="275.0" text="Full Name" />
+                              <TableColumn fx:id="userViewEmail" prefWidth="190.0" text="Email" />
+                              <TableColumn fx:id="userViewFullName" prefWidth="220.0" text="Full Name" />
                           </columns>
                         </TableView>
                         <JFXButton layoutX="239.0" layoutY="248.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">

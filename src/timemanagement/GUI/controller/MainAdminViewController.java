@@ -222,11 +222,13 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField costPrice;
     @FXML
-    private TableColumn<?, ?> userViewFullName;
+    private TableColumn<User, String> userViewFullName;
     @FXML
     private JFXTextField txt_userEmail;
     @FXML
     private JFXTextField txt_userFullName;
+    @FXML
+    private TableColumn<User, String> userViewUsername;
 
     /**
      * Initializes the controller class.
@@ -410,7 +412,7 @@ public class MainAdminViewController implements Initializable
     {
         userView.setItems(model.getAllUsers());
 
-        userViewEmail.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
+        userViewUsername.setCellValueFactory(cellData -> cellData.getValue().userLoginProperty());
         userViewRolle.setCellValueFactory(cellData -> cellData.getValue().adminRightsProperty());
         userViewEmail.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         userViewFullName.setCellValueFactory(cellData -> cellData.getValue().fullNameProperty());
@@ -736,17 +738,16 @@ public class MainAdminViewController implements Initializable
                     return;
                 }
             }
-
-            if (opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
-            {
-                String adminLogin = txt_userLogin.getText();
-                String adminPassword = encryptThisString(txt_userPassword.getText());
-                model.createUser(adminLogin, adminPassword, 1);
-            } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
-            {
                 String userLogin = txt_userLogin.getText();
                 String userPassword = encryptThisString(txt_userPassword.getText());
-                model.createUser(userLogin, userPassword, 0);
+                String email = txt_userEmail.getText();
+                String fullName = txt_userFullName.getText();
+            if (opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
+            {
+                model.createUser(userLogin, userPassword,  1, email, fullName);
+            } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
+            {
+                model.createUser(userLogin, userPassword, 0, email, fullName);
             }
         } catch (Exception e)
         {

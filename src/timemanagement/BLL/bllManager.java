@@ -451,7 +451,7 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public int deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException {
+    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException {
         try {
             return dalFacade.deleteProjectOnClient(project, isDeleted, kundeId);
         } catch (DalException ex) {

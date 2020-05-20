@@ -79,5 +79,5 @@ public interface bllFacade
     
     void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException;
     
-    void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws bllException;
+    Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException;
 }

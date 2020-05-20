@@ -177,7 +177,7 @@ public class ProjectDAO {
         }
     }
     
-    public void deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws DalException
+    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -188,9 +188,12 @@ public class ProjectDAO {
             ps.setInt(1, isDeleted);
             ps.setInt(2, kundeId);
             ps.executeUpdate();
+
         } catch (SQLException ex)
         {
             ex.printStackTrace();
         }
+        return project;
+
     }
 }

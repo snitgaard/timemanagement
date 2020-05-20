@@ -1280,10 +1280,13 @@ public class MainAdminViewController implements Initializable
             model.deleteKunde(selectedClient, 1);
             for (Project project : model.getAllProjects()) 
             {
+                int selectedProject = project.getId();
                 model.deleteProjectOnClient(project, 1, selectedClient.getId());
+                System.out.println(model.deleteProjectOnClient(project, 1, selectedClient.getId()));
                 for (Task task : model.getAllTasks()) 
             {
-                model.deleteTaskOnProject(task, 1, project.getId());
+                model.deleteTaskOnProject(task, 1, selectedProject);
+//                System.out.println("hvad er det her????????? + " + selectedProject);
             }
             }
             

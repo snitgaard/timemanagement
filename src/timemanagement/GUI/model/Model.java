@@ -420,10 +420,10 @@ public class Model
         }
     }
     
-    public void deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
+    public int deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
     {
         try {
-            bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
+            return bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

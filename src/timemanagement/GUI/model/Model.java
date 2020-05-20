@@ -374,4 +374,49 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+    
+    public void deleteTask(Task task, int isDeleted) throws ModelException
+    {
+        try {
+            bllManager.deleteTask(task, isDeleted);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public void deleteProject(Project project, int isDeleted) throws ModelException
+    {
+        try {
+            bllManager.deleteProject(project, isDeleted);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+            
+    public void deleteKunde(Kunde kunde, int isDeleted) throws ModelException
+    {
+        try {
+            bllManager.deleteKunde(kunde, isDeleted);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws ModelException
+    {
+        try {
+            bllManager.deleteTaskOnProject(task, isDeleted, projektId);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public void deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
+    {
+        try {
+            bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 }

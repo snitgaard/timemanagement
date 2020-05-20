@@ -130,4 +130,19 @@ public class KundeDAO
         }
     }
 
+     public void deleteKunde(Kunde kunde, int isDeleted) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = kunde.getId();
+            String sql = "UPDATE Kunde SET isDeleted = ? WHERE id =" + id + ";";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, isDeleted);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

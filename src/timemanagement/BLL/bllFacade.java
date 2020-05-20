@@ -68,4 +68,14 @@ public interface bllFacade
     String timeFormatter(String startTid, String slutTid) throws bllException;
     
     long timeCalculator(String startTid, String slutTid) throws bllException;
+    
+    void deleteProject(Project project, int isDeleted) throws bllException;
+    
+    void deleteTask(Task task, int isDeleted) throws bllException;
+    
+    void deleteKunde(Kunde kunde, int isDeleted) throws bllException;
+    
+    void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException;
+    
+    void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws bllException;
 }

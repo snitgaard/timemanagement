@@ -226,4 +226,29 @@ public class DalManager implements DalFacade
         }
     }
 
+    @Override
+    public void deleteProject(Project project, int isDeleted) throws DalException {
+        projectDAO.deleteProject(project, isDeleted);
+    }
+
+    @Override
+    public void deleteTask(Task task, int isDeleted) throws DalException {
+        taskDAO.deleteTask(task, isDeleted);
+    }
+
+    @Override
+    public void deleteKunde(Kunde kunde, int isDeleted) throws DalException {
+       kundeDAO.deleteKunde(kunde, isDeleted);
+    }
+
+    @Override
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException {
+        taskDAO.deleteTaskOnProject(task, isDeleted, projektId);
+    }
+
+    @Override
+    public void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws DalException {
+        projectDAO.deleteProjectOnClient(project, isDeleted, projektId);
+    }
+
 }

@@ -157,4 +157,37 @@ public class ProjectDAO {
             throw new DalException("Could not fetch all classes");
         }
     }
+    
+    public void deleteProject(Project project, int isDeleted) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = project.getId();
+            String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + ";";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, isDeleted);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = project.getId();
+            String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + " AND kundeId = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, isDeleted);
+            ps.setInt(2, kundeId);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

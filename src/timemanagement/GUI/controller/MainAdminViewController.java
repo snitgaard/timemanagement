@@ -33,6 +33,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -406,21 +407,20 @@ public class MainAdminViewController implements Initializable
         clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
         clientHourlyRateColumn.setCellFactory(tc -> new TableCell<Kunde, Double>()
+        {
+            @Override
+            protected void updateItem(Double hourlyRate, boolean empty)
+            {
+                super.updateItem(hourlyRate, empty);
+                if (empty)
                 {
-                   @Override
-                   protected void updateItem(Double hourlyRate, boolean empty)
-                   {
-                       super.updateItem(hourlyRate, empty);
-                       if (empty)
-                       {
-                           setText(null);
-                       }
-                       else
-                       {
-                           setText(String.format("%.2f", hourlyRate.doubleValue()));
-                       }
-                   }
-                });
+                    setText(null);
+                } else
+                {
+                    setText(String.format("%.2f", hourlyRate.doubleValue()));
+                }
+            }
+        });
     }
 
     /**
@@ -482,21 +482,20 @@ public class MainAdminViewController implements Initializable
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());
         hourlyRateAdminColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
         hourlyRateAdminColumn.setCellFactory(tc -> new TableCell<Project, Double>()
+        {
+            @Override
+            protected void updateItem(Double hourlyRate, boolean empty)
+            {
+                super.updateItem(hourlyRate, empty);
+                if (empty)
                 {
-                   @Override
-                   protected void updateItem(Double hourlyRate, boolean empty)
-                   {
-                       super.updateItem(hourlyRate, empty);
-                       if (empty)
-                       {
-                           setText(null);
-                       }
-                       else
-                       {
-                           setText(String.format("%.2f", hourlyRate.doubleValue()));
-                       }
-                   }
-                });
+                    setText(null);
+                } else
+                {
+                    setText(String.format("%.2f", hourlyRate.doubleValue()));
+                }
+            }
+        });
 
     }
 
@@ -773,13 +772,13 @@ public class MainAdminViewController implements Initializable
                     return;
                 }
             }
-                String userLogin = txt_userLogin.getText();
-                String userPassword = encryptThisString(txt_userPassword.getText());
-                String email = txt_userEmail.getText();
-                String fullName = txt_userFullName.getText();
+            String userLogin = txt_userLogin.getText();
+            String userPassword = encryptThisString(txt_userPassword.getText());
+            String email = txt_userEmail.getText();
+            String fullName = txt_userFullName.getText();
             if (opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
             {
-                model.createUser(userLogin, userPassword,  1, email, fullName);
+                model.createUser(userLogin, userPassword, 1, email, fullName);
             } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
             {
                 model.createUser(userLogin, userPassword, 0, email, fullName);
@@ -843,17 +842,18 @@ public class MainAdminViewController implements Initializable
         {
             if (!txt_projektNavn.getText().isEmpty() && selectedClient != null)
             {
-               if (txt_HourlyRateProject.getText().isEmpty()){
-                Double doubleHourlyRate = selectedClient.getHourlyRate();
-                System.out.println(doubleHourlyRate);
+                if (txt_HourlyRateProject.getText().isEmpty())
+                {
+                    Double doubleHourlyRate = selectedClient.getHourlyRate();
+                    System.out.println(doubleHourlyRate);
                     selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
-                 } else 
-               {
-                Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
-                System.out.println(doubleHourlyRate);
-                selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
-               }
-                
+                } else
+                {
+                    Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
+                    System.out.println(doubleHourlyRate);
+                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
+                }
+
                 projektComboBox.getItems().add(selectedProject);
                 projektComboBox2.getItems().add(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
@@ -1145,6 +1145,7 @@ public class MainAdminViewController implements Initializable
                     Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
                     selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate, 0);
                     clientComboBox.getItems().add(selectedKunde);
+
                 }
             } else
             {
@@ -1168,18 +1169,16 @@ public class MainAdminViewController implements Initializable
                 try
                 {
                     XYChart.Series set1 = new XYChart.Series<>();
+                    XYChart.Series set2 = new XYChart.Series<>();
+                    set1.setName("Projects");
                     barChart.setAnimated(false);
                     Platform.runLater(() -> barChart.getData().addAll(set1));
                     for (Task allTasks : model.getAllTasks())
                     {
                         number = number + 1;
-                        set1.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                        set1.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid(), allTasks.getBetalt() == 1));
+                        set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid(), allTasks.getBetalt() == 0));
 
-                        if (allTasks.getBetalt() == 1)
-                        {
-                            
-
-                        }
                     }
                 } catch (ModelException ex)
                 {
@@ -1287,6 +1286,7 @@ public class MainAdminViewController implements Initializable
             System.out.println("gør den overhovedet det her?");
             int number = -1;
             XYChart.Series set2 = new XYChart.Series<>();
+            XYChart.Series set3 = new XYChart.Series<>();
             barChart.setAnimated(false);
             System.out.println("hvad er det her  = " + selectedProject.getId());
             for (Task allTasks : model.getAllTasks())
@@ -1294,10 +1294,19 @@ public class MainAdminViewController implements Initializable
                 if (allTasks.getProjektId() == selectedProject.getId())
                 {
                     number = number + 1;
-                    set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                    if (allTasks.getBetalt() == 1)
+                    {
+                        set2.setName("Paid task");
+                        set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                    } else if (allTasks.getBetalt() == 0)
+                    {
+                        set3.setName("Not paid task");
+                        set3.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                    }
                 }
             }
             barChart.getData().addAll(set2);
+            barChart.getData().addAll(set3);
         } else
         {
             alertString = "Could not filter charts. Please try again.";
@@ -1338,8 +1347,5 @@ public class MainAdminViewController implements Initializable
             }
         });
     }
-
-    
-   
 
 }

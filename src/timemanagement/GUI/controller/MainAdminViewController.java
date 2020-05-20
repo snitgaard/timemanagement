@@ -1268,6 +1268,15 @@ public class MainAdminViewController implements Initializable
         if (selectedClient != null)
         {
             model.deleteKunde(selectedClient, 1);
+            for (Project project : model.getAllProjects()) 
+            {
+                model.deleteProjectOnClient(project, 1, selectedClient.getId());
+                for (Task task : model.getAllTasks()) 
+            {
+                model.deleteTaskOnProject(task, 1, project.getId());
+            }
+            }
+            
         } else
         {
             alertString = "Could not delete client. Please try again.";

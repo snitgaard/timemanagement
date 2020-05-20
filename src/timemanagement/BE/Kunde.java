@@ -8,6 +8,7 @@ package timemanagement.BE;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
@@ -23,6 +24,7 @@ public class Kunde
     private StringProperty kontaktPerson;
     private StringProperty email;
     private DoubleProperty hourlyRate;
+    private IntegerProperty isDeleted;
 
     /**
      * Constructor for Kunde
@@ -32,12 +34,28 @@ public class Kunde
      * @param email 
      * @param hourlyRate 
      */
-    public Kunde(int id, String kundeNavn, String kontaktPerson, String email, double hourlyRate) {    
+    public Kunde(int id, String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) {    
         this.id = id;
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
         this.kontaktPerson = new SimpleStringProperty(kontaktPerson);
         this.email = new SimpleStringProperty(email);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
+        this.isDeleted = new SimpleIntegerProperty(isDeleted);
+    }
+    
+      public int getIsDeleted()
+    {
+        return isDeleted.get();
+    }
+    
+    public void setIsDeleted(int isDeleted)
+    {
+        this.isDeleted.set(isDeleted);
+    }
+    
+    public ObservableValue<Integer> isDeletedObservable()
+    {
+        return isDeleted.asObject();
     }
 
     public int getId()

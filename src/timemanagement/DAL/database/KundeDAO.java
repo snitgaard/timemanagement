@@ -51,36 +51,11 @@ public class KundeDAO
                 String kontaktPerson = rs.getString("kontaktPerson");
                 String email = rs.getString("email");
                 double hourlyRate = rs.getInt("hourlyRate");
-                Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate);
+                int isDeleted = rs.getInt("isDeleted");
+                Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
                 allKunder.add(kunde);
             }
             return allKunder;
-        }
-    }
-
-    /**
-     * Creates SQL Connection and deletes the selected Kunde.
-     *
-     * @param user
-     * @throws DalException
-     */
-    public void deleteKunde(Kunde kunde) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-            int id = kunde.getId();
-            String sql = "DELETE FROM Kunde WHERE id=?;";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows != 1)
-            {
-                throw new DalException("Could not delete User");
-            }
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
-            throw new DalException("Could not delete User");
         }
     }
 
@@ -90,16 +65,17 @@ public class KundeDAO
      * @return
      * @throws DalException
      */
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Kunde (kundeNavn, kontaktPerson, email, hourlyRate) VALUES (?,?,?,?);";
+            String sql = "INSERT INTO Kunde (kundeNavn, kontaktPerson, email, hourlyRate, isDeleted) VALUES (?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, kundeNavn);
             ps.setString(2, kontaktPerson);
             ps.setString(3, email);
             ps.setDouble(4, hourlyRate);
+            ps.setInt(5, isDeleted);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1)
@@ -108,7 +84,7 @@ public class KundeDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate);
+                    Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
                     return kunde;
                 }
             }
@@ -154,4 +130,19 @@ public class KundeDAO
         }
     }
 
+     public void deleteKunde(Kunde kunde, int isDeleted) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = kunde.getId();
+            String sql = "UPDATE Kunde SET isDeleted = ? WHERE id =" + id + ";";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, isDeleted);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

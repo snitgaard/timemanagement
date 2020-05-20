@@ -29,9 +29,7 @@ public interface DalFacade {
 
     List<Task> getAllTasks() throws DalException;
     
-    void deleteTask(Task task) throws DalException;
-    
-    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws DalException;
+    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws DalException;
     
     void addTime(long brugtTid, int id) throws DalException;
     
@@ -41,17 +39,14 @@ public interface DalFacade {
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate, int rounded) throws DalException;
-    
-    void deleteProject(Project project) throws DalException;
+    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws DalException;
+
     
     List<Project> getProjectKundeNavn() throws DalException;
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws DalException;
 
-    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException;
-    
-    void deleteKunde(Kunde kunde) throws DalException;
+    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException;
     
     List<Kunde> getAllKunder() throws DalException;
     
@@ -72,4 +67,14 @@ public interface DalFacade {
     void updateUserRoles(User user, int isAdmin) throws DalException;
     
     List<Task> getAllTasksOnProject(int projektId) throws DalException;
+    
+    void deleteProject(Project project, int isDeleted) throws DalException;
+    
+    void deleteTask(Task task, int isDeleted) throws DalException;
+    
+    void deleteKunde(Kunde kunde, int isDeleted) throws DalException;
+    
+    void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException;
+    
+    void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws DalException;
 }

@@ -28,7 +28,7 @@ public class Project
     private StringProperty kundeNavn;
     private StringProperty startDato;
     private LongProperty brugtTid;
-    private IntegerProperty ongoing;
+    private IntegerProperty isDeleted;
     private DoubleProperty hourlyRate;
     private IntegerProperty rounded; 
 
@@ -41,14 +41,14 @@ public class Project
      * @param startDato
      * @param brugtTid
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate, int rounded)
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded)
     {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeId = new SimpleIntegerProperty(kundeId);
         this.startDato = new SimpleStringProperty(startDato);
         this.brugtTid = new SimpleLongProperty(brugtTid);
-        this.ongoing = new SimpleIntegerProperty(ongoing);
+        this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
         this.rounded = new SimpleIntegerProperty(rounded);
@@ -61,14 +61,14 @@ public class Project
      * @param kundeNavn
      * @param brugtTid
      */
-    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int ongoing, double hourlyRate)
+    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int isDeleted, double hourlyRate)
     {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
         this.brugtTid = new SimpleLongProperty(brugtTid);
         this.startDato = new SimpleStringProperty(startDato);
-        this.ongoing = new SimpleIntegerProperty(ongoing);
+        this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
     }
 
@@ -217,19 +217,19 @@ public class Project
         return brugtTid.asObject();
     }
 
-    public int getOngoing()
+    public int getIsDeleted()
     {
-        return ongoing.get();
+        return isDeleted.get();
     }
 
-    public void setOngoing(int ongoing)
+    public void setIsDeleted(int isDeleted)
     {
-        this.ongoing.set(ongoing);
+        this.isDeleted.set(isDeleted);
     }
 
-    public ObservableValue<Integer> ongoingObservable()
+    public ObservableValue<Integer> isDeletedObservable()
     {
-        return ongoing.asObject();
+        return isDeleted.asObject();
     }
 
     public double getHourlyRate()

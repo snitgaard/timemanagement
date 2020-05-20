@@ -96,15 +96,9 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void deleteTask(Task task) throws DalException
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws DalException
     {
-        taskDAO.deleteTask(task);
-    }
-
-    @Override
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws DalException
-    {
-        return taskDAO.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+        return taskDAO.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
     }
 
     @Override
@@ -134,7 +128,7 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate, int rounded) throws DalException {
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws DalException {
         return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate, rounded);
     }
 
@@ -223,15 +217,9 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
-        return kundeDAO.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
-    }
-
-    @Override
-    public void deleteProject(Project project) throws DalException
-    {
-        projectDAO.deleteProject(project);
+        return kundeDAO.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
     }
 
     @Override
@@ -244,9 +232,28 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void deleteKunde(Kunde kunde) throws DalException
-    {
-        kundeDAO.deleteKunde(kunde);
+    public void deleteProject(Project project, int isDeleted) throws DalException {
+        projectDAO.deleteProject(project, isDeleted);
     }
- 
+
+    @Override
+    public void deleteTask(Task task, int isDeleted) throws DalException {
+        taskDAO.deleteTask(task, isDeleted);
+    }
+
+    @Override
+    public void deleteKunde(Kunde kunde, int isDeleted) throws DalException {
+       kundeDAO.deleteKunde(kunde, isDeleted);
+    }
+
+    @Override
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException {
+        taskDAO.deleteTaskOnProject(task, isDeleted, projektId);
+    }
+
+    @Override
+    public void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws DalException {
+        projectDAO.deleteProjectOnClient(project, isDeleted, projektId);
+    }
+
 }

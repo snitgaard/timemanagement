@@ -29,25 +29,19 @@ public interface bllFacade
 
     List<Task> getAllTasks() throws bllException;
 
-    void deleteTask(Task task) throws bllException;
-
-    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws bllException;
+    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws bllException;
 
     void addTime(long brugtTid, String opgaveNavn) throws bllException;
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 
-    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws bllException;
-    
-    void deleteProject(Project project) throws bllException;
-
+    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws bllException;
+  
     List<Project> getProjectKundeNavn() throws bllException;
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws bllException;
 
-    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws bllException;
-    
-    void deleteKunde(Kunde kunde) throws bllException;
+    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws bllException;
 
     List<Kunde> getAllKunder() throws bllException;
     

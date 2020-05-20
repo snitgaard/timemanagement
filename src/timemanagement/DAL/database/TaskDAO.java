@@ -58,38 +58,12 @@ public class TaskDAO
                 String beskrivelse = rs.getString("beskrivelse");
                 int betalt = rs.getInt("betalt");
                 String projektNavn = "";
-                int ongoing = rs.getInt("ongoing");
+                int isDeleted = rs.getInt("isDeleted");
                 int userId = rs.getInt("userId");
-                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
                 allProjects.add(task);
             }
             return allProjects;
-        }
-    }
-
-    /**
-     * Creates SQL Connection and deletes the selected tasks.
-     *
-     * @param project
-     * @throws DalException
-     */
-    public void deleteTask(Task task) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-            int id = task.getId();
-            String sql = "DELETE FROM Task WHERE id=?;";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows != 1)
-            {
-                throw new DalException("Shit fuck, could not delete");
-            }
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
-            throw new DalException("Could not delete Task");
         }
     }
 
@@ -99,9 +73,9 @@ public class TaskDAO
      * @return
      * @throws DalException
      */
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws DalException {
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws DalException {
         try (Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Task (opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, ongoing, userId) VALUES (?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Task (opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, isDeleted, userId) VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, opgaveNavn);
             ps.setInt(2, projektId);
@@ -109,7 +83,7 @@ public class TaskDAO
             ps.setString(4, dato);
             ps.setString(5, beskrivelse);
             ps.setInt(6, betalt);
-            ps.setInt(7, ongoing);
+            ps.setInt(7, isDeleted);
             ps.setInt(8, userId);
             int affectedRows = ps.executeUpdate();
 
@@ -119,7 +93,7 @@ public class TaskDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+                    Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
                     return task;
                 }
             }
@@ -231,9 +205,9 @@ public class TaskDAO
                 String beskrivelse = rs.getString("beskrivelse");
                 int betalt = rs.getInt("betalt");
                 String projektNavn = "";
-                int ongoing = rs.getInt("ongoing");
+                int isDeleted = rs.getInt("isDeleted");
                 int userId = rs.getInt("userId");
-                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
                 allProjects.add(task);
             }
             return allProjects;

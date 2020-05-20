@@ -459,7 +459,7 @@ public class MainAdminViewController implements Initializable
         for (Project project1 : allProjectsList)
         {
 
-            if (project1.getOngoing() == 1)
+            if (project1.getIsDeleted() == 1)
             {
                 allProjectsFilteredList.add(project1);
             }
@@ -1051,14 +1051,14 @@ public class MainAdminViewController implements Initializable
             projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
 
-            if (selectedProject.getOngoing() != 0)
+            if (selectedProject.getIsDeleted() != 0)
             {
-                selectedProject.setOngoing(0);
+                selectedProject.setIsDeleted(0);
                 model.archiveProject(selectedProject);
                 allProjectsFilteredList.remove(selectedProject);
-            } else if (selectedProject.getOngoing() == 0)
+            } else if (selectedProject.getIsDeleted() == 0)
             {
-                selectedProject.setOngoing(1);
+                selectedProject.setIsDeleted(1);
                 model.archiveProject(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
             }
@@ -1143,7 +1143,7 @@ public class MainAdminViewController implements Initializable
                     String contactPerson = txt_Contact.getText();
                     String email = txt_Email.getText();
                     Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-                    selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate);
+                    selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate, 0);
                     clientComboBox.getItems().add(selectedKunde);
                 }
             } else
@@ -1211,7 +1211,7 @@ public class MainAdminViewController implements Initializable
 
         if (selectedProject != null)
         {
-            model.deleteProject(selectedProject);
+//            model.deleteProject(selectedProject);
             allProjectsFilteredList.remove(selectedProject);
 
         } else
@@ -1243,7 +1243,7 @@ public class MainAdminViewController implements Initializable
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         if (selectedTask != null)
         {
-            model.deleteTask(selectedTask);
+//            model.deleteTask(selectedTask);
             filteredTaskList.remove(selectedTask);
         } else
         {
@@ -1264,7 +1264,7 @@ public class MainAdminViewController implements Initializable
         Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         if (selectedClient != null)
         {
-            model.deleteKunde(selectedClient);
+//            model.deleteKunde(selectedClient);
         } else
         {
             alertString = "Could not delete client. Please try again.";

@@ -148,11 +148,11 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws ModelException
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws ModelException
     {
         try
         {
-            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
+            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate);
             allProjectsMedKunde.add(project);
             return project;
         } catch (bllException ex)
@@ -177,11 +177,11 @@ public class Model
 
 
 
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws ModelException
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws ModelException
     {
         try
         {
-            Task task = bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+            Task task = bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
             allTasks.add(task);
             return task;
         } catch (bllException ex)
@@ -333,37 +333,13 @@ public class Model
         return allKunder;
     }
 
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws ModelException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws ModelException
     {
         try
         {
-            Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
+            Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
             allKunder.add(kunde);
             return kunde;
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
-
-    public void deleteProject(Project project) throws ModelException
-    {
-        try
-        {
-            bllManager.deleteProject(project);
-            allProjectsMedKunde.remove(project);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
-
-    public void deleteTask(Task task) throws ModelException
-    {
-        try
-        {
-            bllManager.deleteTask(task);
-            allTasks.remove(task);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -375,18 +351,6 @@ public class Model
         try
         {
             return bllManager.getAllTasksOnProject(projektId);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
-
-    public void deleteKunde(Kunde kunde) throws ModelException
-    {
-        try
-        {
-            bllManager.deleteKunde(kunde);
-            allKunder.remove(kunde);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());

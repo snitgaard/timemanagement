@@ -29,25 +29,19 @@ public interface DalFacade {
 
     List<Task> getAllTasks() throws DalException;
     
-    void deleteTask(Task task) throws DalException;
-    
-    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws DalException;
+    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws DalException;
     
     void addTime(long brugtTid, String opgaveNavn) throws DalException;
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException;
-    
-    void deleteProject(Project project) throws DalException;
+    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws DalException;
     
     List<Project> getProjectKundeNavn() throws DalException;
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws DalException;
 
-    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws DalException;
-    
-    void deleteKunde(Kunde kunde) throws DalException;
+    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException;
     
     List<Kunde> getAllKunder() throws DalException;
     

@@ -27,7 +27,7 @@ public class Task
     private StringProperty dato;
     private StringProperty beskrivelse;
     private IntegerProperty betalt;
-    private IntegerProperty ongoing;
+    private IntegerProperty isDeleted;
     private IntegerProperty userId;
 
     /**
@@ -38,7 +38,7 @@ public class Task
      * @param brugtTid
      * @param dato 
      */
-    public Task(int id, String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId)
+    public Task(int id, String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId)
     {
         this.id = id;
         this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
@@ -48,7 +48,7 @@ public class Task
         this.beskrivelse = new SimpleStringProperty(beskrivelse);
         this.betalt = new SimpleIntegerProperty(betalt);
         this.projektNavn = new SimpleStringProperty(projektNavn);
-        this.ongoing = new SimpleIntegerProperty(ongoing);
+        this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.userId = new SimpleIntegerProperty(userId);
     }
 
@@ -257,19 +257,19 @@ public class Task
         return betalt.asObject();
     }
     
-    public int getOngoing()
+    public int getsDeleted()
     {
-        return ongoing.get();
+        return isDeleted.get();
     }
     
-    public void setOngoing(int ongoing)
+    public void setIsDeleted(int isDeleted)
     {
-        this.ongoing.set(ongoing);
+        this.isDeleted.set(isDeleted);
     }
     
-    public ObservableValue<Integer> ongoingObservable()
+    public ObservableValue<Integer> isDeletedObservable()
     {
-        return ongoing.asObject();
+        return isDeleted.asObject();
     }
     
     public int getUserId()

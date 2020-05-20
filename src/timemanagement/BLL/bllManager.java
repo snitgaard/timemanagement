@@ -118,18 +118,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void deleteTask(Task task) throws bllException {
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws bllException {
         try {
-            dalFacade.deleteTask(task);
-        } catch (DalException ex) {
-            throw new bllException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws bllException {
-        try {
-            return dalFacade.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, ongoing, userId);
+            return dalFacade.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -154,9 +145,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws bllException {
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -288,23 +279,11 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate) throws bllException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws bllException
     {
         try
         {
-            return dalFacade.createKunde(kundeNavn, kontaktPerson, email, hourlyRate);
-        } catch (DalException ex)
-        {
-            throw new bllException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public void deleteProject(Project project) throws bllException
-    {
-        try
-        {
-            dalFacade.deleteProject(project);
+            return dalFacade.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());
@@ -316,18 +295,6 @@ public class bllManager implements bllFacade {
         try {
             return dalFacade.getAllTasksOnProject(projektId);
         } catch (DalException ex) {
-            throw new bllException(ex.getMessage());
-        }
-    }
-
-    @Override
-    public void deleteKunde(Kunde kunde) throws bllException
-    {
-        try
-        {
-            dalFacade.deleteKunde(kunde);
-        } catch (DalException ex)
-        {
             throw new bllException(ex.getMessage());
         }
     }

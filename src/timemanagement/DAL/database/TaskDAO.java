@@ -215,6 +215,7 @@ public class TaskDAO
     }
     
      public boolean updateTask(Task task)
+     {
      try (Connection con = dbCon.getConnection())
         {
             int id = task.getId();

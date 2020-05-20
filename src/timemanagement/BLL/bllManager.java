@@ -147,7 +147,7 @@ public class bllManager implements bllFacade {
     @Override
     public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate, rounded);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate, rounded);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -411,6 +411,10 @@ public class bllManager implements bllFacade {
     public boolean updateTask(Task task) throws bllException {
         try {
             return dalFacade.updateTask(task);
+            } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
     public void deleteProject(Project project, int isDeleted) throws bllException {
         try {
             dalFacade.deleteProject(project, isDeleted);

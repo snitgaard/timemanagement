@@ -1172,13 +1172,20 @@ public class MainAdminViewController implements Initializable
                     XYChart.Series set2 = new XYChart.Series<>();
                     set1.setName("Projects");
                     barChart.setAnimated(false);
-                    Platform.runLater(() -> barChart.getData().addAll(set1));
+                    barChart.setBarGap(-35);
+                    Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
                     {
                         number = number + 1;
-                        set1.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid(), allTasks.getBetalt() == 1));
-                        set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid(), allTasks.getBetalt() == 0));
-
+                        if (allTasks.getBetalt() == 1)
+                        {
+                            set1.setName("Paid task");
+                            set1.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
+                        } else if (allTasks.getBetalt() == 0)
+                        {
+                            set2.setName("Not paid task");
+                            set2.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
+                        }
                     }
                 } catch (ModelException ex)
                 {
@@ -1211,7 +1218,7 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             model.deleteProject(selectedProject, 1);
-            for (Task task : model.getAllTasks()) 
+            for (Task task : model.getAllTasks())
             {
                 model.deleteTaskOnProject(task, 1, selectedProject.getId());
             }
@@ -1292,6 +1299,7 @@ public class MainAdminViewController implements Initializable
             XYChart.Series set2 = new XYChart.Series<>();
             XYChart.Series set3 = new XYChart.Series<>();
             barChart.setAnimated(false);
+            barChart.setBarGap(-35);
             System.out.println("hvad er det her  = " + selectedProject.getId());
             for (Task allTasks : model.getAllTasks())
             {
@@ -1301,11 +1309,11 @@ public class MainAdminViewController implements Initializable
                     if (allTasks.getBetalt() == 1)
                     {
                         set2.setName("Paid task");
-                        set2.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                        set2.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + " - " + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
                     } else if (allTasks.getBetalt() == 0)
                     {
                         set3.setName("Not paid task");
-                        set3.getData().add(new BarChart.Data(allTasks.getOpgaveNavn(), allTasks.getBrugtTid()));
+                        set3.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + " - " + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
                     }
                 }
             }

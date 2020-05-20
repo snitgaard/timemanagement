@@ -51,7 +51,8 @@ public class ProjectDAO {
                 int ongoing = rs.getInt("ongoing");
                 String kundeNavn = "";
                 double hourlyRate = rs.getDouble("hourlyRate");
-                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
+                int rounded = rs.getInt("rounded");
+                Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate, rounded);
                 allProjects.add(project);
             }
             return allProjects;
@@ -90,9 +91,9 @@ public class ProjectDAO {
      * @return
      * @throws DalException
      */
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException {
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate, int rounded) throws DalException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, ongoing, hourlyRate) VALUES (?,?,?,?,?,?);";
+            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, ongoing, hourlyRate, rounded) VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projektNavn);
             ps.setInt(2, kundeId);
@@ -100,13 +101,14 @@ public class ProjectDAO {
             ps.setLong(4, brugtTid);
             ps.setInt(5, ongoing);
             ps.setDouble(6, hourlyRate);
+            ps.setInt(7, rounded);
             int affectedRows = ps.executeUpdate();
 
             if (affectedRows == 1) {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     int id = rs.getInt(1);
-                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
+                    Project project = new Project(id, projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate, rounded);
                     return project;
                 }
             }

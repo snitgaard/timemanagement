@@ -108,11 +108,19 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void addTime(long brugtTid, String opgaveNavn) throws DalException {
-        taskDAO.addTime(brugtTid, opgaveNavn);
+    public void addTime(long brugtTid, int id) throws DalException {
+        taskDAO.addTime(brugtTid, id);
     }
     
+    @Override
+    public void addRoundedTime(long brugtTid, int id) throws DalException {
+        taskDAO.addRoundedTime(brugtTid, id);
+    }
     
+    @Override
+    public boolean updateTask(Task task) throws DalException {
+        return taskDAO.updateTask(task);
+    }
     
     public List<Task> getAllTasksProjektNavn() throws DalException
     {
@@ -126,8 +134,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException {
-        return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate);
+    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate, int rounded) throws DalException {
+        return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, ongoing, kundeNavn, hourlyRate, rounded);
     }
 
     
@@ -173,10 +181,7 @@ public class DalManager implements DalFacade
         projectDAO.updateProjectTime(project);
     }
 
-    @Override
-    public boolean updateTask(Task task) throws DalException {
-        return taskDAO.updateTask(task);
-    }
+    
 
     @Override
     public void deleteUser(User user) throws DalException

@@ -131,20 +131,35 @@ public class TaskDAO
         return null;
     }
 
-    public void addTime(long brugtTid, String opgaveNavn) throws DalException
+    public void addTime(long brugtTid, int id) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Task SET brugtTid = brugtTid + ? WHERE opgaveNavn = ?";
+            String sql = "UPDATE Task SET brugtTid = brugtTid + ? WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, brugtTid);
-            ps.setObject(2, opgaveNavn);
+            ps.setInt(2, id);
             ps.executeUpdate();
 
         } catch (SQLException ex)
         {
             System.out.println(ex);
             throw new DalException("Could not fetch all classes");
+        }
+    }
+    
+    public void addRoundedTime(long brugtTid, int id)
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            String sql = "UPDATE Task SET brugtTid = brugtTid + (CEILING(?) * 15) WHERE id = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, brugtTid);
+            ps.setInt(2, id);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
         }
     }
 
@@ -176,22 +191,7 @@ public class TaskDAO
         }
     }
 
-    public boolean updateTask(Task task)
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-            int id = task.getId();
-            String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id =" + id + ";";
-            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, task.getBrugtTid());
-            ps.executeUpdate();
-            return true;
-        } catch (SQLException ex)
-        {
-            ex.printStackTrace();
-            return false;
-        }
-    }
+    
     
     public void editTask(Task task)
     {
@@ -237,6 +237,23 @@ public class TaskDAO
                 allProjects.add(task);
             }
             return allProjects;
+        }
+    }
+    
+     public boolean updateTask(Task task)
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = task.getId();
+            String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id =" + id + ";";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setLong(1, task.getBrugtTid());
+            ps.executeUpdate();
+            return true;
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+            return false;
         }
     }
 }

@@ -33,11 +33,15 @@ public interface DalFacade {
     
     Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int ongoing, int userId) throws DalException;
     
-    void addTime(long brugtTid, String opgaveNavn) throws DalException;
+    void addTime(long brugtTid, int id) throws DalException;
+    
+    void addRoundedTime(long brugtTid, int id) throws DalException;
+    
+    boolean updateTask(Task task) throws DalException;
     
     List<Task> getAllTasksProjektNavn() throws DalException;
     
-    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate) throws DalException;
+    Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int ongoing, String kundeNavn, double hourlyRate, int rounded) throws DalException;
     
     void deleteProject(Project project) throws DalException;
     
@@ -56,8 +60,6 @@ public interface DalFacade {
     List<User> getAllUsers() throws DalException;
     
     void updateProjectTime(Project project) throws DalException;
-    
-    boolean updateTask(Task task) throws DalException;
     
     void deleteUser(User user) throws DalException;
     

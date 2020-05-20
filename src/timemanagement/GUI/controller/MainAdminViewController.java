@@ -1214,7 +1214,7 @@ public class MainAdminViewController implements Initializable
             model.deleteProject(selectedProject, 1);
             for (Task task : model.getAllTasks()) 
             {
-                
+                model.deleteTaskOnProject(task, 1, selectedProject.getId());
             }
             allProjectsFilteredList.remove(selectedProject);
 

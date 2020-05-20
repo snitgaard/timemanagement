@@ -432,4 +432,22 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
+
+    @Override
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException {
+        try {
+            dalFacade.deleteTaskOnProject(task, isDeleted, projektId);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws bllException {
+        try {
+            dalFacade.deleteProjectOnClient(project, isDeleted, projektId);
+        } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
 }

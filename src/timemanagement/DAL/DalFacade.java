@@ -70,4 +70,8 @@ public interface DalFacade {
     void deleteTask(Task task, int isDeleted) throws DalException;
     
     void deleteKunde(Kunde kunde, int isDeleted) throws DalException;
+    
+    void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException;
+    
+    void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws DalException;
 }

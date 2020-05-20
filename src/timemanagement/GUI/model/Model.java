@@ -401,4 +401,22 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+    
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws ModelException
+    {
+        try {
+            bllManager.deleteTaskOnProject(task, isDeleted, projektId);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public void deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
+    {
+        try {
+            bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
+        } catch (bllException ex) {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 }

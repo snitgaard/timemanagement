@@ -1211,7 +1211,11 @@ public class MainAdminViewController implements Initializable
 
         if (selectedProject != null)
         {
-//            model.deleteProject(selectedProject);
+            model.deleteProject(selectedProject, 1);
+            for (Task task : model.getAllTasks()) 
+            {
+                
+            }
             allProjectsFilteredList.remove(selectedProject);
 
         } else
@@ -1243,7 +1247,7 @@ public class MainAdminViewController implements Initializable
         Task selectedTask = opgaverTableView.getSelectionModel().getSelectedItem();
         if (selectedTask != null)
         {
-//            model.deleteTask(selectedTask);
+            model.deleteTask(selectedTask, 1);
             filteredTaskList.remove(selectedTask);
         } else
         {
@@ -1264,7 +1268,7 @@ public class MainAdminViewController implements Initializable
         Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         if (selectedClient != null)
         {
-//            model.deleteKunde(selectedClient);
+            model.deleteKunde(selectedClient, 1);
         } else
         {
             alertString = "Could not delete client. Please try again.";

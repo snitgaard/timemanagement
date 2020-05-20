@@ -213,4 +213,37 @@ public class TaskDAO
             return allProjects;
         }
     }
+    
+    public void deleteTask(Task task, int isDeleted) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = task.getId();
+            String sql = "UPDATE Task SET isDeleted = ? WHERE id =" + id + ";";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, isDeleted);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
+    
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException
+            {
+        try (Connection con = dbCon.getConnection())
+        {
+            int id = task.getId();
+            String sql = "UPDATE Task SET isDeleted = ? WHERE id =" + id + " AND projektId = ?;";
+            PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            
+            ps.setInt(1, isDeleted);
+            ps.setInt(2, projektId);
+            ps.executeUpdate();
+        } catch (SQLException ex)
+        {
+            ex.printStackTrace();
+        }
+    }
 }

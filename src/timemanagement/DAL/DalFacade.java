@@ -64,4 +64,10 @@ public interface DalFacade {
     void updateUserRoles(User user, int isAdmin) throws DalException;
     
     List<Task> getAllTasksOnProject(int projektId) throws DalException;
+    
+    void deleteProject(Project project, int isDeleted) throws DalException;
+    
+    void deleteTask(Task task, int isDeleted) throws DalException;
+    
+    void deleteKunde(Kunde kunde, int isDeleted) throws DalException;
 }

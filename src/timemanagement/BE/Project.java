@@ -30,6 +30,7 @@ public class Project
     private LongProperty brugtTid;
     private IntegerProperty isDeleted;
     private DoubleProperty hourlyRate;
+    private IntegerProperty rounded; 
 
     /**
      * Constructor for Project
@@ -40,7 +41,7 @@ public class Project
      * @param startDato
      * @param brugtTid
      */
-    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate)
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded)
     {
         this.id = id;
         this.projektNavn = new SimpleStringProperty(projektNavn);
@@ -50,6 +51,7 @@ public class Project
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.kundeNavn = new SimpleStringProperty(kundeNavn);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
+        this.rounded = new SimpleIntegerProperty(rounded);
     }
 
     /**
@@ -243,6 +245,21 @@ public class Project
     public ObservableValue<Double> hourlyRateObservable()
     {
         return hourlyRate.asObject();
+    }
+    
+    public int getRounded()
+    {
+        return rounded.get();
+    }
+    
+    public void setRounded(int rounded)
+    {
+        this.rounded.set(rounded);
+    }
+    
+    public ObservableValue<Integer> roundedObservable()
+    {
+        return rounded.asObject();
     }
 
     /**

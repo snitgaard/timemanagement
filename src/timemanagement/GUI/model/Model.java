@@ -110,11 +110,11 @@ public class Model
         return allTasks;
     }
 
-    public void addTime(long brugtTid, String opgaveNavn) throws ModelException
+    public void addTime(long brugtTid, int id) throws ModelException
     {
         try
         {
-            bllManager.addTime(brugtTid, opgaveNavn);
+            bllManager.addTime(brugtTid, id);
         } catch (bllException ex)
         {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -148,11 +148,11 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws ModelException
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws ModelException
     {
         try
         {
-            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate);
+            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate, rounded);
             allProjectsMedKunde.add(project);
             return project;
         } catch (bllException ex)
@@ -253,13 +253,22 @@ public class Model
 
     }
 
-    public boolean updateTask(Task task) throws ModelException
+    public void addRoundedTime(long brugtTid, int id) throws ModelException
     {
         try
         {
-            return bllManager.updateTask(task);
+            bllManager.addRoundedTime(brugtTid, id);
         } catch (bllException ex)
         {
+            throw new ModelException(ex.getMessage());
+        }
+    }
+    
+    public boolean updateTask(Task task) throws ModelException
+    {
+        try {
+            return bllManager.updateTask(task);
+        } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }
@@ -411,10 +420,10 @@ public class Model
         }
     }
     
-    public void deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
+    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
     {
         try {
-            bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
+            return bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

@@ -127,9 +127,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void addTime(long brugtTid, String opgaveNavn) throws bllException {
+    public void addTime(long brugtTid, int id) throws bllException {
         try {
-            dalFacade.addTime(brugtTid, opgaveNavn);
+            dalFacade.addTime(brugtTid, id);
         } catch (DalException ex) {
             Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -145,9 +145,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws bllException {
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws bllException {
         try {
-            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate, rounded);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -204,9 +204,10 @@ public class bllManager implements bllFacade {
             throw new bllException(ex.getMessage());
         }
     }
-    public boolean updateTask(Task task) throws bllException {
+    @Override
+    public void addRoundedTime(long brugtTid, int id) throws bllException {
         try {
-            return dalFacade.updateTask(task);
+            dalFacade.addRoundedTime(brugtTid, id);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -407,6 +408,13 @@ public class bllManager implements bllFacade {
     }
 
     @Override
+    public boolean updateTask(Task task) throws bllException {
+        try {
+            return dalFacade.updateTask(task);
+            } catch (DalException ex) {
+            throw new bllException(ex.getMessage());
+        }
+    }
     public void deleteProject(Project project, int isDeleted) throws bllException {
         try {
             dalFacade.deleteProject(project, isDeleted);
@@ -443,9 +451,9 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws bllException {
+    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException {
         try {
-            dalFacade.deleteProjectOnClient(project, isDeleted, projektId);
+            return dalFacade.deleteProjectOnClient(project, isDeleted, kundeId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

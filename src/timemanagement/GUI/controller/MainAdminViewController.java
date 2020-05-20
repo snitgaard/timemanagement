@@ -235,6 +235,8 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_userFullName;
     @FXML
     private TableColumn<User, String> userViewUsername;
+    @FXML
+    private JFXCheckBox quartersCheckBox;
 
     /**
      * Initializes the controller class.
@@ -587,7 +589,17 @@ public class MainAdminViewController implements Initializable
             slutTidField.setText(sdf.format(date));
 
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
-            model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getOpgaveNavn());
+            
+            if (selectedProject.getRounded() == 0)
+            {
+                model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
+            }
+            else
+            {
+                long roundThis = model.timeCalculator(startTidField.getText(), slutTidField.getText()) / 15;
+                model.addRoundedTime(roundThis, opgaveComboBox.getSelectionModel().getSelectedItem().getId());
+            }
+            
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)
             {
@@ -837,33 +849,31 @@ public class MainAdminViewController implements Initializable
     {
         Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
+        double doubleHourlyRate = 0;
 
-        try
-        {
-            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null)
-            {
-                if (txt_HourlyRateProject.getText().isEmpty())
-                {
-                    Double doubleHourlyRate = selectedClient.getHourlyRate();
-                    System.out.println(doubleHourlyRate);
-                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
-                } else
-                {
-                    Double doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
-                    System.out.println(doubleHourlyRate);
-                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate);
+        try {
+            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null) {
+                if (txt_HourlyRateProject.getText().isEmpty()) {
+                    doubleHourlyRate = selectedClient.getHourlyRate();
+
+                } else {
+                    doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
+                }
+
+                if (quartersCheckBox.isSelected()) {
+                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 1);
+                } else {
+                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 0);
                 }
 
                 projektComboBox.getItems().add(selectedProject);
                 projektComboBox2.getItems().add(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
-            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null)
-            {
+            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null) {
                 alertString = "Could not create project. Please try again";
                 showAlert();
             }
-        } catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
             alertString = "Could not create project as a non-numeric number was detected. Please try again.";
             showAlert();
         }
@@ -1275,6 +1285,25 @@ public class MainAdminViewController implements Initializable
         if (selectedClient != null)
         {
             model.deleteKunde(selectedClient, 1);
+            for (Project project : model.getAllProjects()) 
+            {
+                List<Project> tempDeletedList = new ArrayList<>();
+                if(selectedClient.getId() == project.getKundeId())
+                {
+                    tempDeletedList.add(project);
+                }
+                int selectedProject = project.getId();
+                model.deleteProjectOnClient(project, 1, selectedClient.getId());
+                System.out.println(model.deleteProjectOnClient(project, 1, selectedClient.getId()));
+                System.out.println("dette er listen, pelase = " + tempDeletedList);
+                for (Task task : model.getAllTasks()) 
+            {
+//                if(task.getProjektId() == )
+//                model.deleteTaskOnProject(task, 1, tempDeletedList.);
+//                System.out.println("hvad er det her????????? + " + selectedProject);
+            }
+            }
+            
         } else
         {
             alertString = "Could not delete client. Please try again.";

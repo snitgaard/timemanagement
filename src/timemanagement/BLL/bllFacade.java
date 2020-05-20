@@ -31,12 +31,14 @@ public interface bllFacade
 
     Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws bllException;
 
-    void addTime(long brugtTid, String opgaveNavn) throws bllException;
+    void addTime(long brugtTid, int id) throws bllException;
+    
+    void addRoundedTime(long brugtTid, int id) throws bllException;
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 
-    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate) throws bllException;
-  
+    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws bllException;
+
     List<Project> getProjectKundeNavn() throws bllException;
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws bllException;
@@ -77,5 +79,5 @@ public interface bllFacade
     
     void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException;
     
-    void deleteProjectOnClient(Project project, int isDeleted, int projektId) throws bllException;
+    Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException;
 }

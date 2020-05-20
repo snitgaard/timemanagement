@@ -107,7 +107,7 @@ public class DalManager implements DalFacade
     }
     
     @Override
-    public void addRoundedTime(long brugtTid, int id) throws DalException {
+    public void addRoundedTime(double brugtTid, int id) throws DalException {
         taskDAO.addRoundedTime(brugtTid, id);
     }
     

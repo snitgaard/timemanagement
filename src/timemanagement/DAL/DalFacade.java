@@ -33,7 +33,7 @@ public interface DalFacade {
     
     void addTime(long brugtTid, int id) throws DalException;
     
-    void addRoundedTime(long brugtTid, int id) throws DalException;
+    void addRoundedTime(double brugtTid, int id) throws DalException;
     
     boolean updateTask(Task task) throws DalException;
     

@@ -589,15 +589,18 @@ public class MainAdminViewController implements Initializable
             slutTidField.setText(sdf.format(date));
 
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
+            System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
+            System.out.println(selectedProject + "DET ER HER");
             
             if (selectedProject.getRounded() == 0)
             {
+                System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
                 model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
             }
             else
             {
-                long roundThis = model.timeCalculator(startTidField.getText(), slutTidField.getText()) / 15;
-                model.addRoundedTime(roundThis, opgaveComboBox.getSelectionModel().getSelectedItem().getId());
+                System.out.println(model.timeCalculator(startTidField.getText(), slutTidField.getText()));
+                model.addRoundedTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
             }
             
 
@@ -605,7 +608,20 @@ public class MainAdminViewController implements Initializable
             {
                 if (selectedTask.getId() == opgaverTableView.getItems().get(i).getId())
                 {
-                    opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
+                    if (selectedProject.getRounded() == 0)
+                    {
+                        opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
+                    }
+                    else
+                    { 
+                        double time = model.timeCalculator(startTidField.getText(), slutTidField.getText());
+                        Double roundedTime = Math.ceil(time / 15) * 15;
+                        long realRoundedTime = roundedTime.longValue();
+                        
+                        opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + realRoundedTime);
+                        
+                    }
+                    
                 }
             }
 

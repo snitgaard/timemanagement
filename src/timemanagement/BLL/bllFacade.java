@@ -33,7 +33,7 @@ public interface bllFacade
 
     void addTime(long brugtTid, int id) throws bllException;
     
-    void addRoundedTime(long brugtTid, int id) throws bllException;
+    void addRoundedTime(double brugtTid, int id) throws bllException;
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 

@@ -253,7 +253,7 @@ public class Model
 
     }
 
-    public void addRoundedTime(long brugtTid, int id) throws ModelException
+    public void addRoundedTime(double brugtTid, int id) throws ModelException
     {
         try
         {

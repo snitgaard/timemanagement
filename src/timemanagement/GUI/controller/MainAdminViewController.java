@@ -1312,20 +1312,24 @@ public class MainAdminViewController implements Initializable
         {
             public void run()
             {
+                
+                
                 if (selectedClient != null)
                 {
                     try
                     {
                         model.deleteClient(selectedClient, 1);
 
-                        for (Project project : model.getAllProjects())
+                        for (ListIterator<Project> iterator = model.getAllProjects().listIterator(); iterator.hasNext();)
                         {
                             ArrayList<Project> tempDeletedList = new ArrayList<>();
+                            Project project = iterator.next();
                             if (selectedClient.getId() == project.getClientId())
                             {
                                 tempDeletedList.add(project);
                             }
                             model.deleteProjectOnClient(project, 1, selectedClient.getId());
+                            iterator.remove();
                             for (Project project1 : tempDeletedList)
                             {
                                 for (Task task : model.getAllTasks())

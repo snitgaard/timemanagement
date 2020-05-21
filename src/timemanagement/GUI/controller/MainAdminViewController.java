@@ -585,7 +585,7 @@ public class MainAdminViewController implements Initializable
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
             System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
             System.out.println(selectedProject + "DET ER HER");
-            
+
             if (selectedProject.getRounded() == 0)
             {
                 System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
@@ -603,17 +603,16 @@ public class MainAdminViewController implements Initializable
                     if (selectedProject.getRounded() == 0)
                     {
                         opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
-                    }
-                    else
-                    { 
+                    } else
+                    {
                         double time = model.timeCalculator(startTidField.getText(), slutTidField.getText());
                         Double roundedTime = Math.ceil(time / 15) * 15;
                         long realRoundedTime = roundedTime.longValue();
-                        
+
                         opgaverTableView.getItems().get(i).setBrugtTid(gammelBrugtTid + realRoundedTime);
-                        
+
                     }
-                    
+
                 }
             }
 
@@ -796,12 +795,16 @@ public class MainAdminViewController implements Initializable
             String userPassword = encryptThisString(txt_userPassword.getText());
             String email = txt_userEmail.getText();
             String fullName = txt_userFullName.getText();
-            if (opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
+            if (opretAdminCheckBox.isSelected() && !userLogin.isEmpty() && !txt_userPassword.getText().isEmpty() && !email.isEmpty() && !fullName.isEmpty())
             {
                 model.createUser(userLogin, userPassword, 1, email, fullName);
-            } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty())
+            } else if (!opretAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty() && !email.isEmpty() && !fullName.isEmpty())
             {
                 model.createUser(userLogin, userPassword, 0, email, fullName);
+            } else if (txt_userLogin.getText().isEmpty() || txt_userPassword.getText().isEmpty() || email.isEmpty() || fullName.isEmpty())
+            {
+                alertString = "Could not create user or admin. Please try again";
+                showAlert();
             }
         } catch (Exception e)
         {
@@ -1005,8 +1008,6 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
-    
-
 
     /**
      * Clears the task by re-setting the list task list.
@@ -1056,7 +1057,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * 
+     *
      *
      * @throws ModelException DalException
      */
@@ -1098,7 +1099,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *  Edits and saves the changes to the selectd task. 
+     * Edits and saves the changes to the selectd task.
      *
      * @throws ModelException DalException
      */
@@ -1152,8 +1153,9 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     * Checks the textfields, if they are not empty, takes the indput and creates a client based on the indput. 
-     * 
+     * Checks the textfields, if they are not empty, takes the indput and
+     * creates a client based on the indput.
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1185,9 +1187,10 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-     /**
-     * Create data chart series, and adds them to the charts. While running the method on a seperate thred. 
-     * 
+    /**
+     * Create data chart series, and adds them to the charts. While running the
+     * method on a seperate thred.
+     *
      * @throws ModelException DalException
      */
     private void fillChart() throws ModelException
@@ -1220,8 +1223,8 @@ public class MainAdminViewController implements Initializable
                     }
                 } catch (ModelException ex)
                 {
-            alertString = "Could not fill charts on startup. Please try again.";
-            showAlert();
+                    alertString = "Could not fill charts on startup. Please try again.";
+                    showAlert();
                 }
             }
 
@@ -1240,8 +1243,8 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *  
-     * 
+     *
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1311,40 +1314,40 @@ public class MainAdminViewController implements Initializable
         {
             public void run()
             {
-        if (selectedClient != null)
-        {
-            try {
-                model.deleteKunde(selectedClient, 1);
-            
-            for (Project project : model.getAllProjects()) 
-            {
-                ArrayList<Project> tempDeletedList = new ArrayList<>();
-                if(selectedClient.getId() == project.getKundeId())
+                if (selectedClient != null)
                 {
-                    tempDeletedList.add(project);
-                }
-                model.deleteProjectOnClient(project, 1, selectedClient.getId());
-                for (Project project1 : tempDeletedList)
-                {
-                    for (Task task : model.getAllTasks()) 
-            {
-                model.deleteTaskOnProject(task, 1, project1.getId());
-                }
-            }
-        }
-            } catch (ModelException ex) {
-                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                    try
+                    {
+                        model.deleteKunde(selectedClient, 1);
 
-        
-            
-        } else
-        {
-            alertString = "Could not delete client. Please try again.";
-            showAlert();
-        }
+                        for (Project project : model.getAllProjects())
+                        {
+                            ArrayList<Project> tempDeletedList = new ArrayList<>();
+                            if (selectedClient.getId() == project.getKundeId())
+                            {
+                                tempDeletedList.add(project);
+                            }
+                            model.deleteProjectOnClient(project, 1, selectedClient.getId());
+                            for (Project project1 : tempDeletedList)
+                            {
+                                for (Task task : model.getAllTasks())
+                                {
+                                    model.deleteTaskOnProject(task, 1, project1.getId());
+                                }
+                            }
+                        }
+                    } catch (ModelException ex)
+                    {
+                        Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                } else
+                {
+                    alertString = "Could not delete client. Please try again.";
+                    showAlert();
+                }
             }
-                });
+        });
         thread.start();
         try
         {
@@ -1400,10 +1403,10 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-     /**
-     * 
-     * 
-     * 
+    /**
+     *
+     *
+     *
      */
     private void showAlert()
     {

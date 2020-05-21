@@ -143,7 +143,7 @@ public class TaskDAO
         {
             String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Task.userId, Task.beskrivelse, Task.betalt, Project.projektNavn\n"
                     + "FROM Task \n"
-                    + "INNER JOIN Project ON Task.projektId=Project.id;";
+                    + "INNER JOIN Project ON Task.projektId=Project.id WHERE Task.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Task> allProjects = new ArrayList<>();

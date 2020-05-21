@@ -1376,8 +1376,6 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             barChart.getData().clear();
-            System.out.println("gør den overhovedet det her?");
-            int number = -1;
             XYChart.Series set2 = new XYChart.Series<>();
             XYChart.Series set3 = new XYChart.Series<>();
             barChart.setAnimated(false);
@@ -1387,7 +1385,6 @@ public class MainAdminViewController implements Initializable
             {
                 if (allTasks.getProjectId() == selectedProject.getId())
                 {
-                    number = number + 1;
                     if (allTasks.getPayed() == 1)
                     {
                         set2.setName("Paid task");

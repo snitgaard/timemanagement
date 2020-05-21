@@ -451,7 +451,7 @@ public class MainAdminViewController implements Initializable
         {
             clientComboBox.setItems(model.getAllClients());
         }
-        
+
         projekterTableView.setItems(model.getProjectClientName());
 
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
@@ -584,15 +584,14 @@ public class MainAdminViewController implements Initializable
                     if (selectedProject.getRounded() == 0)
                     {
                         opgaverTableView.getItems().get(i).setUsedTime(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
-                    }
-                    else
-                    { 
+                    } else
+                    {
                         double time = model.timeCalculator(startTidField.getText(), slutTidField.getText());
                         Double roundedTime = Math.ceil(time / 15) * 15;
                         long realRoundedTime = roundedTime.longValue();
-                        
+
                         opgaverTableView.getItems().get(i).setUsedTime(gammelBrugtTid + realRoundedTime);
-                        
+
                     }
 
                 }
@@ -1237,7 +1236,7 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             model.deleteProject(selectedProject, 1);
-            
+
             for (Task task : model.getAllTasksProjectName())
             {
                 if (task.getProjectId() == selectedProject.getId())
@@ -1246,7 +1245,7 @@ public class MainAdminViewController implements Initializable
                 }
                 model.deleteTaskOnProject(task, 1, selectedProject.getId());
             }
-            
+
             for (Task task : toBeDeleted)
             {
                 for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
@@ -1258,7 +1257,7 @@ public class MainAdminViewController implements Initializable
                     }
                 }
             }
-            
+
             allProjectsFilteredList.remove(selectedProject);
 
         } else
@@ -1313,24 +1312,16 @@ public class MainAdminViewController implements Initializable
         {
             public void run()
             {
-        if (selectedClient != null)
-        {
-            try {
-                model.deleteClient(selectedClient, 1);
-            
-            for (Project project : model.getAllProjects()) 
-            {
-                ArrayList<Project> tempDeletedList = new ArrayList<>();
-                if(selectedClient.getId() == project.getClientId())
+                if (selectedClient != null)
                 {
                     try
                     {
-                        model.deleteKunde(selectedClient, 1);
+                        model.deleteClient(selectedClient, 1);
 
                         for (Project project : model.getAllProjects())
                         {
                             ArrayList<Project> tempDeletedList = new ArrayList<>();
-                            if (selectedClient.getId() == project.getKundeId())
+                            if (selectedClient.getId() == project.getClientId())
                             {
                                 tempDeletedList.add(project);
                             }
@@ -1445,5 +1436,4 @@ public class MainAdminViewController implements Initializable
             }
         });
     }
-
 }

@@ -137,61 +137,6 @@
                   </AnchorPane>
                </items>
             </SplitPane>
-            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
-                     <children>
-                        <JFXTextField fx:id="txt_userPassword" layoutX="135.0" layoutY="99.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Password" />
-                        <JFXTextField fx:id="txt_userLogin" layoutX="135.0" layoutY="53.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter Username" />
-                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="135.0" layoutY="253.0" text="Admin">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXCheckBox>
-                        <TableView fx:id="userView" layoutX="12.0" layoutY="309.0" prefHeight="239.0" prefWidth="717.0">
-                          <columns>
-                            <TableColumn fx:id="userViewUsername" prefWidth="163.0" text="Username" />
-                              <TableColumn fx:id="userViewRolle" prefWidth="133.0" text="Role" />
-                              <TableColumn fx:id="userViewEmail" prefWidth="190.0" text="Email" />
-                              <TableColumn fx:id="userViewFullName" prefWidth="220.0" text="Full Name" />
-                          </columns>
-                        </TableView>
-                        <JFXButton layoutX="239.0" layoutY="248.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="585.0" layoutY="552.0" onAction="#deleteUser" style="-fx-border-color: black;" text="Delete Account">
-                           <graphic>
-                              <FontAwesomeIconView text="" />
-                           </graphic>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXComboBox fx:id="userComboBox" layoutX="412.0" layoutY="90.0" promptText="List Of Roles" />
-                        <JFXButton layoutX="553.0" layoutY="87.0" onAction="#updateUserRole" style="-fx-border-color: black;" text="Update">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></JFXButton>
-                        <Label layoutX="22.0" layoutY="15.0" prefHeight="31.0" prefWidth="171.0" text="Create New Account">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="41.0" layoutY="56.0" prefHeight="25.0" prefWidth="67.0" text="Username" />
-                        <Label layoutX="39.0" layoutY="103.0" prefHeight="25.0" prefWidth="71.0" text="Password">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <JFXTextField fx:id="txt_userEmail" layoutX="135.0" layoutY="144.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Email" />
-                        <JFXTextField fx:id="txt_userFullName" layoutX="135.0" layoutY="185.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Full Name" />
-                        <Label layoutX="41.0" layoutY="148.0" prefHeight="25.0" prefWidth="67.0" text="User Email" />
-                        <Label layoutX="33.0" layoutY="189.0" prefHeight="25.0" prefWidth="84.0" text="User Full Name" />
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
             <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -429,6 +374,75 @@
                      </children>
                   </AnchorPane>
               </items>
+            </SplitPane>
+            <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
+                     <children>
+                        <JFXTextField fx:id="txt_userPassword" layoutX="135.0" layoutY="95.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Password" />
+                        <JFXTextField fx:id="txt_userLogin" layoutX="135.0" layoutY="53.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter Username" />
+                        <JFXCheckBox fx:id="opretAdminCheckBox" layoutX="135.0" layoutY="238.0" text="Admin">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <TableView fx:id="userView" layoutX="1.0" layoutY="277.0" prefHeight="268.0" prefWidth="717.0">
+                          <columns>
+                            <TableColumn fx:id="userViewUsername" prefWidth="163.0" text="Username" />
+                              <TableColumn fx:id="userViewFullName" prefWidth="230.0" text="Full Name" />
+                              <TableColumn fx:id="userViewEmail" prefWidth="190.0" text="Email" />
+                              <TableColumn fx:id="userViewRolle" prefWidth="133.0" text="Role" />
+                          </columns>
+                        </TableView>
+                        <JFXButton layoutX="240.0" layoutY="233.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="585.0" layoutY="552.0" onAction="#deleteUser" style="-fx-border-color: black;" text="Delete Account">
+                           <graphic>
+                              <FontAwesomeIconView text="" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXComboBox fx:id="userComboBox" layoutX="412.0" layoutY="90.0" promptText="List Of Roles" />
+                        <JFXButton layoutX="553.0" layoutY="87.0" onAction="#updateUserRole" style="-fx-border-color: black;" text="Update">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
+                        <Label layoutX="22.0" layoutY="15.0" prefHeight="31.0" prefWidth="171.0" text="Create New Account">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="50.0" layoutY="56.0" prefHeight="25.0" prefWidth="63.0" text="Username">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="55.0" layoutY="99.0" prefHeight="25.0" prefWidth="60.0" text="Password">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <JFXTextField fx:id="txt_userEmail" layoutX="135.0" layoutY="183.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Email" />
+                        <JFXTextField fx:id="txt_userFullName" layoutX="135.0" layoutY="139.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Full Name" />
+                        <Label layoutX="50.0" layoutY="186.0" prefHeight="25.0" prefWidth="67.0" text="User Email">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="50.0" layoutY="143.0" prefHeight="25.0" prefWidth="66.0" text="Full Name">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="412.0" layoutY="59.0" text="Select a user to update their role">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+               </items>
             </SplitPane>
          </children>
       </StackPane>

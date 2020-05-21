@@ -143,7 +143,7 @@ public class TaskDAO
         {
             String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Task.userId, Task.beskrivelse, Task.betalt, Project.projektNavn\n"
                     + "FROM Task \n"
-                    + "INNER JOIN Project ON Task.projektId=Project.id WHERE Task.isDeleted = 0;";
+                    + "INNER JOIN Project ON Task.projektId=Project.id;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Task> allProjects = new ArrayList<>();
@@ -174,9 +174,9 @@ public class TaskDAO
             int id = task.getId();
             String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, task.getTaskName());
-            ps.setString(2, task.getDescription());
-            ps.setInt(3, task.getPayed());
+            ps.setString(1, task.getOpgaveNavn());
+            ps.setString(2, task.getBeskrivelse());
+            ps.setInt(3, task.getBetalt());
             ps.executeUpdate();
         } 
         catch (SQLException ex)
@@ -222,7 +222,7 @@ public class TaskDAO
 
             String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, task.getUsedTime());
+            ps.setLong(1, task.getBrugtTid());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex)

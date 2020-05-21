@@ -23,11 +23,11 @@ public class Project
 {
 
     private int id;
-    private StringProperty projectName;
-    private IntegerProperty clientId;
-    private StringProperty clientName;
-    private StringProperty startDate;
-    private LongProperty usedTime;
+    private StringProperty projektNavn;
+    private IntegerProperty kundeId;
+    private StringProperty kundeNavn;
+    private StringProperty startDato;
+    private LongProperty brugtTid;
     private IntegerProperty isDeleted;
     private DoubleProperty hourlyRate;
     private IntegerProperty rounded; 
@@ -36,20 +36,20 @@ public class Project
      * Constructor for Project
      *
      * @param id
-     * @param projectNavn
-     * @param clientId
-     * @param startDate
-     * @param usedTime
+     * @param projektNavn
+     * @param kundeId
+     * @param startDato
+     * @param brugtTid
      */
-    public Project(int id, String projectNavn, int clientId, String startDate, long usedTime, int isDeleted, String ClientName, double hourlyRate, int rounded)
+    public Project(int id, String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded)
     {
         this.id = id;
-        this.projectName = new SimpleStringProperty(projectNavn);
-        this.clientId = new SimpleIntegerProperty(clientId);
-        this.startDate = new SimpleStringProperty(startDate);
-        this.usedTime = new SimpleLongProperty(usedTime);
+        this.projektNavn = new SimpleStringProperty(projektNavn);
+        this.kundeId = new SimpleIntegerProperty(kundeId);
+        this.startDato = new SimpleStringProperty(startDato);
+        this.brugtTid = new SimpleLongProperty(brugtTid);
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
-        this.clientName = new SimpleStringProperty(ClientName);
+        this.kundeNavn = new SimpleStringProperty(kundeNavn);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
         this.rounded = new SimpleIntegerProperty(rounded);
     }
@@ -57,17 +57,17 @@ public class Project
     /**
      * Constructor for Project
      *
-     * @param projectName
-     * @param clientName
-     * @param usedTime
+     * @param projektNavn
+     * @param kundeNavn
+     * @param brugtTid
      */
-    public Project(int id, String projectName, String clientName, long usedTime, String startDate, int isDeleted, double hourlyRate, int rounded)
+    public Project(int id, String projektNavn, String kundeNavn, long brugtTid, String startDato, int isDeleted, double hourlyRate, int rounded)
     {
         this.id = id;
-        this.projectName = new SimpleStringProperty(projectName);
-        this.clientName = new SimpleStringProperty(clientName);
-        this.usedTime = new SimpleLongProperty(usedTime);
-        this.startDate = new SimpleStringProperty(startDate);
+        this.projektNavn = new SimpleStringProperty(projektNavn);
+        this.kundeNavn = new SimpleStringProperty(kundeNavn);
+        this.brugtTid = new SimpleLongProperty(brugtTid);
+        this.startDato = new SimpleStringProperty(startDato);
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
         this.rounded = new SimpleIntegerProperty(rounded);
@@ -94,78 +94,78 @@ public class Project
     }
 
     /**
-     * Getter for projectNavn
+     * Getter for projektNavn
      *
-     * @return projectNavn
+     * @return projektNavn
      */
-    public String getProjectNavn()
+    public String getProjektNavn()
     {
-        return projectName.get();
+        return projektNavn.get();
     }
 
     /**
-     * Setter for projectNavn
+     * Setter for projektNavn
      *
-     * @param projectName
+     * @param projektNavn
      */
-    public void setProjectName(String projectName)
+    public void setProjektNavn(String projektNavn)
     {
-        this.projectName.set(projectName);
+        this.projektNavn.set(projektNavn);
     }
 
-    public StringProperty projectNameProperty()
+    public StringProperty projektNavnProperty()
     {
-        return projectName;
+        return projektNavn;
     }
 
     /**
-     * getter for clientId
+     * getter for kundeId
      *
-     * @return clientId
+     * @return kundeId
      */
-    public int getClientId()
+    public int getKundeId()
     {
-        return clientId.get();
+        return kundeId.get();
     }
 
     /**
-     * Setter for clientId
+     * Setter for kundeId
      *
-     * @param clientId
+     * @param kundeId
      */
-    public void setClientId(int clientId)
+    public void setKundeId(int kundeId)
     {
-        this.clientId.set(clientId);
+        this.kundeId.set(kundeId);
     }
 
-    public ObservableValue<Integer> clientIdObservable()
+    public ObservableValue<Integer> kundeIdObservable()
     {
-        return clientId.asObject();
+        return kundeId.asObject();
     }
 
     /**
-     * getter for clientName
+     * getter for kundeNavn
      *
-     * @return clientName
+     * @return kundeNavn
      */
-    public String getClientName()
+    public String getKundeNavn()
     {
-        return clientName.get();
+        return kundeNavn.get();
     }
 
     /**
-     * setter for clientName
+     * setter for kundeNavn
      *
-     * @param clientName
+     * @param kundeNavn
      */
-    public void setClientName(String clientName)
+    public void setKundeNavn(String kundeNavn)
     {
-        this.clientName.set(clientName);
+        this.kundeNavn.set(kundeNavn);
     }
 
-    public StringProperty clientNameProperty()
+    public StringProperty kundeNavnProperty()
     {
-        return clientName;
+        return kundeNavn;
     }
 
     /**
@@ -173,49 +173,49 @@ public class Project
      *
      * @return startDato
      */
-    public String getStartDate()
+    public String getStartDato()
     {
-        return startDate.get();
+        return startDato.get();
     }
 
     /**
      * setter for startDato
      *
-     * @param startDate
+     * @param startDato
      */
-    public void setStartDate(String startDate)
+    public void setStartDato(String startDato)
     {
-        this.startDate.set(startDate);
+        this.startDato.set(startDato);
     }
 
-    public StringProperty startDateProperty()
+    public StringProperty startDatoProperty()
     {
-        return startDate;
+        return startDato;
     }
 
     /**
-     * getter for usedTime
+     * getter for brugtTid
      *
-     * @return usedTime
+     * @return brugtTid
      */
-    public long getUsedTime()
+    public long getBrugtTid()
     {
-        return usedTime.get();
+        return brugtTid.get();
     }
 
     /**
-     * setter for usedTime
+     * setter for brugtTid
      *
-     * @param usedTime
+     * @param brugtTid
      */
-    public void setUsedTime(long usedTime)
+    public void setBrugtTid(long brugtTid)
     {
-        this.usedTime.set(usedTime);
+        this.brugtTid.set(brugtTid);
     }
 
-    public ObservableValue<Long> usedTimeObservable()
+    public ObservableValue<Long> brugtTidObservable()
     {
-        return usedTime.asObject();
+        return brugtTid.asObject();
     }
 
     public int getIsDeleted()
@@ -266,12 +266,12 @@ public class Project
     /**
      * toString method for Project
      *
-     * @return projectNavn
+     * @return projektNavn
      */
     @Override
     public String toString()
     {
-        return getProjectNavn();
+        return getProjektNavn();
     }
 
 }

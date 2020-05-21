@@ -7,7 +7,7 @@ package timemanagement.DAL;
 
 import java.util.List;
 
-import timemanagement.BE.Client;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -46,9 +46,9 @@ public interface DalFacade {
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws DalException;
 
-    Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException;
+    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException;
     
-    List<Client> getAllKunder() throws DalException;
+    List<Kunde> getAllKunder() throws DalException;
     
     int getKundeId (String kundeNavn) throws DalException;
     
@@ -72,7 +72,7 @@ public interface DalFacade {
     
     void deleteTask(Task task, int isDeleted) throws DalException;
     
-    void deleteKunde(Client kunde, int isDeleted) throws DalException;
+    void deleteKunde(Kunde kunde, int isDeleted) throws DalException;
     
     void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException;
     

@@ -86,5 +86,4 @@ public class NewEmptyJUnitTest {
             assertFalse(throwException());
         }
     }
-    
 }

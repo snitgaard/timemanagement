@@ -40,7 +40,7 @@ public class KundeDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT * FROM Kunde;";
+            String sql = "SELECT * FROM Kunde WHERE isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Kunde> allKunder = new ArrayList<>();

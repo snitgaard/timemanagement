@@ -453,32 +453,9 @@ public class MainAdminViewController implements Initializable
         {
             clientComboBox.setItems(model.getAllKunder());
         }
-        List<Project> allProjectsList = model.getProjectKundeNavn();
-        ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
-        allProjectsFilteredList.clear();
+     
+        projekterTableView.setItems(model.getProjectKundeNavn());
 
-        int brugtTidMinutter = 0;
-        for (Project project1 : allProjectsList)
-        {
-
-            if (project1.getIsDeleted() == 1)
-            {
-                allProjectsFilteredList.add(project1);
-            }
-
-            allProjectsResultList.add(project1);
-
-        }
-
-        if (ongoingCheckbox.isSelected() == true)
-        {
-            projekterTableView.setItems(allProjectsFilteredList);
-
-        } else
-        {
-            projekterTableView.setItems(model.getProjectKundeNavn());
-
-        }
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());

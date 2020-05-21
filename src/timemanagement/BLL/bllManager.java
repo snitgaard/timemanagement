@@ -205,7 +205,7 @@ public class bllManager implements bllFacade {
         }
     }
     @Override
-    public void addRoundedTime(long brugtTid, int id) throws bllException {
+    public void addRoundedTime(double brugtTid, int id) throws bllException {
         try {
             dalFacade.addRoundedTime(brugtTid, id);
         } catch (DalException ex) {

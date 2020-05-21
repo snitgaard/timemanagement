@@ -122,13 +122,13 @@ public class TaskDAO
         }
     }
     
-    public void addRoundedTime(long brugtTid, int id)
+    public void addRoundedTime(double brugtTid, int id)
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE Task SET brugtTid = brugtTid + (CEILING(?) * 15) WHERE id = ?;";
+            String sql = "UPDATE Task SET brugtTid = brugtTid + (CEILING(?/15.0) * 15.0) WHERE id = ?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, brugtTid);
+            ps.setDouble(1, brugtTid);
             ps.setInt(2, id);
             ps.executeUpdate();
         } catch (SQLException ex)

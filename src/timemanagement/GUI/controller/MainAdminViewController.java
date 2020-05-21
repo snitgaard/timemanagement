@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -450,22 +451,8 @@ public class MainAdminViewController implements Initializable
         {
             clientComboBox.setItems(model.getAllClients());
         }
-        List<Project> allProjectsList = model.getProjectClientName();
-        ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
-        allProjectsFilteredList.clear();
-
-        int brugtTidMinutter = 0;
-        for (Project project1 : allProjectsList)
-        {
-
-            if (project1.getIsDeleted() == 1)
-            {
-                allProjectsFilteredList.add(project1);
-            }
-
-            allProjectsResultList.add(project1);
-
-        }
+        
+        projekterTableView.setItems(model.getProjectClientName());
 
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().clientNameProperty());
@@ -1257,15 +1244,18 @@ public class MainAdminViewController implements Initializable
                 {
                     toBeDeleted.add(task);
                 }
-                
                 model.deleteTaskOnProject(task, 1, selectedProject.getId());
             }
             
-            for (int i = 0; i < toBeDeleted.size(); i++)
+            for (Task task : toBeDeleted)
             {
-                if (toBeDeleted.get(i).getId() == filteredTaskList.get(i).getId())
+                for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
                 {
-                    filteredTaskList.remove(i);
+                    Task task1 = iterator.next();
+                    if (task.getId() == task1.getId())
+                    {
+                        iterator.remove();
+                    }
                 }
             }
             
@@ -1388,10 +1378,6 @@ public class MainAdminViewController implements Initializable
         if (selectedProject != null)
         {
             barChart.getData().clear();
-<<<<<<< HEAD
-            System.out.println("gør den overhovedet det her?");
-=======
->>>>>>> parent of a50d27f... Revert "Merge branch 'master' of https://github.com/snitgaard/timemanagement"
             XYChart.Series set2 = new XYChart.Series<>();
             XYChart.Series set3 = new XYChart.Series<>();
             barChart.setAnimated(false);
@@ -1401,11 +1387,7 @@ public class MainAdminViewController implements Initializable
             {
                 if (allTasks.getProjectId() == selectedProject.getId())
                 {
-<<<<<<< HEAD
-                    if (allTasks.getBetalt() == 1)
-=======
                     if (allTasks.getPayed() == 1)
->>>>>>> parent of a50d27f... Revert "Merge branch 'master' of https://github.com/snitgaard/timemanagement"
                     {
                         set2.setName("Paid task");
                         set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));

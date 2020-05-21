@@ -138,7 +138,6 @@ public class MainAdminViewController implements Initializable
     private JFXComboBox<Project> projektComboBox2;
     @FXML
     private JFXTextField txt_projektNavn;
-    private JFXTextField txt_kundeNavn;
     @FXML
     private JFXButton btn_start;
     @FXML
@@ -168,7 +167,6 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_nyBrugtTid;
     private User selectedUser;
-    private TableColumn<Task, Integer> idColumn;
     @FXML
     private JFXDatePicker startDate;
     @FXML
@@ -179,8 +177,6 @@ public class MainAdminViewController implements Initializable
     private TableColumn<User, String> userViewRolle;
     @FXML
     private JFXComboBox<String> userComboBox;
-    private JFXCheckBox ongoingCheckbox;
-    private TableColumn<Project, Integer> archivedColumn;
     @FXML
     private Label loginTextField;
     private LoginController controller;
@@ -202,8 +198,6 @@ public class MainAdminViewController implements Initializable
     private SplitPane clientPane;
 
     private JFXTextField txt_HourlyRate;
-
-    ListView<String> onGoing = new ListView<>();
 
     @FXML
     private JFXTextField txt_ClientHourlyRate;
@@ -825,7 +819,7 @@ public class MainAdminViewController implements Initializable
         if (betaltCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
-                    1, projektComboBox.getSelectionModel().getSelectedItem().getProjectNavn(), 0, this.selectedUser.getId());
+                    1, projektComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
 
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
@@ -833,7 +827,7 @@ public class MainAdminViewController implements Initializable
         } else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
-                    projektComboBox.getSelectionModel().getSelectedItem().getProjectNavn(), 0, this.selectedUser.getId());
+                    projektComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
 
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
@@ -1126,10 +1120,10 @@ public class MainAdminViewController implements Initializable
 
         if (betaltCheckBox.isSelected() == true)
         {
-            int betalt = 1;
+            int payed = 1;
             selectedTask.setTaskName(titelField.getText());
             selectedTask.setDescription(beskrivelseTextArea.getText());
-            selectedTask.setPayed(betalt);
+            selectedTask.setPayed(payed);
             selectedTaskTwo.setTaskName(titelField.getText());
             model.editTask(selectedTask);
             opgaveComboBox.getItems().remove(selectedTask);
@@ -1138,10 +1132,10 @@ public class MainAdminViewController implements Initializable
 
         } else if (betaltCheckBox.isSelected() == false)
         {
-            int betalt = 0;
+            int payed = 0;
             selectedTask.setTaskName(titelField.getText());
             selectedTask.setDescription(beskrivelseTextArea.getText());
-            selectedTask.setPayed(betalt);
+            selectedTask.setPayed(payed);
             selectedTaskTwo.setTaskName(titelField.getText());
             model.editTask(selectedTask);
             opgaveComboBox.getItems().remove(selectedTask);

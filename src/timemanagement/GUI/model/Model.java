@@ -126,7 +126,7 @@ public class Model
         allTasks = FXCollections.observableArrayList();
         try
         {
-            allTasks.addAll(bllManager.getAllTasksProjektNavn());
+            allTasks.addAll(bllManager.getAllTasksProjectName());
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -194,7 +194,7 @@ public class Model
     {
         try
         {
-            return bllManager.getKundeId(clientName);
+            return bllManager.getClientId(clientName);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -207,7 +207,7 @@ public class Model
         {
             allProjectsWithClients = FXCollections.observableArrayList();
 
-            allProjectsWithClients.addAll(bllManager.getProjectKundeNavn());
+            allProjectsWithClients.addAll(bllManager.getProjectClientName());
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -334,7 +334,7 @@ public class Model
         try
         {
             allClients = FXCollections.observableArrayList();
-            allClients.addAll(bllManager.getAllKunder());
+            allClients.addAll(bllManager.getAllClients());
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -346,7 +346,7 @@ public class Model
     {
         try
         {
-            Client client = bllManager.createKunde(clientName, contactPerson, email, hourlyRate, isDeleted);
+            Client client = bllManager.createClient(clientName, contactPerson, email, hourlyRate, isDeleted);
             allClients.add(client);
             return client;
         } catch (bllException ex)
@@ -409,7 +409,7 @@ public class Model
     {
         try {
             allClients.remove(client);
-            bllManager.deleteKunde(client, isDeleted);
+            bllManager.deleteClient(client, isDeleted);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

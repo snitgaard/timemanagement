@@ -98,7 +98,7 @@ public class Project
      *
      * @return projectNavn
      */
-    public String getProjectNavn()
+    public String getProjectName()
     {
         return projectName.get();
     }
@@ -271,7 +271,7 @@ public class Project
     @Override
     public String toString()
     {
-        return getProjectNavn();
+        return getProjectName();
     }
 
 }

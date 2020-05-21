@@ -35,19 +35,19 @@ public interface bllFacade
     
     void addRoundedTime(double usedTime, int id) throws bllException;
 
-    List<Task> getAllTasksProjektNavn() throws bllException;
+    List<Task> getAllTasksProjectName() throws bllException;
 
     Project createProjekt(String projectName, int clientId, String startDate, long usedTiem, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException;
 
-    List<Project> getProjectKundeNavn() throws bllException;
+    List<Project> getProjectClientName() throws bllException;
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws bllException;
 
-    Client createKunde(String clientNAme, String contactPerson, String email, double hourlyRate, int isDeleted) throws bllException;
+    Client createClient(String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) throws bllException;
 
-    List<Client> getAllKunder() throws bllException;
+    List<Client> getAllClients() throws bllException;
     
-    int getKundeId(String clientName) throws bllException;
+    int getClientId(String clientName) throws bllException;
 
     List<User> getAllUsers() throws bllException;
     
@@ -75,7 +75,7 @@ public interface bllFacade
     
     void deleteTask(Task task, int isDeleted) throws bllException;
     
-    void deleteKunde(Client client, int isDeleted) throws bllException;
+    void deleteClient(Client client, int isDeleted) throws bllException;
     
     void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws bllException;
     

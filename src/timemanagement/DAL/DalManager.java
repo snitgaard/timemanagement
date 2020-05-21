@@ -30,14 +30,14 @@ public class DalManager implements DalFacade
     private final UserDAO userDAO;
     private final ProjectDAO projectDAO;
     private final TaskDAO taskDAO;
-    private final ClientDAO kundeDAO;
+    private final ClientDAO clientDAO;
 
     public DalManager() throws IOException
     {
         userDAO = new UserDAO();
         projectDAO = new ProjectDAO();
         taskDAO = new TaskDAO();
-        kundeDAO = new ClientDAO();
+        clientDAO = new ClientDAO();
 
     }
 
@@ -96,19 +96,19 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws DalException
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException
     {
-        return taskDAO.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
+        return taskDAO.createTask(taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
     }
 
     @Override
-    public void addTime(long brugtTid, int id) throws DalException {
-        taskDAO.addTime(brugtTid, id);
+    public void addTime(long usedTime, int id) throws DalException {
+        taskDAO.addTime(usedTime, id);
     }
     
     @Override
-    public void addRoundedTime(double brugtTid, int id) throws DalException {
-        taskDAO.addRoundedTime(brugtTid, id);
+    public void addRoundedTime(double usedTime, int id) throws DalException {
+        taskDAO.addRoundedTime(usedTime, id);
     }
     
     @Override
@@ -116,11 +116,11 @@ public class DalManager implements DalFacade
         return taskDAO.updateTask(task);
     }
     
-    public List<Task> getAllTasksProjektNavn() throws DalException
+    public List<Task> getAllTasksProjectName() throws DalException
     {
         try
         {
-            return taskDAO.getAllTasksProjektNavn();
+            return taskDAO.getAllTasksProjectName();
         } catch (SQLException ex)
         {
             throw new DalException(ex.getMessage());
@@ -128,8 +128,8 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Project createProject(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws DalException {
-        return projectDAO.createProject(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate, rounded);
+    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException {
+        return projectDAO.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
     }
 
     
@@ -140,17 +140,17 @@ public class DalManager implements DalFacade
     }    
     
     @Override
-    public int getKundeId(String kundeNavn) throws DalException
+    public int getClientId(String clientName) throws DalException
     {
-        return kundeDAO.getClientId(kundeNavn);
+        return clientDAO.getClientId(clientName);
     }
     
     @Override
-    public List<Project> getProjectKundeNavn() throws DalException
+    public List<Project> getProjectClientName() throws DalException
     {
         try
         {
-            return projectDAO.getProjectKundeNavn();
+            return projectDAO.getProjectClientName();
         } catch (SQLException ex)
         {
             throw new DalException(ex.getMessage());
@@ -205,11 +205,11 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public List<Client> getAllKunder() throws DalException
+    public List<Client> getAllClients() throws DalException
     {
         try
         {
-            return kundeDAO.getAllClients();
+            return clientDAO.getAllClients();
         } catch (SQLException ex)
         {
             throw new DalException(ex.getMessage());
@@ -217,15 +217,15 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
+    public Client createClient(String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
-        return kundeDAO.createClient(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
+        return clientDAO.createClient(clientName, contactPerson, email, hourlyRate, isDeleted);
     }
 
     @Override
-    public List<Task> getAllTasksOnProject(int projektId) throws DalException {
+    public List<Task> getAllTasksOnProject(int projectId) throws DalException {
         try {
-            return taskDAO.getAllTasksOnProject(projektId);
+            return taskDAO.getAllTasksOnProject(projectId);
         } catch (SQLException ex) {
             throw new DalException(ex.getMessage());
         }
@@ -242,18 +242,18 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void deleteKunde(Client kunde, int isDeleted) throws DalException {
-       kundeDAO.deleteClient(kunde, isDeleted);
+    public void deleteClient(Client client, int isDeleted) throws DalException {
+       clientDAO.deleteClient(client, isDeleted);
     }
 
     @Override
-    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException {
-        taskDAO.deleteTaskOnProject(task, isDeleted, projektId);
+    public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws DalException {
+        taskDAO.deleteTaskOnProject(task, isDeleted, projectId);
     }
 
     @Override
-    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws DalException {
-        return projectDAO.deleteProjectOnClient(project, isDeleted, kundeId);
+    public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws DalException {
+        return projectDAO.deleteProjectOnClient(project, isDeleted, clientId);
     }
 
 }

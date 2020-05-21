@@ -1257,7 +1257,7 @@ public class MainAdminViewController implements Initializable
             
             for (Task task : model.getAllTasksProjektNavn())
             {
-                if (task.getProjektId() == selectedProject.getId())
+                if (task.getProjectId() == selectedProject.getId())
                 {
                     toBeDeleted.add(task);
                 }

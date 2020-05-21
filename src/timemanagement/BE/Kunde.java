@@ -43,91 +43,163 @@ public class Kunde
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
     }
     
-      public int getIsDeleted()
+    /**
+     * getter for isDeleted
+     * @return isDeleted
+     */
+    public int getIsDeleted()
     {
         return isDeleted.get();
     }
     
+    /**
+     * setter for isDeleted
+     * @param isDeleted 
+     */
     public void setIsDeleted(int isDeleted)
     {
         this.isDeleted.set(isDeleted);
     }
     
+    /**
+     * returns isDeleted as an observable Object
+     * @return isDeleted
+     */
     public ObservableValue<Integer> isDeletedObservable()
     {
         return isDeleted.asObject();
     }
 
+    /**
+     * getter for Id
+     * @return id
+     */
     public int getId()
     {
         return id;
     }
 
+    /**
+     * setter for id
+     * @param id 
+     */
     public void setId(int id)
     {
         this.id = id;
     }
 
+    /**
+     * getter for kundeNavn
+     * @return kundeNavn
+     */
     public String getKundeNavn()
     {
         return kundeNavn.get();
     }
 
+    /**
+     * setter for kundeNavn
+     * @param kundeNavn 
+     */
     public void setKundeNavn(String kundeNavn)
     {
         this.kundeNavn.set(kundeNavn);
     }
     
+    /**
+     * return kundeNavn as StringProperty
+     * @return kundeNavn
+     */
     public StringProperty kundeNavnProperty()
     {
         return kundeNavn;
     }
 
+    /**
+     * getter for kontaktPerson
+     * @return kontaktPerson
+     */
     public String getKontaktPerson()
     {
         return kontaktPerson.get();
     }
 
+    /**
+     * setter for kontaktPerson
+     * @param kontaktPerson 
+     */
     public void setKontaktPerson(String kontaktPerson)
     {
         this.kontaktPerson.set(kontaktPerson);
     }
     
+    /**
+     * return kontaktPerson as StringProperty
+     * @return kontaktPerson
+     */
     public StringProperty kontaktPersonProperty()
     {
         return kontaktPerson;
     }
 
+    /**
+     * getter for email
+     * @return email
+     */
     public String getEmail()
     {
         return email.get();
     }
 
+    /**
+     * setter for email
+     * @param email 
+     */
     public void setEmail(String email)
     {
         this.email.set(email);
     }
     
+    /**
+     * return email as StringProperty
+     * @return email
+     */
     public StringProperty emailProperty()
     {
         return email;
     }
 
+    /**
+     * getter for hourlyRate
+     * @return hourlyRate
+     */
     public double getHourlyRate()
     {
         return hourlyRate.get();
     }
 
+    /**
+     * setter for hourlyRate
+     * @param hourlyRate 
+     */
     public void setHourlyRate(double hourlyRate)
     {
         this.hourlyRate.set(hourlyRate);
     }
     
+    /**
+     * return hourlyRate as an observable Object
+     * @return hourlyRate
+     */
     public ObservableValue<Double> hourlyRateObservable()
     {
         return hourlyRate.asObject();
     }
 
+    /**
+     * toString method for Kunde
+     * @return kundenavn stringproperty
+     */
     @Override
     public String toString()
     {

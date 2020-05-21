@@ -52,7 +52,7 @@ public class NewEmptyJUnitTest {
     
     
     /**
-     * Test method that checks the login credentials.
+     * Test method that checks the login credentials. 
      * @throws UnknownHostException
      * @throws ModelException 
      */
@@ -64,10 +64,10 @@ public class NewEmptyJUnitTest {
         String password = encryptThisString("3");
 
         if (model.checkUserCredentials(username, password, 0)) {
-            assertTrue(false);
+            assertFalse(throwException());
         }
         if (model.checkUserCredentials(username, password, 1)) {
-            assertTrue(false);
+          assertFalse(throwException());
         }
     }
     
@@ -86,4 +86,7 @@ public class NewEmptyJUnitTest {
             assertFalse(throwException());
         }
     }
+    
+    @Test(expected = IllegalAccessException.class)
+    public void 
 }

@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import timemanagement.BE.Client;
+import timemanagement.BE.Kunde;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -118,36 +118,36 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Task createTask(String taskName, int proejctId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws bllException {
+    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws bllException {
         try {
-            return dalFacade.createTask(taskName, proejctId, usedTime, date, description, payed, projectName, isDeleted, userId);
+            return dalFacade.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public void addTime(long usedTime, int id) throws bllException {
+    public void addTime(long brugtTid, int id) throws bllException {
         try {
-            dalFacade.addTime(usedTime, id);
+            dalFacade.addTime(brugtTid, id);
         } catch (DalException ex) {
             Logger.getLogger(bllManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public List<Task> getAllTasksProjectName() throws bllException {
+    public List<Task> getAllTasksProjektNavn() throws bllException {
         try {
-            return dalFacade.getAllTasksProjectName();
+            return dalFacade.getAllTasksProjektNavn();
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public Project createProjekt(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException {
+    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws bllException {
         try {
-            return dalFacade.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+            return dalFacade.createProject(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate, rounded);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -163,21 +163,21 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public int getClientId(String clientName) throws bllException
+    public int getKundeId(String kundeNavn) throws bllException
     {
         try {
-            return dalFacade.getClientId(clientName);
+            return dalFacade.getKundeId(kundeNavn);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public List<Project> getProjectClientName() throws bllException
+    public List<Project> getProjectKundeNavn() throws bllException
     {
         try
         {
-            return dalFacade.getProjectClientName();
+            return dalFacade.getProjectKundeNavn();
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());
@@ -205,9 +205,9 @@ public class bllManager implements bllFacade {
         }
     }
     @Override
-    public void addRoundedTime(double usedTime, int id) throws bllException {
+    public void addRoundedTime(double brugtTid, int id) throws bllException {
         try {
-            dalFacade.addRoundedTime(usedTime, id);
+            dalFacade.addRoundedTime(brugtTid, id);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
@@ -268,11 +268,11 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public List<Client> getAllClients() throws bllException
+    public List<Kunde> getAllKunder() throws bllException
     {
         try
         {
-            return dalFacade.getAllClients();
+            return dalFacade.getAllKunder();
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());
@@ -280,11 +280,11 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public Client createClient(String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) throws bllException
+    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws bllException
     {
         try
         {
-            return dalFacade.createClient(clientName, contactPerson, email, hourlyRate, isDeleted);
+            return dalFacade.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());
@@ -292,25 +292,26 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public List<Task> getAllTasksOnProject(int projectId) throws bllException {
+    public List<Task> getAllTasksOnProject(int projektId) throws bllException {
         try {
-            return dalFacade.getAllTasksOnProject(projectId);
+            return dalFacade.getAllTasksOnProject(projektId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public String timeFormatter(String startTime, String endTime) throws bllException {
+    public String timeFormatter(String startTid, String slutTid) throws bllException {
  
        
             
-            LocalTime start = LocalTime.parse(startTime);
-            LocalTime end = LocalTime.parse(endTime);
+            LocalTime start = LocalTime.parse(startTid);
+            LocalTime slut = LocalTime.parse(slutTid);
             
-            if (start.isBefore(end))
+            if (start.isBefore(slut))
             {
-                long difference = Duration.between(start, end).toMillis();
+                long difference = Duration.between(start, slut).toMillis();
+                System.out.println(difference + "ER DET MON HER?");
                 long input = difference / 1000;
                 long hours = (input - input % 3600) / 3600;
                 long minutes = (input % 3600 - input % 3600 % 60) / 60;
@@ -324,14 +325,14 @@ public class bllManager implements bllFacade {
                 
             }
             
-            else if (start.equals(end))
+            else if (start.equals(slut))
             {
                 return "00:00"; //Ohterwise returns 24:00
             }
             
             else
             {
-                long differenceTwo = Duration.ofHours(24).minus(Duration.between(end, start)).toMillis();
+                long differenceTwo = Duration.ofHours(24).minus(Duration.between(slut, start)).toMillis();
                 long input = differenceTwo / 1000;
                 long hours = (input - input % 3600) / 3600;
                 long minutes = (input % 3600 - input % 3600 % 60) / 60;
@@ -341,20 +342,27 @@ public class bllManager implements bllFacade {
                 String h = formatter.format(hours); 
                 String m = formatter.format(minutes);
                 
-                return h + ":" + m;         
-            }  
+                return h + ":" + m;
+                           
+            }
+            
+            
+            
+        
+            
+
     }
 
     @Override
-    public long timeCalculator(String startTime, String endTime) throws bllException {
+    public long timeCalculator(String startTid, String slutTid) throws bllException {
         
         
-            LocalTime start = LocalTime.parse(startTime);
-            LocalTime end = LocalTime.parse(endTime);
+            LocalTime start = LocalTime.parse(startTid);
+            LocalTime slut = LocalTime.parse(slutTid);
             
-            if (start.isBefore(end))
+            if (start.isBefore(slut))
             {
-                long duration = Duration.between(start, end).toMillis();
+                long duration = Duration.between(start, slut).toMillis();
                 
                 
                 
@@ -371,7 +379,7 @@ public class bllManager implements bllFacade {
                 
             }
             
-            else if (start.equals(end))
+            else if (start.equals(slut))
             {
                 long minuteTime = 0;
                 return minuteTime;
@@ -379,7 +387,7 @@ public class bllManager implements bllFacade {
             
             else
             {
-                long durationAfterMidnight = Duration.ofHours(24).minus(Duration.between(end, start)).toMillis();
+                long durationAfterMidnight = Duration.ofHours(24).minus(Duration.between(slut, start)).toMillis();
                 
                 
 
@@ -425,27 +433,27 @@ public class bllManager implements bllFacade {
     }
 
     @Override
-    public void deleteClient(Client client, int isDeleted) throws bllException {
+    public void deleteKunde(Kunde kunde, int isDeleted) throws bllException {
         try {
-            dalFacade.deleteClient(client, isDeleted);
+            dalFacade.deleteKunde(kunde, isDeleted);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws bllException {
+    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException {
         try {
-            dalFacade.deleteTaskOnProject(task, isDeleted, projectId);
+            dalFacade.deleteTaskOnProject(task, isDeleted, projektId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }
     }
 
     @Override
-    public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws bllException {
+    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException {
         try {
-            return dalFacade.deleteProjectOnClient(project, isDeleted, clientId);
+            return dalFacade.deleteProjectOnClient(project, isDeleted, kundeId);
         } catch (DalException ex) {
             throw new bllException(ex.getMessage());
         }

@@ -87,4 +87,6 @@ public class NewEmptyJUnitTest {
         }
     }
     
+    @Test(expected = IllegalAccessException.class)
+    public void 
 }

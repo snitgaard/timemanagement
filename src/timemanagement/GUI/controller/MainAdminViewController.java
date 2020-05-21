@@ -237,6 +237,10 @@ public class MainAdminViewController implements Initializable
     private TableColumn<User, String> userViewUsername;
     @FXML
     private JFXCheckBox quartersCheckBox;
+    @FXML
+    private JFXDatePicker analStartDate;
+    @FXML
+    private JFXDatePicker analEndDate;
 
     /**
      * Initializes the controller class.
@@ -573,13 +577,11 @@ public class MainAdminViewController implements Initializable
             {
                 System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
                 model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
-            }
-            else
+            } else
             {
                 System.out.println(model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                 model.addRoundedTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
             }
-            
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)
             {
@@ -810,7 +812,7 @@ public class MainAdminViewController implements Initializable
         if (betaltCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
-                    1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+                    1, projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 0, this.selectedUser.getId());
 
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
@@ -818,7 +820,7 @@ public class MainAdminViewController implements Initializable
         } else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
-                    projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 1, this.selectedUser.getId());
+                    projektComboBox.getSelectionModel().getSelectedItem().getProjektNavn(), 0, this.selectedUser.getId());
 
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
@@ -844,29 +846,37 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = null;
         double doubleHourlyRate = 0;
 
-        try {
-            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null) {
-                if (txt_HourlyRateProject.getText().isEmpty()) {
+        try
+        {
+            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null)
+            {
+                if (txt_HourlyRateProject.getText().isEmpty())
+                {
                     doubleHourlyRate = selectedClient.getHourlyRate();
 
-                } else {
+                } else
+                {
                     doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
                 }
 
-                if (quartersCheckBox.isSelected()) {
+                if (quartersCheckBox.isSelected())
+                {
                     selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 1);
-                } else {
+                } else
+                {
                     selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 0);
                 }
 
                 projektComboBox.getItems().add(selectedProject);
                 projektComboBox2.getItems().add(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
-            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null) {
+            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null)
+            {
                 alertString = "Could not create project. Please try again";
                 showAlert();
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e)
+        {
             alertString = "Could not create project as a non-numeric number was detected. Please try again.";
             showAlert();
         }
@@ -982,6 +992,52 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
+    
+//        private void analDateFilter() throws ParseException, ModelException
+//                    {
+//        try
+//        {
+//            List<Task> taskNames = model.getAllTasksProjektNavn();
+//            ObservableList<Task> result = FXCollections.observableArrayList();
+//            Date start = new SimpleDateFormat("yyyy-MM-dd").parse(analStartDate.getValue().toString());
+//
+//            Calendar calendar2 = Calendar.getInstance();
+//            calendar2.setTime(start);
+//            calendar2.add(Calendar.DATE, 1);
+//            Date sDate = calendar2.getTime();
+//
+//            Date end = new SimpleDateFormat("yyyy-MM-dd").parse(analEndDate.getValue().toString());
+//            Calendar calendar3 = Calendar.getInstance();
+//            calendar3.setTime(end);
+//            calendar3.add(Calendar.DATE, 1);
+//            Date eDate = calendar3.getTime();
+//
+//            for (Task tasks : taskNames)
+//            {
+//                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
+//
+//                Calendar calendar1 = Calendar.getInstance();
+//                calendar1.setTime(date1);
+//                calendar1.add(Calendar.DATE, 1);
+//                Date x = calendar1.getTime();
+//                if (x.after(sDate) && x.before(eDate) && tasks.getUserId() == this.selectedUser.getId() || x.equals(sDate) || x.equals(eDate))
+//                {
+//                    result.add(tasks);
+//                }
+//            }
+//
+//            opgaverTableView.setItems(result);
+//        } catch (ParseException ex)
+//        {
+//            alertString = "Could not parse to date format. Please try again.";
+//            showAlert();
+//
+//        } catch (ModelException ex)
+//        {
+//            alertString = "Could not get all tasks from database. Please try again.";
+//            showAlert();
+//        }
+//    }
 
     /**
      * Clears the task by re-setting the list task list.
@@ -1164,6 +1220,7 @@ public class MainAdminViewController implements Initializable
 
     private void fillChart() throws ModelException
     {
+        barChart.setAnimated(false);
         Thread thread = new Thread(new Runnable()
         {
             public void run()
@@ -1173,9 +1230,8 @@ public class MainAdminViewController implements Initializable
                 {
                     XYChart.Series set1 = new XYChart.Series<>();
                     XYChart.Series set2 = new XYChart.Series<>();
-                    set1.setName("Projects");
                     barChart.setAnimated(false);
-                    barChart.setBarGap(-35);
+                    barChart.setBarGap(-10);
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
                     {
@@ -1183,17 +1239,17 @@ public class MainAdminViewController implements Initializable
                         if (allTasks.getBetalt() == 1)
                         {
                             set1.setName("Paid task");
-                            set1.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
+                            set1.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + " - " + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
                         } else if (allTasks.getBetalt() == 0)
                         {
                             set2.setName("Not paid task");
-                            set2.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
+                            set2.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + " - " + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
                         }
                     }
                 } catch (ModelException ex)
                 {
-                    Logger.getLogger(MainAdminViewController.class
-                            .getName()).log(Level.SEVERE, null, ex);
+            alertString = "Could not fill charts on startup. Please try again.";
+            showAlert();
                 }
             }
 
@@ -1275,9 +1331,15 @@ public class MainAdminViewController implements Initializable
     {
         clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
         if (selectedClient != null)
         {
-            model.deleteKunde(selectedClient, 1);
+            try {
+                model.deleteKunde(selectedClient, 1);
+            
             for (Project project : model.getAllProjects()) 
             {
                 ArrayList<Project> tempDeletedList = new ArrayList<>();
@@ -1294,8 +1356,24 @@ public class MainAdminViewController implements Initializable
                 }
             }
         }
+            } catch (ModelException ex) {
+                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        
             
         } else
+        {
+            alertString = "Could not delete client. Please try again.";
+            showAlert();
+        }
+            }
+                });
+        thread.start();
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex)
         {
             alertString = "Could not delete client. Please try again.";
             showAlert();
@@ -1319,7 +1397,7 @@ public class MainAdminViewController implements Initializable
             XYChart.Series set2 = new XYChart.Series<>();
             XYChart.Series set3 = new XYChart.Series<>();
             barChart.setAnimated(false);
-            barChart.setBarGap(-35);
+            barChart.setBarGap(-10);
             System.out.println("hvad er det her  = " + selectedProject.getId());
             for (Task allTasks : model.getAllTasks())
             {

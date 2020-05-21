@@ -15,7 +15,7 @@ import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
 
-import timemanagement.DAL.database.KundeDAO;
+import timemanagement.DAL.database.ClientDAO;
 import timemanagement.DAL.database.ProjectDAO;
 import timemanagement.DAL.database.TaskDAO;
 import timemanagement.DAL.database.UserDAO;
@@ -30,14 +30,14 @@ public class DalManager implements DalFacade
     private final UserDAO userDAO;
     private final ProjectDAO projectDAO;
     private final TaskDAO taskDAO;
-    private final KundeDAO kundeDAO;
+    private final ClientDAO kundeDAO;
 
     public DalManager() throws IOException
     {
         userDAO = new UserDAO();
         projectDAO = new ProjectDAO();
         taskDAO = new TaskDAO();
-        kundeDAO = new KundeDAO();
+        kundeDAO = new ClientDAO();
 
     }
 
@@ -142,7 +142,7 @@ public class DalManager implements DalFacade
     @Override
     public int getKundeId(String kundeNavn) throws DalException
     {
-        return kundeDAO.getKundeId(kundeNavn);
+        return kundeDAO.getClientId(kundeNavn);
     }
     
     @Override
@@ -209,7 +209,7 @@ public class DalManager implements DalFacade
     {
         try
         {
-            return kundeDAO.getAllKunder();
+            return kundeDAO.getAllClients();
         } catch (SQLException ex)
         {
             throw new DalException(ex.getMessage());
@@ -219,7 +219,7 @@ public class DalManager implements DalFacade
     @Override
     public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
-        return kundeDAO.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
+        return kundeDAO.createClient(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
     }
 
     @Override
@@ -243,7 +243,7 @@ public class DalManager implements DalFacade
 
     @Override
     public void deleteKunde(Kunde kunde, int isDeleted) throws DalException {
-       kundeDAO.deleteKunde(kunde, isDeleted);
+       kundeDAO.deleteClient(kunde, isDeleted);
     }
 
     @Override

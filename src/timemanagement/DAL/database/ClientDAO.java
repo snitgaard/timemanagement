@@ -20,12 +20,12 @@ import timemanagement.DAL.DalException;
  *
  * @author The Cowboys
  */
-public class KundeDAO
+public class ClientDAO
 {
 
     private DatabaseConnector dbCon;
 
-    public KundeDAO() throws IOException
+    public ClientDAO() throws IOException
     {
         dbCon = new DatabaseConnector();
     }
@@ -36,7 +36,7 @@ public class KundeDAO
      * @return
      * @throws SQLException
      */
-    public List<Kunde> getAllKunder() throws SQLException
+    public List<Kunde> getAllClients() throws SQLException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -65,7 +65,7 @@ public class KundeDAO
      * @return
      * @throws DalException
      */
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
+    public Kunde createClient(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -106,7 +106,7 @@ public class KundeDAO
      * @return kundeId
      * @throws DalException
      */
-    public int getKundeId(String kundeNavn) throws DalException
+    public int getClientId(String kundeNavn) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -130,7 +130,7 @@ public class KundeDAO
         }
     }
 
-     public void deleteKunde(Kunde kunde, int isDeleted) throws DalException
+     public void deleteClient(Kunde kunde, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {

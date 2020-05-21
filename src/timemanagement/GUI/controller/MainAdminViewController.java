@@ -407,8 +407,8 @@ public class MainAdminViewController implements Initializable
     private void fillClientView() throws ModelException
     {
         clientTableView.setItems(model.getAllKunder());
-        clientNameColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
-        clientContactColumn.setCellValueFactory(cellData -> cellData.getValue().kontaktPersonProperty());
+        clientNameColumn.setCellValueFactory(cellData -> cellData.getValue().clientNameProperty());
+        clientContactColumn.setCellValueFactory(cellData -> cellData.getValue().contactPersonProperty());
         clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
         clientHourlyRateColumn.setCellFactory(tc -> new TableCell<Kunde, Double>()
@@ -874,10 +874,10 @@ public class MainAdminViewController implements Initializable
 
                 if (quartersCheckBox.isSelected())
                 {
-                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 1);
+                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
                 } else
                 {
-                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 0);
+                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
                 }
 
                 projektComboBox.getItems().add(selectedProject);

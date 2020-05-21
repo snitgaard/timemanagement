@@ -29,25 +29,25 @@ public interface bllFacade
 
     List<Task> getAllTasks() throws bllException;
 
-    Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws bllException;
+    Task createTask(String taskName, int projectId, long usedTime, String date, String description, int betalt, String projectName, int isDeleted, int userId) throws bllException;
 
-    void addTime(long brugtTid, int id) throws bllException;
+    void addTime(long usedTime, int id) throws bllException;
     
-    void addRoundedTime(double brugtTid, int id) throws bllException;
+    void addRoundedTime(double usedTime, int id) throws bllException;
 
     List<Task> getAllTasksProjektNavn() throws bllException;
 
-    Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws bllException;
+    Project createProjekt(String projectName, int clientId, String startDate, long usedTiem, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException;
 
     List<Project> getProjectKundeNavn() throws bllException;
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws bllException;
 
-    Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws bllException;
+    Client createKunde(String clientNAme, String contactPerson, String email, double hourlyRate, int isDeleted) throws bllException;
 
     List<Client> getAllKunder() throws bllException;
     
-    int getKundeId(String kundeNavn) throws bllException;
+    int getKundeId(String clientName) throws bllException;
 
     List<User> getAllUsers() throws bllException;
     
@@ -67,17 +67,17 @@ public interface bllFacade
     
     List<Task> getAllTasksOnProject(int projektId) throws bllException;
     
-    String timeFormatter(String startTid, String slutTid) throws bllException;
+    String timeFormatter(String startTime, String endTime) throws bllException;
     
-    long timeCalculator(String startTid, String slutTid) throws bllException;
+    long timeCalculator(String startTime, String endTime) throws bllException;
     
     void deleteProject(Project project, int isDeleted) throws bllException;
     
     void deleteTask(Task task, int isDeleted) throws bllException;
     
-    void deleteKunde(Client kunde, int isDeleted) throws bllException;
+    void deleteKunde(Client client, int isDeleted) throws bllException;
     
-    void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException;
+    void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws bllException;
     
-    Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws bllException;
+    Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws bllException;
 }

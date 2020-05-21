@@ -44,7 +44,7 @@ public class TaskDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT * FROM Task;";
+            String sql = "SELECT * FROM Task WHERE isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Task> allProjects = new ArrayList<>();

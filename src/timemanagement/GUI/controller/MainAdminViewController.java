@@ -589,17 +589,15 @@ public class MainAdminViewController implements Initializable
             slutTidField.setText(sdf.format(date));
 
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
-            
+
             if (selectedProject.getRounded() == 0)
             {
                 model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
-            }
-            else
+            } else
             {
                 long roundThis = model.timeCalculator(startTidField.getText(), slutTidField.getText()) / 15;
                 model.addRoundedTime(roundThis, opgaveComboBox.getSelectionModel().getSelectedItem().getId());
             }
-            
 
             for (int i = 0; i < opgaverTableView.getItems().size(); i++)
             {
@@ -851,29 +849,37 @@ public class MainAdminViewController implements Initializable
         Project selectedProject = null;
         double doubleHourlyRate = 0;
 
-        try {
-            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null) {
-                if (txt_HourlyRateProject.getText().isEmpty()) {
+        try
+        {
+            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null)
+            {
+                if (txt_HourlyRateProject.getText().isEmpty())
+                {
                     doubleHourlyRate = selectedClient.getHourlyRate();
 
-                } else {
+                } else
+                {
                     doubleHourlyRate = Double.parseDouble(txt_HourlyRateProject.getText());
                 }
 
-                if (quartersCheckBox.isSelected()) {
+                if (quartersCheckBox.isSelected())
+                {
                     selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 1);
-                } else {
+                } else
+                {
                     selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getKundeNavn()), LocalDate.now().toString(), 0, 1, selectedClient.getKundeNavn(), doubleHourlyRate, 0);
                 }
 
                 projektComboBox.getItems().add(selectedProject);
                 projektComboBox2.getItems().add(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
-            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null) {
+            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null)
+            {
                 alertString = "Could not create project. Please try again";
                 showAlert();
             }
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException e)
+        {
             alertString = "Could not create project as a non-numeric number was detected. Please try again.";
             showAlert();
         }
@@ -1171,6 +1177,7 @@ public class MainAdminViewController implements Initializable
 
     private void fillChart() throws ModelException
     {
+        barChart.setAnimated(false);
         Thread thread = new Thread(new Runnable()
         {
             public void run()
@@ -1180,8 +1187,7 @@ public class MainAdminViewController implements Initializable
                 {
                     XYChart.Series set1 = new XYChart.Series<>();
                     XYChart.Series set2 = new XYChart.Series<>();
-                    set1.setName("Projects");
-                    barChart.setAnimated(false);
+                    barChart.setAnimated(true);
                     barChart.setBarGap(-35);
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
@@ -1190,11 +1196,11 @@ public class MainAdminViewController implements Initializable
                         if (allTasks.getBetalt() == 1)
                         {
                             set1.setName("Paid task");
-                            set1.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
+                            set1.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + " - " + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
                         } else if (allTasks.getBetalt() == 0)
                         {
                             set2.setName("Not paid task");
-                            set2.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
+                            set2.getData().add(new BarChart.Data((allTasks.getOpgaveNavn() + " - " + allTasks.getBrugtTid()), allTasks.getBrugtTid()));
                         }
                     }
                 } catch (ModelException ex)
@@ -1285,10 +1291,10 @@ public class MainAdminViewController implements Initializable
         if (selectedClient != null)
         {
             model.deleteKunde(selectedClient, 1);
-            for (Project project : model.getAllProjects()) 
+            for (Project project : model.getAllProjects())
             {
                 List<Project> tempDeletedList = new ArrayList<>();
-                if(selectedClient.getId() == project.getKundeId())
+                if (selectedClient.getId() == project.getKundeId())
                 {
                     tempDeletedList.add(project);
                 }
@@ -1296,14 +1302,14 @@ public class MainAdminViewController implements Initializable
                 model.deleteProjectOnClient(project, 1, selectedClient.getId());
                 System.out.println(model.deleteProjectOnClient(project, 1, selectedClient.getId()));
                 System.out.println("dette er listen, pelase = " + tempDeletedList);
-                for (Task task : model.getAllTasks()) 
-            {
+                for (Task task : model.getAllTasks())
+                {
 //                if(task.getProjektId() == )
 //                model.deleteTaskOnProject(task, 1, tempDeletedList.);
 //                System.out.println("hvad er det her????????? + " + selectedProject);
+                }
             }
-            }
-            
+
         } else
         {
             alertString = "Could not delete client. Please try again.";

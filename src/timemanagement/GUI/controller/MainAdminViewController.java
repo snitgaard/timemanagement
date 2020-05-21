@@ -1010,14 +1010,6 @@ public class MainAdminViewController implements Initializable
         }
     }
     
-//                    {
-//        try
-//        {
-//            List<Task> taskNames = model.getAllTasksProjektNavn();
-//            ObservableList<Task> result = FXCollections.observableArrayList();
-//            Date start = new SimpleDateFormat("yyyy-MM-dd").parse(analStartDate.getValue().toString());
-//
-//            Calendar calendar2 = Calendar.getInstance();
 
 
     /**

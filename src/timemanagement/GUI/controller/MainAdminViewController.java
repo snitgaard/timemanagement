@@ -1103,39 +1103,6 @@ public class MainAdminViewController implements Initializable
      * @throws ModelException DalException
      */
     @FXML
-    private void handleArchiveProject(ActionEvent event) throws ModelException
-    {
-        try
-        {
-            projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-
-            if (selectedProject.getIsDeleted() != 0)
-            {
-                selectedProject.setIsDeleted(0);
-                model.archiveProject(selectedProject);
-                allProjectsFilteredList.remove(selectedProject);
-            } else if (selectedProject.getIsDeleted() == 0)
-            {
-                selectedProject.setIsDeleted(1);
-                model.archiveProject(selectedProject);
-                allProjectsFilteredList.add(selectedProject);
-            }
-
-        } catch (Exception e)
-        {
-            alertString = "Could not archive project. Please try again.";
-            showAlert();
-        }
-
-    }
-
-    /**
-     *
-     *
-     * @throws ModelException DalException
-     */
-    @FXML
     private void handleEditTask(ActionEvent event) throws ModelException
     {
 

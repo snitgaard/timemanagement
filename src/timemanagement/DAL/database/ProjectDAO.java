@@ -140,7 +140,7 @@ public class ProjectDAO {
             
             
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, project.getProjektNavn());
+            ps.setString(1, project.getProjectNavn());
             ps.executeUpdate();
 
         } catch (SQLException ex) {

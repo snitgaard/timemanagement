@@ -174,9 +174,9 @@ public class TaskDAO
             int id = task.getId();
             String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, task.getOpgaveNavn());
-            ps.setString(2, task.getBeskrivelse());
-            ps.setInt(3, task.getBetalt());
+            ps.setString(1, task.getTaskName());
+            ps.setString(2, task.getDescription());
+            ps.setInt(3, task.getPayed());
             ps.executeUpdate();
         } 
         catch (SQLException ex)
@@ -222,7 +222,7 @@ public class TaskDAO
 
             String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, task.getBrugtTid());
+            ps.setLong(1, task.getUsedTime());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex)

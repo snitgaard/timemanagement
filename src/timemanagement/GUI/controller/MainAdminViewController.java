@@ -1348,9 +1348,15 @@ public class MainAdminViewController implements Initializable
     {
         clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        Thread thread = new Thread(new Runnable()
+        {
+            public void run()
+            {
         if (selectedClient != null)
         {
-            model.deleteKunde(selectedClient, 1);
+            try {
+                model.deleteKunde(selectedClient, 1);
+            
             for (Project project : model.getAllProjects()) 
             {
                 ArrayList<Project> tempDeletedList = new ArrayList<>();
@@ -1367,8 +1373,24 @@ public class MainAdminViewController implements Initializable
                 }
             }
         }
+            } catch (ModelException ex) {
+                Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        
             
         } else
+        {
+            alertString = "Could not delete client. Please try again.";
+            showAlert();
+        }
+            }
+                });
+        thread.start();
+        try
+        {
+            Thread.sleep(1000);
+        } catch (InterruptedException ex)
         {
             alertString = "Could not delete client. Please try again.";
             showAlert();

@@ -51,16 +51,16 @@ public class TaskDAO
             while (rs.next())
             {
                 int id = rs.getInt("Id");
-                String opgaveNavn = rs.getString("opgaveNavn");
-                int projektId = rs.getInt("projektId");
-                int brugtTid = rs.getInt("brugtTid");
-                String dato = rs.getString("dato");
-                String beskrivelse = rs.getString("beskrivelse");
-                int betalt = rs.getInt("betalt");
-                String projektNavn = "";
+                String taskName = rs.getString("opgaveNavn");
+                int projectId = rs.getInt("projektId");
+                int usedTime = rs.getInt("brugtTid");
+                String date = rs.getString("dato");
+                String description = rs.getString("beskrivelse");
+                int payed = rs.getInt("betalt");
+                String projectName = "";
                 int isDeleted = rs.getInt("isDeleted");
                 int userId = rs.getInt("userId");
-                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
+                Task task = new Task(id, taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
                 allProjects.add(task);
             }
             return allProjects;
@@ -73,16 +73,16 @@ public class TaskDAO
      * @return
      * @throws DalException
      */
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws DalException {
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException {
         try (Connection con = dbCon.getConnection()) {
             String sql = "INSERT INTO Task (opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, isDeleted, userId) VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, opgaveNavn);
-            ps.setInt(2, projektId);
-            ps.setLong(3, brugtTid);
-            ps.setString(4, dato);
-            ps.setString(5, beskrivelse);
-            ps.setInt(6, betalt);
+            ps.setString(1, taskName);
+            ps.setInt(2, projectId);
+            ps.setLong(3, usedTime);
+            ps.setString(4, date);
+            ps.setString(5, description);
+            ps.setInt(6, payed);
             ps.setInt(7, isDeleted);
             ps.setInt(8, userId);
             int affectedRows = ps.executeUpdate();
@@ -93,7 +93,7 @@ public class TaskDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
+                    Task task = new Task(id, taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
                     return task;
                 }
             }
@@ -105,13 +105,13 @@ public class TaskDAO
         return null;
     }
 
-    public void addTime(long brugtTid, int id) throws DalException
+    public void addTime(long usedTime, int id) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
             String sql = "UPDATE Task SET brugtTid = brugtTid + ? WHERE id = ?";
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setLong(1, brugtTid);
+            ps.setLong(1, usedTime);
             ps.setInt(2, id);
             ps.executeUpdate();
 
@@ -122,13 +122,13 @@ public class TaskDAO
         }
     }
     
-    public void addRoundedTime(double brugtTid, int id)
+    public void addRoundedTime(double usedTime, int id)
     {
         try (Connection con = dbCon.getConnection())
         {
             String sql = "UPDATE Task SET brugtTid = brugtTid + (CEILING(?/15.0) * 15.0) WHERE id = ?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setDouble(1, brugtTid);
+            ps.setDouble(1, usedTime);
             ps.setInt(2, id);
             ps.executeUpdate();
         } catch (SQLException ex)
@@ -137,28 +137,28 @@ public class TaskDAO
         }
     }
 
-    public List<Task> getAllTasksProjektNavn() throws SQLException
+    public List<Task> getAllTasksProjectName() throws SQLException
     {
         try (Connection con = dbCon.getConnection())
         {
             String sql = "SELECT Task.id, Task.opgaveNavn, Task.brugtTid, Task.dato, Task.projektId, Task.userId, Task.beskrivelse, Task.betalt, Project.projektNavn\n"
                     + "FROM Task \n"
-                    + "INNER JOIN Project ON Task.projektId=Project.id;";
+                    + "INNER JOIN Project ON Task.projektId=Project.id WHERE Task.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Task> allProjects = new ArrayList<>();
             while (rs.next())
             {
                 int id = rs.getInt("id");
-                String opgaveNavn = rs.getString("opgaveNavn");
-                String projektNavn = rs.getString("projektNavn");
-                int brugtTid = rs.getInt("brugtTid");
-                String dato = rs.getString("dato");
-                int projektId = rs.getInt("projektId");
+                String taskName = rs.getString("opgaveNavn");
+                String projectName = rs.getString("projektNavn");
+                int usedTime = rs.getInt("brugtTid");
+                String date = rs.getString("dato");
+                int projectId = rs.getInt("projektId");
                 int userId = rs.getInt("userId");
-                String beskrivelse = rs.getString("beskrivelse");
-                int betalt = rs.getInt("betalt");
-                Task task = new Task(id, opgaveNavn, projektNavn, brugtTid, dato, projektId, userId, beskrivelse, betalt);
+                String description = rs.getString("beskrivelse");
+                int payed = rs.getInt("betalt");
+                Task task = new Task(id, taskName, projectName, usedTime, date, projectId, userId, description, payed);
                 allProjects.add(task);
             }
             return allProjects;
@@ -174,9 +174,9 @@ public class TaskDAO
             int id = task.getId();
             String sql = "UPDATE Task SET opgaveNavn = ?, beskrivelse = ?, betalt = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, task.getOpgaveNavn());
-            ps.setString(2, task.getBeskrivelse());
-            ps.setInt(3, task.getBetalt());
+            ps.setString(1, task.getTaskName());
+            ps.setString(2, task.getDescription());
+            ps.setInt(3, task.getPayed());
             ps.executeUpdate();
         } 
         catch (SQLException ex)
@@ -185,7 +185,7 @@ public class TaskDAO
         }
     }
     
-    public List<Task> getAllTasksOnProject(int projektId) throws SQLException
+    public List<Task> getAllTasksOnProject(int projectId) throws SQLException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -194,20 +194,20 @@ public class TaskDAO
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Task> allProjects = new ArrayList<>();
-            ps.setInt(1, projektId);
+            ps.setInt(1, projectId);
             while (rs.next())
             {
                 int id = rs.getInt("Id");
-                String opgaveNavn = rs.getString("opgaveNavn");
+                String taskName = rs.getString("opgaveNavn");
                 
-                int brugtTid = rs.getInt("brugtTid");
-                String dato = rs.getString("dato");
-                String beskrivelse = rs.getString("beskrivelse");
-                int betalt = rs.getInt("betalt");
-                String projektNavn = "";
+                int usedTime = rs.getInt("brugtTid");
+                String date = rs.getString("dato");
+                String description = rs.getString("beskrivelse");
+                int payed = rs.getInt("betalt");
+                String projectName = "";
                 int isDeleted = rs.getInt("isDeleted");
                 int userId = rs.getInt("userId");
-                Task task = new Task(id, opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
+                Task task = new Task(id, taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
                 allProjects.add(task);
             }
             return allProjects;
@@ -222,7 +222,7 @@ public class TaskDAO
 
             String sql = "UPDATE Task SET brugtTid = CEILING(?) WHERE Id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            ps.setLong(1, task.getBrugtTid());
+            ps.setLong(1, task.getUsedTime());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex)
@@ -248,7 +248,7 @@ public class TaskDAO
         }
     }
     
-    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws DalException
+    public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws DalException
             {
         try (Connection con = dbCon.getConnection())
         {
@@ -257,7 +257,7 @@ public class TaskDAO
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setInt(1, isDeleted);
-            ps.setInt(2, projektId);
+            ps.setInt(2, projectId);
             ps.executeUpdate();
         } catch (SQLException ex)
         {

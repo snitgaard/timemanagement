@@ -473,15 +473,15 @@ public class MainAdminViewController implements Initializable
 
         }
 
-        if (ongoingCheckbox.isSelected() == true)
-        {
-            projekterTableView.setItems(allProjectsFilteredList);
-
-        } else
-        {
-            projekterTableView.setItems(model.getProjectKundeNavn());
-
-        }
+//        if (ongoingCheckbox.isSelected() == true)
+//        {
+//            projekterTableView.setItems(allProjectsFilteredList);
+//
+//        } else
+//        {
+//            projekterTableView.setItems(model.getProjectKundeNavn());
+//
+//        }
         projektNavnAdminColumn.setCellValueFactory(cellData -> cellData.getValue().projektNavnProperty());
         kundeColumn.setCellValueFactory(cellData -> cellData.getValue().kundeNavnProperty());
         brugtTidAdminColumn.setCellValueFactory(cellData -> cellData.getValue().brugtTidObservable());

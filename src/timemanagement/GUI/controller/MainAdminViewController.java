@@ -939,7 +939,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
+     * Deletes the user by changing the int valvue in the DB
      *
      * @throws ModelException DalException
      */
@@ -1010,7 +1010,6 @@ public class MainAdminViewController implements Initializable
         }
     }
     
-//        private void analDateFilter() throws ParseException, ModelException
 //                    {
 //        try
 //        {
@@ -1019,42 +1018,7 @@ public class MainAdminViewController implements Initializable
 //            Date start = new SimpleDateFormat("yyyy-MM-dd").parse(analStartDate.getValue().toString());
 //
 //            Calendar calendar2 = Calendar.getInstance();
-//            calendar2.setTime(start);
-//            calendar2.add(Calendar.DATE, 1);
-//            Date sDate = calendar2.getTime();
-//
-//            Date end = new SimpleDateFormat("yyyy-MM-dd").parse(analEndDate.getValue().toString());
-//            Calendar calendar3 = Calendar.getInstance();
-//            calendar3.setTime(end);
-//            calendar3.add(Calendar.DATE, 1);
-//            Date eDate = calendar3.getTime();
-//
-//            for (Task tasks : taskNames)
-//            {
-//                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
-//
-//                Calendar calendar1 = Calendar.getInstance();
-//                calendar1.setTime(date1);
-//                calendar1.add(Calendar.DATE, 1);
-//                Date x = calendar1.getTime();
-//                if (x.after(sDate) && x.before(eDate) && tasks.getUserId() == this.selectedUser.getId() || x.equals(sDate) || x.equals(eDate))
-//                {
-//                    result.add(tasks);
-//                }
-//            }
-//
-//            opgaverTableView.setItems(result);
-//        } catch (ParseException ex)
-//        {
-//            alertString = "Could not parse to date format. Please try again.";
-//            showAlert();
-//
-//        } catch (ModelException ex)
-//        {
-//            alertString = "Could not get all tasks from database. Please try again.";
-//            showAlert();
-//        }
-//    }
+
 
     /**
      * Clears the task by re-setting the list task list.
@@ -1104,7 +1068,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
+     * 
      *
      * @throws ModelException DalException
      */
@@ -1148,7 +1112,7 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
+     *  Edits and saves the changes to the selectd task. 
      *
      * @throws ModelException DalException
      */
@@ -1202,8 +1166,8 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
+     * Checks the textfields, if they are not empty, takes the indput and creates a client based on the indput. 
+     * 
      * @throws ModelException DalException
      */
     @FXML
@@ -1235,6 +1199,11 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+     /**
+     * Create data chart series, and adds them to the charts. While running the method on a seperate thred. 
+     * 
+     * @throws ModelException DalException
+     */
     private void fillChart() throws ModelException
     {
         Thread thread = new Thread(new Runnable()
@@ -1284,8 +1253,12 @@ public class MainAdminViewController implements Initializable
 
     }
 
+    /**
+     *  
+     * 
+     * @throws ModelException DalException
+     */
     @FXML
-
     private void handleDeleteProject(ActionEvent event) throws ModelException
     {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
@@ -1441,6 +1414,11 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+     /**
+     * 
+     * 
+     * 
+     */
     private void showAlert()
     {
         Alert alert = new Alert(Alert.AlertType.WARNING, alertString, ButtonType.OK);

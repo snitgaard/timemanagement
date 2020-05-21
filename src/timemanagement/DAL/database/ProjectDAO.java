@@ -38,7 +38,7 @@ public class ProjectDAO {
      */
     public List<Project> getAllProjects() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "SELECT * FROM Project;";
+            String sql = "SELECT * FROM Project WHERE Project.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Project> allProjects = new ArrayList<>();
@@ -101,7 +101,7 @@ public class ProjectDAO {
         try ( Connection con = dbCon.getConnection()) {
             String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Client.kundeNavn, Project.startDato, Project.isDeleted, Project.hourlyRate, Project.rounded\n"
                     + "FROM Project\n"
-                    + "INNER JOIN Client ON Project.kundeId=Client.id;";
+                    + "INNER JOIN Client ON Project.kundeId=Client.id WHERE Project.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Project> allProjects = new ArrayList<>();

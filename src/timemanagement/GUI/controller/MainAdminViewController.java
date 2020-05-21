@@ -259,7 +259,7 @@ public class MainAdminViewController implements Initializable
             ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
             userComboBox.setItems(roles);
 
-//            projekterTableView.setItems(model.getProjectKundeNavn());
+//            projekterTableView.setItems(model.getProjectClientName());
             fillChart();
 
         } catch (ModelException ex)
@@ -354,7 +354,7 @@ public class MainAdminViewController implements Initializable
      */
     private void setProjects() throws ModelException
     {
-        projektComboBox.setItems(model.getProjectKundeNavn());
+        projektComboBox.setItems(model.getProjectClientName());
         projektComboBox2.setItems(model.getAllProjects());
 //        for (Project projects : model.getAllProjects())
 //        {
@@ -371,7 +371,7 @@ public class MainAdminViewController implements Initializable
     private void fillColumns() throws ModelException
     {
         //Opgaver tableview
-        List<Task> taskList = model.getAllTasksProjektNavn();
+        List<Task> taskList = model.getAllTasksProjectName();
 
         for (Task task : taskList)
         {
@@ -406,7 +406,7 @@ public class MainAdminViewController implements Initializable
      */
     private void fillClientView() throws ModelException
     {
-        clientTableView.setItems(model.getAllKunder());
+        clientTableView.setItems(model.getAllClients());
         clientNameColumn.setCellValueFactory(cellData -> cellData.getValue().clientNameProperty());
         clientContactColumn.setCellValueFactory(cellData -> cellData.getValue().contactPersonProperty());
         clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
@@ -454,9 +454,9 @@ public class MainAdminViewController implements Initializable
     {
         if (clientComboBox.getSelectionModel().getSelectedItem() == null)
         {
-            clientComboBox.setItems(model.getAllKunder());
+            clientComboBox.setItems(model.getAllClients());
         }
-        List<Project> allProjectsList = model.getProjectKundeNavn();
+        List<Project> allProjectsList = model.getProjectClientName();
         ObservableList<Project> allProjectsResultList = FXCollections.observableArrayList();
         allProjectsFilteredList.clear();
 
@@ -874,10 +874,10 @@ public class MainAdminViewController implements Initializable
 
                 if (quartersCheckBox.isSelected())
                 {
-                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
+                    selectedProject = model.createProject(txt_projektNavn.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
                 } else
                 {
-                    selectedProject = model.createProjekt(txt_projektNavn.getText(), model.getKundeId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
+                    selectedProject = model.createProject(txt_projektNavn.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
                 }
 
                 projektComboBox.getItems().add(selectedProject);
@@ -964,7 +964,7 @@ public class MainAdminViewController implements Initializable
     {
         try
         {
-            List<Task> taskNames = model.getAllTasksProjektNavn();
+            List<Task> taskNames = model.getAllTasksProjectName();
             ObservableList<Task> result = FXCollections.observableArrayList();
             Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate.getValue().toString());
 
@@ -1169,7 +1169,7 @@ public class MainAdminViewController implements Initializable
                     String contactPerson = txt_Contact.getText();
                     String email = txt_Email.getText();
                     Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-                    selectedKunde = model.createKunde(kundeNavn, contactPerson, email, hourlyRate, 0);
+                    selectedKunde = model.createClient(kundeNavn, contactPerson, email, hourlyRate, 0);
                     clientComboBox.getItems().add(selectedKunde);
 
                 }
@@ -1235,8 +1235,6 @@ public class MainAdminViewController implements Initializable
             alertString = "Could not fill charts on startup. Please try again.";
             showAlert();
         }
-//        List<Project> projectList = model.getAllProjects();
-
     }
 
     /**
@@ -1255,7 +1253,7 @@ public class MainAdminViewController implements Initializable
         {
             model.deleteProject(selectedProject, 1);
             
-            for (Task task : model.getAllTasksProjektNavn())
+            for (Task task : model.getAllTasksProjectName())
             {
                 if (task.getProjectId() == selectedProject.getId())
                 {
@@ -1330,7 +1328,7 @@ public class MainAdminViewController implements Initializable
         if (selectedClient != null)
         {
             try {
-                model.deleteKunde(selectedClient, 1);
+                model.deleteClient(selectedClient, 1);
             
             for (Project project : model.getAllProjects()) 
             {

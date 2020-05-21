@@ -29,9 +29,9 @@ public class Model
     private bllManager bllManager;
     private ObservableList<Project> allProjects;
     private ObservableList<Task> allTasks;
-    private ObservableList<Project> allProjectsMedKunde;
+    private ObservableList<Project> allProjectsWithClients;
     private ObservableList<User> allUsers;
-    private ObservableList<Client> allKunder;
+    private ObservableList<Client> allClients;
 
     private static Model instance = new Model();
 
@@ -110,18 +110,18 @@ public class Model
         return allTasks;
     }
 
-    public void addTime(long brugtTid, int id) throws ModelException
+    public void addTime(long usedTime, int id) throws ModelException
     {
         try
         {
-            bllManager.addTime(brugtTid, id);
+            bllManager.addTime(usedTime, id);
         } catch (bllException ex)
         {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
-    public ObservableList<Task> getAllTasksProjektNavn() throws ModelException
+    public ObservableList<Task> getAllTasksProjectName() throws ModelException
     {
         allTasks = FXCollections.observableArrayList();
         try
@@ -137,23 +137,23 @@ public class Model
     /**
      * Creates attendance from courseId, studentId and attended parameters
      *
-     * @param projektNavn
-     * @param kundeId
+     * @param projectName
+     * @param clientId
      * @param courseId
-     * @param brugtTid
-     * @param startDato
+     * @param usedTime
+     * @param startDate
      * @param studentId
      * @param attended
      * @return createAttendance method in the bllManager that returns true if a
      * row was added, false if not
      * @throws ModelException
      */
-    public Project createProjekt(String projektNavn, int kundeId, String startDato, long brugtTid, int isDeleted, String kundeNavn, double hourlyRate, int rounded) throws ModelException
+    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws ModelException
     {
         try
         {
-            Project project = bllManager.createProjekt(projektNavn, kundeId, startDato, brugtTid, isDeleted, kundeNavn, hourlyRate, rounded);
-            allProjectsMedKunde.add(project);
+            Project project = bllManager.createProjekt(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+            allProjectsWithClients.add(project);
             return project;
         } catch (bllException ex)
         {
@@ -177,11 +177,11 @@ public class Model
 
 
 
-    public Task createTask(String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId) throws ModelException
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws ModelException
     {
         try
         {
-            Task task = bllManager.createTask(opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, projektNavn, isDeleted, userId);
+            Task task = bllManager.createTask(taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
             allTasks.add(task);
             return task;
         } catch (bllException ex)
@@ -190,29 +190,29 @@ public class Model
         }
     }
 
-    public int getKundeId(String kundeNavn) throws ModelException
+    public int getClientId(String clientName) throws ModelException
     {
         try
         {
-            return bllManager.getKundeId(kundeNavn);
+            return bllManager.getKundeId(clientName);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public ObservableList<Project> getProjectKundeNavn() throws ModelException
+    public ObservableList<Project> getProjectClientName() throws ModelException
     {
         try
         {
-            allProjectsMedKunde = FXCollections.observableArrayList();
+            allProjectsWithClients = FXCollections.observableArrayList();
 
-            allProjectsMedKunde.addAll(bllManager.getProjectKundeNavn());
+            allProjectsWithClients.addAll(bllManager.getProjectKundeNavn());
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
-        return allProjectsMedKunde;
+        return allProjectsWithClients;
     }
 
     public ObservableList<User> getAllUsers() throws ModelException
@@ -253,11 +253,11 @@ public class Model
 
     }
 
-    public void addRoundedTime(double brugtTid, int id) throws ModelException
+    public void addRoundedTime(double usedTime, int id) throws ModelException
     {
         try
         {
-            bllManager.addRoundedTime(brugtTid, id);
+            bllManager.addRoundedTime(usedTime, id);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
@@ -329,56 +329,56 @@ public class Model
         }
     }
 
-    public ObservableList<Client> getAllKunder() throws ModelException
+    public ObservableList<Client> getAllClients() throws ModelException
     {
         try
         {
-            allKunder = FXCollections.observableArrayList();
-            allKunder.addAll(bllManager.getAllKunder());
+            allClients = FXCollections.observableArrayList();
+            allClients.addAll(bllManager.getAllKunder());
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
-        return allKunder;
+        return allClients;
     }
 
-    public Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws ModelException
+    public Client createClient(String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) throws ModelException
     {
         try
         {
-            Client kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
-            allKunder.add(kunde);
-            return kunde;
+            Client client = bllManager.createKunde(clientName, contactPerson, email, hourlyRate, isDeleted);
+            allClients.add(client);
+            return client;
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
 
-    public List<Task> getAllTasksOnProject(int projektId) throws ModelException
+    public List<Task> getAllTasksOnProject(int projectId) throws ModelException
     {
         try
         {
-            return bllManager.getAllTasksOnProject(projektId);
+            return bllManager.getAllTasksOnProject(projectId);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
     
-    public String timeFormatter(String startTid, String slutTid) throws ModelException
+    public String timeFormatter(String usedTime, String endTime) throws ModelException
     {
         try {
-            return bllManager.timeFormatter(startTid, slutTid);
+            return bllManager.timeFormatter(usedTime, endTime);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }
     
-    public long timeCalculator(String startTid, String slutTid) throws ModelException
+    public long timeCalculator(String startTime, String endTime) throws ModelException
     {
         try {
-            return bllManager.timeCalculator(startTid, slutTid);
+            return bllManager.timeCalculator(startTime, endTime);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
@@ -398,38 +398,38 @@ public class Model
     {
         try {
             allProjects.remove(project);
-            allProjectsMedKunde.remove(project);
+            allProjectsWithClients.remove(project);
             bllManager.deleteProject(project, isDeleted);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }
             
-    public void deleteKunde(Client kunde, int isDeleted) throws ModelException
+    public void deleteClient(Client client, int isDeleted) throws ModelException
     {
         try {
-            allKunder.remove(kunde);
-            bllManager.deleteKunde(kunde, isDeleted);
+            allClients.remove(client);
+            bllManager.deleteKunde(client, isDeleted);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }
     
-    public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws ModelException
+    public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws ModelException
     {
         try {   
-            bllManager.deleteTaskOnProject(task, isDeleted, projektId);
+            bllManager.deleteTaskOnProject(task, isDeleted, projectId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }
     }
     
-    public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
+    public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws ModelException
     {
         try {
             allProjects.remove(project);
-            allProjectsMedKunde.remove(project);
-            return bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
+            allProjectsWithClients.remove(project);
+            return bllManager.deleteProjectOnClient(project, isDeleted, clientId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
         }

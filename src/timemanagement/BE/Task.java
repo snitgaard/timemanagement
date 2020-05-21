@@ -20,34 +20,34 @@ import javafx.beans.value.ObservableValue;
 public class Task
 {
     private int id;
-    private StringProperty opgaveNavn;
-    private StringProperty projektNavn;
-    private IntegerProperty projektId;
-    private LongProperty brugtTid;
-    private StringProperty dato;
-    private StringProperty beskrivelse;
-    private IntegerProperty betalt;
+    private StringProperty taskName;
+    private StringProperty projectName;
+    private IntegerProperty projectId;
+    private LongProperty usedTime;
+    private StringProperty date;
+    private StringProperty description;
+    private IntegerProperty payed;
     private IntegerProperty isDeleted;
     private IntegerProperty userId;
 
     /**
      * Constructor for Task
      * @param id
-     * @param opgaveNavn
-     * @param projektId
-     * @param brugtTid
-     * @param dato 
+     * @param taskName
+     * @param projectId
+     * @param usedTime
+     * @param date 
      */
-    public Task(int id, String opgaveNavn, int projektId, long brugtTid, String dato, String beskrivelse, int betalt, String projektNavn, int isDeleted, int userId)
+    public Task(int id, String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId)
     {
         this.id = id;
-        this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
-        this.projektId = new SimpleIntegerProperty(projektId);
-        this.brugtTid = new SimpleLongProperty(brugtTid);
-        this.dato = new SimpleStringProperty(dato);
-        this.beskrivelse = new SimpleStringProperty(beskrivelse);
-        this.betalt = new SimpleIntegerProperty(betalt);
-        this.projektNavn = new SimpleStringProperty(projektNavn);
+        this.taskName = new SimpleStringProperty(taskName);
+        this.projectId = new SimpleIntegerProperty(projectId);
+        this.usedTime = new SimpleLongProperty(usedTime);
+        this.date = new SimpleStringProperty(date);
+        this.description = new SimpleStringProperty(description);
+        this.payed = new SimpleIntegerProperty(payed);
+        this.projectName = new SimpleStringProperty(projectName);
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.userId = new SimpleIntegerProperty(userId);
     }
@@ -55,22 +55,22 @@ public class Task
     /**
      * Constructor for Task
      * @param id
-     * @param opgaveNavn
-     * @param projektNavn
-     * @param brugtTid
-     * @param dato 
+     * @param taskName
+     * @param projectName
+     * @param usedTime
+     * @param date 
      */
-    public Task(int id, String opgaveNavn, String projektNavn, long brugtTid, String dato, int projektId, int userId, String beskrivelse, int betalt)
+    public Task(int id, String taskName, String projectName, long usedTime, String date, int projektId, int userId, String beskrivelse, int betalt)
     {
         this.id = id;
-        this.opgaveNavn = new SimpleStringProperty(opgaveNavn);
-        this.projektNavn = new SimpleStringProperty(projektNavn);
-        this.brugtTid = new SimpleLongProperty(brugtTid);
-        this.dato = new SimpleStringProperty(dato);
-        this.projektId = new SimpleIntegerProperty(projektId);
+        this.taskName = new SimpleStringProperty(taskName);
+        this.projectName = new SimpleStringProperty(projectName);
+        this.usedTime = new SimpleLongProperty(usedTime);
+        this.date = new SimpleStringProperty(date);
+        this.projectId = new SimpleIntegerProperty(projektId);
         this.userId = new SimpleIntegerProperty(userId);
-        this.beskrivelse = new SimpleStringProperty(beskrivelse);
-        this.betalt = new SimpleIntegerProperty(betalt);
+        this.description = new SimpleStringProperty(beskrivelse);
+        this.payed = new SimpleIntegerProperty(betalt);
     }
 
     /**
@@ -95,166 +95,166 @@ public class Task
      * getter for opgaveNavn
      * @return opgaveNavn
      */
-    public String getOpgaveNavn()
+    public String getTaskName()
     {
-        return opgaveNavn.get();
+        return taskName.get();
     }
 
     /**
      * setter for opgaveNavn
-     * @param opgaveNavn 
+     * @param taskName 
      */
-    public void setOpgaveNavn(String opgaveNavn)
+    public void setTaskName(String taskName)
     {
-        this.opgaveNavn.set(opgaveNavn);
+        this.taskName.set(taskName);
     }
     
-    public StringProperty opgaveNavnProperty()
+    public StringProperty taskNameProperty()
     {
-        return opgaveNavn;
+        return taskName;
     }
 
     /**
-     * getter for projektNavn
-     * @return projektNavn
+     * getter for projectName
+     * @return projectName
      */
     
-    public String getProjektNavn() {
-        return projektNavn.get();
+    public String getProjectName() {
+        return projectName.get();
     }
 
     /**
-     * Setter for projektNavn
-     * @param projektNavn 
+     * Setter for projectName
+     * @param projectName 
      */
-    public void setProjektNavn(String projektNavn) {
-        this.projektNavn.set(projektNavn);
+    public void setProjectName(String projectName) {
+        this.projectName.set(projectName);
     }
     
-    public StringProperty projektNavnProperty() {
-        return projektNavn;
+    public StringProperty projectNameProperty() {
+        return projectName;
     }
 
     /**
      * getter for projektId
      * @return projektId
      */
-    public int getProjektId()
+    public int getProjectId()
     {
-        return projektId.get();
+        return projectId.get();
     }
 
     /**
-     * setter for projektId
-     * @param projektId 
+     * setter for projectId
+     * @param projectId 
      */
-    public void setProjektId(int projektId)
+    public void setProjectId(int projectId)
     {
-        this.projektId.set(projektId);
+        this.projectId.set(projectId);
     }
     
-    public ObservableValue<Integer> projektIdObservable()
+    public ObservableValue<Integer> projectIdObservable()
     {
-        return projektId.asObject();
+        return projectId.asObject();
     }
 
 
     /**
-     * getter for brugtTid
-     * @return brugtTid
+     * getter for usedTime
+     * @return usedTime
      */
-    public long getBrugtTid()
+    public long getUsedTime()
     {
-        return brugtTid.get();
+        return usedTime.get();
     }
 
     /**
      * setter for brugtTid
-     * @param brugtTid 
+     * @param usedTime 
      */
-    public void setBrugtTid(long brugtTid)
+    public void setUsedTime(long usedTime)
     {
-        this.brugtTid.set(brugtTid);
+        this.usedTime.set(usedTime);
     }
     
-    public ObservableValue<Long> brugtTidObservableValue()
+    public ObservableValue<Long> usedTimeObservableValue()
     {
-        return brugtTid.asObject();
+        return usedTime.asObject();
     }
 
     /**
-     * getter for dato
-     * @return dato
+     * getter for date
+     * @return date
      */
-    public String getDato()
+    public String getDate()
     {
-        return dato.get();
+        return date.get();
     }
 
     /**
-     * setter for dato
-     * @param dato 
+     * setter for date
+     * @param date 
      */
-    public void setDato(String dato)
+    public void setDato(String date)
     {
-        this.dato.set(dato);
+        this.date.set(date);
     }
     
-    public StringProperty datoProperty()
+    public StringProperty dateProperty()
     {
-        return dato;
+        return date;
     }
 
     /**
      * toString metode for Task
-     * @return opgaveNavn
+     * @return taskName
      */
     @Override
     public String toString()
     {
-        return getOpgaveNavn();
+        return getTaskName();
     }
 
     /**
-     * getter for beskrivelse
-     * @return beskrivelse
+     * getter for description
+     * @return description
      */
-    public String getBeskrivelse() {
-        return beskrivelse.get();
+    public String getDescription() {
+        return description.get();
     }
 
     /**
-     * setter for beskrivelse
-     * @param beskrivelse 
+     * setter for description
+     * @param description 
      */
-    public void setBeskrivelse(String beskrivelse) {
-        this.beskrivelse.set(beskrivelse);
+    public void setDescription(String description) {
+        this.description.set(description);
     }
     
-    public StringProperty beskrivelseProperty()
+    public StringProperty descriptionProperty()
     {
-        return beskrivelse;
+        return description;
     }
 
     /**
-     * getter for betalt
-     * @return betalt
+     * getter for payed
+     * @return payed
      */
-    public int getBetalt() {
-        return betalt.get();
+    public int getPayed() {
+        return payed.get();
     }
 
     /**
      * setter for betalt
-     * @param betalt 
+     * @param payed 
      */
-    public void setBetalt(int betalt) {
-        this.betalt.set(betalt);
+    public void setPayed(int payed) {
+        this.payed.set(payed);
     }
     
-    public ObservableValue<Integer> betaltObservable()
+    public ObservableValue<Integer> payedObservable()
     {
-        return betalt.asObject();
+        return payed.asObject();
     }
     
     public int getsDeleted()

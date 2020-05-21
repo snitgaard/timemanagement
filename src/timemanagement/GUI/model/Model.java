@@ -11,7 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import timemanagement.BE.Kunde;
+import timemanagement.BE.Client;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BLL.bllManager;
@@ -31,7 +31,7 @@ public class Model
     private ObservableList<Task> allTasks;
     private ObservableList<Project> allProjectsMedKunde;
     private ObservableList<User> allUsers;
-    private ObservableList<Kunde> allKunder;
+    private ObservableList<Client> allKunder;
 
     private static Model instance = new Model();
 
@@ -329,7 +329,7 @@ public class Model
         }
     }
 
-    public ObservableList<Kunde> getAllKunder() throws ModelException
+    public ObservableList<Client> getAllKunder() throws ModelException
     {
         try
         {
@@ -342,11 +342,11 @@ public class Model
         return allKunder;
     }
 
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws ModelException
+    public Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws ModelException
     {
         try
         {
-            Kunde kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
+            Client kunde = bllManager.createKunde(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
             allKunder.add(kunde);
             return kunde;
         } catch (bllException ex)
@@ -405,7 +405,7 @@ public class Model
         }
     }
             
-    public void deleteKunde(Kunde kunde, int isDeleted) throws ModelException
+    public void deleteKunde(Client kunde, int isDeleted) throws ModelException
     {
         try {
             allKunder.remove(kunde);

@@ -81,6 +81,62 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
+            <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="717.0">
+                     <children>
+                        <JFXDatePicker fx:id="startDate" layoutX="95.0" layoutY="55.0" onAction="#handleStartDate" promptText="Select Start Date" />
+                        <JFXDatePicker fx:id="endDate" layoutX="354.0" layoutY="56.0" onAction="#handleEndDate" promptText="Select End Date" />
+                        <JFXTextField fx:id="txt_nyBrugtTid" alignment="CENTER" layoutX="95.0" layoutY="100.0" prefHeight="25.0" prefWidth="135.0" promptText="New Used Time" />
+                        <JFXButton layoutX="270.0" layoutY="95.0" onAction="#handleUpdateTime" prefHeight="25.0" prefWidth="71.0" style="-fx-border-color: grey;" text="Update">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
+                        <JFXButton fx:id="btnTaskClearFilter" layoutX="553.0" layoutY="59.0" onAction="#taskClearFilter" style="-fx-border-color: grey;" text="Clear date filter">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
+                        <Label layoutX="22.0" layoutY="61.0" text="Start Date">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="280.0" layoutY="60.0" text="End Date">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="103.0" text="Used Time">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="20.0" layoutY="18.0" prefHeight="31.0" prefWidth="171.0" text="Tasks">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="428.0" prefWidth="721.0">
+                     <children>
+                        <TableView fx:id="opgaverTableView" layoutY="25.0" prefHeight="392.0" prefWidth="719.0">
+                           <columns>
+                              <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Task Name" />
+                              <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Project Name" />
+                              <TableColumn fx:id="brugtTidColumn" prefWidth="165.0" text="Used Time" />
+                              <TableColumn fx:id="datoColumn" prefWidth="108.0" text="Date" />
+                           </columns>
+                        </TableView>
+                        <JFXButton layoutX="614.0" layoutY="423.0" onAction="#handleDeleteTask" prefHeight="29.0" prefWidth="89.0" style="-fx-border-color: grey;" text="Delete task">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
             <SplitPane fx:id="opretBrugerPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
@@ -193,62 +249,6 @@
                      </children>
                   </AnchorPane>
               </items>
-            </SplitPane>
-            <SplitPane fx:id="opgaverPane" dividerPositions="0.21561969439728354" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="138.0" prefWidth="717.0">
-                     <children>
-                        <JFXDatePicker fx:id="startDate" layoutX="95.0" layoutY="55.0" onAction="#handleStartDate" promptText="Select Start Date" />
-                        <JFXDatePicker fx:id="endDate" layoutX="354.0" layoutY="56.0" onAction="#handleEndDate" promptText="Select End Date" />
-                        <JFXTextField fx:id="txt_nyBrugtTid" alignment="CENTER" layoutX="95.0" layoutY="100.0" prefHeight="25.0" prefWidth="135.0" promptText="New Used Time" />
-                        <JFXButton layoutX="270.0" layoutY="95.0" onAction="#handleUpdateTime" prefHeight="25.0" prefWidth="71.0" style="-fx-border-color: grey;" text="Update">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></JFXButton>
-                        <JFXButton fx:id="btnTaskClearFilter" layoutX="553.0" layoutY="59.0" onAction="#taskClearFilter" style="-fx-border-color: grey;" text="Clear date filter">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></JFXButton>
-                        <Label layoutX="22.0" layoutY="61.0" text="Start Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="280.0" layoutY="60.0" text="End Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="20.0" layoutY="103.0" text="Used Time">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="20.0" layoutY="18.0" prefHeight="31.0" prefWidth="171.0" text="Tasks">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="428.0" prefWidth="721.0">
-                     <children>
-                        <TableView fx:id="opgaverTableView" layoutY="25.0" prefHeight="392.0" prefWidth="719.0">
-                           <columns>
-                              <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Task Name" />
-                              <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Project Name" />
-                              <TableColumn fx:id="brugtTidColumn" prefWidth="165.0" text="Used Time" />
-                              <TableColumn fx:id="datoColumn" prefWidth="108.0" text="Date" />
-                           </columns>
-                        </TableView>
-                        <JFXButton layoutX="614.0" layoutY="423.0" onAction="#handleDeleteTask" prefHeight="29.0" prefWidth="89.0" style="-fx-border-color: grey;" text="Delete task">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                     </children>
-                  </AnchorPane>
-               </items>
             </SplitPane>
             <SplitPane fx:id="clientPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
@@ -410,8 +410,8 @@
                           </yAxis>
                         </BarChart>
                         <JFXComboBox fx:id="projektComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
-                        <JFXDatePicker fx:id="analStartDate" layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
-                        <JFXDatePicker fx:id="analEndDate" layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
+                        <JFXDatePicker fx:id="chartStartDate" layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
+                        <JFXDatePicker fx:id="chartEndDate" layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
                         <Label layoutX="32.0" layoutY="81.0" text="Project">
                            <font>
                               <Font size="14.0" />

@@ -86,7 +86,4 @@ public class NewEmptyJUnitTest {
             assertFalse(throwException());
         }
     }
-    
-    @Test(expected = IllegalAccessException.class)
-    public void 
 }

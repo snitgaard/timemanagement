@@ -17,7 +17,7 @@ import javafx.beans.value.ObservableValue;
  *
  * @author The Cowboys
  */
-public class Kunde
+public class Client
 {
     private int id;
     private StringProperty clientName;
@@ -34,7 +34,7 @@ public class Kunde
      * @param email 
      * @param hourlyRate 
      */
-    public Kunde(int id, String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) {    
+    public Client(int id, String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) {    
         this.id = id;
         this.clientName = new SimpleStringProperty(clientName);
         this.contactPerson = new SimpleStringProperty(contactPerson);
@@ -197,7 +197,7 @@ public class Kunde
     }
 
     /**
-     * toString method for Kunde
+     * toString method for Client
      * @return kundenavn stringproperty
      */
     @Override

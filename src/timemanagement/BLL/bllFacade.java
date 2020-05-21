@@ -6,7 +6,7 @@
 package timemanagement.BLL;
 
 import java.util.List;
-import timemanagement.BE.Kunde;
+import timemanagement.BE.Client;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -43,9 +43,9 @@ public interface bllFacade
     
     User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws bllException;
 
-    Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws bllException;
+    Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws bllException;
 
-    List<Kunde> getAllKunder() throws bllException;
+    List<Client> getAllKunder() throws bllException;
     
     int getKundeId(String kundeNavn) throws bllException;
 
@@ -75,7 +75,7 @@ public interface bllFacade
     
     void deleteTask(Task task, int isDeleted) throws bllException;
     
-    void deleteKunde(Kunde kunde, int isDeleted) throws bllException;
+    void deleteKunde(Client kunde, int isDeleted) throws bllException;
     
     void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws bllException;
     

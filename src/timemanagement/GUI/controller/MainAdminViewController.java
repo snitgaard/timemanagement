@@ -58,7 +58,7 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import timemanagement.BE.Kunde;
+import timemanagement.BE.Client;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -76,13 +76,13 @@ public class MainAdminViewController implements Initializable
 {
 
     @FXML
-    private TableColumn<Kunde, String> clientNameColumn;
+    private TableColumn<Client, String> clientNameColumn;
     @FXML
-    private TableColumn<Kunde, String> clientContactColumn;
+    private TableColumn<Client, String> clientContactColumn;
     @FXML
-    private TableColumn<Kunde, String> clientEmailColumn;
+    private TableColumn<Client, String> clientEmailColumn;
     @FXML
-    private TableColumn<Kunde, Double> clientHourlyRateColumn;
+    private TableColumn<Client, Double> clientHourlyRateColumn;
     @FXML
     private JFXButton timeLoggerButton;
     @FXML
@@ -191,7 +191,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXButton clientButton;
     @FXML
-    private TableView<Kunde> clientTableView;
+    private TableView<Client> clientTableView;
     @FXML
     private JFXTextField txt_Contact;
     @FXML
@@ -208,7 +208,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField txt_ClientHourlyRate;
     @FXML
-    private JFXComboBox<Kunde> clientComboBox;
+    private JFXComboBox<Client> clientComboBox;
     @FXML
     private BarChart<String, Long> barChart;
     @FXML
@@ -411,7 +411,7 @@ public class MainAdminViewController implements Initializable
         clientContactColumn.setCellValueFactory(cellData -> cellData.getValue().contactPersonProperty());
         clientEmailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
         clientHourlyRateColumn.setCellValueFactory(cellData -> cellData.getValue().hourlyRateObservable());
-        clientHourlyRateColumn.setCellFactory(tc -> new TableCell<Kunde, Double>()
+        clientHourlyRateColumn.setCellFactory(tc -> new TableCell<Client, Double>()
         {
             @Override
             protected void updateItem(Double hourlyRate, boolean empty)
@@ -855,7 +855,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleCreateProjekt(ActionEvent event) throws ModelException
     {
-        Kunde selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
+        Client selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
         double doubleHourlyRate = 0;
 
@@ -1161,7 +1161,7 @@ public class MainAdminViewController implements Initializable
     {
         try
         {
-            Kunde selectedKunde = null;
+            Client selectedKunde = null;
             if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
             {
                 {
@@ -1306,7 +1306,7 @@ public class MainAdminViewController implements Initializable
     private void handleDeleteClient(ActionEvent event) throws ModelException
     {
         clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-        Kunde selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         Thread thread = new Thread(new Runnable()
         {
             public void run()

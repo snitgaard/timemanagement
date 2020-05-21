@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import timemanagement.BE.Kunde;
+import timemanagement.BE.Client;
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.BE.User;
@@ -205,7 +205,7 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public List<Kunde> getAllKunder() throws DalException
+    public List<Client> getAllKunder() throws DalException
     {
         try
         {
@@ -217,7 +217,7 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public Kunde createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
+    public Client createKunde(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
         return kundeDAO.createClient(kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
     }
@@ -242,7 +242,7 @@ public class DalManager implements DalFacade
     }
 
     @Override
-    public void deleteKunde(Kunde kunde, int isDeleted) throws DalException {
+    public void deleteKunde(Client kunde, int isDeleted) throws DalException {
        kundeDAO.deleteClient(kunde, isDeleted);
     }
 

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import timemanagement.BE.Kunde;
+import timemanagement.BE.Client;
 import timemanagement.DAL.DalException;
 
 /**
@@ -36,14 +36,14 @@ public class ClientDAO
      * @return
      * @throws SQLException
      */
-    public List<Kunde> getAllClients() throws SQLException
+    public List<Client> getAllClients() throws SQLException
     {
         try (Connection con = dbCon.getConnection())
         {
             String sql = "SELECT * FROM Kunde;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
-            ArrayList<Kunde> allKunder = new ArrayList<>();
+            ArrayList<Client> allKunder = new ArrayList<>();
             while (rs.next())
             {
                 int id = rs.getInt("Id");
@@ -52,7 +52,7 @@ public class ClientDAO
                 String email = rs.getString("email");
                 double hourlyRate = rs.getInt("hourlyRate");
                 int isDeleted = rs.getInt("isDeleted");
-                Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
+                Client kunde = new Client(id, kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
                 allKunder.add(kunde);
             }
             return allKunder;
@@ -60,12 +60,12 @@ public class ClientDAO
     }
 
     /**
-     * Creates SQL Connetion and creates a new Kunde.
+     * Creates SQL Connetion and creates a new Client.
      *
      * @return
      * @throws DalException
      */
-    public Kunde createClient(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
+    public Client createClient(String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -84,7 +84,7 @@ public class ClientDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Kunde kunde = new Kunde(id, kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
+                    Client kunde = new Client(id, kundeNavn, kontaktPerson, email, hourlyRate, isDeleted);
                     return kunde;
                 }
             }
@@ -130,7 +130,7 @@ public class ClientDAO
         }
     }
 
-     public void deleteClient(Kunde kunde, int isDeleted) throws DalException
+     public void deleteClient(Client kunde, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {

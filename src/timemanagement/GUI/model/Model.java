@@ -387,6 +387,7 @@ public class Model
     public void deleteTask(Task task, int isDeleted) throws ModelException
     {
         try {
+            allTasks.remove(task);
             bllManager.deleteTask(task, isDeleted);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
@@ -396,6 +397,8 @@ public class Model
     public void deleteProject(Project project, int isDeleted) throws ModelException
     {
         try {
+            allProjects.remove(project);
+            allProjectsMedKunde.remove(project);
             bllManager.deleteProject(project, isDeleted);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
@@ -405,6 +408,7 @@ public class Model
     public void deleteKunde(Kunde kunde, int isDeleted) throws ModelException
     {
         try {
+            allKunder.remove(kunde);
             bllManager.deleteKunde(kunde, isDeleted);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
@@ -413,7 +417,7 @@ public class Model
     
     public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws ModelException
     {
-        try {
+        try {   
             bllManager.deleteTaskOnProject(task, isDeleted, projektId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());
@@ -423,6 +427,8 @@ public class Model
     public Project deleteProjectOnClient(Project project, int isDeleted, int kundeId) throws ModelException
     {
         try {
+            allProjects.remove(project);
+            allProjectsMedKunde.remove(project);
             return bllManager.deleteProjectOnClient(project, isDeleted, kundeId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());

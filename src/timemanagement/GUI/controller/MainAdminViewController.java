@@ -1273,14 +1273,30 @@ public class MainAdminViewController implements Initializable
     {
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
+        List<Task> toBeDeleted = new ArrayList();
 
         if (selectedProject != null)
         {
             model.deleteProject(selectedProject, 1);
-            for (Task task : model.getAllTasks())
+            
+            for (Task task : model.getAllTasksProjektNavn())
             {
+                if (task.getProjektId() == selectedProject.getId())
+                {
+                    toBeDeleted.add(task);
+                }
+                
                 model.deleteTaskOnProject(task, 1, selectedProject.getId());
             }
+            
+            for (int i = 0; i < toBeDeleted.size(); i++)
+            {
+                if (toBeDeleted.get(i).getId() == filteredTaskList.get(i).getId())
+                {
+                    filteredTaskList.remove(i);
+                }
+            }
+            
             allProjectsFilteredList.remove(selectedProject);
 
         } else

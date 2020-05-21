@@ -40,7 +40,7 @@ public class ClientDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT * FROM Kunde;";
+            String sql = "SELECT * FROM Client;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Client> allClients = new ArrayList<>();
@@ -69,7 +69,7 @@ public class ClientDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Kunde (kundeNavn, kontaktPerson, email, hourlyRate, isDeleted) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Client (kundeNavn, kontaktPerson, email, hourlyRate, isDeleted) VALUES (?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, clientName);
             ps.setString(2, contactPerson);
@@ -111,7 +111,7 @@ public class ClientDAO
         try (Connection con = dbCon.getConnection())
         {
 
-            String sql = "SELECT * FROM Kunde WHERE kundeNavn = ?";
+            String sql = "SELECT * FROM Client WHERE kundeNavn = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, clientName);
             ResultSet rs = ps.executeQuery();
@@ -135,7 +135,7 @@ public class ClientDAO
         try (Connection con = dbCon.getConnection())
         {
             int id = client.getId();
-            String sql = "UPDATE Kunde SET isDeleted = ? WHERE id =" + id + ";";
+            String sql = "UPDATE Client SET isDeleted = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             
             ps.setInt(1, isDeleted);

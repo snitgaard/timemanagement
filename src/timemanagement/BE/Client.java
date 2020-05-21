@@ -17,11 +17,11 @@ import javafx.beans.value.ObservableValue;
  *
  * @author The Cowboys
  */
-public class Kunde
+public class Client
 {
     private int id;
-    private StringProperty kundeNavn;
-    private StringProperty kontaktPerson;
+    private StringProperty clientName;
+    private StringProperty contactPerson;
     private StringProperty email;
     private DoubleProperty hourlyRate;
     private IntegerProperty isDeleted;
@@ -29,15 +29,15 @@ public class Kunde
     /**
      * Constructor for Kunde
      * @param id
-     * @param kundeNavn 
-     * @param kontaktPerson 
+     * @param clientName 
+     * @param contactPerson 
      * @param email 
      * @param hourlyRate 
      */
-    public Kunde(int id, String kundeNavn, String kontaktPerson, String email, double hourlyRate, int isDeleted) {    
+    public Client(int id, String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) {    
         this.id = id;
-        this.kundeNavn = new SimpleStringProperty(kundeNavn);
-        this.kontaktPerson = new SimpleStringProperty(kontaktPerson);
+        this.clientName = new SimpleStringProperty(clientName);
+        this.contactPerson = new SimpleStringProperty(contactPerson);
         this.email = new SimpleStringProperty(email);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
@@ -89,57 +89,57 @@ public class Kunde
     }
 
     /**
-     * getter for kundeNavn
-     * @return kundeNavn
+     * getter for clientName
+     * @return clientName
      */
-    public String getKundeNavn()
+    public String getClientName()
     {
-        return kundeNavn.get();
+        return clientName.get();
     }
 
     /**
-     * setter for kundeNavn
-     * @param kundeNavn 
+     * setter for clientName
+     * @param clientName 
      */
-    public void setKundeNavn(String kundeNavn)
+    public void setClientName(String clientName)
     {
-        this.kundeNavn.set(kundeNavn);
+        this.clientName.set(clientName);
     }
     
     /**
-     * return kundeNavn as StringProperty
-     * @return kundeNavn
+     * return clientName as StringProperty
+     * @return clientName
      */
-    public StringProperty kundeNavnProperty()
+    public StringProperty clientNameProperty()
     {
-        return kundeNavn;
+        return clientName;
     }
 
     /**
-     * getter for kontaktPerson
-     * @return kontaktPerson
+     * getter for contactPerson
+     * @return contactPerson
      */
-    public String getKontaktPerson()
+    public String getContactPerson()
     {
-        return kontaktPerson.get();
+        return contactPerson.get();
     }
 
     /**
-     * setter for kontaktPerson
-     * @param kontaktPerson 
+     * setter for contactPerson
+     * @param contactPerson 
      */
-    public void setKontaktPerson(String kontaktPerson)
+    public void setContactPerson(String contactPerson)
     {
-        this.kontaktPerson.set(kontaktPerson);
+        this.contactPerson.set(contactPerson);
     }
     
     /**
-     * return kontaktPerson as StringProperty
-     * @return kontaktPerson
+     * return contactPerson as StringProperty
+     * @return contactPerson
      */
-    public StringProperty kontaktPersonProperty()
+    public StringProperty contactPersonProperty()
     {
-        return kontaktPerson;
+        return contactPerson;
     }
 
     /**
@@ -197,13 +197,13 @@ public class Kunde
     }
 
     /**
-     * toString method for Kunde
+     * toString method for Client
      * @return kundenavn stringproperty
      */
     @Override
     public String toString()
     {
-        return getKundeNavn();
+        return getClientName();
     }
 
 }

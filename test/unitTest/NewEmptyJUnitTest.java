@@ -86,4 +86,8 @@ public class NewEmptyJUnitTest {
             assertFalse(throwException());
         }
     }
+<<<<<<< HEAD
+=======
+    
+>>>>>>> parent of a50d27f... Revert "Merge branch 'master' of https://github.com/snitgaard/timemanagement"
 }

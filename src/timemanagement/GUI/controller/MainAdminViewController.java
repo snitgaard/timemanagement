@@ -237,6 +237,10 @@ public class MainAdminViewController implements Initializable
     private TableColumn<User, String> userViewUsername;
     @FXML
     private JFXCheckBox quartersCheckBox;
+    @FXML
+    private JFXDatePicker analStartDate;
+    @FXML
+    private JFXDatePicker analEndDate;
 
     /**
      * Initializes the controller class.
@@ -1005,6 +1009,52 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
     }
+    
+//        private void analDateFilter() throws ParseException, ModelException
+//                    {
+//        try
+//        {
+//            List<Task> taskNames = model.getAllTasksProjektNavn();
+//            ObservableList<Task> result = FXCollections.observableArrayList();
+//            Date start = new SimpleDateFormat("yyyy-MM-dd").parse(analStartDate.getValue().toString());
+//
+//            Calendar calendar2 = Calendar.getInstance();
+//            calendar2.setTime(start);
+//            calendar2.add(Calendar.DATE, 1);
+//            Date sDate = calendar2.getTime();
+//
+//            Date end = new SimpleDateFormat("yyyy-MM-dd").parse(analEndDate.getValue().toString());
+//            Calendar calendar3 = Calendar.getInstance();
+//            calendar3.setTime(end);
+//            calendar3.add(Calendar.DATE, 1);
+//            Date eDate = calendar3.getTime();
+//
+//            for (Task tasks : taskNames)
+//            {
+//                Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDato());
+//
+//                Calendar calendar1 = Calendar.getInstance();
+//                calendar1.setTime(date1);
+//                calendar1.add(Calendar.DATE, 1);
+//                Date x = calendar1.getTime();
+//                if (x.after(sDate) && x.before(eDate) && tasks.getUserId() == this.selectedUser.getId() || x.equals(sDate) || x.equals(eDate))
+//                {
+//                    result.add(tasks);
+//                }
+//            }
+//
+//            opgaverTableView.setItems(result);
+//        } catch (ParseException ex)
+//        {
+//            alertString = "Could not parse to date format. Please try again.";
+//            showAlert();
+//
+//        } catch (ModelException ex)
+//        {
+//            alertString = "Could not get all tasks from database. Please try again.";
+//            showAlert();
+//        }
+//    }
 
     /**
      * Clears the task by re-setting the list task list.
@@ -1198,7 +1248,7 @@ public class MainAdminViewController implements Initializable
                     XYChart.Series set2 = new XYChart.Series<>();
                     set1.setName("Projects");
                     barChart.setAnimated(false);
-                    barChart.setBarGap(-35);
+                    barChart.setBarGap(-10);
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
                     {
@@ -1215,8 +1265,8 @@ public class MainAdminViewController implements Initializable
                     }
                 } catch (ModelException ex)
                 {
-                    Logger.getLogger(MainAdminViewController.class
-                            .getName()).log(Level.SEVERE, null, ex);
+            alertString = "Could not fill charts on startup. Please try again.";
+            showAlert();
                 }
             }
 
@@ -1342,7 +1392,7 @@ public class MainAdminViewController implements Initializable
             XYChart.Series set2 = new XYChart.Series<>();
             XYChart.Series set3 = new XYChart.Series<>();
             barChart.setAnimated(false);
-            barChart.setBarGap(-35);
+            barChart.setBarGap(-10);
             System.out.println("hvad er det her  = " + selectedProject.getId());
             for (Task allTasks : model.getAllTasks())
             {

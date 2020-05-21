@@ -418,6 +418,7 @@ public class Model
     public void deleteTaskOnProject(Task task, int isDeleted, int projektId) throws ModelException
     {
         try {   
+//            allTasks.remove(task);
             bllManager.deleteTaskOnProject(task, isDeleted, projektId);
         } catch (bllException ex) {
             throw new ModelException(ex.getMessage());

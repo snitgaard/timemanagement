@@ -179,7 +179,6 @@ public class MainAdminViewController implements Initializable
     private TableColumn<User, String> userViewRolle;
     @FXML
     private JFXComboBox<String> userComboBox;
-    @FXML
     private JFXCheckBox ongoingCheckbox;
     private TableColumn<Project, Integer> archivedColumn;
     @FXML
@@ -238,9 +237,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXCheckBox quartersCheckBox;
     @FXML
-    private JFXDatePicker analStartDate;
+    private JFXDatePicker chartStartDate;
     @FXML
-    private JFXDatePicker analEndDate;
+    private JFXDatePicker chartEndDate;
 
     /**
      * Initializes the controller class.
@@ -1114,7 +1113,6 @@ public class MainAdminViewController implements Initializable
      *
      * @throws ModelException DalException
      */
-    @FXML
     private void setOngoing(ActionEvent event) throws ModelException
     {
         setProjectTable();
@@ -1125,7 +1123,6 @@ public class MainAdminViewController implements Initializable
      *
      * @throws ModelException DalException
      */
-    @FXML
     private void handleArchiveProject(ActionEvent event) throws ModelException
     {
         try

@@ -136,9 +136,9 @@ public class MainAdminViewController implements Initializable
     @FXML
     private TableView<Task> opgaverTableView;
     @FXML
-    private JFXComboBox<Project> projektComboBox2;
+    private JFXComboBox<Project> projectComboBox2;
     @FXML
-    private JFXTextField txt_projektNavn;
+    private JFXTextField txt_projectNavn;
     @FXML
     private JFXButton btn_start;
     @FXML
@@ -350,7 +350,7 @@ public class MainAdminViewController implements Initializable
     private void setProjects() throws ModelException
     {
         projektComboBox.setItems(model.getProjectClientName());
-        projektComboBox2.setItems(model.getAllProjects());
+        projectComboBox2.setItems(model.getAllProjects());
 //        for (Project projects : model.getAllProjects())
 //        {
 //            projektComboBox.getItems().add(projects.ge);
@@ -845,7 +845,7 @@ public class MainAdminViewController implements Initializable
 
         try
         {
-            if (!txt_projektNavn.getText().isEmpty() && selectedClient != null)
+            if (!txt_projectNavn.getText().isEmpty() && selectedClient != null)
             {
                 if (txt_HourlyRateProject.getText().isEmpty())
                 {
@@ -858,16 +858,16 @@ public class MainAdminViewController implements Initializable
 
                 if (quartersCheckBox.isSelected())
                 {
-                    selectedProject = model.createProject(txt_projektNavn.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
+                    selectedProject = model.createProject(txt_projectNavn.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
                 } else
                 {
-                    selectedProject = model.createProject(txt_projektNavn.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
+                    selectedProject = model.createProject(txt_projectNavn.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
                 }
 
                 projektComboBox.getItems().add(selectedProject);
-                projektComboBox2.getItems().add(selectedProject);
+                projectComboBox2.getItems().add(selectedProject);
                 allProjectsFilteredList.add(selectedProject);
-            } else if (txt_projektNavn.getText().isEmpty() || selectedClient == null)
+            } else if (txt_projectNavn.getText().isEmpty() || selectedClient == null)
             {
                 alertString = "Could not create project. Please try again";
                 showAlert();
@@ -1188,17 +1188,17 @@ public class MainAdminViewController implements Initializable
                     XYChart.Series set2 = new XYChart.Series<>();
                     barChart.setAnimated(false);
                     barChart.setBarGap(-10);
+                    set1.setName("Paid task");
+                    set2.setName("Not paid task");
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
                     {
                         number = number + 1;
                         if (allTasks.getPayed() == 1)
                         {
-                            set1.setName("Paid task");
                             set1.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         } else if (allTasks.getPayed() == 0)
                         {
-                            set2.setName("Not paid task");
                             set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
                     }
@@ -1236,7 +1236,6 @@ public class MainAdminViewController implements Initializable
         {
             public void run()
             {
-
                 if (selectedProject != null)
                 {
                     try
@@ -1413,44 +1412,99 @@ public class MainAdminViewController implements Initializable
         }
     }
 
+    private ObservableList<Task> analyseChartFilter() throws ModelException, ParseException
+    {
+        List<Task> taskNames = model.getAllTasksProjectName();
+        ObservableList<Task> result = FXCollections.observableArrayList();
+        Date start = new SimpleDateFormat("yyyy-MM-dd").parse(chartStartDate.getValue().toString());
+
+        Calendar calendar2 = Calendar.getInstance();
+        calendar2.setTime(start);
+        calendar2.add(Calendar.DATE, 1);
+        Date sDate = calendar2.getTime();
+
+        Date end = new SimpleDateFormat("yyyy-MM-dd").parse(chartEndDate.getValue().toString());
+        Calendar calendar3 = Calendar.getInstance();
+        calendar3.setTime(end);
+        calendar3.add(Calendar.DATE, 1);
+        Date eDate = calendar3.getTime();
+
+        for (Task tasks : taskNames)
+        {
+            Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDate());
+
+            Calendar calendar1 = Calendar.getInstance();
+            calendar1.setTime(date1);
+            calendar1.add(Calendar.DATE, 1);
+            Date x = calendar1.getTime();
+            if (x.after(sDate) && x.before(eDate) || x.equals(sDate) || x.equals(eDate))
+            {
+                result.add(tasks);
+            }
+        }
+        return result;
+    }
+
     /**
      *
      *
      * @throws ModelException DalException
      */
     @FXML
-    private void handleFilterCharts(ActionEvent event) throws ModelException
+    private void handleFilterCharts(ActionEvent event) throws ModelException, ParseException
     {
-        Project selectedProject = projektComboBox2.getSelectionModel().getSelectedItem();
-        if (selectedProject != null)
+        try
         {
-            barChart.getData().clear();
-            XYChart.Series set2 = new XYChart.Series<>();
-            XYChart.Series set3 = new XYChart.Series<>();
-            barChart.setAnimated(false);
-            barChart.setBarGap(-10);
-            System.out.println("hvad er det her  = " + selectedProject.getId());
-            for (Task allTasks : model.getAllTasks())
+            Project selectedProject = projectComboBox2.getSelectionModel().getSelectedItem();
+            if (selectedProject != null)
             {
-                if (allTasks.getProjectId() == selectedProject.getId())
+                barChart.getData().clear();
+                XYChart.Series set2 = new XYChart.Series<>();
+                XYChart.Series set3 = new XYChart.Series<>();
+                barChart.setAnimated(false);
+                set2.setName("Paid task");
+                set3.setName("Not paid task");
+                barChart.setBarGap(-10);
+                System.out.println("hvad er det her  = " + selectedProject.getId());
+
+                if (chartStartDate.getValue() != null || chartEndDate.getValue() != null)
                 {
-                    if (allTasks.getPayed() == 1)
+                    for (Task allTasks : analyseChartFilter())
                     {
-                        set2.setName("Paid task");
-                        set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
-                    } else if (allTasks.getPayed() == 0)
+                        if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 1)
+                        {
+                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
+                        } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 0)
+                        {
+                            set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
+                        }
+                    }
+                } 
+                else
+                {
+                    for (Task allTasks : model.getAllTasks())
                     {
-                        set3.setName("Not paid task");
-                        set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
+                        if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 1)
+                        {
+                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
+                        } 
+                        else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 0)
+                        {
+                            set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
+                        }
                     }
                 }
+
+                barChart.getData().addAll(set2);
+                barChart.getData().addAll(set3);
+            } else
+            {
+                alertString = "Could not filter charts. Please select a project and try again.";
+                showAlert();
             }
-            barChart.getData().addAll(set2);
-            barChart.getData().addAll(set3);
-        } else
+        } catch (NullPointerException e)
         {
-            alertString = "Could not filter charts. Please try again.";
-            showAlert();
+
         }
     }
 
@@ -1492,4 +1546,5 @@ public class MainAdminViewController implements Initializable
             }
         });
     }
+
 }

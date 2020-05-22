@@ -1243,7 +1243,7 @@ public class MainAdminViewController implements Initializable
                     {
                         model.deleteProject(selectedProject, 1);
 
-                        for (Task task : model.getAllTasksProjectName())
+                        for (Task task : filteredTaskList)
                         {
                             if (task.getProjectId() == selectedProject.getId())
                             {
@@ -1260,6 +1260,19 @@ public class MainAdminViewController implements Initializable
                                 if (task.getId() == task1.getId())
                                 {
                                     iterator.remove();
+                                }
+                            }
+                        }
+
+                        for (Task task : toBeDeleted)
+                        {
+                            for (ListIterator<Task> iterator = opgaveComboBox.getItems().listIterator(); iterator.hasNext();)
+                            {
+                                Task task1 = iterator.next();
+                                if (task.getId() == task1.getId())
+                                {
+                                    opgaveComboBox.getItems().remove(task1);
+                                    opgaveComboBox.getSelectionModel().clearSelection();
                                 }
                             }
                         }
@@ -1329,36 +1342,54 @@ public class MainAdminViewController implements Initializable
     {
         clientTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
+        ArrayList<Project> tempDeletedList = new ArrayList<>();
+        ArrayList<Task> toBeDeleted = new ArrayList<>();
         Thread thread = new Thread(new Runnable()
         {
             public void run()
             {
-                
-                
+
                 if (selectedClient != null)
                 {
                     try
                     {
                         model.deleteClient(selectedClient, 1);
 
-                        for (ListIterator<Project> iterator = model.getAllProjects().listIterator(); iterator.hasNext();)
+                        for (Project project : projekterTableView.getItems())
                         {
-                            ArrayList<Project> tempDeletedList = new ArrayList<>();
-                            Project project = iterator.next();
                             if (selectedClient.getId() == project.getClientId())
                             {
                                 tempDeletedList.add(project);
                             }
-                            model.deleteProjectOnClient(project, 1, selectedClient.getId());
-                            iterator.remove();
-                            for (Project project1 : tempDeletedList)
+
+                        }
+
+                        for (Project project1 : tempDeletedList)
+                        {
+                            for (Task task : filteredTaskList)
                             {
-                                for (Task task : model.getAllTasks())
+                                if (project1.getId() == task.getProjectId())
                                 {
+                                    toBeDeleted.add(task);
                                     model.deleteTaskOnProject(task, 1, project1.getId());
+                                }
+
+                            }
+                            model.deleteProjectOnClient(project1, 1, selectedClient.getId());
+                        }
+
+                        for (Task task : toBeDeleted)
+                        {
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                            {
+                                Task task1 = iterator.next();
+                                if (task.getId() == task1.getId())
+                                {
+                                    iterator.remove();
                                 }
                             }
                         }
+
                     } catch (ModelException ex)
                     {
                         Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);

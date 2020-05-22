@@ -99,7 +99,7 @@ public class ProjectDAO {
 
     public List<Project> getProjectClientName() throws SQLException {
         try ( Connection con = dbCon.getConnection()) {
-            String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Client.kundeNavn, Project.startDato, Project.isDeleted, Project.hourlyRate, Project.rounded\n"
+            String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Client.kundeNavn, Project.startDato, Project.isDeleted, Project.hourlyRate, Project.rounded, Project.kundeId\n"
                     + "FROM Project\n"
                     + "INNER JOIN Client ON Project.kundeId=Client.id WHERE Project.isDeleted = 0;";
             Statement statement = con.createStatement();
@@ -114,7 +114,8 @@ public class ProjectDAO {
                 int isDeleted = rs.getInt("isDeleted");
                 double hourlyRate = rs.getDouble("hourlyRate");
                 int rounded = rs.getInt("rounded");
-                Project project = new Project(id, projectName, clientName, usedTime, startDate, isDeleted, hourlyRate, rounded);
+                int kundeId = rs.getInt("kundeId");
+                Project project = new Project(id, projectName, clientName, usedTime, startDate, isDeleted, hourlyRate, rounded, kundeId);
                 allProjects.add(project);
             }
             return allProjects;

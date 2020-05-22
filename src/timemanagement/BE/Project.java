@@ -61,7 +61,7 @@ public class Project
      * @param clientName
      * @param usedTime
      */
-    public Project(int id, String projectName, String clientName, long usedTime, String startDate, int isDeleted, double hourlyRate, int rounded)
+    public Project(int id, String projectName, String clientName, long usedTime, String startDate, int isDeleted, double hourlyRate, int rounded, int clientId)
     {
         this.id = id;
         this.projectName = new SimpleStringProperty(projectName);
@@ -71,6 +71,7 @@ public class Project
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
         this.rounded = new SimpleIntegerProperty(rounded);
+        this.clientId = new SimpleIntegerProperty(clientId);
     }
 
     /**

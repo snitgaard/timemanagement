@@ -1251,15 +1251,22 @@ public class MainAdminViewController implements Initializable
                             model.deleteTaskOnProject(task, 1, selectedProject.getId());
                         }
 
-                        for (Task task : toBeDeleted)
+                        for (int i = 0; i < projektComboBox.getItems().size(); i++)
                         {
-                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                            if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
                             {
-                                Task task1 = iterator.next();
-                                if (task.getId() == task1.getId())
-                                {
-                                    iterator.remove();
-                                }
+                                projektComboBox.getItems().remove(i);
+                                projektComboBox.getSelectionModel().clearSelection();
+                                kundeField.clear();
+                            }
+                        }
+                        
+                        for (int i = 0; i < projectComboBox2.getItems().size(); i++)
+                        {
+                            if (selectedProject.getId() == projectComboBox2.getItems().get(i).getId())
+                            {
+                                projectComboBox2.getItems().remove(i);
+                                projectComboBox2.getSelectionModel().clearSelection();
                             }
                         }
 
@@ -1276,6 +1283,7 @@ public class MainAdminViewController implements Initializable
                         }
 
                         allProjectsFilteredList.remove(selectedProject);
+                        opgaveComboBox.getSelectionModel().clearSelection();
 
                     } catch (ModelException ex)
                     {
@@ -1287,15 +1295,6 @@ public class MainAdminViewController implements Initializable
                     showAlert();
                 }
 
-                for (int i = 0; i < projektComboBox.getItems().size(); i++)
-                {
-                    if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
-                    {
-                        projektComboBox.getItems().remove(i);
-                        projektComboBox.getSelectionModel().clearSelection();
-                        kundeField.clear();
-                    }
-                }
             }
         });
         thread.start();
@@ -1323,6 +1322,9 @@ public class MainAdminViewController implements Initializable
         {
             model.deleteTask(selectedTask, 1);
             filteredTaskList.remove(selectedTask);
+            projektComboBox.getSelectionModel().clearSelection();
+            opgaveComboBox.getSelectionModel().clearSelection();
+            
         } else
         {
             alertString = "Could not delete task. Please try again.";
@@ -1387,6 +1389,45 @@ public class MainAdminViewController implements Initializable
                                 }
                             }
                         }
+                        
+                        for (int i = 0; i < clientComboBox.getItems().size(); i++)
+                        {
+                            if (selectedClient.getId() == clientComboBox.getItems().get(i).getId())
+                            {
+                                clientComboBox.getItems().remove(i);
+                                clientComboBox.getSelectionModel().clearSelection();
+                            }
+                        }
+                        
+                        for (Project project : tempDeletedList)
+                        {
+                            for (ListIterator<Project> iterator = projektComboBox.getItems().listIterator(); iterator.hasNext();)
+                            {
+                                Project project1 = iterator.next();
+                                if (project.getId() == project1.getId())
+                                {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+                        
+                        for (Project project : tempDeletedList)
+                        {
+                            for (ListIterator<Project> iterator = projectComboBox2.getItems().listIterator(); iterator.hasNext();)
+                            {
+                                Project project1 = iterator.next();
+                                if (project.getId() == project1.getId())
+                                {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+                        
+                        projektComboBox.getSelectionModel().clearSelection();
+                        projectComboBox2.getSelectionModel().clearSelection();
+                        opgaveComboBox.getSelectionModel().clearSelection();
+                        
+                        
 
                     } catch (ModelException ex)
                     {
@@ -1478,16 +1519,14 @@ public class MainAdminViewController implements Initializable
                             set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
                     }
-                } 
-                else
+                } else
                 {
                     for (Task allTasks : model.getAllTasks())
                     {
                         if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 1)
                         {
                             set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
-                        } 
-                        else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 0)
+                        } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 0)
                         {
                             set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }

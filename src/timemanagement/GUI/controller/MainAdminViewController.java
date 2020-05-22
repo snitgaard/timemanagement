@@ -1251,6 +1251,18 @@ public class MainAdminViewController implements Initializable
                             model.deleteTaskOnProject(task, 1, selectedProject.getId());
                         }
 
+                        for (Task task : toBeDeleted)
+                        {
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                            {
+                                Task task1 = iterator.next();
+                                if (task.getId() == task1.getId())
+                                {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+
                         for (int i = 0; i < projektComboBox.getItems().size(); i++)
                         {
                             if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
@@ -1267,18 +1279,6 @@ public class MainAdminViewController implements Initializable
                             {
                                 projectComboBox2.getItems().remove(i);
                                 projectComboBox2.getSelectionModel().clearSelection();
-                            }
-                        }
-
-                        for (Task task : toBeDeleted)
-                        {
-                            for (ListIterator<Task> iterator = opgaveComboBox.getItems().listIterator(); iterator.hasNext();)
-                            {
-                                Task task1 = iterator.next();
-                                if (task.getId() == task1.getId())
-                                {
-                                    iterator.remove();
-                                }
                             }
                         }
 

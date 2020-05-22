@@ -1270,8 +1270,7 @@ public class MainAdminViewController implements Initializable
                                 Task task1 = iterator.next();
                                 if (task.getId() == task1.getId())
                                 {
-                                    opgaveComboBox.getItems().remove(task1);
-                                    opgaveComboBox.getSelectionModel().clearSelection();
+                                    iterator.remove();
                                 }
                             }
                         }

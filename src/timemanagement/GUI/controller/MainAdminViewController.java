@@ -1232,48 +1232,69 @@ public class MainAdminViewController implements Initializable
         projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
         List<Task> toBeDeleted = new ArrayList();
-
-        if (selectedProject != null)
+        Thread thread = new Thread(new Runnable()
         {
-            model.deleteProject(selectedProject, 1);
-
-            for (Task task : model.getAllTasksProjectName())
+            public void run()
             {
-                if (task.getProjectId() == selectedProject.getId())
-                {
-                    toBeDeleted.add(task);
-                }
-                model.deleteTaskOnProject(task, 1, selectedProject.getId());
-            }
 
-            for (Task task : toBeDeleted)
-            {
-                for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                if (selectedProject != null)
                 {
-                    Task task1 = iterator.next();
-                    if (task.getId() == task1.getId())
+                    try
                     {
-                        iterator.remove();
+                        model.deleteProject(selectedProject, 1);
+
+                        for (Task task : model.getAllTasksProjectName())
+                        {
+                            if (task.getProjectId() == selectedProject.getId())
+                            {
+                                toBeDeleted.add(task);
+                            }
+                            model.deleteTaskOnProject(task, 1, selectedProject.getId());
+                        }
+
+                        for (Task task : toBeDeleted)
+                        {
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                            {
+                                Task task1 = iterator.next();
+                                if (task.getId() == task1.getId())
+                                {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+
+                        allProjectsFilteredList.remove(selectedProject);
+
+                    } catch (ModelException ex)
+                    {
+                        Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                } else
+                {
+                    alertString = "Could not delete project. Please try again.";
+                    showAlert();
+                }
+
+                for (int i = 0; i < projektComboBox.getItems().size(); i++)
+                {
+                    if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
+                    {
+                        projektComboBox.getItems().remove(i);
+                        projektComboBox.getSelectionModel().clearSelection();
+                        kundeField.clear();
                     }
                 }
             }
-
-            allProjectsFilteredList.remove(selectedProject);
-
-        } else
+        });
+        thread.start();
+        try
         {
-            alertString = "Could not delete project. Please try again.";
+            Thread.sleep(1000);
+        } catch (InterruptedException ex)
+        {
+            alertString = "Could not delete Project. Please try again.";
             showAlert();
-        }
-
-        for (int i = 0; i < projektComboBox.getItems().size(); i++)
-        {
-            if (selectedProject.getId() == projektComboBox.getItems().get(i).getId())
-            {
-                projektComboBox.getItems().remove(i);
-                projektComboBox.getSelectionModel().clearSelection();
-                kundeField.clear();
-            }
         }
     }
 

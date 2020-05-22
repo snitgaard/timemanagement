@@ -1380,7 +1380,7 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    private ObservableList<Task> analChart() throws ModelException, ParseException
+    private ObservableList<Task> analyseChartFilter() throws ModelException, ParseException
     {
         List<Task> taskNames = model.getAllTasksProjectName();
         ObservableList<Task> result = FXCollections.observableArrayList();
@@ -1437,7 +1437,7 @@ public class MainAdminViewController implements Initializable
 
                 if (chartStartDate.getValue() != null || chartEndDate.getValue() != null)
                 {
-                    for (Task allTasks : analChart())
+                    for (Task allTasks : analyseChartFilter())
                     {
                         if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 1)
                         {

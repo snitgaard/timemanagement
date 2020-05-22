@@ -137,45 +137,6 @@
                   </AnchorPane>
                </items>
             </SplitPane>
-            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" fx:id="x" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis fx:id="y" side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <JFXComboBox fx:id="projectComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
-                        <JFXDatePicker fx:id="chartStartDate" layoutX="112.0" layoutY="131.0" promptText="Select Start Date" />
-                        <JFXDatePicker fx:id="chartEndDate" layoutX="394.0" layoutY="131.0" promptText="Select End Date" />
-                        <Label layoutX="32.0" layoutY="81.0" text="Project">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="171.0" text="Analysis">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="32.0" layoutY="135.0" text="Start Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="328.0" layoutY="135.0" text="End Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
             <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="717.0">
@@ -443,6 +404,45 @@
                      </children>
                   </AnchorPane>
                </items>
+            </SplitPane>
+            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="x" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="y" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <JFXComboBox fx:id="projectComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
+                        <JFXDatePicker fx:id="chartStartDate" layoutX="112.0" layoutY="131.0" onAction="#handleFilterCharts" promptText="Select Start Date" />
+                        <JFXDatePicker fx:id="chartEndDate" layoutX="394.0" layoutY="131.0" onAction="#handleFilterCharts" promptText="Select End Date" />
+                        <Label layoutX="32.0" layoutY="81.0" text="Project">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="171.0" text="Analysis">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="32.0" layoutY="135.0" text="Start Date">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="328.0" layoutY="135.0" text="End Date">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </AnchorPane>
+              </items>
             </SplitPane>
          </children>
       </StackPane>

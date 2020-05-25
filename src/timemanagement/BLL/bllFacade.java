@@ -55,8 +55,6 @@ public interface bllFacade
 
     int getIsAdminInt(String userLogin, String userPassword) throws bllException;
 
-    void archiveProject(Project project) throws bllException;
-
     void editTask(Task task) throws bllException;
 
     void updateUserRoles(User user, int isAdmin) throws bllException;

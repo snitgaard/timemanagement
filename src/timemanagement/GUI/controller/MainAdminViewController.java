@@ -242,7 +242,6 @@ public class MainAdminViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
         try
         {
             calculateCostPrice();
@@ -254,7 +253,7 @@ public class MainAdminViewController implements Initializable
             ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
             userComboBox.setItems(roles);
 
-//            projekterTableView.setItems(model.getProjectClientName());
+
             fillChart();
 
         } catch (ModelException ex)
@@ -351,10 +350,6 @@ public class MainAdminViewController implements Initializable
     {
         projektComboBox.setItems(model.getProjectClientName());
         projectComboBox2.setItems(model.getAllProjects());
-//        for (Project projects : model.getAllProjects())
-//        {
-//            projektComboBox.getItems().add(projects.ge);
-//        }
     }
 
     /**
@@ -746,10 +741,6 @@ public class MainAdminViewController implements Initializable
         {
             titelField.setText(selectedTask.getTaskName());
 
-//            long hours = (result.get(0).getUsedTime() - result.get(0).getUsedTime() % 3600) / 3600;
-//            long minutes = (result.get(0).getUsedTime() % 3600 - result.get(0).getUsedTime() % 3600 % 60) / 60;
-//            long seconds = result.get(0).getUsedTime() % 3600 % 60;
-//            NumberFormat f = new DecimalFormat("00");
             beskrivelseTextArea.setText(selectedTask.getDescription());
 
             if (selectedTask.getPayed() == 1)

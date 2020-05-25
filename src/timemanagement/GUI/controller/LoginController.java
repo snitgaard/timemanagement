@@ -88,15 +88,12 @@ public class LoginController implements Initializable
     {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
-        int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
 
         if (model.checkUserCredentials(username, password, 0))
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/TimeLoggerView.fxml"));
             redirectToStage(fxmlLoader);
-            MainAdminViewController mainAdminController = fxmlLoader.getController();
-            // Here the StudentAttendanceController is given important data objects,
-            // This secures that it is the correct ones we are working with.
+            TimeLoggerViewController mainAdminController = fxmlLoader.getController();
             mainAdminController.ApplyImportantData(model.getSpecificUser(username));
 
             Stage stage = (Stage) btnLogin.getScene().getWindow();
@@ -104,12 +101,10 @@ public class LoginController implements Initializable
 
         } else if (model.checkUserCredentials(username, password, 1))
         {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/TimeLoggerView.fxml"));
             redirectToStage(fxmlLoader);
-            MainAdminViewController mainAdminController = fxmlLoader.getController();
+            TimeLoggerViewController mainAdminController = fxmlLoader.getController();
             mainAdminController.showAdminButtons();
-//            // Here the TeacherMainController is given important data objects,
-//            // This secures that it is the correct ones we are working with.
             mainAdminController.ApplyImportantData(model.getSpecificUser(username));
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();

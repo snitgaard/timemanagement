@@ -42,7 +42,7 @@ import static utilities.encryptThisString.encryptThisString;
  *
  * @author The Cowboys
  */
-public class MainAdminViewController implements Initializable
+public class TimeLoggerViewController implements Initializable
 {
 
     ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
@@ -225,7 +225,7 @@ public class MainAdminViewController implements Initializable
 
         } catch (ModelException ex)
         {
-            Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TimeLoggerViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
@@ -1249,7 +1249,7 @@ public class MainAdminViewController implements Initializable
 
                     } catch (ModelException ex)
                     {
-                        Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(TimeLoggerViewController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else
                 {
@@ -1387,7 +1387,7 @@ public class MainAdminViewController implements Initializable
 
                     } catch (ModelException ex)
                     {
-                        Logger.getLogger(MainAdminViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(TimeLoggerViewController.class.getName()).log(Level.SEVERE, null, ex);
                     }
 
                 } else

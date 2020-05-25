@@ -125,6 +125,12 @@ public class ClientDAO
         }
     }
 
+    /**
+     * Archives a client in the database.
+     * @param client
+     * @param isDeleted
+     * @throws DalException 
+     */
     public void deleteClient(Client client, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())

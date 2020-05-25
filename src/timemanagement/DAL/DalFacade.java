@@ -15,8 +15,15 @@ import java.util.List;
 public interface DalFacade
 {
 
+    /**
+     * Checks if the role of a user is "Admin" or "User".
+     * @param userLogin
+     * @param userPassword
+     * @param isAdmin
+     * @return
+     * @throws DalException 
+     */
     boolean checkUserCredentials(String userLogin, String userPassword, int isAdmin) throws DalException;
-
 
     List<User> getUser(String userLogin) throws DalException;
 

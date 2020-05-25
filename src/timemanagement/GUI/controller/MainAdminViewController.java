@@ -833,7 +833,6 @@ public class MainAdminViewController implements Initializable
             showAlert();
         }
 
-//        opgaveComboBox.getSelectionModel().select(titelField.getText());
     }
 
     /**

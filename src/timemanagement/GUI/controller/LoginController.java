@@ -132,7 +132,6 @@ public class LoginController implements Initializable
             mainAdminController.showAdminButtons();
 //            // Here the TeacherMainController is given important data objects,
 //            // This secures that it is the correct ones we are working with.
-//            teachercontroller.ApplyImportantData(model, this, selectedTeacher);
             mainAdminController.ApplyImportantData(model.getSpecificUser(username));
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();

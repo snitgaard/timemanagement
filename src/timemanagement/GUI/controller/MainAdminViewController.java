@@ -121,7 +121,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXTextField brugtTidField;
     @FXML
-    private JFXCheckBox betaltCheckBox;
+    private JFXCheckBox paidCheckBox;
     @FXML
     private JFXTextField kundeField;
     @FXML
@@ -160,7 +160,7 @@ public class MainAdminViewController implements Initializable
     @FXML
     private JFXCheckBox opretAdminCheckBox;
     @FXML
-    private JFXButton nyOpgaveButton;
+    private JFXButton newTaskButton;
     @FXML
     private TableView<User> userView;
     @FXML
@@ -520,26 +520,43 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleTime(ActionEvent event) throws ParseException
     {
-        if (startIcon.getGlyphName().equals("PAUSE"))
+        if (opgaveComboBox.getSelectionModel().getSelectedItem() == null)
         {
-            startIcon.setIcon(FontAwesomeIcon.PLAY);
-            btn_start.setText("Start tid");
-            stopTidMethod();
-        } else if (startIcon.getGlyphName().equals("PLAY"))
+            alertString = "Can not start time if a task has not been selected. Please select a task and try again.";
+            showAlert();
+        } else
         {
-            startIcon.setIcon(FontAwesomeIcon.PAUSE);
-            btn_start.setText("Stop tid");
-            try
+            if (startIcon.getGlyphName().equals("PAUSE"))
             {
-                java.util.Date date = new java.util.Date();
-                SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-                startTidField.setText(sdf.format(date));
-                slutTidField.clear();
-                brugtTidField.clear();
-            } catch (Exception e)
+                startIcon.setIcon(FontAwesomeIcon.PLAY);
+                btn_start.setText("Start time");
+                opgaveComboBox.setDisable(false);
+                projektComboBox.setDisable(false);
+                editButton.setDisable(false);
+                newTaskButton.setDisable(false);
+                paidCheckBox.setDisable(false);
+                stopTidMethod();
+            } else if (startIcon.getGlyphName().equals("PLAY"))
             {
-                alertString = "Could not format time difference.";
-                showAlert();
+                startIcon.setIcon(FontAwesomeIcon.PAUSE);
+                btn_start.setText("Stop time");
+                opgaveComboBox.setDisable(true);
+                projektComboBox.setDisable(true);
+                editButton.setDisable(true);
+                newTaskButton.setDisable(true);
+                paidCheckBox.setDisable(true);
+                try
+                {
+                    java.util.Date date = new java.util.Date();
+                    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                    startTidField.setText(sdf.format(date));
+                    slutTidField.clear();
+                    brugtTidField.clear();
+                } catch (Exception e)
+                {
+                    alertString = "Could not format time difference.";
+                    showAlert();
+                }
             }
         }
     }
@@ -687,8 +704,8 @@ public class MainAdminViewController implements Initializable
         opgaveComboBox.setDisable(buttonState);
         titelField.setDisable(buttonState);
         beskrivelseTextArea.setDisable(buttonState);
-        betaltCheckBox.setDisable(buttonState);
-        nyOpgaveButton.setDisable(buttonState);
+        paidCheckBox.setDisable(buttonState);
+        newTaskButton.setDisable(buttonState);
         btn_start.setDisable(buttonState);
         editButton.setDisable(buttonState);
         startTidField.setDisable(buttonState);
@@ -741,13 +758,13 @@ public class MainAdminViewController implements Initializable
 
             if (selectedTask.getPayed() == 1)
             {
-                betaltCheckBox.setSelected(true);
+                paidCheckBox.setSelected(true);
             }
         } else
         {
             titelField.clear();
             beskrivelseTextArea.clear();
-            betaltCheckBox.setSelected(false);
+            paidCheckBox.setSelected(false);
         }
     }
 
@@ -806,7 +823,7 @@ public class MainAdminViewController implements Initializable
         int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
         Task selectedTask = null;
 
-        if (betaltCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
+        if (paidCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
                     1, projektComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
@@ -814,7 +831,7 @@ public class MainAdminViewController implements Initializable
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.getSelectionModel().select(selectedTask);
             filteredTaskList.add(selectedTask);
-        } else if (betaltCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
+        } else if (paidCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
             selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
                     projektComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
@@ -1106,7 +1123,7 @@ public class MainAdminViewController implements Initializable
             }
         }
 
-        if (betaltCheckBox.isSelected() == true)
+        if (paidCheckBox.isSelected() == true)
         {
             int payed = 1;
             selectedTask.setTaskName(titelField.getText());
@@ -1118,7 +1135,7 @@ public class MainAdminViewController implements Initializable
             opgaveComboBox.getItems().add(selectedTask);
             opgaveComboBox.setValue(selectedTask);
 
-        } else if (betaltCheckBox.isSelected() == false)
+        } else if (paidCheckBox.isSelected() == false)
         {
             int payed = 0;
             selectedTask.setTaskName(titelField.getText());
@@ -1181,7 +1198,6 @@ public class MainAdminViewController implements Initializable
         {
             public void run()
             {
-                int number = -1;
                 try
                 {
                     XYChart.Series set1 = new XYChart.Series<>();
@@ -1193,7 +1209,6 @@ public class MainAdminViewController implements Initializable
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
                     {
-                        number = number + 1;
                         if (allTasks.getPayed() == 1)
                         {
                             set1.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
@@ -1272,7 +1287,7 @@ public class MainAdminViewController implements Initializable
                                 kundeField.clear();
                             }
                         }
-                        
+
                         for (int i = 0; i < projectComboBox2.getItems().size(); i++)
                         {
                             if (selectedProject.getId() == projectComboBox2.getItems().get(i).getId())
@@ -1324,7 +1339,7 @@ public class MainAdminViewController implements Initializable
             filteredTaskList.remove(selectedTask);
             projektComboBox.getSelectionModel().clearSelection();
             opgaveComboBox.getSelectionModel().clearSelection();
-            
+
         } else
         {
             alertString = "Could not delete task. Please try again.";
@@ -1389,7 +1404,7 @@ public class MainAdminViewController implements Initializable
                                 }
                             }
                         }
-                        
+
                         for (int i = 0; i < clientComboBox.getItems().size(); i++)
                         {
                             if (selectedClient.getId() == clientComboBox.getItems().get(i).getId())
@@ -1398,7 +1413,7 @@ public class MainAdminViewController implements Initializable
                                 clientComboBox.getSelectionModel().clearSelection();
                             }
                         }
-                        
+
                         for (Project project : tempDeletedList)
                         {
                             for (ListIterator<Project> iterator = projektComboBox.getItems().listIterator(); iterator.hasNext();)
@@ -1410,7 +1425,7 @@ public class MainAdminViewController implements Initializable
                                 }
                             }
                         }
-                        
+
                         for (Project project : tempDeletedList)
                         {
                             for (ListIterator<Project> iterator = projectComboBox2.getItems().listIterator(); iterator.hasNext();)
@@ -1422,12 +1437,10 @@ public class MainAdminViewController implements Initializable
                                 }
                             }
                         }
-                        
+
                         projektComboBox.getSelectionModel().clearSelection();
                         projectComboBox2.getSelectionModel().clearSelection();
                         opgaveComboBox.getSelectionModel().clearSelection();
-                        
-                        
 
                     } catch (ModelException ex)
                     {
@@ -1493,7 +1506,51 @@ public class MainAdminViewController implements Initializable
     @FXML
     private void handleFilterCharts(ActionEvent event) throws ModelException, ParseException
     {
-        try
+        filterChartMethod();
+    }
+
+    /**
+     *
+     *
+     *
+     */
+    private void showAlert()
+    {
+        Alert alert = new Alert(Alert.AlertType.WARNING, alertString, ButtonType.OK);
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.setAlwaysOnTop(true);
+        stage.showAndWait();
+        stage.toFront();
+    }
+
+    /**
+     * Gets the selected project, and calculate the estimated chost price, from
+     * the hourly rate and the time used Formated correctly.
+     */
+    private void calculateCostPrice()
+    {
+        projekterTableView.setOnMousePressed((MouseEvent event) ->
+        {
+            try
+            {
+                costPrice.clear();
+                double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getUsedTime();
+                double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
+                double estimatedChostPrice = usedTime * hourlyRate;
+
+                String pattern = "####,####,###.##";
+                DecimalFormat decimalFormat = new DecimalFormat(pattern);
+                String number = decimalFormat.format(estimatedChostPrice);
+                costPrice.setText(number);
+            } catch (NullPointerException ex)
+            {
+            }
+        });
+    }
+    
+    private void filterChartMethod() throws ModelException, ParseException
+    {
+                try
         {
             Project selectedProject = projectComboBox2.getSelectionModel().getSelectedItem();
             if (selectedProject != null)
@@ -1546,43 +1603,19 @@ public class MainAdminViewController implements Initializable
         }
     }
 
-    /**
-     *
-     *
-     *
-     */
-    private void showAlert()
+    @FXML
+    private void clearAnalysisDate(ActionEvent event) throws ModelException, ParseException
     {
-        Alert alert = new Alert(Alert.AlertType.WARNING, alertString, ButtonType.OK);
-        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
-        stage.setAlwaysOnTop(true);
-        stage.showAndWait();
-        stage.toFront();
-    }
-
-    /**
-     * Gets the selected project, and calculate the estimated chost price, from
-     * the hourly rate and the time used Formated correctly.
-     */
-    private void calculateCostPrice()
-    {
-        projekterTableView.setOnMousePressed((MouseEvent event) ->
+        if (chartStartDate.getValue() != null && chartEndDate.getValue() != null)
         {
-            try
-            {
-                costPrice.clear();
-                double usedTime = projekterTableView.getSelectionModel().getSelectedItem().getUsedTime();
-                double hourlyRate = projekterTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
-                double estimatedChostPrice = usedTime * hourlyRate;
-
-                String pattern = "####,####,###.##";
-                DecimalFormat decimalFormat = new DecimalFormat(pattern);
-                String number = decimalFormat.format(estimatedChostPrice);
-                costPrice.setText(number);
-            } catch (NullPointerException ex)
-            {
-            }
-        });
+            barChart.getData().clear();
+            filterChartMethod();
+            chartStartDate.setValue(null);
+            chartEndDate.setValue(null);
+        } else
+        {
+            alertString = "Could not clear filter. Please try again.";
+            showAlert();
+        }
     }
-
 }

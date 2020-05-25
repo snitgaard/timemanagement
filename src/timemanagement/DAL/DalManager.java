@@ -184,12 +184,6 @@ public class DalManager implements DalFacade
         return userDAO.getIsAdminInt(userLogin, userPassword);
     }
 
-    @Override
-    public void archiveProject(Project project) throws DalException
-    {
-        projectDAO.archiveProject(project);
-    }
-
     public void updateUserRoles(User user, int isAdmin) throws DalException
     {
         userDAO.updateUserRoles(user, isAdmin);

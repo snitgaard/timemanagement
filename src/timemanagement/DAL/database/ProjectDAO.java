@@ -171,26 +171,6 @@ public class ProjectDAO
     }
 
     /**
-     * SKAL DET HER OVERHOVEDET VÆRE DER????????????????????????
-     * @param project
-     * @throws DalException 
-     */
-    public void archiveProject(Project project) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-            int id = project.getId();
-            String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + ";";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, project.getIsDeleted());
-            ps.executeUpdate();
-        } catch (SQLException ex)
-        {
-            throw new DalException("Could not fetch all classes");
-        }
-    }
-
-    /**
      * Archives a project in the database.
      * @param project
      * @param isDeleted

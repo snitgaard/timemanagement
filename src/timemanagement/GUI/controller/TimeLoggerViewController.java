@@ -1019,36 +1019,6 @@ public class TimeLoggerViewController implements Initializable
         setProjectTable();
     }
 
-    /**
-     * ??????????????????
-     * @throws ModelException DalException
-     */
-    private void handleArchiveProject(ActionEvent event) throws ModelException
-    {
-        try
-        {
-            projekterTableView.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-            Project selectedProject = projekterTableView.getSelectionModel().getSelectedItem();
-
-            if (selectedProject.getIsDeleted() != 0)
-            {
-                selectedProject.setIsDeleted(0);
-                model.archiveProject(selectedProject);
-                allProjectsFilteredList.remove(selectedProject);
-            } else if (selectedProject.getIsDeleted() == 0)
-            {
-                selectedProject.setIsDeleted(1);
-                model.archiveProject(selectedProject);
-                allProjectsFilteredList.add(selectedProject);
-            }
-
-        } catch (Exception e)
-        {
-            alertString = "Could not archive project. Please try again.";
-            showAlert();
-        }
-
-    }
 
     /**
      * Edits and saves the changes to the selectd task.

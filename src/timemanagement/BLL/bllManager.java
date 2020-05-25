@@ -269,19 +269,7 @@ public class bllManager implements bllFacade
             throw new bllException(ex.getMessage());
         }
     }
-
-    @Override
-    public void archiveProject(Project project) throws bllException
-    {
-        try
-        {
-            dalFacade.archiveProject(project);
-        } catch (DalException ex)
-        {
-            throw new bllException(ex.getMessage());
-        }
-    }
-
+    
     public void updateUserRoles(User user, int isAdmin) throws bllException
     {
         try

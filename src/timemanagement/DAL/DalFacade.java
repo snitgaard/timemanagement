@@ -64,8 +64,6 @@ public interface DalFacade
 
     int getIsAdminInt(String userLogin, String userPassword) throws DalException;
 
-    void archiveProject(Project project) throws DalException;
-
     void editTask(Task task) throws DalException;
 
     void updateUserRoles(User user, int isAdmin) throws DalException;

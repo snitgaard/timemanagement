@@ -414,22 +414,6 @@ public class Model
     }
 
     /**
-     * ??????????????????
-     * @param project
-     * @throws ModelException 
-     */
-    public void archiveProject(Project project) throws ModelException
-    {
-        try
-        {
-            bllManager.archiveProject(project);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
-
-    /**
      * Updates the role of an user to either "User" or "Admin"
      * @param user
      * @param isAdmin

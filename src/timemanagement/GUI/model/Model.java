@@ -45,11 +45,25 @@ public class Model
         }
     }
 
+    /**
+     * Returns a singleton instance of the model
+     * @return 
+     */
     public static Model getInstance()
     {
         return instance;
     }
 
+    /**
+     * Calls the checkUserCredentials method from the BLL layer. 
+     * Checks if the user login and password is correct. 
+     * Also check whether or not the user is an admin. 
+     * @param userLogin
+     * @param userPassword
+     * @param isAdmin
+     * @return
+     * @throws ModelException 
+     */
     public boolean checkUserCredentials(String userLogin, String userPassword, int isAdmin) throws ModelException
     {
         try
@@ -61,6 +75,12 @@ public class Model
         }
     }
 
+    /**
+     * Returns a specific user.
+     * @param userLogin
+     * @return
+     * @throws ModelException 
+     */
     public List<User> getUser(String userLogin) throws ModelException
     {
         try
@@ -71,7 +91,29 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
+    
+        /**
+     * Returns a specific user
+     * @param userLogin
+     * @return
+     * @throws ModelException 
+     */
+    public User getSpecificUser(String userLogin) throws ModelException
+    {
+        try
+        {
+            return bllManager.getSpecificUser(userLogin);
+        } catch (bllException ex)
+        {
+            throw new ModelException(ex.getMessage());
+        }
+    }
 
+    /**
+     * Returns all the projects in the database.
+     * @return
+     * @throws ModelException 
+     */
     public ObservableList<Project> getAllProjects() throws ModelException
     {
         allProjects = FXCollections.observableArrayList();
@@ -85,17 +127,12 @@ public class Model
         return allProjects;
     }
 
-    public User getSpecificUser(String userLogin) throws ModelException
-    {
-        try
-        {
-            return bllManager.getSpecificUser(userLogin);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
 
+    /**
+     * Returns all the tasks in the database.
+     * @return
+     * @throws ModelException 
+     */
     public ObservableList<Task> getAllTasks() throws ModelException
     {
         allTasks = FXCollections.observableArrayList();
@@ -109,6 +146,12 @@ public class Model
         return allTasks;
     }
 
+    /**
+     * Adds time to a selected task.
+     * @param usedTime
+     * @param id
+     * @throws ModelException 
+     */
     public void addTime(long usedTime, int id) throws ModelException
     {
         try
@@ -120,6 +163,11 @@ public class Model
         }
     }
 
+    /**
+     * Returns all tasks in the database, as well as the name of their given project.
+     * @return
+     * @throws ModelException 
+     */
     public ObservableList<Task> getAllTasksProjectName() throws ModelException
     {
         allTasks = FXCollections.observableArrayList();
@@ -160,6 +208,15 @@ public class Model
         }
     }
 
+    /**
+     * Creates a user with all the given parameters.
+     * @param userLogin
+     * @param userPassword
+     * @param isAdmin
+     * @param email
+     * @param fullName
+     * @throws ModelException 
+     */
     public void createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws ModelException
     {
         try
@@ -174,7 +231,20 @@ public class Model
         }
     }
 
-
+    /**
+     * Creates a task with all the given parameters.
+     * @param taskName
+     * @param projectId
+     * @param usedTime
+     * @param date
+     * @param description
+     * @param payed
+     * @param projectName
+     * @param isDeleted
+     * @param userId
+     * @return
+     * @throws ModelException 
+     */
     public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws ModelException
     {
         try
@@ -188,6 +258,12 @@ public class Model
         }
     }
 
+    /**
+     * Returns the id of a client.
+     * @param clientName
+     * @return
+     * @throws ModelException 
+     */
     public int getClientId(String clientName) throws ModelException
     {
         try
@@ -199,6 +275,11 @@ public class Model
         }
     }
 
+    /**
+     * Returns a list of all projects in the database and the name of their client.
+     * @return
+     * @throws ModelException 
+     */
     public ObservableList<Project> getProjectClientName() throws ModelException
     {
         try
@@ -213,6 +294,12 @@ public class Model
         return allProjectsWithClients;
     }
 
+    /**
+     * Returns a list of all users in the database.
+     * Sets text "Admin" or "User" to be displayed in the program.
+     * @return
+     * @throws ModelException 
+     */
     public ObservableList<User> getAllUsers() throws ModelException
     {
 
@@ -239,6 +326,12 @@ public class Model
         return allUsers;
     }
 
+    /**
+     * Updates time spent on a project 
+     * by adding time spent on all the tasks in the project
+     * @param project
+     * @throws ModelException 
+     */
     public void updateProjectTime(Project project) throws ModelException
     {
         try
@@ -251,6 +344,12 @@ public class Model
 
     }
 
+    /**
+     * Adds time to a task, but rounds up to the nearest 15 minutes.
+     * @param usedTime
+     * @param id
+     * @throws ModelException 
+     */
     public void addRoundedTime(double usedTime, int id) throws ModelException
     {
         try
@@ -262,6 +361,12 @@ public class Model
         }
     }
 
+    /**
+     * Updates the time of a given task based on user input. 
+     * @param task
+     * @return
+     * @throws ModelException 
+     */
     public boolean updateTask(Task task) throws ModelException
     {
         try
@@ -273,6 +378,11 @@ public class Model
         }
     }
 
+    /**
+     * Deletes a user from the database.
+     * @param user
+     * @throws ModelException 
+     */
     public void deleteUser(User user) throws ModelException
     {
         try
@@ -285,6 +395,13 @@ public class Model
         }
     }
 
+    /**
+     * Returns 1 or 0 depending on if a user is an admin or not.
+     * @param userLogin
+     * @param userPassword
+     * @return
+     * @throws ModelException 
+     */
     public int getIsAdminInt(String userLogin, String userPassword) throws ModelException
     {
         try
@@ -296,6 +413,11 @@ public class Model
         }
     }
 
+    /**
+     * ??????????????????
+     * @param project
+     * @throws ModelException 
+     */
     public void archiveProject(Project project) throws ModelException
     {
         try
@@ -307,6 +429,12 @@ public class Model
         }
     }
 
+    /**
+     * Updates the role of an user to either "User" or "Admin"
+     * @param user
+     * @param isAdmin
+     * @throws ModelException 
+     */
     public void updateUserRoles(User user, int isAdmin) throws ModelException
     {
         try
@@ -318,6 +446,11 @@ public class Model
         }
     }
 
+    /**
+     * Edits the title and/or description of a given task.
+     * @param task
+     * @throws ModelException 
+     */
     public void editTask(Task task) throws ModelException
     {
         try
@@ -329,6 +462,11 @@ public class Model
         }
     }
 
+    /**
+     * Returns the list of all clients in the database.
+     * @return
+     * @throws ModelException 
+     */
     public ObservableList<Client> getAllClients() throws ModelException
     {
         try
@@ -342,6 +480,16 @@ public class Model
         return allClients;
     }
 
+    /**
+     * Creates a client with the given parameters.
+     * @param clientName
+     * @param contactPerson
+     * @param email
+     * @param hourlyRate
+     * @param isDeleted
+     * @return
+     * @throws ModelException 
+     */
     public Client createClient(String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) throws ModelException
     {
         try
@@ -355,6 +503,12 @@ public class Model
         }
     }
 
+    /**
+     * Returns all tasks on a given project. 
+     * @param projectId
+     * @return
+     * @throws ModelException 
+     */
     public List<Task> getAllTasksOnProject(int projectId) throws ModelException
     {
         try
@@ -366,6 +520,13 @@ public class Model
         }
     }
 
+    /**
+     * Returns the time spent on a task in the correct format (HH:mm)
+     * @param usedTime
+     * @param endTime
+     * @return
+     * @throws ModelException 
+     */
     public String timeFormatter(String usedTime, String endTime) throws ModelException
     {
         try
@@ -377,6 +538,13 @@ public class Model
         }
     }
 
+    /**
+     * Calculates the time spent on a task
+     * @param startTime
+     * @param endTime
+     * @return
+     * @throws ModelException 
+     */
     public long timeCalculator(String startTime, String endTime) throws ModelException
     {
         try
@@ -388,6 +556,12 @@ public class Model
         }
     }
 
+    /**
+     * Removes a task from the views in the program and archives it in the database.
+     * @param task
+     * @param isDeleted
+     * @throws ModelException 
+     */
     public void deleteTask(Task task, int isDeleted) throws ModelException
     {
         try
@@ -400,6 +574,12 @@ public class Model
         }
     }
 
+    /**
+     * Removes a project from the views in the program and archives it in the database.
+     * @param project
+     * @param isDeleted
+     * @throws ModelException 
+     */
     public void deleteProject(Project project, int isDeleted) throws ModelException
     {
         try
@@ -413,6 +593,12 @@ public class Model
         }
     }
 
+    /**
+     * Removes a client from the views in the program and archives it in the database.
+     * @param client
+     * @param isDeleted
+     * @throws ModelException 
+     */
     public void deleteClient(Client client, int isDeleted) throws ModelException
     {
         try
@@ -425,6 +611,13 @@ public class Model
         }
     }
 
+    /**
+     * Archives all tasks on a given project.
+     * @param task
+     * @param isDeleted
+     * @param projectId
+     * @throws ModelException 
+     */
     public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws ModelException
     {
         try
@@ -436,6 +629,14 @@ public class Model
         }
     }
 
+    /**
+     * Archives all projects on a given client.
+     * @param project
+     * @param isDeleted
+     * @param clientId
+     * @return
+     * @throws ModelException 
+     */
     public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws ModelException
     {
         try

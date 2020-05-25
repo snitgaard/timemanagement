@@ -83,6 +83,12 @@ public class LoginController implements Initializable
         stage.setIconified(true);
     }
 
+    /**
+     * Handles logging in as a user or an admin. 
+     * @param event
+     * @throws ModelException
+     * @throws IOException 
+     */
     @FXML
     private void handleLoginButton(ActionEvent event) throws ModelException, IOException
     {
@@ -117,6 +123,11 @@ public class LoginController implements Initializable
         }
     }
 
+    /**
+     * Loads the stage of another controller.
+     * @param fxmlLoader
+     * @throws IOException 
+     */
     private void redirectToStage(FXMLLoader fxmlLoader) throws IOException
     {
         Parent root = fxmlLoader.load();

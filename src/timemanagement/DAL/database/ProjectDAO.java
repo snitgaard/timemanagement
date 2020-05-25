@@ -101,6 +101,11 @@ public class ProjectDAO
         return null;
     }
 
+    /**
+     * Returns a list of all active projects and the name of their client.
+     * @return
+     * @throws SQLException 
+     */
     public List<Project> getProjectClientName() throws SQLException
     {
         try (Connection con = dbCon.getConnection())
@@ -129,6 +134,12 @@ public class ProjectDAO
         }
     }
 
+    /**
+     * Updates the time spent on a project 
+     * by adding up the time spent on every task in the project.
+     * @param project
+     * @throws DalException 
+     */
     public void updateProjectTime(Project project) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -159,6 +170,11 @@ public class ProjectDAO
         }
     }
 
+    /**
+     * SKAL DET HER OVERHOVEDET VÆRE DER????????????????????????
+     * @param project
+     * @throws DalException 
+     */
     public void archiveProject(Project project) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -174,6 +190,12 @@ public class ProjectDAO
         }
     }
 
+    /**
+     * Archives a project in the database.
+     * @param project
+     * @param isDeleted
+     * @throws DalException 
+     */
     public void deleteProject(Project project, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -190,6 +212,14 @@ public class ProjectDAO
         }
     }
 
+    /**
+     * Archives every project on a given client
+     * @param project
+     * @param isDeleted
+     * @param clientId
+     * @return
+     * @throws DalException 
+     */
     public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws DalException
     {
         try (Connection con = dbCon.getConnection())

@@ -657,6 +657,9 @@ public class TimeLoggerViewController implements Initializable
         }
     }
 
+    /**
+     * Enables/Disables the buttons and fields in the time logger view
+     */
     private void disableTimeLoggerButtons()
     {
         opgaveComboBox.setDisable(buttonState);
@@ -1008,6 +1011,7 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
+     * ???????????????????
      * @throws ModelException DalException
      */
     private void setOngoing(ActionEvent event) throws ModelException
@@ -1016,6 +1020,7 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
+     * ??????????????????
      * @throws ModelException DalException
      */
     private void handleArchiveProject(ActionEvent event) throws ModelException
@@ -1186,6 +1191,9 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
+     * Deletes a project from the view, and archives it in the database.
+     * Archives every task belonging to the selected project.
+     * Removes the project as well as the tasks from the comboboxes. 
      * @throws ModelException DalException
      */
     @FXML
@@ -1271,6 +1279,8 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
+     * Deletes a task from the view, and archives it in the database.
+     * Removes the task from every combobox in the program.
      * @throws ModelException DalException
      */
     @FXML
@@ -1293,6 +1303,9 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
+     * Deletes a client from the view, and archives it in the database.
+     * Archives every project and task belonging to the given client. 
+     * Removes the client, projects and tasks from all the comboboxes. 
      * @throws ModelException DalException
      */
     @FXML
@@ -1408,6 +1421,9 @@ public class TimeLoggerViewController implements Initializable
         }
     }
 
+    /**
+     * Filters the tasks displayed in the analysis tab depending on the dates selected.
+     */
     private ObservableList<Task> analyseChartFilter() throws ModelException, ParseException
     {
         List<Task> taskNames = model.getAllTasksProjectName();
@@ -1442,6 +1458,7 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
+     * Calls the filterChart method
      * @throws ModelException DalException
      */
     @FXML
@@ -1451,7 +1468,7 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     *
+     * Displays an alert for the user if an error happens.
      */
     private void showAlert()
     {
@@ -1487,6 +1504,13 @@ public class TimeLoggerViewController implements Initializable
         });
     }
 
+    /**
+     * Sets the data for the chart in the analysis tab.
+     * If a specific project is selected, loads all the tasks from the project.
+     * Otherwise loads data for every project in the program.
+     * @throws ModelException
+     * @throws ParseException 
+     */
     private void filterChartMethod() throws ModelException, ParseException
     {
         try
@@ -1541,6 +1565,12 @@ public class TimeLoggerViewController implements Initializable
         }
     }
 
+    /**
+     * Clears the datefilters in the analysis tab.
+     * @param event
+     * @throws ModelException
+     * @throws ParseException 
+     */
     @FXML
     private void clearAnalysisDate(ActionEvent event) throws ModelException, ParseException
     {

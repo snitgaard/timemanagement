@@ -99,6 +99,12 @@ public class TaskDAO
         return null;
     }
 
+    /**
+     * Adds up time spent on a task
+     * @param usedTime
+     * @param id
+     * @throws DalException 
+     */
     public void addTime(long usedTime, int id) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -115,6 +121,11 @@ public class TaskDAO
         }
     }
 
+    /**
+     * Adds up time spent on a task and rounds up to nearest 15 minutes.
+     * @param usedTime
+     * @param id 
+     */
     public void addRoundedTime(double usedTime, int id)
     {
         try (Connection con = dbCon.getConnection())
@@ -130,6 +141,11 @@ public class TaskDAO
         }
     }
 
+    /**
+     * Returns a list of all tasks in the database and their project name.
+     * @return
+     * @throws SQLException 
+     */
     public List<Task> getAllTasksProjectName() throws SQLException
     {
         try (Connection con = dbCon.getConnection())
@@ -159,6 +175,10 @@ public class TaskDAO
     }
 
 
+    /**
+     * Edits the name and/or description and/or paid status of a task.
+     * @param task 
+     */
     public void editTask(Task task)
     {
         try (Connection con = dbCon.getConnection())
@@ -176,6 +196,12 @@ public class TaskDAO
         }
     }
 
+    /**
+     * Returns a list of all tasks on a given project.
+     * @param projectId
+     * @return
+     * @throws SQLException 
+     */
     public List<Task> getAllTasksOnProject(int projectId) throws SQLException
     {
         try (Connection con = dbCon.getConnection())
@@ -205,6 +231,11 @@ public class TaskDAO
         }
     }
 
+    /**
+     * Updates time spent on a task based on manual user input.
+     * @param task
+     * @return 
+     */
     public boolean updateTask(Task task)
     {
         try (Connection con = dbCon.getConnection())
@@ -223,6 +254,12 @@ public class TaskDAO
         }
     }
 
+    /**
+     * Archives a task in the database.
+     * @param task
+     * @param isDeleted
+     * @throws DalException 
+     */
     public void deleteTask(Task task, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -240,6 +277,13 @@ public class TaskDAO
         }
     }
 
+    /**
+     * Archives every task on a given project.
+     * @param task
+     * @param isDeleted
+     * @param projectId
+     * @throws DalException 
+     */
     public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws DalException
     {
         try (Connection con = dbCon.getConnection())

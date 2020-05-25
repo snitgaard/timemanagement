@@ -214,6 +214,13 @@ public class UserDAO
         return getUser(userLogin).get(0);
     }
 
+    /**
+     * Returns 1 or 0 depending on if a user is an admin or not.
+     * @param userLogin
+     * @param userPassword
+     * @return
+     * @throws DalException 
+     */
     public int getIsAdminInt(String userLogin, String userPassword) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -239,6 +246,12 @@ public class UserDAO
         }
     }
 
+    /**
+     * Updates the role of a user to either "User" or "Admin".
+     * @param user
+     * @param isAdmin
+     * @throws DalException 
+     */
     public void updateUserRoles(User user, int isAdmin) throws DalException
     {
         try (Connection con = dbCon.getConnection())

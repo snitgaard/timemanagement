@@ -5,12 +5,9 @@
  */
 package timemanagement.DAL;
 
-import java.util.List;
+import timemanagement.BE.*;
 
-import timemanagement.BE.Client;
-import timemanagement.BE.Project;
-import timemanagement.BE.Task;
-import timemanagement.BE.User;
+import java.util.List;
 
 /**
  * @author Mads

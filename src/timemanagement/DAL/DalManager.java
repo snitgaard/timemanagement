@@ -5,21 +5,12 @@
  */
 package timemanagement.DAL;
 
+import timemanagement.BE.*;
+import timemanagement.DAL.database.*;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import timemanagement.BE.Client;
-import timemanagement.BE.Project;
-import timemanagement.BE.Task;
-import timemanagement.BE.User;
-
-import timemanagement.DAL.database.ClientDAO;
-import timemanagement.DAL.database.ProjectDAO;
-import timemanagement.DAL.database.TaskDAO;
-import timemanagement.DAL.database.UserDAO;
 
 /**
  * @author Mads

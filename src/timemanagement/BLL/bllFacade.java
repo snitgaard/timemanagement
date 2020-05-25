@@ -5,13 +5,9 @@
  */
 package timemanagement.BLL;
 
-import java.util.List;
+import timemanagement.BE.*;
 
-import timemanagement.BE.Client;
-import timemanagement.BE.Project;
-import timemanagement.BE.Task;
-import timemanagement.BE.User;
-import timemanagement.DAL.DalException;
+import java.util.List;
 
 /**
  * @author The Cowboys

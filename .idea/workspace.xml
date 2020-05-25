@@ -2,32 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cc2b6b73-d13b-47a6-930b-a0a340d75270" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/BE/Admin.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BE/Admin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/timemanagement/BE/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BE/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/BE/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BE/Project.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/BE/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BE/Task.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/BE/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BE/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/BLL/bllException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BLL/bllException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/BLL/bllFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BLL/bllFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/BLL/bllManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/BLL/bllManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/DalException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/DalException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/DalFacade.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/DalFacade.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/DalManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/DalManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/database/AdminDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/database/AdminDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/database/DatabaseConnector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/database/DatabaseConnector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/database/ClientDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/database/ClientDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/database/ProjectDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/database/ProjectDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/database/TaskDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/database/TaskDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/DAL/database/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/DAL/database/UserDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/controller/LoginController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/controller/LoginController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/controller/MainAdminViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/controller/MainAdminViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/controller/MainUserViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/controller/MainUserViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/controller/TimeManagementCSS.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/controller/TimeManagementCSS.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/model/Model.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/model/Model.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/model/ModelException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/model/ModelException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/view/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/view/LoginView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/view/MainAdminView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/view/MainAdminView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/timemanagement/GUI/view/MainUserView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/timemanagement/GUI/view/MainUserView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

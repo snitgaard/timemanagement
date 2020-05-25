@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import timemanagement.BE.Client;
@@ -20,20 +21,18 @@ import timemanagement.BLL.bllException;
 import timemanagement.DAL.DalException;
 
 /**
- *
  * @author jigzi
  */
 public class Model
 {
 
+    private static Model instance = new Model();
     private bllManager bllManager;
     private ObservableList<Project> allProjects;
     private ObservableList<Task> allTasks;
     private ObservableList<Project> allProjectsWithClients;
     private ObservableList<User> allUsers;
     private ObservableList<Client> allClients;
-
-    private static Model instance = new Model();
 
     public Model()
     {
@@ -176,7 +175,6 @@ public class Model
     }
 
 
-
     public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws ModelException
     {
         try
@@ -263,12 +261,14 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public boolean updateTask(Task task) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.updateTask(task);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
@@ -365,72 +365,86 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public String timeFormatter(String usedTime, String endTime) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.timeFormatter(usedTime, endTime);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public long timeCalculator(String startTime, String endTime) throws ModelException
     {
-        try {
+        try
+        {
             return bllManager.timeCalculator(startTime, endTime);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void deleteTask(Task task, int isDeleted) throws ModelException
     {
-        try {
+        try
+        {
             allTasks.remove(task);
             bllManager.deleteTask(task, isDeleted);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void deleteProject(Project project, int isDeleted) throws ModelException
     {
-        try {
+        try
+        {
             allProjects.remove(project);
             allProjectsWithClients.remove(project);
             bllManager.deleteProject(project, isDeleted);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-            
+
     public void deleteClient(Client client, int isDeleted) throws ModelException
     {
-        try {
+        try
+        {
             allClients.remove(client);
             bllManager.deleteClient(client, isDeleted);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws ModelException
     {
-        try {   
+        try
+        {
             bllManager.deleteTaskOnProject(task, isDeleted, projectId);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }
-    
+
     public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws ModelException
     {
-        try {
+        try
+        {
             allProjects.remove(project);
             allProjectsWithClients.remove(project);
             return bllManager.deleteProjectOnClient(project, isDeleted, clientId);
-        } catch (bllException ex) {
+        } catch (bllException ex)
+        {
             throw new ModelException(ex.getMessage());
         }
     }

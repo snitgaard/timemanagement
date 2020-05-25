@@ -14,7 +14,6 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 
 /**
- *
  * @author The Cowboys
  */
 public class Task
@@ -32,11 +31,12 @@ public class Task
 
     /**
      * Constructor for Task
+     *
      * @param id
      * @param taskName
      * @param projectId
      * @param usedTime
-     * @param date 
+     * @param date
      */
     public Task(int id, String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId)
     {
@@ -54,11 +54,12 @@ public class Task
 
     /**
      * Constructor for Task
+     *
      * @param id
      * @param taskName
      * @param projectName
      * @param usedTime
-     * @param date 
+     * @param date
      */
     public Task(int id, String taskName, String projectName, long usedTime, String date, int projektId, int userId, String beskrivelse, int betalt)
     {
@@ -75,6 +76,7 @@ public class Task
 
     /**
      * getter for Id
+     *
      * @return Id
      */
     public int getId()
@@ -84,7 +86,8 @@ public class Task
 
     /**
      * setter for id
-     * @param id 
+     *
+     * @param id
      */
     public void setId(int id)
     {
@@ -93,6 +96,7 @@ public class Task
 
     /**
      * getter for opgaveNavn
+     *
      * @return opgaveNavn
      */
     public String getTaskName()
@@ -102,13 +106,14 @@ public class Task
 
     /**
      * setter for opgaveNavn
-     * @param taskName 
+     *
+     * @param taskName
      */
     public void setTaskName(String taskName)
     {
         this.taskName.set(taskName);
     }
-    
+
     public StringProperty taskNameProperty()
     {
         return taskName;
@@ -116,27 +121,33 @@ public class Task
 
     /**
      * getter for projectName
+     *
      * @return projectName
      */
-    
-    public String getProjectName() {
+
+    public String getProjectName()
+    {
         return projectName.get();
     }
 
     /**
      * Setter for projectName
-     * @param projectName 
+     *
+     * @param projectName
      */
-    public void setProjectName(String projectName) {
+    public void setProjectName(String projectName)
+    {
         this.projectName.set(projectName);
     }
-    
-    public StringProperty projectNameProperty() {
+
+    public StringProperty projectNameProperty()
+    {
         return projectName;
     }
 
     /**
      * getter for projektId
+     *
      * @return projektId
      */
     public int getProjectId()
@@ -146,13 +157,14 @@ public class Task
 
     /**
      * setter for projectId
-     * @param projectId 
+     *
+     * @param projectId
      */
     public void setProjectId(int projectId)
     {
         this.projectId.set(projectId);
     }
-    
+
     public ObservableValue<Integer> projectIdObservable()
     {
         return projectId.asObject();
@@ -161,6 +173,7 @@ public class Task
 
     /**
      * getter for usedTime
+     *
      * @return usedTime
      */
     public long getUsedTime()
@@ -170,13 +183,14 @@ public class Task
 
     /**
      * setter for brugtTid
-     * @param usedTime 
+     *
+     * @param usedTime
      */
     public void setUsedTime(long usedTime)
     {
         this.usedTime.set(usedTime);
     }
-    
+
     public ObservableValue<Long> usedTimeObservableValue()
     {
         return usedTime.asObject();
@@ -184,6 +198,7 @@ public class Task
 
     /**
      * getter for date
+     *
      * @return date
      */
     public String getDate()
@@ -193,13 +208,14 @@ public class Task
 
     /**
      * setter for date
-     * @param date 
+     *
+     * @param date
      */
     public void setDato(String date)
     {
         this.date.set(date);
     }
-    
+
     public StringProperty dateProperty()
     {
         return date;
@@ -207,6 +223,7 @@ public class Task
 
     /**
      * toString metode for Task
+     *
      * @return taskName
      */
     @Override
@@ -217,20 +234,24 @@ public class Task
 
     /**
      * getter for description
+     *
      * @return description
      */
-    public String getDescription() {
+    public String getDescription()
+    {
         return description.get();
     }
 
     /**
      * setter for description
-     * @param description 
+     *
+     * @param description
      */
-    public void setDescription(String description) {
+    public void setDescription(String description)
+    {
         this.description.set(description);
     }
-    
+
     public StringProperty descriptionProperty()
     {
         return description;
@@ -238,54 +259,58 @@ public class Task
 
     /**
      * getter for payed
+     *
      * @return payed
      */
-    public int getPayed() {
+    public int getPayed()
+    {
         return payed.get();
     }
 
     /**
      * setter for betalt
-     * @param payed 
+     *
+     * @param payed
      */
-    public void setPayed(int payed) {
+    public void setPayed(int payed)
+    {
         this.payed.set(payed);
     }
-    
+
     public ObservableValue<Integer> payedObservable()
     {
         return payed.asObject();
     }
-    
+
     public int getsDeleted()
     {
         return isDeleted.get();
     }
-    
+
     public void setIsDeleted(int isDeleted)
     {
         this.isDeleted.set(isDeleted);
     }
-    
+
     public ObservableValue<Integer> isDeletedObservable()
     {
         return isDeleted.asObject();
     }
-    
+
     public int getUserId()
     {
         return userId.get();
     }
-    
+
     public void setUserId(int userId)
     {
         this.userId.set(userId);
     }
-    
+
     public ObservableValue<Integer> userIdObservableValue()
     {
         return userId.asObject();
     }
-    
-    
+
+
 }

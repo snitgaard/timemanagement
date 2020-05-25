@@ -13,11 +13,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import timemanagement.BE.Client;
 import timemanagement.DAL.DalException;
 
 /**
- *
  * @author The Cowboys
  */
 public class ClientDAO
@@ -129,14 +129,14 @@ public class ClientDAO
         }
     }
 
-     public void deleteClient(Client client, int isDeleted) throws DalException
+    public void deleteClient(Client client, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
             int id = client.getId();
             String sql = "UPDATE Client SET isDeleted = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, isDeleted);
             ps.executeUpdate();
         } catch (SQLException ex)

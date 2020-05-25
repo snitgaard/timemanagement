@@ -14,7 +14,6 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 
 /**
- *
  * @author The Cowboys
  */
 public class User
@@ -23,21 +22,24 @@ public class User
     private StringProperty userLogin;
     private StringProperty userPassword;
     private IntegerProperty isAdmin;
-    private StringProperty adminRights; 
+    private StringProperty adminRights;
     private StringProperty email;
     private StringProperty fullName;
 
-    
+
     /**
      * Constructor for User
-     * @param id 
+     *
+     * @param id
      */
-    public User(int id) {
+    public User(int id)
+    {
         this.id = id;
     }
-    
+
     /**
      * Constructor for User
+     *
      * @param id
      * @param userLogin
      * @param userPassword
@@ -46,7 +48,8 @@ public class User
      * @param fullName
      * @param adminRights
      */
-    public User(int id, String userLogin, String userPassword, int isAdmin, String adminRights, String email, String fullName) {
+    public User(int id, String userLogin, String userPassword, int isAdmin, String adminRights, String email, String fullName)
+    {
         this.id = id;
         this.userLogin = new SimpleStringProperty(userLogin);
         this.userPassword = new SimpleStringProperty(userPassword);
@@ -56,76 +59,92 @@ public class User
         this.fullName = new SimpleStringProperty(fullName);
     }
 
-    
 
-    public String getEmail() {
+    public String getEmail()
+    {
         return email.get();
     }
 
-    public void setEmail(String email) {
+    public void setEmail(String email)
+    {
         this.fullName.set(email);
     }
-    
-    public StringProperty emailProperty() {
+
+    public StringProperty emailProperty()
+    {
         return email;
     }
-    
-    public String getFullName() {
+
+    public String getFullName()
+    {
         return fullName.get();
     }
 
-    public void setFullName(String fullName) {
+    public void setFullName(String fullName)
+    {
         this.fullName.set(fullName);
     }
-    
-    public StringProperty fullNameProperty() {
+
+    public StringProperty fullNameProperty()
+    {
         return fullName;
     }
-    
-    public String getAdminRights() {
+
+    public String getAdminRights()
+    {
         return adminRights.get();
     }
 
-    public void setAdminRights(String adminRights) {
+    public void setAdminRights(String adminRights)
+    {
         this.adminRights.set(adminRights);
     }
-    
-    public StringProperty adminRightsProperty() {
+
+    public StringProperty adminRightsProperty()
+    {
         return adminRights;
     }
-    
+
     /**
      * getter for Id
-     * @return 
+     *
+     * @return
      */
-    public int getId() {
+    public int getId()
+    {
         return id;
     }
 
     /**
      * Setter for id
-     * @param id 
+     *
+     * @param id
      */
-    public void setId(int id) {
+    public void setId(int id)
+    {
         this.id = id;
     }
 
     /**
      * getter for userLogin
+     *
      * @return userLogin
      */
-    public String getUserLogin() {
+    public String getUserLogin()
+    {
         return userLogin.get();
     }
 
     /**
      * setter for userLogin
-     * @param userLogin 
+     *
+     * @param userLogin
      */
-    public void setUserLogin(String userLogin) {
+    public void setUserLogin(String userLogin)
+    {
         this.userLogin.set(userLogin);
     }
-    
+
     public StringProperty userLoginProperty()
     {
         return userLogin;
@@ -133,20 +152,24 @@ public class User
 
     /**
      * getter for userPassword
+     *
      * @return userPassword
      */
-    public String getUserPassword() {
+    public String getUserPassword()
+    {
         return userPassword.get();
     }
 
     /**
      * setter for userPassword
-     * @param userPassword 
+     *
+     * @param userPassword
      */
-    public void setUserPassword(String userPassword) {
+    public void setUserPassword(String userPassword)
+    {
         this.userPassword.set(userPassword);
-    } 
-    
+    }
+
     public StringProperty userPasswordProperty()
     {
         return userPassword;
@@ -154,20 +177,24 @@ public class User
 
     /**
      * getter for isAdmin
+     *
      * @return isAdmin
      */
-    public int getIsAdmin() {
+    public int getIsAdmin()
+    {
         return isAdmin.get();
     }
 
     /**
      * setter for isAdmin
-     * @param isAdmin 
+     *
+     * @param isAdmin
      */
-    public void setIsAdmin(int isAdmin) {
+    public void setIsAdmin(int isAdmin)
+    {
         this.isAdmin.set(isAdmin);
     }
-    
+
     public ObservableValue<Integer> isAdminObservable()
     {
         return isAdmin.asObject();
@@ -175,6 +202,7 @@ public class User
 
     /**
      * toString Method for User
+     *
      * @return userLogin
      */
     @Override
@@ -182,6 +210,6 @@ public class User
     {
         return getUserLogin();
     }
-    
-    
+
+
 }

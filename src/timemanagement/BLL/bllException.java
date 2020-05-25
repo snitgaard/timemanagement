@@ -6,11 +6,11 @@
 package timemanagement.BLL;
 
 /**
- *
  * @author The Cowboys
  */
-public class bllException extends Exception {
-    
+public class bllException extends Exception
+{
+
     /**
      * BllException method for exception handling
      *
@@ -20,5 +20,5 @@ public class bllException extends Exception {
     {
         super(message);
     }
-    
+
 }

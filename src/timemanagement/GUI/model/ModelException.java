@@ -6,7 +6,6 @@
 package timemanagement.gui.model;
 
 /**
- *
  * @author Mads
  */
 public class ModelException extends Exception

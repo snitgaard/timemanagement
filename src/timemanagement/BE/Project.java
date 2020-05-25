@@ -16,7 +16,6 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 
 /**
- *
  * @author The Cowboys
  */
 public class Project
@@ -30,7 +29,7 @@ public class Project
     private LongProperty usedTime;
     private IntegerProperty isDeleted;
     private DoubleProperty hourlyRate;
-    private IntegerProperty rounded; 
+    private IntegerProperty rounded;
 
     /**
      * Constructor for Project
@@ -248,17 +247,17 @@ public class Project
     {
         return hourlyRate.asObject();
     }
-    
+
     public int getRounded()
     {
         return rounded.get();
     }
-    
+
     public void setRounded(int rounded)
     {
         this.rounded.set(rounded);
     }
-    
+
     public ObservableValue<Integer> roundedObservable()
     {
         return rounded.asObject();

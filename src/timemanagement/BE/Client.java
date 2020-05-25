@@ -14,7 +14,6 @@ import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
 
 /**
- *
  * @author The Cowboys
  */
 public class Client
@@ -28,13 +27,15 @@ public class Client
 
     /**
      * Constructor for Kunde
+     *
      * @param id
-     * @param clientName 
-     * @param contactPerson 
-     * @param email 
-     * @param hourlyRate 
+     * @param clientName
+     * @param contactPerson
+     * @param email
+     * @param hourlyRate
      */
-    public Client(int id, String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) {    
+    public Client(int id, String clientName, String contactPerson, String email, double hourlyRate, int isDeleted)
+    {
         this.id = id;
         this.clientName = new SimpleStringProperty(clientName);
         this.contactPerson = new SimpleStringProperty(contactPerson);
@@ -42,27 +43,30 @@ public class Client
         this.hourlyRate = new SimpleDoubleProperty(hourlyRate);
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
     }
-    
+
     /**
      * getter for isDeleted
+     *
      * @return isDeleted
      */
     public int getIsDeleted()
     {
         return isDeleted.get();
     }
-    
+
     /**
      * setter for isDeleted
-     * @param isDeleted 
+     *
+     * @param isDeleted
      */
     public void setIsDeleted(int isDeleted)
     {
         this.isDeleted.set(isDeleted);
     }
-    
+
     /**
      * returns isDeleted as an observable Object
+     *
      * @return isDeleted
      */
     public ObservableValue<Integer> isDeletedObservable()
@@ -72,6 +76,7 @@ public class Client
 
     /**
      * getter for Id
+     *
      * @return id
      */
     public int getId()
@@ -81,7 +86,8 @@ public class Client
 
     /**
      * setter for id
-     * @param id 
+     *
+     * @param id
      */
     public void setId(int id)
     {
@@ -90,6 +96,7 @@ public class Client
 
     /**
      * getter for clientName
+     *
      * @return clientName
      */
     public String getClientName()
@@ -99,15 +106,17 @@ public class Client
 
     /**
      * setter for clientName
-     * @param clientName 
+     *
+     * @param clientName
      */
     public void setClientName(String clientName)
     {
         this.clientName.set(clientName);
     }
-    
+
     /**
      * return clientName as StringProperty
+     *
      * @return clientName
      */
     public StringProperty clientNameProperty()
@@ -117,6 +126,7 @@ public class Client
 
     /**
      * getter for contactPerson
+     *
      * @return contactPerson
      */
     public String getContactPerson()
@@ -126,15 +136,17 @@ public class Client
 
     /**
      * setter for contactPerson
-     * @param contactPerson 
+     *
+     * @param contactPerson
      */
     public void setContactPerson(String contactPerson)
     {
         this.contactPerson.set(contactPerson);
     }
-    
+
     /**
      * return contactPerson as StringProperty
+     *
      * @return contactPerson
      */
     public StringProperty contactPersonProperty()
@@ -144,6 +156,7 @@ public class Client
 
     /**
      * getter for email
+     *
      * @return email
      */
     public String getEmail()
@@ -153,15 +166,17 @@ public class Client
 
     /**
      * setter for email
-     * @param email 
+     *
+     * @param email
      */
     public void setEmail(String email)
     {
         this.email.set(email);
     }
-    
+
     /**
      * return email as StringProperty
+     *
      * @return email
      */
     public StringProperty emailProperty()
@@ -171,6 +186,7 @@ public class Client
 
     /**
      * getter for hourlyRate
+     *
      * @return hourlyRate
      */
     public double getHourlyRate()
@@ -180,15 +196,17 @@ public class Client
 
     /**
      * setter for hourlyRate
-     * @param hourlyRate 
+     *
+     * @param hourlyRate
      */
     public void setHourlyRate(double hourlyRate)
     {
         this.hourlyRate.set(hourlyRate);
     }
-    
+
     /**
      * return hourlyRate as an observable Object
+     *
      * @return hourlyRate
      */
     public ObservableValue<Double> hourlyRateObservable()
@@ -198,6 +216,7 @@ public class Client
 
     /**
      * toString method for Client
+     *
      * @return kundenavn stringproperty
      */
     @Override

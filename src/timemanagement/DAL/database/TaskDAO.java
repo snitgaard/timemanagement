@@ -6,6 +6,7 @@
 package timemanagement.DAL.database;
 
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -16,12 +17,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import timemanagement.BE.Project;
 import timemanagement.BE.Task;
 import timemanagement.DAL.DalException;
 
 /**
- *
  * @author The Cowboys
  */
 public class TaskDAO
@@ -73,8 +74,10 @@ public class TaskDAO
      * @return
      * @throws DalException
      */
-    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException {
-        try (Connection con = dbCon.getConnection()) {
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "INSERT INTO Task (opgaveNavn, projektId, brugtTid, dato, beskrivelse, betalt, isDeleted, userId) VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, taskName);
@@ -120,7 +123,7 @@ public class TaskDAO
             throw new DalException("Could not fetch all classes");
         }
     }
-    
+
     public void addRoundedTime(double usedTime, int id)
     {
         try (Connection con = dbCon.getConnection())
@@ -164,8 +167,7 @@ public class TaskDAO
         }
     }
 
-    
-    
+
     public void editTask(Task task)
     {
         try (Connection con = dbCon.getConnection())
@@ -177,13 +179,12 @@ public class TaskDAO
             ps.setString(2, task.getDescription());
             ps.setInt(3, task.getPayed());
             ps.executeUpdate();
-        } 
-        catch (SQLException ex)
+        } catch (SQLException ex)
         {
             ex.printStackTrace();
         }
     }
-    
+
     public List<Task> getAllTasksOnProject(int projectId) throws SQLException
     {
         try (Connection con = dbCon.getConnection())
@@ -198,7 +199,7 @@ public class TaskDAO
             {
                 int id = rs.getInt("Id");
                 String taskName = rs.getString("opgaveNavn");
-                
+
                 int usedTime = rs.getInt("brugtTid");
                 String date = rs.getString("dato");
                 String description = rs.getString("beskrivelse");
@@ -212,10 +213,10 @@ public class TaskDAO
             return allProjects;
         }
     }
-    
-     public boolean updateTask(Task task)
-     {
-     try (Connection con = dbCon.getConnection())
+
+    public boolean updateTask(Task task)
+    {
+        try (Connection con = dbCon.getConnection())
         {
             int id = task.getId();
 
@@ -230,15 +231,16 @@ public class TaskDAO
             return false;
         }
     }
+
     public void deleteTask(Task task, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
             int id = task.getId();
-        
+
             String sql = "UPDATE Task SET isDeleted = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, isDeleted);
             ps.executeUpdate();
         } catch (SQLException ex)
@@ -246,15 +248,15 @@ public class TaskDAO
             ex.printStackTrace();
         }
     }
-    
+
     public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws DalException
-            {
+    {
         try (Connection con = dbCon.getConnection())
         {
             int id = task.getId();
             String sql = "UPDATE Task SET isDeleted = ? WHERE id =" + id + " AND projektId = ?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, isDeleted);
             ps.setInt(2, projectId);
             ps.executeUpdate();

@@ -15,18 +15,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import timemanagement.BE.Project;
 import timemanagement.DAL.DalException;
 
 /**
- *
  * @author The Cowboys
  */
-public class ProjectDAO {
+public class ProjectDAO
+{
 
     private DatabaseConnector dbCon;
 
-    public ProjectDAO() throws IOException {
+    public ProjectDAO() throws IOException
+    {
         dbCon = new DatabaseConnector();
     }
 
@@ -36,13 +38,16 @@ public class ProjectDAO {
      * @return allProjects
      * @throws SQLException
      */
-    public List<Project> getAllProjects() throws SQLException {
-        try ( Connection con = dbCon.getConnection()) {
+    public List<Project> getAllProjects() throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "SELECT * FROM Project WHERE Project.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Project> allProjects = new ArrayList<>();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 int id = rs.getInt("Id");
                 String projectName = rs.getString("projektNavn");
                 int clientId = rs.getInt("kundeId");
@@ -69,8 +74,10 @@ public class ProjectDAO {
      * @return
      * @throws DalException
      */
-    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, isDeleted, hourlyRate, rounded) VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projectName);
@@ -82,30 +89,36 @@ public class ProjectDAO {
             ps.setInt(7, rounded);
             int affectedRows = ps.executeUpdate();
 
-            if (affectedRows == 1) {
+            if (affectedRows == 1)
+            {
                 ResultSet rs = ps.getGeneratedKeys();
-                if (rs.next()) {
+                if (rs.next())
+                {
                     int id = rs.getInt(1);
                     Project project = new Project(id, projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
                     return project;
                 }
             }
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             ex.printStackTrace();
             throw new DalException("Could not create project");
         }
         return null;
     }
 
-    public List<Project> getProjectClientName() throws SQLException {
-        try ( Connection con = dbCon.getConnection()) {
+    public List<Project> getProjectClientName() throws SQLException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Client.kundeNavn, Project.startDato, Project.isDeleted, Project.hourlyRate, Project.rounded, Project.kundeId\n"
                     + "FROM Project\n"
                     + "INNER JOIN Client ON Project.kundeId=Client.id WHERE Project.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Project> allProjects = new ArrayList<>();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 int id = rs.getInt("id");
                 String projectName = rs.getString("projektNavn");
                 String clientName = rs.getString("kundeNavn");
@@ -122,8 +135,10 @@ public class ProjectDAO {
         }
     }
 
-    public void updateProjectTime(Project project) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public void updateProjectTime(Project project) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             String sql = "UPDATE\n"
                     + "	P \n"
                     + "SET \n"
@@ -138,29 +153,33 @@ public class ProjectDAO {
                     + "	) t\n"
                     + "	ON t.projektId = p.id\n"
                     + " WHERE projektNavn = (?)";
-            
-            
+
+
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, project.getProjectName());
             ps.executeUpdate();
 
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             throw new DalException("Could not fetch all classes");
         }
     }
 
-    public void archiveProject(Project project) throws DalException {
-        try ( Connection con = dbCon.getConnection()) {
+    public void archiveProject(Project project) throws DalException
+    {
+        try (Connection con = dbCon.getConnection())
+        {
             int id = project.getId();
             String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setInt(1, project.getIsDeleted());
             ps.executeUpdate();
-        } catch (SQLException ex) {
+        } catch (SQLException ex)
+        {
             throw new DalException("Could not fetch all classes");
         }
     }
-    
+
     public void deleteProject(Project project, int isDeleted) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -168,7 +187,7 @@ public class ProjectDAO {
             int id = project.getId();
             String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, isDeleted);
             ps.executeUpdate();
         } catch (SQLException ex)
@@ -176,7 +195,7 @@ public class ProjectDAO {
             ex.printStackTrace();
         }
     }
-    
+
     public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws DalException
     {
         try (Connection con = dbCon.getConnection())
@@ -184,7 +203,7 @@ public class ProjectDAO {
             int id = project.getId();
             String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + " AND kundeId = ?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, isDeleted);
             ps.setInt(2, clientId);
             ps.executeUpdate();

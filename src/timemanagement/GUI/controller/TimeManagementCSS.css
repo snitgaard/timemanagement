@@ -8,25 +8,29 @@ and open the template in the editor.
     Author     : Mads
 */
 {
-    -fx-primary : #435a9a;
-    -fx-secondary : #A9BCF5; 
-    -fx-primarytext: #FFFFFF; 
+    -fx-primary: #435a9a
+;
+    -fx-secondary: #A9BCF5
+;
+    -fx-primarytext: #FFFFFF
+;
 }
 
-.split-pane *.split-pane-divider {
-    -fx-padding: 1 0 1 0;  
-    
+.split-pane *.split-pane-divider
+{
+    -fx-padding: 1 0 1 0;
+
 }
 
 .root
 {
-    -fx-background-color: -fx-primary; 
+    -fx-background-color: -fx-primary;
 }
 
 .AnchorPaneLogin
 {
     -fx-background-image: url("/Images/BlueBlur.jpg");
-    
+
 }
 
 .button
@@ -44,22 +48,22 @@ and open the template in the editor.
 
 .pane-glyph-icon
 {
-    -fx-fill: -fx-primarytext; 
+    -fx-fill: -fx-primarytext;
 }
 
 .pane-button
 {
-    -fx-text-fill: -fx-primarytext; 
-    -fx-border-color: -fx-secondary; 
-    -fx-border-radius: 20px; 
-    -fx-background-radius: 20px; 
+    -fx-text-fill: -fx-primarytext;
+    -fx-border-color: -fx-secondary;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
 }
 
 .pane-button:hover
 {
-    -fx-border-color: -fx-secondary; 
+    -fx-border-color: -fx-secondary;
     -fx-background-color: -fx-secondary;
-    -fx-text-fill: -fx-primary; 
+    -fx-text-fill: -fx-primary;
 }
 
 .pane-buttonSelected
@@ -67,20 +71,20 @@ and open the template in the editor.
     -fx-background-color: -fx-secondary;
     -fx-border-color: -fx-secondary;
     -fx-text-fill: -fx-primary;
-    -fx-border-radius: 20px; 
-    -fx-background-radius: 20px; 
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
 }
 
 .pane-buttonSelected:hover
 {
-   -fx-border-color: -fx-secondary; 
-   -fx-background-color: -fx-secondary;
-   -fx-text-fill: -fx-primary;  
+    -fx-border-color: -fx-secondary;
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary;
 }
 
 .login-label
 {
-    -fx-text-fill: -fx-primarytext; 
+    -fx-text-fill: -fx-primarytext;
 }
 
 .login-text-field
@@ -91,7 +95,7 @@ and open the template in the editor.
     -fx-font-size: 13pt;
     -fx-prompt-text-fill: -fx-primarytext;
     -jfx-focus-color: -fx-secondary;
-    
+
 }
 
 .login-text-field: focused
@@ -100,16 +104,18 @@ and open the template in the editor.
 }
 
 
-.jfx-date-picker > .text-field  
+.jfx-date-picker > .text-field
 {
     -fx-alignment: center;
 }
 
 
-.vbox {
+.vbox
+{
     -fx-background-color: -fx-primary;
 }
 
-.chart-bar {
+.chart-bar
+{
     -fx-bar-bill: red;
 }

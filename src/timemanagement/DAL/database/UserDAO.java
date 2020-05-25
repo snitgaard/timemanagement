@@ -7,6 +7,7 @@ package timemanagement.DAL.database;
 
 import timemanagement.DAL.DalException;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,10 +16,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import timemanagement.BE.User;
 
 /**
- *
  * @author The Cowboys
  */
 public class UserDAO
@@ -132,7 +133,7 @@ public class UserDAO
     /**
      * If called this method will create a connection between the database and
      * the program.The SQL statement will be run afterwards. Checks the user
- credentials based on user login and password
+     * credentials based on user login and password
      *
      * @param userLogin
      * @param userPassword
@@ -251,7 +252,7 @@ public class UserDAO
             int id = user.getId();
             String sql = "UPDATE [User] SET isAdmin = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-            
+
             ps.setInt(1, isAdmin);
             ps.executeUpdate();
         } catch (SQLException ex)
@@ -259,7 +260,6 @@ public class UserDAO
             ex.printStackTrace();
         }
     }
-
 
 
 }

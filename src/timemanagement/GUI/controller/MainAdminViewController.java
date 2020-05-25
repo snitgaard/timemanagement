@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
+
 import java.net.URL;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -27,6 +28,7 @@ import java.util.ListIterator;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -66,6 +68,7 @@ import timemanagement.BE.User;
 import timemanagement.DAL.DalException;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
+
 import static utilities.encryptThisString.encryptThisString;
 
 /**
@@ -76,6 +79,10 @@ import static utilities.encryptThisString.encryptThisString;
 public class MainAdminViewController implements Initializable
 {
 
+    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
+    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
+    ObservableList<Task> filteredTaskList = FXCollections.observableArrayList();
+    String alertString = "Generic Warning";
     @FXML
     private TableColumn<Client, String> clientNameColumn;
     @FXML
@@ -182,9 +189,6 @@ public class MainAdminViewController implements Initializable
     private Label loginTextField;
     private LoginController controller;
     private String username;
-    ObservableList<User> allUsersResultList = FXCollections.observableArrayList();
-    ObservableList<Project> allProjectsFilteredList = FXCollections.observableArrayList();
-    ObservableList<Task> filteredTaskList = FXCollections.observableArrayList();
     @FXML
     private JFXButton clientButton;
     @FXML
@@ -197,9 +201,7 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_Client;
     @FXML
     private SplitPane clientPane;
-
     private JFXTextField txt_HourlyRate;
-
     @FXML
     private JFXTextField txt_ClientHourlyRate;
     @FXML
@@ -214,7 +216,6 @@ public class MainAdminViewController implements Initializable
     private JFXTextField txt_HourlyRateProject;
     @FXML
     private TableColumn<Project, Double> hourlyRateAdminColumn;
-    String alertString = "Generic Warning";
     @FXML
     private JFXButton editButton;
 
@@ -1042,8 +1043,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      * @throws ModelException DalException
      */
     private void setOngoing(ActionEvent event) throws ModelException
@@ -1052,8 +1051,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      * @throws ModelException DalException
      */
     private void handleArchiveProject(ActionEvent event) throws ModelException
@@ -1224,8 +1221,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1255,7 +1250,7 @@ public class MainAdminViewController implements Initializable
 
                         for (Task task : toBeDeleted)
                         {
-                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext(); )
                             {
                                 Task task1 = iterator.next();
                                 if (task.getId() == task1.getId())
@@ -1311,8 +1306,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1335,8 +1328,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1382,7 +1373,7 @@ public class MainAdminViewController implements Initializable
 
                         for (Task task : toBeDeleted)
                         {
-                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext(); )
                             {
                                 Task task1 = iterator.next();
                                 if (task.getId() == task1.getId())
@@ -1403,7 +1394,7 @@ public class MainAdminViewController implements Initializable
 
                         for (Project project : tempDeletedList)
                         {
-                            for (ListIterator<Project> iterator = projektComboBox.getItems().listIterator(); iterator.hasNext();)
+                            for (ListIterator<Project> iterator = projektComboBox.getItems().listIterator(); iterator.hasNext(); )
                             {
                                 Project project1 = iterator.next();
                                 if (project.getId() == project1.getId())
@@ -1415,7 +1406,7 @@ public class MainAdminViewController implements Initializable
 
                         for (Project project : tempDeletedList)
                         {
-                            for (ListIterator<Project> iterator = projectComboBox2.getItems().listIterator(); iterator.hasNext();)
+                            for (ListIterator<Project> iterator = projectComboBox2.getItems().listIterator(); iterator.hasNext(); )
                             {
                                 Project project1 = iterator.next();
                                 if (project.getId() == project1.getId())
@@ -1486,8 +1477,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1497,8 +1486,6 @@ public class MainAdminViewController implements Initializable
     }
 
     /**
-     *
-     *
      *
      */
     private void showAlert()
@@ -1534,10 +1521,10 @@ public class MainAdminViewController implements Initializable
             }
         });
     }
-    
+
     private void filterChartMethod() throws ModelException, ParseException
     {
-                try
+        try
         {
             Project selectedProject = projectComboBox2.getSelectionModel().getSelectedItem();
             if (selectedProject != null)

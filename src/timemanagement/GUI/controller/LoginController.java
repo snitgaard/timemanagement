@@ -8,6 +8,7 @@ package timemanagement.gui.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+
 import java.io.IOException;
 import java.math.BigInteger;
 import java.net.URL;
@@ -18,6 +19,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -42,13 +44,14 @@ import timemanagement.BE.User;
 import timemanagement.gui.model.Model;
 import timemanagement.gui.model.ModelException;
 import utilities.encryptThisString;
+
 import static utilities.encryptThisString.encryptThisString;
 
 /**
- *
  * @author The Cowboys
  */
-public class LoginController implements Initializable {
+public class LoginController implements Initializable
+{
 
     @FXML
     private AnchorPane anchorPane;
@@ -70,7 +73,8 @@ public class LoginController implements Initializable {
     private JFXButton btnLogin;
 
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
         model = model.getInstance();
 
@@ -83,7 +87,8 @@ public class LoginController implements Initializable {
      * @param event
      */
     @FXML
-    private void close_app(MouseEvent event) {
+    private void close_app(MouseEvent event)
+    {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.close();
     }
@@ -94,18 +99,21 @@ public class LoginController implements Initializable {
      * @param event
      */
     @FXML
-    private void minimize_app(MouseEvent event) {
+    private void minimize_app(MouseEvent event)
+    {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setIconified(true);
     }
 
     @FXML
-    private void handleLoginButton(ActionEvent event) throws ModelException, IOException {
+    private void handleLoginButton(ActionEvent event) throws ModelException, IOException
+    {
         String username = emailField.getText();
         String password = encryptThisString(passwordField.getText());
         int isAdmin = model.getIsAdminInt(username, encryptThisString(password));
-        
-        if (model.checkUserCredentials(username, password, 0)) {
+
+        if (model.checkUserCredentials(username, password, 0))
+        {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdminController = fxmlLoader.getController();
@@ -116,7 +124,8 @@ public class LoginController implements Initializable {
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
 
-        } else if (model.checkUserCredentials(username, password, 1)) {
+        } else if (model.checkUserCredentials(username, password, 1))
+        {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/MainAdminView.fxml"));
             redirectToStage(fxmlLoader);
             MainAdminViewController mainAdminController = fxmlLoader.getController();
@@ -127,7 +136,8 @@ public class LoginController implements Initializable {
             mainAdminController.ApplyImportantData(model.getSpecificUser(username));
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
-        } else {
+        } else
+        {
             Border warning = new Border(new BorderStroke(javafx.scene.paint.Color.RED,
                     BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(2)));
             emailField.setBorder(warning);
@@ -135,7 +145,8 @@ public class LoginController implements Initializable {
         }
     }
 
-    private void redirectToStage(FXMLLoader fxmlLoader) throws IOException {
+    private void redirectToStage(FXMLLoader fxmlLoader) throws IOException
+    {
         Parent root = fxmlLoader.load();
         Object c = fxmlLoader.getController();
         Stage stage = new Stage();
@@ -145,16 +156,20 @@ public class LoginController implements Initializable {
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.show();
-        root.setOnMousePressed(new EventHandler<MouseEvent>() {
+        root.setOnMousePressed(new EventHandler<MouseEvent>()
+        {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(MouseEvent event)
+            {
                 xOffset = event.getSceneX();
                 yOffset = event.getSceneY();
             }
         });
-        root.setOnMouseDragged(new EventHandler<MouseEvent>() {
+        root.setOnMouseDragged(new EventHandler<MouseEvent>()
+        {
             @Override
-            public void handle(MouseEvent event) {
+            public void handle(MouseEvent event)
+            {
                 stage.setX(event.getScreenX() - xOffset);
                 stage.setY(event.getScreenY() - yOffset);
             }

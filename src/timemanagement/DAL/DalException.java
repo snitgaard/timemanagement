@@ -6,12 +6,13 @@
 package timemanagement.DAL;
 
 /**
- *
  * @author The Cowboys
  */
-public class DalException extends Exception {
+public class DalException extends Exception
+{
 
-    public DalException(String message) {
+    public DalException(String message)
+    {
         super(message);
     }
 }

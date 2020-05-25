@@ -117,7 +117,6 @@ public class TaskDAO
 
         } catch (SQLException ex)
         {
-            System.out.println(ex);
             throw new DalException("Could not fetch all classes");
         }
     }

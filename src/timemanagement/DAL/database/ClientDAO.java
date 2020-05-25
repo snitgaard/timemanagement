@@ -125,7 +125,6 @@ public class ClientDAO
 
         } catch (SQLException ex)
         {
-            System.out.println(ex);
             throw new DalException("Could not get user");
         }
     }

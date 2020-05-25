@@ -581,16 +581,12 @@ public class MainAdminViewController implements Initializable
             slutTidField.setText(sdf.format(date));
 
             brugtTidField.setText(model.timeFormatter(startTidField.getText(), slutTidField.getText()));
-            System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
-            System.out.println(selectedProject + "DET ER HER");
 
             if (selectedProject.getRounded() == 0)
             {
-                System.out.println(opgaveComboBox.getSelectionModel().getSelectedItem().getId() + "HEJ ER DET HER?????");
                 model.addTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
             } else
             {
-                System.out.println(model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                 model.addRoundedTime(model.timeCalculator(startTidField.getText(), slutTidField.getText()), opgaveComboBox.getSelectionModel().getSelectedItem().getId());
             }
 
@@ -1562,7 +1558,6 @@ public class MainAdminViewController implements Initializable
                 set2.setName("Paid task");
                 set3.setName("Not paid task");
                 barChart.setBarGap(-10);
-                System.out.println("hvad er det her  = " + selectedProject.getId());
 
                 if (chartStartDate.getValue() != null || chartEndDate.getValue() != null)
                 {

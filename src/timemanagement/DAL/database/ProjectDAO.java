@@ -145,7 +145,6 @@ public class ProjectDAO {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
-            System.out.println(ex);
             throw new DalException("Could not fetch all classes");
         }
     }

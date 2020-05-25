@@ -161,7 +161,6 @@ public class UserDAO
 
         } catch (SQLException ex)
         {
-            System.out.println(ex);
             throw new DalException("Could not check user credentials");
         }
     }
@@ -202,7 +201,6 @@ public class UserDAO
 
         } catch (SQLException ex)
         {
-            System.out.println(ex);
             throw new DalException("Could not get user");
         }
     }

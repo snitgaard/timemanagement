@@ -1011,16 +1011,6 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * ???????????????????
-     * @throws ModelException DalException
-     */
-    private void setOngoing(ActionEvent event) throws ModelException
-    {
-        setProjectTable();
-    }
-
-
-    /**
      * Edits and saves the changes to the selectd task.
      *
      * @throws ModelException DalException

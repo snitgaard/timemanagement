@@ -169,36 +169,36 @@ public class UserDAO
      * @return list of users called selectedUser
      * @throws DalException
      */
-    public List<User> getUser(String userLogin) throws DalException
-    {
-        try (Connection con = dbCon.getConnection())
-        {
-
-            String sql = "SELECT * FROM [User] WHERE userLogin = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, userLogin);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<User> selectedUser = new ArrayList<>();
-            while (rs.next())
-            {
-                int id = rs.getInt("id");
-                userLogin = rs.getString("userLogin");
-                String userPassword = rs.getString("userPassword");
-                int isAdmin = rs.getInt("isAdmin");
-                String adminRights = "";
-                String email = rs.getString("fullName");
-                String fullName = rs.getString("fullName");
-
-                User user = new User(id, userLogin, userPassword, isAdmin, adminRights, email, fullName);
-                selectedUser.add(user);
-            }
-            return selectedUser;
-
-        } catch (SQLException ex)
-        {
-            throw new DalException("Could not get user");
-        }
-    }
+//    public List<User> getUser(String userLogin) throws DalException
+//    {
+//        try (Connection con = dbCon.getConnection())
+//        {
+//
+//            String sql = "SELECT * FROM [User] WHERE userLogin = ?";
+//            PreparedStatement ps = con.prepareStatement(sql);
+//            ps.setString(1, userLogin);
+//            ResultSet rs = ps.executeQuery();
+//            ArrayList<User> selectedUser = new ArrayList<>();
+//            while (rs.next())
+//            {
+//                int id = rs.getInt("id");
+//                userLogin = rs.getString("userLogin");
+//                String userPassword = rs.getString("userPassword");
+//                int isAdmin = rs.getInt("isAdmin");
+//                String adminRights = "";
+//                String email = rs.getString("fullName");
+//                String fullName = rs.getString("fullName");
+//
+//                User user = new User(id, userLogin, userPassword, isAdmin, adminRights, email, fullName);
+//                selectedUser.add(user);
+//            }
+//            return selectedUser;
+//
+//        } catch (SQLException ex)
+//        {
+//            throw new DalException("Could not get user");
+//        }
+//    }
 
     /**
      * If called this method will create a connection between the database and

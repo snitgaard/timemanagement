@@ -74,23 +74,6 @@ public class Model
             throw new ModelException(ex.getMessage());
         }
     }
-
-    /**
-     * Returns a specific user.
-     * @param userLogin
-     * @return
-     * @throws ModelException 
-     */
-    public List<User> getUser(String userLogin) throws ModelException
-    {
-        try
-        {
-            return bllManager.getUser(userLogin);
-        } catch (bllException ex)
-        {
-            throw new ModelException(ex.getMessage());
-        }
-    }
     
         /**
      * Returns a specific user

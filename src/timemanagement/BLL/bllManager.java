@@ -59,25 +59,6 @@ public class bllManager implements bllFacade
     }
 
     /**
-     * Gets a list of a User from the dalFacade
-     *
-     * @param userLogin
-     * @return getUser method from the DalFacade
-     * @throws bllException
-     */
-    @Override
-    public List<User> getUser(String userLogin) throws bllException
-    {
-        try
-        {
-            return dalFacade.getUser(userLogin);
-        } catch (DalException ex)
-        {
-            throw new bllException(ex.getMessage());
-        }
-    }
-
-    /**
      * Gets a list of all Projects from the dalFacade
      *
      * @return getAllProjects method from the DalFacade
@@ -114,6 +95,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns a list of all tasks in the database.
+     * @return
+     * @throws bllException 
+     */
     @Override
     public List<Task> getAllTasks() throws bllException
     {
@@ -126,6 +112,20 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Creates a task in the database with the given parameters.
+     * @param taskName
+     * @param proejctId
+     * @param usedTime
+     * @param date
+     * @param description
+     * @param payed
+     * @param projectName
+     * @param isDeleted
+     * @param userId
+     * @return
+     * @throws bllException 
+     */
     @Override
     public Task createTask(String taskName, int proejctId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws bllException
     {
@@ -138,6 +138,12 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Adds time spent to the selected task.
+     * @param usedTime
+     * @param id
+     * @throws bllException 
+     */
     @Override
     public void addTime(long usedTime, int id) throws bllException
     {
@@ -150,6 +156,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns a list of all tasks in the database and their project name.
+     * @return
+     * @throws DalException 
+     */
     @Override
     public List<Task> getAllTasksProjectName() throws bllException
     {
@@ -162,6 +173,19 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Creates a project in the database with the given parameters.
+     * @param projectName
+     * @param clientId
+     * @param startDate
+     * @param usedTime
+     * @param isDeleted
+     * @param clientName
+     * @param hourlyRate
+     * @param rounded
+     * @return
+     * @throws DalException 
+     */
     @Override
     public Project createProjekt(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException
     {
@@ -174,6 +198,16 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Creates a user in the database with the given parameters
+     * @param userLogin
+     * @param userPassword
+     * @param isAdmin
+     * @param email
+     * @param fullName
+     * @return
+     * @throws DalException 
+     */
     @Override
     public User createUser(String userLogin, String userPassword, int isAdmin, String email, String fullName) throws bllException
     {
@@ -186,6 +220,12 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns the id of a client based on client name.
+     * @param clientName
+     * @return
+     * @throws DalException 
+     */
     @Override
     public int getClientId(String clientName) throws bllException
     {
@@ -198,6 +238,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns a list of all projects in the database and the name of their client.
+     * @return
+     * @throws DalException 
+     */
     @Override
     public List<Project> getProjectClientName() throws bllException
     {
@@ -210,6 +255,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns a list of all users in the database.
+     * @return
+     * @throws DalException 
+     */
     @Override
     public List<User> getAllUsers() throws bllException
     {
@@ -222,6 +272,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Updates time spent on a project in the database.
+     * @param project
+     * @throws DalException 
+     */
     @Override
     public void updateProjectTime(Project project) throws bllException
     {
@@ -234,6 +289,12 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Adds time spent to the selected task and rounds up to the nearest 15 minutes.
+     * @param usedTime
+     * @param id
+     * @throws DalException 
+     */
     @Override
     public void addRoundedTime(double usedTime, int id) throws bllException
     {
@@ -246,6 +307,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Deletes a user from the database.
+     * @param user
+     * @throws DalException 
+     */
     @Override
     public void deleteUser(User user) throws bllException
     {
@@ -258,6 +324,13 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns 0 or 1 depending on if the user is an admin or not.
+     * @param userLogin
+     * @param userPassword
+     * @return
+     * @throws DalException 
+     */
     @Override
     public int getIsAdminInt(String userLogin, String userPassword) throws bllException
     {
@@ -270,6 +343,13 @@ public class bllManager implements bllFacade
         }
     }
     
+    /**
+     * Updates the role of a user in the database. Can either be an admin or user.
+     * @param user
+     * @param isAdmin
+     * @throws DalException 
+     */
+    @Override
     public void updateUserRoles(User user, int isAdmin) throws bllException
     {
         try
@@ -281,6 +361,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Edits the parameters of a task in the database.
+     * @param task
+     * @throws DalException 
+     */
     @Override
     public void editTask(Task task) throws bllException
     {
@@ -293,6 +378,11 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns a list of all clients in the database.
+     * @return
+     * @throws DalException 
+     */
     @Override
     public List<Client> getAllClients() throws bllException
     {
@@ -305,6 +395,16 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Creates a client in the database with the given parameters.
+     * @param clientName
+     * @param contactPerson
+     * @param email
+     * @param hourlyRate
+     * @param isDeleted
+     * @return
+     * @throws DalException 
+     */
     @Override
     public Client createClient(String clientName, String contactPerson, String email, double hourlyRate, int isDeleted) throws bllException
     {
@@ -317,6 +417,12 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Returns all tasks on a given project.
+     * @param projectId
+     * @return
+     * @throws DalException 
+     */
     @Override
     public List<Task> getAllTasksOnProject(int projectId) throws bllException
     {
@@ -329,6 +435,17 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Converts startTime and endTime from String to LocalTime.
+     * Calculates the difference between endTime and startTime and converts it to hours and minutes.
+     * Then formats the hours and minutes to a string that is displayed in the program.
+     * If the time goes past midnight it takes the difference between 24 and 
+     * the difference between endTime and startTime.
+     * @param startTime
+     * @param endTime
+     * @return
+     * @throws bllException 
+     */
     @Override
     public String timeFormatter(String startTime, String endTime) throws bllException
     {
@@ -353,7 +470,7 @@ public class bllManager implements bllFacade
 
         } else if (start.equals(end))
         {
-            return "00:00"; //Ohterwise returns 24:00
+            return "00:00"; //Otherwise returns 24:00
         } else
         {
             long differenceTwo = Duration.ofHours(24).minus(Duration.between(end, start)).toMillis();
@@ -370,6 +487,16 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Calculates the time spent on a task and converts it to minutes.
+     * Returns 0 if startTime and endTime are equal.
+     * If time goes past midnight, returns the difference between 24 and
+     * the difference between endTime and startTime.
+     * @param startTime
+     * @param endTime
+     * @return
+     * @throws bllException 
+     */
     @Override
     public long timeCalculator(String startTime, String endTime) throws bllException
     {
@@ -416,6 +543,12 @@ public class bllManager implements bllFacade
 
     }
 
+    /**
+     * Updates the time spent on a task based on manual user input.
+     * @param task
+     * @return
+     * @throws DalException 
+     */
     @Override
     public boolean updateTask(Task task) throws bllException
     {
@@ -428,6 +561,13 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Archives a project in the database. 
+     * @param project
+     * @param isDeleted
+     * @throws DalException 
+     */
+    @Override
     public void deleteProject(Project project, int isDeleted) throws bllException
     {
         try
@@ -439,6 +579,12 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Archives a task in the database.
+     * @param task
+     * @param isDeleted
+     * @throws DalException 
+     */
     @Override
     public void deleteTask(Task task, int isDeleted) throws bllException
     {
@@ -451,6 +597,12 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Archives a client in the database.
+     * @param client
+     * @param isDeleted
+     * @throws DalException 
+     */
     @Override
     public void deleteClient(Client client, int isDeleted) throws bllException
     {
@@ -463,6 +615,13 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Archives all tasks on a given project.
+     * @param task
+     * @param isDeleted
+     * @param projectId
+     * @throws DalException 
+     */
     @Override
     public void deleteTaskOnProject(Task task, int isDeleted, int projectId) throws bllException
     {
@@ -475,6 +634,14 @@ public class bllManager implements bllFacade
         }
     }
 
+    /**
+     * Archives all projects on a given client.
+     * @param project
+     * @param isDeleted
+     * @param clientId
+     * @return
+     * @throws DalException 
+     */
     @Override
     public Project deleteProjectOnClient(Project project, int isDeleted, int clientId) throws bllException
     {

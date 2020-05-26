@@ -230,6 +230,12 @@ public class TimeLoggerViewController implements Initializable
 
     }
 
+    /**
+     * Transfers the selectedUser from one controller to the other
+     * Sets the text for loginTextField and fills all the tableviews.
+     * @param selectedUser
+     * @throws ModelException 
+     */
     public void ApplyImportantData(User selectedUser) throws ModelException
     {
         this.selectedUser = selectedUser;

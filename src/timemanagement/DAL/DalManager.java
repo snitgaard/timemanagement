@@ -34,6 +34,7 @@ public class DalManager implements DalFacade
 
     /**
      * Checks if the role of a user is "Admin" or "User".
+     * Also checks if the login credentials that the user put in are correct.
      * @param userLogin
      * @param userPassword
      * @param isAdmin
@@ -113,9 +114,9 @@ public class DalManager implements DalFacade
      * @throws DalException 
      */
     @Override
-    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId) throws DalException
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException
     {
-        return taskDAO.createTask(taskName, projectId, usedTime, date, description, paid, projectName, isDeleted, userId);
+        return taskDAO.createTask(taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
     }
 
     /**

@@ -100,7 +100,7 @@ public interface bllFacade
      * @return
      * @throws DalException 
      */
-    Project createProjekt(String projectName, int clientId, String startDate, long usedTiem, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException;
+    Project createProject(String projectName, int clientId, String startDate, long usedTiem, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException;
 
     /**
      * Returns a list of all projects in the database and the name of their client.
@@ -207,7 +207,7 @@ public interface bllFacade
      * @return
      * @throws DalException 
      */
-    List<Task> getAllTasksOnProject(int projektId) throws bllException;
+    List<Task> getAllTasksOnProject(int projectId) throws bllException;
 
     /**
      * Formats the used time that is shown in the time logger to (HH:mm)

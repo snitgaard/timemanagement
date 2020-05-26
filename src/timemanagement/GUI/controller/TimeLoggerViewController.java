@@ -535,8 +535,8 @@ public class TimeLoggerViewController implements Initializable
         {
             Task selectedTask = opgaveComboBox.getSelectionModel().getSelectedItem();
             Project selectedProject = projektComboBox.getSelectionModel().getSelectedItem();
-            long gammelBrugtTid = selectedTask.getUsedTime();
-            long gammelProjektTid = selectedProject.getUsedTime();
+            long oldUsedTime = selectedTask.getUsedTime();
+            long oldProjectTime = selectedProject.getUsedTime();
 
             java.util.Date date = new java.util.Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
@@ -558,14 +558,14 @@ public class TimeLoggerViewController implements Initializable
                 {
                     if (selectedProject.getRounded() == 0)
                     {
-                        opgaverTableView.getItems().get(i).setUsedTime(gammelBrugtTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
+                        opgaverTableView.getItems().get(i).setUsedTime(oldUsedTime + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                     } else
                     {
                         double time = model.timeCalculator(startTidField.getText(), slutTidField.getText());
                         Double roundedTime = Math.ceil(time / 15) * 15;
                         long realRoundedTime = roundedTime.longValue();
 
-                        opgaverTableView.getItems().get(i).setUsedTime(gammelBrugtTid + realRoundedTime);
+                        opgaverTableView.getItems().get(i).setUsedTime(oldUsedTime + realRoundedTime);
 
                     }
 
@@ -576,7 +576,7 @@ public class TimeLoggerViewController implements Initializable
             {
                 if (selectedTask.getProjectId() == projekterTableView.getItems().get(i).getId())
                 {
-                    projekterTableView.getItems().get(i).setUsedTime(gammelProjektTid + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
+                    projekterTableView.getItems().get(i).setUsedTime(oldProjectTime + model.timeCalculator(startTidField.getText(), slutTidField.getText()));
                     model.updateProjectTime(selectedProject);
                 }
             }
@@ -713,7 +713,7 @@ public class TimeLoggerViewController implements Initializable
 
             beskrivelseTextArea.setText(selectedTask.getDescription());
 
-            if (selectedTask.getPayed() == 1)
+            if (selectedTask.getPaid() == 1)
             {
                 paidCheckBox.setSelected(true);
             }
@@ -777,12 +777,12 @@ public class TimeLoggerViewController implements Initializable
     @FXML
     private void createOpgave(ActionEvent event) throws ModelException
     {
-        int projektId = projektComboBox.getSelectionModel().getSelectedItem().getId();
+        int projectId = projektComboBox.getSelectionModel().getSelectedItem().getId();
         Task selectedTask = null;
 
         if (paidCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
-            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
+            selectedTask = model.createTask(titelField.getText(), projectId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(),
                     1, projektComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
 
             opgaveComboBox.getItems().add(selectedTask);
@@ -790,7 +790,7 @@ public class TimeLoggerViewController implements Initializable
             filteredTaskList.add(selectedTask);
         } else if (paidCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !beskrivelseTextArea.getText().isEmpty())
         {
-            selectedTask = model.createTask(titelField.getText(), projektId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
+            selectedTask = model.createTask(titelField.getText(), projectId, 0, LocalDate.now().toString(), beskrivelseTextArea.getText(), 0,
                     projektComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
 
             opgaveComboBox.getItems().add(selectedTask);
@@ -1039,10 +1039,10 @@ public class TimeLoggerViewController implements Initializable
 
         if (paidCheckBox.isSelected() == true)
         {
-            int payed = 1;
+            int paid = 1;
             selectedTask.setTaskName(titelField.getText());
             selectedTask.setDescription(beskrivelseTextArea.getText());
-            selectedTask.setPayed(payed);
+            selectedTask.setPaid(paid);
             selectedTaskTwo.setTaskName(titelField.getText());
             model.editTask(selectedTask);
             opgaveComboBox.getItems().remove(selectedTask);
@@ -1051,10 +1051,10 @@ public class TimeLoggerViewController implements Initializable
 
         } else if (paidCheckBox.isSelected() == false)
         {
-            int payed = 0;
+            int paid = 0;
             selectedTask.setTaskName(titelField.getText());
             selectedTask.setDescription(beskrivelseTextArea.getText());
-            selectedTask.setPayed(payed);
+            selectedTask.setPaid(paid);
             selectedTaskTwo.setTaskName(titelField.getText());
             model.editTask(selectedTask);
             opgaveComboBox.getItems().remove(selectedTask);
@@ -1123,10 +1123,10 @@ public class TimeLoggerViewController implements Initializable
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
                     for (Task allTasks : model.getAllTasks())
                     {
-                        if (allTasks.getPayed() == 1)
+                        if (allTasks.getPaid() == 1)
                         {
                             set1.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
-                        } else if (allTasks.getPayed() == 0)
+                        } else if (allTasks.getPaid() == 0)
                         {
                             set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
@@ -1490,10 +1490,10 @@ public class TimeLoggerViewController implements Initializable
                 {
                     for (Task allTasks : analyseChartFilter())
                     {
-                        if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 1)
+                        if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 1)
                         {
                             set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
-                        } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 0)
+                        } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 0)
                         {
                             set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
@@ -1502,10 +1502,10 @@ public class TimeLoggerViewController implements Initializable
                 {
                     for (Task allTasks : model.getAllTasks())
                     {
-                        if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 1)
+                        if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 1)
                         {
                             set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
-                        } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPayed() == 0)
+                        } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 0)
                         {
                             set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }

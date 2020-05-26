@@ -113,9 +113,9 @@ public class DalManager implements DalFacade
      * @throws DalException 
      */
     @Override
-    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId) throws DalException
     {
-        return taskDAO.createTask(taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
+        return taskDAO.createTask(taskName, projectId, usedTime, date, description, paid, projectName, isDeleted, userId);
     }
 
     /**

@@ -122,10 +122,10 @@
                      <children>
                         <TableView fx:id="tasksTableView" layoutY="25.0" prefHeight="392.0" prefWidth="719.0">
                            <columns>
-                              <TableColumn fx:id="opgaveNavnColumn" prefWidth="208.0" text="Task Name" />
-                              <TableColumn fx:id="projektNavnColumn" minWidth="0.0" prefWidth="237.0" text="Project Name" />
-                              <TableColumn fx:id="brugtTidColumn" prefWidth="165.0" text="Used Time" />
-                              <TableColumn fx:id="datoColumn" prefWidth="108.0" text="Date" />
+                              <TableColumn fx:id="taskNameColumn" prefWidth="208.0" text="Task Name" />
+                              <TableColumn fx:id="projectNameColumn" minWidth="0.0" prefWidth="237.0" text="Project Name" />
+                              <TableColumn fx:id="usedTimeColumn" prefWidth="165.0" text="Used Time" />
+                              <TableColumn fx:id="dateColumn" prefWidth="108.0" text="Date" />
                            </columns>
                         </TableView>
                         <JFXButton layoutX="614.0" layoutY="423.0" onAction="#handleDeleteTask" prefHeight="29.0" prefWidth="89.0" style="-fx-border-color: grey;" text="Delete task">

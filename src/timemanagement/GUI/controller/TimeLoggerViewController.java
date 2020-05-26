@@ -74,13 +74,13 @@ public class TimeLoggerViewController implements Initializable
     @FXML
     private SplitPane tasksPane;
     @FXML
-    private TableColumn<Task, String> opgaveNavnColumn;
+    private TableColumn<Task, String> taskNameColumn;
     @FXML
-    private TableColumn<Task, String> projektNavnColumn;
+    private TableColumn<Task, String> projectNameColumn;
     @FXML
-    private TableColumn<Task, Long> brugtTidColumn;
+    private TableColumn<Task, Long> usedTimeColumn;
     @FXML
-    private TableColumn<Task, String> datoColumn;
+    private TableColumn<Task, String> dateColumn;
     @FXML
     private SplitPane timeLoggerPane;
     @FXML
@@ -153,8 +153,6 @@ public class TimeLoggerViewController implements Initializable
     private JFXComboBox<String> userComboBox;
     @FXML
     private Label loginTextField;
-    private LoginController controller;
-    private String username;
     @FXML
     private JFXButton clientButton;
     @FXML
@@ -167,7 +165,6 @@ public class TimeLoggerViewController implements Initializable
     private JFXTextField txt_Client;
     @FXML
     private SplitPane clientPane;
-    private JFXTextField txt_HourlyRate;
     @FXML
     private JFXTextField txt_ClientHourlyRate;
     @FXML
@@ -333,7 +330,7 @@ public class TimeLoggerViewController implements Initializable
      */
     private void fillColumns() throws ModelException
     {
-        //Opgaver tableview
+        //Tasks tableview
         List<Task> taskList = model.getAllTasksProjectName();
 
         for (Task task : taskList)
@@ -346,10 +343,10 @@ public class TimeLoggerViewController implements Initializable
 
         tasksTableView.setItems(filteredTaskList);
 
-        opgaveNavnColumn.setCellValueFactory(cellData -> cellData.getValue().taskNameProperty());
-        projektNavnColumn.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
-        brugtTidColumn.setCellValueFactory(cellData -> cellData.getValue().usedTimeObservableValue());
-        datoColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
+        taskNameColumn.setCellValueFactory(cellData -> cellData.getValue().taskNameProperty());
+        projectNameColumn.setCellValueFactory(cellData -> cellData.getValue().projectNameProperty());
+        usedTimeColumn.setCellValueFactory(cellData -> cellData.getValue().usedTimeObservableValue());
+        dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
 
         //Projekter tableview
         setProjectTable();
@@ -503,7 +500,7 @@ public class TimeLoggerViewController implements Initializable
                 editButton.setDisable(false);
                 newTaskButton.setDisable(false);
                 paidCheckBox.setDisable(false);
-                stopTidMethod();
+                stopTimeMethod();
             } else if (startIcon.getGlyphName().equals("PLAY"))
             {
                 startIcon.setIcon(FontAwesomeIcon.PAUSE);
@@ -535,7 +532,7 @@ public class TimeLoggerViewController implements Initializable
      *
      * @param event
      */
-    private void stopTidMethod() throws ParseException
+    private void stopTimeMethod() throws ParseException
     {
         try
         {
@@ -681,14 +678,15 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Calls the opgaveData method as an action event, and disables start button
+     * Calls the taskData method as an action event, and disables start button
      * if titlefield and beskrivelsetextarea is not empty.
      *
      * @throws ModelException
      */
-    private void setOpgaveData(ActionEvent event) throws ModelException
+    @FXML
+    private void setTaskData(ActionEvent event) throws ModelException
     {
-        opgaveData();
+        taskData();
         Task selectedTask = taskComboBox.getSelectionModel().getSelectedItem();
         if (titelField.getText() != null && descriptionTextArea.getText() != null)
         {
@@ -708,7 +706,7 @@ public class TimeLoggerViewController implements Initializable
      *
      * @throws ModelException
      */
-    private void opgaveData() throws ModelException
+    private void taskData() throws ModelException
     {
         Task selectedTask = taskComboBox.getSelectionModel().getSelectedItem();
 
@@ -779,7 +777,8 @@ public class TimeLoggerViewController implements Initializable
      *
      * @throws ModelException
      */
-    private void createOpgave(ActionEvent event) throws ModelException
+    @FXML
+    private void createTask(ActionEvent event) throws ModelException
     {
         int projectId = projectComboBox.getSelectionModel().getSelectedItem().getId();
         Task selectedTask = null;
@@ -813,7 +812,8 @@ public class TimeLoggerViewController implements Initializable
      *
      * @throws ModelException
      */
-    private void handleCreateProjekt(ActionEvent event) throws ModelException
+    @FXML
+    private void handleCreateProject(ActionEvent event) throws ModelException
     {
         Client selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
@@ -871,8 +871,8 @@ public class TimeLoggerViewController implements Initializable
         {
             if (selectedTask != null && !txt_newUsedTime.getText().isEmpty())
             {
-                int nyBrugtTid = Integer.parseInt(txt_newUsedTime.getText());
-                selectedTask.setUsedTime(nyBrugtTid);
+                int newUsedTime = Integer.parseInt(txt_newUsedTime.getText());
+                selectedTask.setUsedTime(newUsedTime);
                 model.updateTask(selectedTask);
                 for (int i = 0; i < projectsTableView.getItems().size(); i++)
                 {
@@ -1078,7 +1078,7 @@ public class TimeLoggerViewController implements Initializable
     {
         try
         {
-            Client selectedKunde = null;
+            Client selectedClient = null;
             if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
             {
                 {
@@ -1086,8 +1086,8 @@ public class TimeLoggerViewController implements Initializable
                     String contactPerson = txt_Contact.getText();
                     String email = txt_Email.getText();
                     Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-                    selectedKunde = model.createClient(kundeNavn, contactPerson, email, hourlyRate, 0);
-                    clientComboBox.getItems().add(selectedKunde);
+                    selectedClient = model.createClient(kundeNavn, contactPerson, email, hourlyRate, 0);
+                    clientComboBox.getItems().add(selectedClient);
 
                 }
             } else
@@ -1548,20 +1548,5 @@ public class TimeLoggerViewController implements Initializable
             alertString = "Could not clear filter. Please try again.";
             showAlert();
         }
-    }
-
-    @FXML
-    private void handleCreateProject(ActionEvent event)
-    {
-    }
-
-    @FXML
-    private void setTaskData(ActionEvent event)
-    {
-    }
-
-    @FXML
-    private void createTask(ActionEvent event)
-    {
     }
 }

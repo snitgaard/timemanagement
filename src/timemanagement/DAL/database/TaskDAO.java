@@ -69,7 +69,7 @@ public class TaskDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Task (taskName, projectId, usedTime, datdateo, description, paid, isDeleted, userId) VALUES (?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Task (taskName, projectId, usedTime, date, description, paid, isDeleted, userId) VALUES (?,?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, taskName);
             ps.setInt(2, projectId);

@@ -10,7 +10,7 @@ import timemanagement.BE.*;
 import java.util.List;
 
 /**
- * @author Mads
+ * @author The Cowboys
  */
 public interface DalFacade
 {

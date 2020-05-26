@@ -249,7 +249,7 @@
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="titelField" disable="true" layoutX="455.0" layoutY="52.0" prefHeight="20.0" prefWidth="159.0" promptText="Enter task Title">
+                        <JFXTextField fx:id="titleField" disable="true" layoutX="455.0" layoutY="52.0" prefHeight="20.0" prefWidth="159.0" promptText="Enter task Title">
                            <font>
                               <Font size="14.0" />
                            </font>

@@ -98,7 +98,7 @@ public class TimeLoggerViewController implements Initializable
     @FXML
     private JFXTextField clientField;
     @FXML
-    private JFXTextField titelField;
+    private JFXTextField titleField;
     @FXML
     private JFXTextArea descriptionTextArea;
     @FXML
@@ -666,7 +666,7 @@ public class TimeLoggerViewController implements Initializable
     private void disableTimeLoggerButtons()
     {
         taskComboBox.setDisable(buttonState);
-        titelField.setDisable(buttonState);
+        titleField.setDisable(buttonState);
         descriptionTextArea.setDisable(buttonState);
         paidCheckBox.setDisable(buttonState);
         newTaskButton.setDisable(buttonState);
@@ -688,11 +688,11 @@ public class TimeLoggerViewController implements Initializable
     {
         taskData();
         Task selectedTask = taskComboBox.getSelectionModel().getSelectedItem();
-        if (titelField.getText() != null && descriptionTextArea.getText() != null)
+        if (titleField.getText() != null && descriptionTextArea.getText() != null)
         {
             buttonState = false;
             disableTimeLoggerButtons();
-        } else if (titelField.getText() == null && descriptionTextArea.getText() == null && selectedTask == null)
+        } else if (titleField.getText() == null && descriptionTextArea.getText() == null && selectedTask == null)
         {
             buttonState = true;
             disableTimeLoggerButtons();
@@ -712,7 +712,7 @@ public class TimeLoggerViewController implements Initializable
 
         if (taskComboBox.getSelectionModel().getSelectedItem() != null)
         {
-            titelField.setText(selectedTask.getTaskName());
+            titleField.setText(selectedTask.getTaskName());
 
             descriptionTextArea.setText(selectedTask.getDescription());
 
@@ -722,7 +722,7 @@ public class TimeLoggerViewController implements Initializable
             }
         } else
         {
-            titelField.clear();
+            titleField.clear();
             descriptionTextArea.clear();
             paidCheckBox.setSelected(false);
         }
@@ -783,17 +783,17 @@ public class TimeLoggerViewController implements Initializable
         int projectId = projectComboBox.getSelectionModel().getSelectedItem().getId();
         Task selectedTask = null;
 
-        if (paidCheckBox.isSelected() == true && !titelField.getText().isEmpty() && !descriptionTextArea.getText().isEmpty())
+        if (paidCheckBox.isSelected() == true && !titleField.getText().isEmpty() && !descriptionTextArea.getText().isEmpty())
         {
-            selectedTask = model.createTask(titelField.getText(), projectId, 0, LocalDate.now().toString(), descriptionTextArea.getText(),
+            selectedTask = model.createTask(titleField.getText(), projectId, 0, LocalDate.now().toString(), descriptionTextArea.getText(),
                     1, projectComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
 
             taskComboBox.getItems().add(selectedTask);
             taskComboBox.getSelectionModel().select(selectedTask);
             filteredTaskList.add(selectedTask);
-        } else if (paidCheckBox.isSelected() == false && !titelField.getText().isEmpty() && !descriptionTextArea.getText().isEmpty())
+        } else if (paidCheckBox.isSelected() == false && !titleField.getText().isEmpty() && !descriptionTextArea.getText().isEmpty())
         {
-            selectedTask = model.createTask(titelField.getText(), projectId, 0, LocalDate.now().toString(), descriptionTextArea.getText(), 0,
+            selectedTask = model.createTask(titleField.getText(), projectId, 0, LocalDate.now().toString(), descriptionTextArea.getText(), 0,
                     projectComboBox.getSelectionModel().getSelectedItem().getProjectName(), 0, this.selectedUser.getId());
 
             taskComboBox.getItems().add(selectedTask);
@@ -1025,7 +1025,7 @@ public class TimeLoggerViewController implements Initializable
         Task selectedTask = taskComboBox.getSelectionModel().getSelectedItem();
         Task selectedTaskTwo = null;
 
-        if (titelField.getText().isEmpty() && descriptionTextArea.getText().isEmpty())
+        if (titleField.getText().isEmpty() && descriptionTextArea.getText().isEmpty())
         {
             alertString = "Could not edit task. Please try again.";
             showAlert();
@@ -1043,10 +1043,10 @@ public class TimeLoggerViewController implements Initializable
         if (paidCheckBox.isSelected() == true)
         {
             int paid = 1;
-            selectedTask.setTaskName(titelField.getText());
+            selectedTask.setTaskName(titleField.getText());
             selectedTask.setDescription(descriptionTextArea.getText());
             selectedTask.setPaid(paid);
-            selectedTaskTwo.setTaskName(titelField.getText());
+            selectedTaskTwo.setTaskName(titleField.getText());
             model.editTask(selectedTask);
             taskComboBox.getItems().remove(selectedTask);
             taskComboBox.getItems().add(selectedTask);
@@ -1055,10 +1055,10 @@ public class TimeLoggerViewController implements Initializable
         } else if (paidCheckBox.isSelected() == false)
         {
             int paid = 0;
-            selectedTask.setTaskName(titelField.getText());
+            selectedTask.setTaskName(titleField.getText());
             selectedTask.setDescription(descriptionTextArea.getText());
             selectedTask.setPaid(paid);
-            selectedTaskTwo.setTaskName(titelField.getText());
+            selectedTaskTwo.setTaskName(titleField.getText());
             model.editTask(selectedTask);
             taskComboBox.getItems().remove(selectedTask);
             taskComboBox.getItems().add(selectedTask);

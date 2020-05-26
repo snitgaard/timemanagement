@@ -34,6 +34,9 @@ public class Model
     private ObservableList<User> allUsers;
     private ObservableList<Client> allClients;
 
+    /**
+     * constructor for Model
+     */
     public Model()
     {
         try
@@ -169,11 +172,12 @@ public class Model
      *
      * @param projectName
      * @param clientId
-     * @param courseId
      * @param usedTime
+     * @param isDeleted
      * @param startDate
-     * @param studentId
-     * @param attended
+     * @param clientName
+     * @param hourlyRate
+     * @param rounded
      * @return createAttendance method in the bllManager that returns true if a
      * row was added, false if not
      * @throws ModelException

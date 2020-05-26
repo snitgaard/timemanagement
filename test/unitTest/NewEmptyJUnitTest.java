@@ -52,7 +52,7 @@ public class NewEmptyJUnitTest {
     
     
     /**
-     * Test method that checks the login credentials. 
+     * Test method that checks the login credentials, this checks in database. 
      * @throws UnknownHostException
      * @throws ModelException 
      */

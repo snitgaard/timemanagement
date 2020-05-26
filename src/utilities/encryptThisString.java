@@ -11,9 +11,15 @@ import java.security.NoSuchAlgorithmException;
 
 /**
  *
- * @author nbruu
+ * @author The Cowboys
  */
 public class encryptThisString {
+    /**
+     * encrypts the given string.
+     * @param input
+     * @return hashtext
+     * @throws RuntimeException 
+     */
     public static String encryptThisString(String input) throws RuntimeException
     {
         try

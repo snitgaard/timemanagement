@@ -100,7 +100,7 @@ public class LoginController implements Initializable
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/timemanagement/gui/view/TimeLoggerView.fxml"));
             redirectToStage(fxmlLoader);
             TimeLoggerViewController mainAdminController = fxmlLoader.getController();
-            mainAdminController.ApplyImportantData(model.getSpecificUser(username));
+            mainAdminController.applyImportantData(model.getSpecificUser(username));
 
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
@@ -111,7 +111,7 @@ public class LoginController implements Initializable
             redirectToStage(fxmlLoader);
             TimeLoggerViewController mainAdminController = fxmlLoader.getController();
             mainAdminController.showAdminButtons();
-            mainAdminController.ApplyImportantData(model.getSpecificUser(username));
+            mainAdminController.applyImportantData(model.getSpecificUser(username));
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.close();
         } else

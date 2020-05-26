@@ -236,7 +236,7 @@ public class TimeLoggerViewController implements Initializable
      * @param selectedUser
      * @throws ModelException 
      */
-    public void ApplyImportantData(User selectedUser) throws ModelException
+    public void applyImportantData(User selectedUser) throws ModelException
     {
         this.selectedUser = selectedUser;
         loginTextField.setText(selectedUser + "");

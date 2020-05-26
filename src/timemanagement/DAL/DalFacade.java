@@ -17,6 +17,7 @@ public interface DalFacade
 
     /**
      * Checks if the role of a user is "Admin" or "User".
+     * Also checks if the login credentials that the user put in are correct.
      * @param userLogin
      * @param userPassword
      * @param isAdmin
@@ -61,7 +62,7 @@ public interface DalFacade
      * @return
      * @throws DalException 
      */
-    Task createTask(String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId) throws DalException;
+    Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException;
 
     /**
      * Adds time spent to the selected task.

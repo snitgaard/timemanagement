@@ -33,7 +33,7 @@ public interface DalFacade
 
     List<Task> getAllTasks() throws DalException;
 
-    Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws DalException;
+    Task createTask(String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId) throws DalException;
 
     void addTime(long usedTime, int id) throws DalException;
 

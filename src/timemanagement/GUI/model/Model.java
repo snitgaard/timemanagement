@@ -199,7 +199,7 @@ public class Model
     {
         try
         {
-            Project project = bllManager.createProjekt(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+            Project project = bllManager.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
             allProjectsWithClients.add(project);
             return project;
         } catch (bllException ex)
@@ -238,18 +238,18 @@ public class Model
      * @param usedTime
      * @param date
      * @param description
-     * @param payed
+     * @param paid
      * @param projectName
      * @param isDeleted
      * @param userId
      * @return
      * @throws ModelException 
      */
-    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws ModelException
+    public Task createTask(String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId) throws ModelException
     {
         try
         {
-            Task task = bllManager.createTask(taskName, projectId, usedTime, date, description, payed, projectName, isDeleted, userId);
+            Task task = bllManager.createTask(taskName, projectId, usedTime, date, description, paid, projectName, isDeleted, userId);
             allTasks.add(task);
             return task;
         } catch (bllException ex)

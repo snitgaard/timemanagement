@@ -43,10 +43,10 @@ public class ProjectDAO
             while (rs.next())
             {
                 int id = rs.getInt("Id");
-                String projectName = rs.getString("projektNavn");
-                int clientId = rs.getInt("kundeId");
-                String startDate = rs.getString("startDato");
-                int usedTime = rs.getInt("brugtTid");
+                String projectName = rs.getString("projectName");
+                int clientId = rs.getInt("clientId");
+                String startDate = rs.getString("startDate");
+                int usedTime = rs.getInt("usedTime");
                 int isDeleted = rs.getInt("isDeleted");
                 String clientName = "";
                 double hourlyRate = rs.getDouble("hourlyRate");
@@ -72,7 +72,7 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Project (projektNavn, kundeId, startDato, brugtTid, isDeleted, hourlyRate, rounded) VALUES (?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Project (projectName, clientId, startDate, usedTime, isDeleted, hourlyRate, rounded) VALUES (?,?,?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projectName);
             ps.setInt(2, clientId);
@@ -110,24 +110,24 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "SELECT Project.id, Project.projektNavn, Project.brugtTid, Client.kundeNavn, Project.startDato, Project.isDeleted, Project.hourlyRate, Project.rounded, Project.kundeId\n"
+            String sql = "SELECT Project.id, Project.projectName, Project.usedTime, Client.clientName, Project.startDate, Project.isDeleted, Project.hourlyRate, Project.rounded, Project.clientId\n"
                     + "FROM Project\n"
-                    + "INNER JOIN Client ON Project.kundeId=Client.id WHERE Project.isDeleted = 0;";
+                    + "INNER JOIN Client ON Project.clientId=Client.id WHERE Project.isDeleted = 0;";
             Statement statement = con.createStatement();
             ResultSet rs = statement.executeQuery(sql);
             ArrayList<Project> allProjects = new ArrayList<>();
             while (rs.next())
             {
                 int id = rs.getInt("id");
-                String projectName = rs.getString("projektNavn");
-                String clientName = rs.getString("kundeNavn");
-                String startDate = rs.getString("startDato");
-                long usedTime = rs.getLong("brugtTid");
+                String projectName = rs.getString("projectName");
+                String clientName = rs.getString("clientName");
+                String startDate = rs.getString("startDate");
+                long usedTime = rs.getLong("usedTime");
                 int isDeleted = rs.getInt("isDeleted");
                 double hourlyRate = rs.getDouble("hourlyRate");
                 int rounded = rs.getInt("rounded");
-                int kundeId = rs.getInt("kundeId");
-                Project project = new Project(id, projectName, clientName, usedTime, startDate, isDeleted, hourlyRate, rounded, kundeId);
+                int clientId = rs.getInt("clientId");
+                Project project = new Project(id, projectName, clientName, usedTime, startDate, isDeleted, hourlyRate, rounded, clientId);
                 allProjects.add(project);
             }
             return allProjects;
@@ -147,17 +147,17 @@ public class ProjectDAO
             String sql = "UPDATE\n"
                     + "	P \n"
                     + "SET \n"
-                    + "	P.brugtTid = t.brugtTid\n"
+                    + "	P.usedTime = t.usedTime\n"
                     + "FROM\n"
                     + "	Project AS p\n"
                     + "INNER JOIN\n"
                     + "	(\n"
-                    + "		SELECT Task.projektId, SUM(Task.brugtTid) brugtTid\n"
+                    + "		SELECT Task.projectId, SUM(Task.usedTime) usedTime\n"
                     + "		FROM Task\n"
-                    + "		GROUP BY Task.projektId\n"
+                    + "		GROUP BY Task.projectId\n"
                     + "	) t\n"
-                    + "	ON t.projektId = p.id\n"
-                    + " WHERE projektNavn = (?)";
+                    + "	ON t.projectId = p.id\n"
+                    + " WHERE projectName = (?)";
 
 
             PreparedStatement ps = con.prepareStatement(sql);
@@ -205,7 +205,7 @@ public class ProjectDAO
         try (Connection con = dbCon.getConnection())
         {
             int id = project.getId();
-            String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + " AND kundeId = ?;";
+            String sql = "UPDATE Project SET isDeleted = ? WHERE id =" + id + " AND clientId = ?;";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             ps.setInt(1, isDeleted);

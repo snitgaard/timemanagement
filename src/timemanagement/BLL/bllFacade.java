@@ -33,7 +33,7 @@ public interface bllFacade
 
     List<Task> getAllTasksProjectName() throws bllException;
 
-    Project createProjekt(String projectName, int clientId, String startDate, long usedTiem, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException;
+    Project createProject(String projectName, int clientId, String startDate, long usedTiem, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException;
 
     List<Project> getProjectClientName() throws bllException;
 
@@ -59,7 +59,7 @@ public interface bllFacade
 
     void updateUserRoles(User user, int isAdmin) throws bllException;
 
-    List<Task> getAllTasksOnProject(int projektId) throws bllException;
+    List<Task> getAllTasksOnProject(int projectId) throws bllException;
 
     String timeFormatter(String startTime, String endTime) throws bllException;
 

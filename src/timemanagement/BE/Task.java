@@ -20,7 +20,7 @@ public class Task
     private LongProperty usedTime;
     private StringProperty date;
     private StringProperty description;
-    private IntegerProperty payed;
+    private IntegerProperty paid;
     private IntegerProperty isDeleted;
     private IntegerProperty userId;
 
@@ -33,7 +33,7 @@ public class Task
      * @param usedTime
      * @param date
      */
-    public Task(int id, String taskName, int projectId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId)
+    public Task(int id, String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId)
     {
         this.id = id;
         this.taskName = new SimpleStringProperty(taskName);
@@ -41,7 +41,7 @@ public class Task
         this.usedTime = new SimpleLongProperty(usedTime);
         this.date = new SimpleStringProperty(date);
         this.description = new SimpleStringProperty(description);
-        this.payed = new SimpleIntegerProperty(payed);
+        this.paid = new SimpleIntegerProperty(paid);
         this.projectName = new SimpleStringProperty(projectName);
         this.isDeleted = new SimpleIntegerProperty(isDeleted);
         this.userId = new SimpleIntegerProperty(userId);
@@ -66,7 +66,7 @@ public class Task
         this.projectId = new SimpleIntegerProperty(projektId);
         this.userId = new SimpleIntegerProperty(userId);
         this.description = new SimpleStringProperty(beskrivelse);
-        this.payed = new SimpleIntegerProperty(betalt);
+        this.paid = new SimpleIntegerProperty(betalt);
     }
 
     /**
@@ -253,28 +253,28 @@ public class Task
     }
 
     /**
-     * getter for payed
+     * getter for paid
      *
-     * @return payed
+     * @return paid
      */
-    public int getPayed()
+    public int getPaid()
     {
-        return payed.get();
+        return paid.get();
     }
 
     /**
-     * setter for betalt
+     * setter for paid
      *
-     * @param payed
+     * @param paid
      */
-    public void setPayed(int payed)
+    public void setPaid(int paid)
     {
-        this.payed.set(payed);
+        this.paid.set(paid);
     }
 
-    public ObservableValue<Integer> payedObservable()
+    public ObservableValue<Integer> paidObservable()
     {
-        return payed.asObject();
+        return paid.asObject();
     }
 
     public int getsDeleted()

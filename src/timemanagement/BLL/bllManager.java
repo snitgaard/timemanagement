@@ -127,11 +127,11 @@ public class bllManager implements bllFacade
     }
 
     @Override
-    public Task createTask(String taskName, int proejctId, long usedTime, String date, String description, int payed, String projectName, int isDeleted, int userId) throws bllException
+    public Task createTask(String taskName, int proejctId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId) throws bllException
     {
         try
         {
-            return dalFacade.createTask(taskName, proejctId, usedTime, date, description, payed, projectName, isDeleted, userId);
+            return dalFacade.createTask(taskName, proejctId, usedTime, date, description, paid, projectName, isDeleted, userId);
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());
@@ -163,7 +163,7 @@ public class bllManager implements bllFacade
     }
 
     @Override
-    public Project createProjekt(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException
+    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException
     {
         try
         {

@@ -43,8 +43,8 @@ public class ClientDAO
             while (rs.next())
             {
                 int id = rs.getInt("Id");
-                String clientName = rs.getString("kundeNavn");
-                String contactPerson = rs.getString("kontaktPerson");
+                String clientName = rs.getString("clientName");
+                String contactPerson = rs.getString("contactPerson");
                 String email = rs.getString("email");
                 double hourlyRate = rs.getInt("hourlyRate");
                 int isDeleted = rs.getInt("isDeleted");
@@ -65,7 +65,7 @@ public class ClientDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Client (kundeNavn, kontaktPerson, email, hourlyRate, isDeleted) VALUES (?,?,?,?,?);";
+            String sql = "INSERT INTO Client (clientName, contactPerson, email, hourlyRate, isDeleted) VALUES (?,?,?,?,?);";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, clientName);
             ps.setString(2, contactPerson);
@@ -107,7 +107,7 @@ public class ClientDAO
         try (Connection con = dbCon.getConnection())
         {
 
-            String sql = "SELECT * FROM Client WHERE kundeNavn = ?";
+            String sql = "SELECT * FROM Client WHERE clientName = ?";
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, clientName);
             ResultSet rs = ps.executeQuery();

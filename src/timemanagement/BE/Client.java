@@ -212,7 +212,7 @@ public class Client
     /**
      * toString method for Client
      *
-     * @return kundenavn stringproperty
+     * @return clientName stringproperty
      */
     @Override
     public String toString()

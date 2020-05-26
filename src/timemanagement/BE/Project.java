@@ -87,9 +87,9 @@ public class Project
     }
 
     /**
-     * Getter for projectNavn
+     * Getter for projectName
      *
-     * @return projectNavn
+     * @return projectName
      */
     public String getProjectName()
     {
@@ -97,7 +97,7 @@ public class Project
     }
 
     /**
-     * Setter for projectNavn
+     * Setter for projectName
      *
      * @param projectName
      */
@@ -106,6 +106,11 @@ public class Project
         this.projectName.set(projectName);
     }
 
+    /**
+     * returns projectName as an observable Object
+     *
+     * @return projectName
+     */
     public StringProperty projectNameProperty()
     {
         return projectName;
@@ -131,6 +136,11 @@ public class Project
         this.clientId.set(clientId);
     }
 
+    /**
+     * returns clientId as an observable Object
+     *
+     * @return clientId
+     */
     public ObservableValue<Integer> clientIdObservable()
     {
         return clientId.asObject();
@@ -156,6 +166,11 @@ public class Project
         this.clientName.set(clientName);
     }
 
+    /**
+     * returns clientName as an observable Object
+     *
+     * @return clientName
+     */
     public StringProperty clientNameProperty()
     {
         return clientName;
@@ -181,6 +196,11 @@ public class Project
         this.startDate.set(startDate);
     }
 
+    /**
+     * returns startDate as an observable Object
+     *
+     * @return startDate
+     */
     public StringProperty startDateProperty()
     {
         return startDate;
@@ -206,51 +226,95 @@ public class Project
         this.usedTime.set(usedTime);
     }
 
+    /**
+     * returns usedTime as an observable Object
+     *
+     * @return usedTime
+     */
     public ObservableValue<Long> usedTimeObservable()
     {
         return usedTime.asObject();
     }
 
+    /**
+     * getter for isDeleted
+     * @return isDeleted
+     */
     public int getIsDeleted()
     {
         return isDeleted.get();
     }
 
+    /**
+     * setter for isDeleted
+     * @param isDeleted 
+     */
     public void setIsDeleted(int isDeleted)
     {
         this.isDeleted.set(isDeleted);
     }
 
+    /**
+     * returns isDeleted as an observable Object
+     *
+     * @return isDeleted
+     */
     public ObservableValue<Integer> isDeletedObservable()
     {
         return isDeleted.asObject();
     }
 
+    /**
+     * getter for hourlyRate
+     * @return hourlyRate
+     */
     public double getHourlyRate()
     {
         return hourlyRate.get();
     }
 
+    /**
+     * setter for hourlyRate
+     * @param hourlyRate 
+     */
     public void setHourlyRate(double hourlyRate)
     {
         this.hourlyRate.set(hourlyRate);
     }
 
+    /**
+     * returns hourlyRate as an observable Object
+     *
+     * @return hourlyRate
+     */
     public ObservableValue<Double> hourlyRateObservable()
     {
         return hourlyRate.asObject();
     }
 
+    /**
+     * getter for rounded
+     * @return rounded
+     */
     public int getRounded()
     {
         return rounded.get();
     }
 
+    /**
+     * setter for rounded
+     * @param rounded 
+     */
     public void setRounded(int rounded)
     {
         this.rounded.set(rounded);
     }
 
+    /**
+     * returns rounded as an observable Object
+     *
+     * @return rounded
+     */
     public ObservableValue<Integer> roundedObservable()
     {
         return rounded.asObject();
@@ -259,7 +323,7 @@ public class Project
     /**
      * toString method for Project
      *
-     * @return projectNavn
+     * @return projectName
      */
     @Override
     public String toString()

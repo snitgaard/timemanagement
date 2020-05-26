@@ -90,9 +90,9 @@ public class Task
     }
 
     /**
-     * getter for opgaveNavn
+     * getter for taskName
      *
-     * @return opgaveNavn
+     * @return taskName
      */
     public String getTaskName()
     {
@@ -100,7 +100,7 @@ public class Task
     }
 
     /**
-     * setter for opgaveNavn
+     * setter for taskName
      *
      * @param taskName
      */
@@ -109,6 +109,11 @@ public class Task
         this.taskName.set(taskName);
     }
 
+    /**
+     * returns taskName as an observable Object
+     *
+     * @return taskName
+     */
     public StringProperty taskNameProperty()
     {
         return taskName;
@@ -135,15 +140,20 @@ public class Task
         this.projectName.set(projectName);
     }
 
+    /**
+     * returns projectName as an observable Object
+     *
+     * @return projectName
+     */
     public StringProperty projectNameProperty()
     {
         return projectName;
     }
 
     /**
-     * getter for projektId
+     * getter for projectId
      *
-     * @return projektId
+     * @return projectId
      */
     public int getProjectId()
     {
@@ -160,6 +170,11 @@ public class Task
         this.projectId.set(projectId);
     }
 
+    /**
+     * returns projectId as an observable Object
+     *
+     * @return projectId
+     */
     public ObservableValue<Integer> projectIdObservable()
     {
         return projectId.asObject();
@@ -177,7 +192,7 @@ public class Task
     }
 
     /**
-     * setter for brugtTid
+     * setter for usedTime
      *
      * @param usedTime
      */
@@ -186,6 +201,11 @@ public class Task
         this.usedTime.set(usedTime);
     }
 
+    /**
+     * returns usedTime as an observable Object
+     *
+     * @return usedTime
+     */
     public ObservableValue<Long> usedTimeObservableValue()
     {
         return usedTime.asObject();
@@ -211,6 +231,11 @@ public class Task
         this.date.set(date);
     }
 
+    /**
+     * returns date as an observable Object
+     *
+     * @return date
+     */
     public StringProperty dateProperty()
     {
         return date;
@@ -247,6 +272,11 @@ public class Task
         this.description.set(description);
     }
 
+    /**
+     * returns description as an observable Object
+     *
+     * @return description
+     */
     public StringProperty descriptionProperty()
     {
         return description;
@@ -272,36 +302,67 @@ public class Task
         this.paid.set(paid);
     }
 
+    /**
+     * returns paid as an observable Object
+     *
+     * @return paid
+     */
     public ObservableValue<Integer> paidObservable()
     {
         return paid.asObject();
     }
 
+    /**
+     * getter for isDeleted
+     * @return isDeleted
+     */
     public int getsDeleted()
     {
         return isDeleted.get();
     }
 
+    /**
+     * setter for isDeleted
+     * @param isDeleted 
+     */
     public void setIsDeleted(int isDeleted)
     {
         this.isDeleted.set(isDeleted);
     }
 
+    /**
+     * returns isDeleted as an observable Object
+     *
+     * @return isDeleted
+     */
     public ObservableValue<Integer> isDeletedObservable()
     {
         return isDeleted.asObject();
     }
 
+    /**
+     * getter for userId
+     * @return userId
+     */
     public int getUserId()
     {
         return userId.get();
     }
 
+    /**
+     * setter for userId
+     * @param userId 
+     */
     public void setUserId(int userId)
     {
         this.userId.set(userId);
     }
 
+    /**
+     * returns userId as an observable Object
+     *
+     * @return userId
+     */
     public ObservableValue<Integer> userIdObservableValue()
     {
         return userId.asObject();

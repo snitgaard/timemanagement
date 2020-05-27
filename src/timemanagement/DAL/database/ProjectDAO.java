@@ -148,11 +148,11 @@ public class ProjectDAO
                     + "INNER JOIN(SELECT Task.projectId, SUM(Task.usedTime) usedTime\n"
                     + "		FROM Task\n"
                     + "		GROUP BY Task.projectId) t ON t.projectId = p.id\n"
-                    + " WHERE projectName = (?)";
+                    + " WHERE projectId = (?)";
 
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setString(1, project.getProjectName());
+            ps.setInt(1, project.getId());
             ps.executeUpdate();
 
         } catch (SQLException ex)

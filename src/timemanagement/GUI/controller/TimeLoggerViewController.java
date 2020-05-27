@@ -882,7 +882,7 @@ public class TimeLoggerViewController implements Initializable
                         model.updateProjectTime(selectedProject);
                     }
                 }
-            } else if (selectedTask == null && txt_newUsedTime.getText().isEmpty())
+            } else if (selectedTask == null || txt_newUsedTime.getText().isEmpty())
             {
                 alertString = "Could not update time. Please try again.";
                 showAlert();

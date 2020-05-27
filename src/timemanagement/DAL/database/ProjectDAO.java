@@ -144,19 +144,10 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "UPDATE\n"
-                    + "	P \n"
-                    + "SET \n"
-                    + "	P.usedTime = t.usedTime\n"
-                    + "FROM\n"
-                    + "	Project AS p\n"
-                    + "INNER JOIN\n"
-                    + "	(\n"
-                    + "		SELECT Task.projectId, SUM(Task.usedTime) usedTime\n"
+            String sql = "UPDATE P SET P.usedTime = t.usedTime FROM Project AS p\n"
+                    + "INNER JOIN(SELECT Task.projectId, SUM(Task.usedTime) usedTime\n"
                     + "		FROM Task\n"
-                    + "		GROUP BY Task.projectId\n"
-                    + "	) t\n"
-                    + "	ON t.projectId = p.id\n"
+                    + "		GROUP BY Task.projectId) t ON t.projectId = p.id\n"
                     + " WHERE projectName = (?)";
 
 

@@ -219,7 +219,6 @@ public class TimeLoggerViewController implements Initializable
             ObservableList<String> roles = FXCollections.observableArrayList("Admin", "User");
             userComboBox.setItems(roles);
 
-
             fillChart();
 
         } catch (ModelException ex)
@@ -230,10 +229,11 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Transfers the selectedUser from one controller to the other
-     * Sets the text for loginTextField and fills all the tableviews.
+     * Transfers the selectedUser from one controller to the other Sets the text
+     * for loginTextField and fills all the tableviews.
+     *
      * @param selectedUser
-     * @throws ModelException 
+     * @throws ModelException
      */
     public void applyImportantData(User selectedUser) throws ModelException
     {
@@ -929,33 +929,17 @@ public class TimeLoggerViewController implements Initializable
             List<Task> taskNames = model.getAllTasksProjectName();
             ObservableList<Task> result = FXCollections.observableArrayList();
             Date start = new SimpleDateFormat("yyyy-MM-dd").parse(startDate.getValue().toString());
-
-            Calendar calendar2 = Calendar.getInstance();
-            calendar2.setTime(start);
-            calendar2.add(Calendar.DATE, 1);
-            Date sDate = calendar2.getTime();
-
             Date end = new SimpleDateFormat("yyyy-MM-dd").parse(endDate.getValue().toString());
-            Calendar calendar3 = Calendar.getInstance();
-            calendar3.setTime(end);
-            calendar3.add(Calendar.DATE, 1);
-            Date eDate = calendar3.getTime();
 
             for (Task tasks : taskNames)
             {
-                check = tasks.getUserId() == this.selectedUser.getId();
                 Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDate());
-
-                Calendar calendar1 = Calendar.getInstance();
-                calendar1.setTime(date1);
-                calendar1.add(Calendar.DATE, 1);
-                Date x = calendar1.getTime();
-                if (x.after(sDate) && x.before(eDate) && check || x.equals(sDate) && check || x.equals(eDate) && check)
+                check = tasks.getUserId() == this.selectedUser.getId();
+                if (date1.after(start) && date1.before(end) && check || date1.equals(start) && check || date1.equals(end) && check)
                 {
                     result.add(tasks);
                 }
             }
-
             tasksTableView.setItems(result);
         } catch (ParseException ex)
         {
@@ -1158,8 +1142,9 @@ public class TimeLoggerViewController implements Initializable
 
     /**
      * Deletes a project from the view, and archives it in the database.
-     * Archives every task belonging to the selected project.
-     * Removes the project as well as the tasks from the comboboxes. 
+     * Archives every task belonging to the selected project. Removes the
+     * project as well as the tasks from the comboboxes.
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1189,7 +1174,7 @@ public class TimeLoggerViewController implements Initializable
 
                         for (Task task : toBeDeleted)
                         {
-                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext(); )
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
                             {
                                 Task task1 = iterator.next();
                                 if (task.getId() == task1.getId())
@@ -1245,8 +1230,9 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Deletes a task from the view, and archives it in the database.
-     * Removes the task from every combobox in the program.
+     * Deletes a task from the view, and archives it in the database. Removes
+     * the task from every combobox in the program.
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1269,9 +1255,10 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Deletes a client from the view, and archives it in the database.
-     * Archives every project and task belonging to the given client. 
-     * Removes the client, projects and tasks from all the comboboxes. 
+     * Deletes a client from the view, and archives it in the database. Archives
+     * every project and task belonging to the given client. Removes the client,
+     * projects and tasks from all the comboboxes.
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1317,7 +1304,7 @@ public class TimeLoggerViewController implements Initializable
 
                         for (Task task : toBeDeleted)
                         {
-                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext(); )
+                            for (ListIterator<Task> iterator = filteredTaskList.listIterator(); iterator.hasNext();)
                             {
                                 Task task1 = iterator.next();
                                 if (task.getId() == task1.getId())
@@ -1338,7 +1325,7 @@ public class TimeLoggerViewController implements Initializable
 
                         for (Project project : tempDeletedList)
                         {
-                            for (ListIterator<Project> iterator = projectComboBox.getItems().listIterator(); iterator.hasNext(); )
+                            for (ListIterator<Project> iterator = projectComboBox.getItems().listIterator(); iterator.hasNext();)
                             {
                                 Project project1 = iterator.next();
                                 if (project.getId() == project1.getId())
@@ -1350,7 +1337,7 @@ public class TimeLoggerViewController implements Initializable
 
                         for (Project project : tempDeletedList)
                         {
-                            for (ListIterator<Project> iterator = projectComboBox2.getItems().listIterator(); iterator.hasNext(); )
+                            for (ListIterator<Project> iterator = projectComboBox2.getItems().listIterator(); iterator.hasNext();)
                             {
                                 Project project1 = iterator.next();
                                 if (project.getId() == project1.getId())
@@ -1388,34 +1375,20 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Filters the tasks displayed in the analysis tab depending on the dates selected.
+     * Filters the tasks displayed in the analysis tab depending on the dates
+     * selected.
      */
     private ObservableList<Task> analyseChartFilter() throws ModelException, ParseException
     {
         List<Task> taskNames = model.getAllTasksProjectName();
         ObservableList<Task> result = FXCollections.observableArrayList();
         Date start = new SimpleDateFormat("yyyy-MM-dd").parse(chartStartDate.getValue().toString());
-
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.setTime(start);
-        calendar2.add(Calendar.DATE, 1);
-        Date sDate = calendar2.getTime();
-
         Date end = new SimpleDateFormat("yyyy-MM-dd").parse(chartEndDate.getValue().toString());
-        Calendar calendar3 = Calendar.getInstance();
-        calendar3.setTime(end);
-        calendar3.add(Calendar.DATE, 1);
-        Date eDate = calendar3.getTime();
 
         for (Task tasks : taskNames)
         {
             Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDate());
-
-            Calendar calendar1 = Calendar.getInstance();
-            calendar1.setTime(date1);
-            calendar1.add(Calendar.DATE, 1);
-            Date x = calendar1.getTime();
-            if (x.after(sDate) && x.before(eDate) || x.equals(sDate) || x.equals(eDate))
+            if (date1.after(start) && date1.before(end) || date1.equals(start) || date1.equals(end))
             {
                 result.add(tasks);
             }
@@ -1425,6 +1398,7 @@ public class TimeLoggerViewController implements Initializable
 
     /**
      * Calls the filterChart method
+     *
      * @throws ModelException DalException
      */
     @FXML
@@ -1471,11 +1445,12 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Sets the data for the chart in the analysis tab.
-     * If a specific project is selected, loads all the tasks from the project.
-     * Otherwise loads data for every project in the program.
+     * Sets the data for the chart in the analysis tab. If a specific project is
+     * selected, loads all the tasks from the project. Otherwise loads data for
+     * every project in the program.
+     *
      * @throws ModelException
-     * @throws ParseException 
+     * @throws ParseException
      */
     private void filterChartMethod() throws ModelException, ParseException
     {
@@ -1533,9 +1508,10 @@ public class TimeLoggerViewController implements Initializable
 
     /**
      * Clears the datefilters in the analysis tab.
+     *
      * @param event
      * @throws ModelException
-     * @throws ParseException 
+     * @throws ParseException
      */
     @FXML
     private void clearAnalysisDate(ActionEvent event) throws ModelException, ParseException

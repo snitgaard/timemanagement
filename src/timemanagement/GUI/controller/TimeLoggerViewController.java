@@ -199,6 +199,8 @@ public class TimeLoggerViewController implements Initializable
     private JFXDatePicker chartStartDate;
     @FXML
     private JFXDatePicker chartEndDate;
+    @FXML
+    private boolean check;
 
     /**
      * Initializes the controller class.
@@ -941,13 +943,14 @@ public class TimeLoggerViewController implements Initializable
 
             for (Task tasks : taskNames)
             {
+                check = tasks.getUserId() == this.selectedUser.getId();
                 Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDate());
 
                 Calendar calendar1 = Calendar.getInstance();
                 calendar1.setTime(date1);
                 calendar1.add(Calendar.DATE, 1);
                 Date x = calendar1.getTime();
-                if (x.after(sDate) && x.before(eDate) && tasks.getUserId() == this.selectedUser.getId() || x.equals(sDate) || x.equals(eDate))
+                if (x.after(sDate) && x.before(eDate) && check || x.equals(sDate) && check || x.equals(eDate) && check)
                 {
                     result.add(tasks);
                 }

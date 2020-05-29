@@ -199,7 +199,6 @@ public class TimeLoggerViewController implements Initializable
     private JFXDatePicker chartStartDate;
     @FXML
     private JFXDatePicker chartEndDate;
-    @FXML
     private boolean check;
 
     /**
@@ -961,7 +960,7 @@ public class TimeLoggerViewController implements Initializable
     @FXML
     private void taskClearFilter(ActionEvent event) throws ModelException
     {
-        if (startDate.getValue() != null && endDate.getValue() != null)
+        if (startDate.getValue() != null || endDate.getValue() != null)
         {
             tasksTableView.setItems(filteredTaskList);
             startDate.setValue(null);
@@ -1516,7 +1515,7 @@ public class TimeLoggerViewController implements Initializable
     @FXML
     private void clearAnalysisDate(ActionEvent event) throws ModelException, ParseException
     {
-        if (chartStartDate.getValue() != null && chartEndDate.getValue() != null)
+        if (chartStartDate.getValue() != null || chartEndDate.getValue() != null)
         {
             barChart.getData().clear();
             filterChartMethod();

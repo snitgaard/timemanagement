@@ -210,13 +210,21 @@ public class Model
         {
             User user = bllManager.createUser(userLogin, userPassword, isAdmin, email, fullName);
 
-            user.setAdminRights("User");
+            if (isAdmin == 0)
+            {
+                user.setAdminRights("User");
+            } else
+            {
+                user.setAdminRights("Admin");
+            }
+            
             allUsers.add(user);
         } catch (bllException ex)
         {
             throw new ModelException(ex.getMessage());
         }
     }
+    
 
     /**
      * Creates a task with all the given parameters.

@@ -200,7 +200,7 @@ public class TimeLoggerViewController implements Initializable
     @FXML
     private JFXDatePicker chartEndDate;
     private boolean check;
-    
+
     private int prefBarGap = -10;
 
     /**
@@ -1108,7 +1108,7 @@ public class TimeLoggerViewController implements Initializable
                     XYChart.Series set1 = new XYChart.Series<>();
                     XYChart.Series set2 = new XYChart.Series<>();
                     barChart.setAnimated(false);
-                    barChart.setBarGap(-10);
+                    barChart.setBarGap(prefBarGap);
                     set1.setName("Paid task");
                     set2.setName("Not paid task");
                     Platform.runLater(() -> barChart.getData().addAll(set1, set2));
@@ -1120,7 +1120,7 @@ public class TimeLoggerViewController implements Initializable
                                     + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         } else if (allTasks.getPaid() == 0)
                         {
-                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " 
+                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - "
                                     + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
                     }
@@ -1476,12 +1476,12 @@ public class TimeLoggerViewController implements Initializable
                     {
                         if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 1)
                         {
-                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + 
-                                    allTasks.getUsedTime()), allTasks.getUsedTime()));
+                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - "
+                                    + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 0)
                         {
-                            set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + 
-                                    allTasks.getUsedTime()), allTasks.getUsedTime()));
+                            set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - "
+                                    + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
                     }
                 } else
@@ -1490,12 +1490,12 @@ public class TimeLoggerViewController implements Initializable
                     {
                         if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 1)
                         {
-                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " +
-                                    allTasks.getUsedTime()), allTasks.getUsedTime()));
+                            set2.getData().add(new BarChart.Data((allTasks.getTaskName() + " - "
+                                    + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         } else if (allTasks.getProjectId() == selectedProject.getId() && allTasks.getPaid() == 0)
                         {
-                            set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - " + 
-                                    allTasks.getUsedTime()), allTasks.getUsedTime()));
+                            set3.getData().add(new BarChart.Data((allTasks.getTaskName() + " - "
+                                    + allTasks.getUsedTime()), allTasks.getUsedTime()));
                         }
                     }
                 }
@@ -1509,7 +1509,6 @@ public class TimeLoggerViewController implements Initializable
             }
         } catch (NullPointerException e)
         {
-
         }
     }
 

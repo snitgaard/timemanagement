@@ -759,10 +759,10 @@ public class TimeLoggerViewController implements Initializable
             if (createAdminCheckBox.isSelected() && !userLogin.isEmpty() && !txt_userPassword.getText().isEmpty() && !email.isEmpty() && !fullName.isEmpty())
             {
                 model.createUser(userLogin, userPassword, 1, email, fullName);
-            } else if (!createAdminCheckBox.isSelected() && !txt_userLogin.getText().isEmpty() && !txt_userPassword.getText().isEmpty() && !email.isEmpty() && !fullName.isEmpty())
+            } else if (!createAdminCheckBox.isSelected() && !userLogin.isEmpty() && !txt_userPassword.getText().isEmpty() && !email.isEmpty() && !fullName.isEmpty())
             {
                 model.createUser(userLogin, userPassword, 0, email, fullName);
-            } else if (txt_userLogin.getText().isEmpty() || txt_userPassword.getText().isEmpty() || email.isEmpty() || fullName.isEmpty())
+            } else if (userLogin.isEmpty() || txt_userPassword.getText().isEmpty() || email.isEmpty() || fullName.isEmpty())
             {
                 alertString = "Could not create user or admin. Please try again";
                 showAlert();

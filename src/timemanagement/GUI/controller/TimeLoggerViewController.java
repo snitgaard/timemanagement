@@ -1271,6 +1271,7 @@ public class TimeLoggerViewController implements Initializable
         Client selectedClient = clientTableView.getSelectionModel().getSelectedItem();
         ArrayList<Project> tempDeletedList = new ArrayList<>();
         ArrayList<Task> toBeDeleted = new ArrayList<>();
+        List<Task> allTasks = model.getAllTasks();
         Thread thread = new Thread(new Runnable()
         {
             public void run()
@@ -1293,8 +1294,9 @@ public class TimeLoggerViewController implements Initializable
 
                         for (Project project1 : tempDeletedList)
                         {
-                            for (Task task : filteredTaskList)
+                            for (Task task : allTasks)
                             {
+                                
                                 if (project1.getId() == task.getProjectId())
                                 {
                                     toBeDeleted.add(task);

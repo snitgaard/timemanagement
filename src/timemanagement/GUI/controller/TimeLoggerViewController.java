@@ -351,7 +351,7 @@ public class TimeLoggerViewController implements Initializable
         usedTimeColumn.setCellValueFactory(cellData -> cellData.getValue().usedTimeObservableValue());
         dateColumn.setCellValueFactory(cellData -> cellData.getValue().dateProperty());
 
-        //Projekter tableview
+        //Projects tableview
         setProjectTable();
 
         //User & Admin views
@@ -837,10 +837,12 @@ public class TimeLoggerViewController implements Initializable
 
                 if (quartersCheckBox.isSelected())
                 {
-                    selectedProject = model.createProject(txt_projectName.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
+                    selectedProject = model.createProject(txt_projectName.getText(), model.getClientId(selectedClient.getClientName()),
+                                                LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
                 } else
                 {
-                    selectedProject = model.createProject(txt_projectName.getText(), model.getClientId(selectedClient.getClientName()), LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
+                    selectedProject = model.createProject(txt_projectName.getText(), model.getClientId(selectedClient.getClientName()),
+                                                LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
                 }
 
                 projectComboBox.getItems().add(selectedProject);
@@ -1070,11 +1072,11 @@ public class TimeLoggerViewController implements Initializable
             if (!txt_Client.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_Contact.getText().isEmpty() && !txt_ClientHourlyRate.getText().isEmpty())
             {
                 {
-                    String kundeNavn = txt_Client.getText();
+                    String clientName = txt_Client.getText();
                     String contactPerson = txt_Contact.getText();
                     String email = txt_Email.getText();
                     Double hourlyRate = Double.parseDouble(txt_ClientHourlyRate.getText());
-                    selectedClient = model.createClient(kundeNavn, contactPerson, email, hourlyRate, 0);
+                    selectedClient = model.createClient(clientName, contactPerson, email, hourlyRate, 0);
                     clientComboBox.getItems().add(selectedClient);
 
                 }
@@ -1425,7 +1427,7 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Gets the selected project, and calculate the estimated chost price, from
+     * Gets the selected project, and calculate the estimated cost price, from
      * the hourly rate and the time used Formated correctly.
      */
     private void calculateCostPrice()

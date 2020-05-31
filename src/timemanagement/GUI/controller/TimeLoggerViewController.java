@@ -1437,11 +1437,11 @@ public class TimeLoggerViewController implements Initializable
                 costPrice.clear();
                 double usedTime = projectsTableView.getSelectionModel().getSelectedItem().getUsedTime();
                 double hourlyRate = projectsTableView.getSelectionModel().getSelectedItem().getHourlyRate() / 60;
-                double estimatedChostPrice = usedTime * hourlyRate;
+                double estimatedCostPrice = usedTime * hourlyRate;
 
                 String pattern = "####,####,###.##";
                 DecimalFormat decimalFormat = new DecimalFormat(pattern);
-                String number = decimalFormat.format(estimatedChostPrice);
+                String number = decimalFormat.format(estimatedCostPrice);
                 costPrice.setText(number);
             } catch (NullPointerException ex)
             {

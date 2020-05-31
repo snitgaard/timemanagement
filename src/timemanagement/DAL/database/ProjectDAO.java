@@ -65,10 +65,15 @@ public class ProjectDAO
      * @param clientId
      * @param startDate
      * @param usedTime
+     * @param isDeleted
+     * @param clientName
+     * @param hourlyRate
+     * @param rounded
      * @return
      * @throws DalException
      */
-    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException
+    public Project createProject(String projectName, int clientId, String startDate,
+            long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -95,7 +100,6 @@ public class ProjectDAO
             }
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
             throw new DalException("Could not create project");
         }
         return null;
@@ -179,7 +183,7 @@ public class ProjectDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not delete project");
         }
     }
 
@@ -205,7 +209,7 @@ public class ProjectDAO
 
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not delete the project");
         }
         return project;
 

@@ -185,7 +185,8 @@ public class DalManager implements DalFacade
      * @throws DalException 
      */
     @Override
-    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException
+    public Project createProject(String projectName, int clientId, String startDate,
+            long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException
     {
         return projectDAO.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
     }

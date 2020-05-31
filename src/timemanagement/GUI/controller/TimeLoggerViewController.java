@@ -821,7 +821,6 @@ public class TimeLoggerViewController implements Initializable
         Client selectedClient = clientComboBox.getSelectionModel().getSelectedItem();
         Project selectedProject = null;
         double doubleHourlyRate = 0;
-
         try
         {
             if (!txt_projectName.getText().isEmpty() && selectedClient != null)

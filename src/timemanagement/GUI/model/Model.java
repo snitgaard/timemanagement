@@ -182,7 +182,8 @@ public class Model
      * row was added, false if not
      * @throws ModelException
      */
-    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws ModelException
+    public Project createProject(String projectName, int clientId, String startDate,
+                                long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws ModelException
     {
         try
         {

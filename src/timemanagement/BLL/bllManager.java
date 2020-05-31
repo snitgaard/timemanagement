@@ -187,7 +187,8 @@ public class bllManager implements bllFacade
      * @throws DalException 
      */
     @Override
-    public Project createProject(String projectName, int clientId, String startDate, long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException
+    public Project createProject(String projectName, int clientId, String startDate,
+                                long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws bllException
     {
         try
         {

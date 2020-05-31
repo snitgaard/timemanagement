@@ -239,7 +239,7 @@ public class TimeLoggerViewController implements Initializable
     public void applyImportantData(User selectedUser) throws ModelException
     {
         this.selectedUser = selectedUser;
-        loginTextField.setText(selectedUser + "");
+        loginTextField.setText(selectedUser.getFullName());
         fillColumns();
     }
 

@@ -682,7 +682,7 @@ public class TimeLoggerViewController implements Initializable
 
     /**
      * Calls the taskData method as an action event, and disables start button
-     * if titlefield and beskrivelsetextarea is not empty.
+     * if titlefield and descriptiontextarea is not empty.
      *
      * @throws ModelException
      */

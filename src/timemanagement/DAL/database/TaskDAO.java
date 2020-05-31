@@ -62,6 +62,15 @@ public class TaskDAO
     /**
      * Creates SQL Connection and creates a new Task.
      *
+     * @param taskName
+     * @param projectId
+     * @param usedTime
+     * @param date
+     * @param paid
+     * @param description
+     * @param projectName
+     * @param isDeleted
+     * @param userId
      * @return
      * @throws DalException
      */
@@ -93,7 +102,6 @@ public class TaskDAO
             }
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
             throw new DalException("Could not create task");
         }
         return null;
@@ -125,8 +133,9 @@ public class TaskDAO
      * Adds up time spent on a task and rounds up to nearest 15 minutes.
      * @param usedTime
      * @param id 
+     * @throws DalException 
      */
-    public void addRoundedTime(double usedTime, int id)
+    public void addRoundedTime(double usedTime, int id) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -137,7 +146,7 @@ public class TaskDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not fetch add roundedTime");
         }
     }
 
@@ -178,8 +187,9 @@ public class TaskDAO
     /**
      * Edits the name and/or description and/or paid status of a task.
      * @param task 
+     * @throws DalException 
      */
-    public void editTask(Task task)
+    public void editTask(Task task) throws DalException
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -192,7 +202,7 @@ public class TaskDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not edit task");
         }
     }
 
@@ -236,7 +246,7 @@ public class TaskDAO
      * @param task
      * @return 
      */
-    public boolean updateTask(Task task)
+    public boolean updateTask(Task task) 
     {
         try (Connection con = dbCon.getConnection())
         {
@@ -249,7 +259,6 @@ public class TaskDAO
             return true;
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
             return false;
         }
     }
@@ -273,7 +282,7 @@ public class TaskDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not delete task");
         }
     }
 
@@ -297,7 +306,7 @@ public class TaskDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not delete task on project");
         }
     }
 }

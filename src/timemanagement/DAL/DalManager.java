@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * @author Mads
+ * @author The Cowboys
  */
 public class DalManager implements DalFacade
 {
@@ -160,6 +160,7 @@ public class DalManager implements DalFacade
      * @return
      * @throws DalException 
      */
+    @Override
     public List<Task> getAllTasksProjectName() throws DalException
     {
         try
@@ -295,6 +296,7 @@ public class DalManager implements DalFacade
      * @param isAdmin
      * @throws DalException 
      */
+    @Override
     public void updateUserRoles(User user, int isAdmin) throws DalException
     {
         userDAO.updateUserRoles(user, isAdmin);
@@ -375,7 +377,6 @@ public class DalManager implements DalFacade
 
     /**
      * Archives a task in the database.
-     * @param client
      * @param isDeleted
      * @throws DalException 
      */

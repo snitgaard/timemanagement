@@ -58,6 +58,11 @@ public class ClientDAO
     /**
      * Creates SQL Connetion and creates a new Client.
      *
+     * @param clientName
+     * @param contactPerson
+     * @param email
+     * @param isDeleted
+     * @param hourlyRate
      * @return
      * @throws DalException
      */
@@ -87,7 +92,6 @@ public class ClientDAO
 
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
             throw new DalException("Could not create Client");
         }
         return null;
@@ -143,7 +147,7 @@ public class ClientDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not delete user");
         }
     }
 }

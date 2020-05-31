@@ -21,7 +21,7 @@ import timemanagement.BLL.bllException;
 import timemanagement.DAL.DalException;
 
 /**
- * @author jigzi
+ * @author The Cowboys
  */
 public class Model
 {
@@ -35,7 +35,7 @@ public class Model
     private ObservableList<Client> allClients;
 
     /**
-     * constructor for Model
+     * Constructor for Model
      */
     public Model()
     {
@@ -78,7 +78,7 @@ public class Model
         }
     }
     
-        /**
+     /**
      * Returns a specific user
      * @param userLogin
      * @return

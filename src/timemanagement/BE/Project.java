@@ -32,6 +32,10 @@ public class Project
      * @param clientId
      * @param startDate
      * @param usedTime
+     * @param isDeleted
+     * @param ClientName
+     * @param hourlyRate
+     * @param rounded
      */
     public Project(int id, String projectNavn, int clientId, String startDate, long usedTime, int isDeleted, String ClientName, double hourlyRate, int rounded)
     {
@@ -49,9 +53,15 @@ public class Project
     /**
      * Constructor for Project
      *
+     * @param id
      * @param projectName
      * @param clientName
      * @param usedTime
+     * @param startDate
+     * @param isDeleted
+     * @param clientId
+     * @param hourlyRate
+     * @param rounded
      */
     public Project(int id, String projectName, String clientName, long usedTime, String startDate, int isDeleted, double hourlyRate, int rounded, int clientId)
     {
@@ -177,9 +187,9 @@ public class Project
     }
 
     /**
-     * getter for startDato
+     * getter for startDate
      *
-     * @return startDato
+     * @return startDate
      */
     public String getStartDate()
     {
@@ -187,7 +197,7 @@ public class Project
     }
 
     /**
-     * setter for startDato
+     * setter for startDate
      *
      * @param startDate
      */

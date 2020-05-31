@@ -19,7 +19,7 @@ import static utilities.encryptThisString.encryptThisString;
 
 /**
  *
- * @author jigzi
+ * @author The Cowboys
  */
 public class NewEmptyJUnitTest {
     

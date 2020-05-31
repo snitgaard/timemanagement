@@ -21,13 +21,14 @@ public class Client
     private IntegerProperty isDeleted;
 
     /**
-     * Constructor for Kunde
+     * Constructor for Client
      *
      * @param id
      * @param clientName
      * @param contactPerson
      * @param email
      * @param hourlyRate
+     * @param isDeleted
      */
     public Client(int id, String clientName, String contactPerson, String email, double hourlyRate, int isDeleted)
     {

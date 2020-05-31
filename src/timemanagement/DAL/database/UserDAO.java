@@ -78,7 +78,6 @@ public class UserDAO
             }
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
             throw new DalException("Could not delete User");
         }
     }
@@ -89,6 +88,8 @@ public class UserDAO
      * @param userLogin
      * @param userPassword
      * @param isAdmin
+     * @param email
+     * @param fullName
      * @return
      * @throws DalException
      */
@@ -118,7 +119,6 @@ public class UserDAO
 
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
             throw new DalException("Could not create User");
         }
         return null;
@@ -264,7 +264,7 @@ public class UserDAO
             ps.executeUpdate();
         } catch (SQLException ex)
         {
-            ex.printStackTrace();
+            throw new DalException("Could not update user roles");
         }
     }
 

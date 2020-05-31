@@ -161,7 +161,7 @@ public class ProjectDAO
 
         } catch (SQLException ex)
         {
-            throw new DalException("Could not fetch all classes");
+            throw new DalException("Could not update time");
         }
     }
 

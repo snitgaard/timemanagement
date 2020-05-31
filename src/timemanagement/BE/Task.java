@@ -32,6 +32,11 @@ public class Task
      * @param projectId
      * @param usedTime
      * @param date
+     * @param description
+     * @param paid
+     * @param projectName
+     * @param userId
+     * @param isDeleted
      */
     public Task(int id, String taskName, int projectId, long usedTime, String date, String description, int paid, String projectName, int isDeleted, int userId)
     {
@@ -55,6 +60,10 @@ public class Task
      * @param projectName
      * @param usedTime
      * @param date
+     * @param projektId
+     * @param userId
+     * @param beskrivelse
+     * @param betalt
      */
     public Task(int id, String taskName, String projectName, long usedTime, String date, int projektId, int userId, String beskrivelse, int betalt)
     {
@@ -226,7 +235,7 @@ public class Task
      *
      * @param date
      */
-    public void setDato(String date)
+    public void setDate(String date)
     {
         this.date.set(date);
     }

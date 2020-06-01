@@ -74,7 +74,7 @@ public class User
     }
 
     /**
-     * returns email as an observable Object
+     * returns email as StringProperty
      *
      * @return email
      */
@@ -102,7 +102,7 @@ public class User
     }
 
     /**
-     * returns fullName as an observable Object
+     * returns fullName as StringProperty
      *
      * @return fullName
      */
@@ -130,7 +130,7 @@ public class User
     }
 
     /**
-     * returns adminRights as an observable Object
+     * returns adminRights as StringProperty
      *
      * @return adminRights
      */
@@ -180,7 +180,7 @@ public class User
     }
 
     /**
-     * returns userLogin as an observable Object
+     * returns userLogin as StringProperty
      *
      * @return userLogin
      */
@@ -210,7 +210,7 @@ public class User
     }
 
     /**
-     * returns userPassword as an observable Object
+     * returns userPassword as StringProperty
      *
      * @return userPassword
      */

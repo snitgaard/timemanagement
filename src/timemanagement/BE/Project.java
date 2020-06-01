@@ -117,7 +117,7 @@ public class Project
     }
 
     /**
-     * returns projectName as an observable Object
+     * returns projectName as StringProperty
      *
      * @return projectName
      */
@@ -177,7 +177,7 @@ public class Project
     }
 
     /**
-     * returns clientName as an observable Object
+     * returns clientName as StringProperty
      *
      * @return clientName
      */
@@ -207,7 +207,7 @@ public class Project
     }
 
     /**
-     * returns startDate as an observable Object
+     * returns startDate as StringProperty
      *
      * @return startDate
      */

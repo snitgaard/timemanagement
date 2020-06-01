@@ -119,7 +119,7 @@ public class Task
     }
 
     /**
-     * returns taskName as an observable Object
+     * returns taskName as StringProperty
      *
      * @return taskName
      */
@@ -150,7 +150,7 @@ public class Task
     }
 
     /**
-     * returns projectName as an observable Object
+     * returns projectName as StringProperty
      *
      * @return projectName
      */
@@ -241,7 +241,7 @@ public class Task
     }
 
     /**
-     * returns date as an observable Object
+     * returns date as StringProperty
      *
      * @return date
      */
@@ -282,7 +282,7 @@ public class Task
     }
 
     /**
-     * returns description as an observable Object
+     * returns description as StringProperty
      *
      * @return description
      */

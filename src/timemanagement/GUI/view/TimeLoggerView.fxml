@@ -81,115 +81,6 @@
       </VBox>
       <StackPane fx:id="stackPane" layoutX="228.0" prefHeight="591.0" prefWidth="719.0">
          <children>
-            <SplitPane fx:id="createUserPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-               <items>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
-                     <children>
-                        <JFXTextField fx:id="txt_userPassword" layoutX="135.0" layoutY="95.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Password" />
-                        <JFXTextField fx:id="txt_userLogin" layoutX="135.0" layoutY="53.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter Username" />
-                        <JFXCheckBox fx:id="createAdminCheckBox" layoutX="135.0" layoutY="238.0" text="Admin">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </JFXCheckBox>
-                        <TableView fx:id="userView" layoutX="1.0" layoutY="277.0" prefHeight="268.0" prefWidth="717.0">
-                          <columns>
-                            <TableColumn fx:id="userViewUsername" prefWidth="163.0" text="Username" />
-                              <TableColumn fx:id="userViewFullName" prefWidth="230.0" text="Full Name" />
-                              <TableColumn fx:id="userViewEmail" prefWidth="190.0" text="Email" />
-                              <TableColumn fx:id="userViewRole" prefWidth="133.0" text="Role" />
-                          </columns>
-                        </TableView>
-                        <JFXButton layoutX="240.0" layoutY="233.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXButton layoutX="585.0" layoutY="552.0" onAction="#deleteUser" style="-fx-border-color: black;" text="Delete Account">
-                           <graphic>
-                              <FontAwesomeIconView text="" />
-                           </graphic>
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font>
-                        </JFXButton>
-                        <JFXComboBox fx:id="userComboBox" layoutX="412.0" layoutY="90.0" promptText="List Of Roles" />
-                        <JFXButton layoutX="553.0" layoutY="87.0" onAction="#updateUserRole" style="-fx-border-color: black;" text="Update">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></JFXButton>
-                        <Label layoutX="22.0" layoutY="15.0" prefHeight="31.0" prefWidth="171.0" text="Create New Account">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="50.0" layoutY="56.0" prefHeight="25.0" prefWidth="63.0" text="Username">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="55.0" layoutY="99.0" prefHeight="25.0" prefWidth="60.0" text="Password">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <JFXTextField fx:id="txt_userEmail" layoutX="135.0" layoutY="183.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Email" />
-                        <JFXTextField fx:id="txt_userFullName" layoutX="135.0" layoutY="139.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Full Name" />
-                        <Label layoutX="50.0" layoutY="186.0" prefHeight="25.0" prefWidth="67.0" text="User Email">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="50.0" layoutY="143.0" prefHeight="25.0" prefWidth="66.0" text="Full Name">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="412.0" layoutY="59.0" text="Select a user to update their role">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                     </children>
-                  </AnchorPane>
-               </items>
-            </SplitPane>
-            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
-              <items>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-                     <children>
-                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
-                          <xAxis>
-                            <CategoryAxis side="BOTTOM" fx:id="x" />
-                          </xAxis>
-                          <yAxis>
-                            <NumberAxis fx:id="y" side="LEFT" />
-                          </yAxis>
-                        </BarChart>
-                        <JFXComboBox fx:id="projectComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
-                        <JFXDatePicker fx:id="chartStartDate" editable="false" layoutX="112.0" layoutY="131.0" onAction="#handleFilterCharts" promptText="Select Start Date" />
-                        <JFXDatePicker fx:id="chartEndDate" editable="false" layoutX="394.0" layoutY="131.0" onAction="#handleFilterCharts" promptText="Select End Date" />
-                        <Label layoutX="32.0" layoutY="81.0" text="Project">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="171.0" text="Analysis">
-                           <font>
-                              <Font name="System Bold" size="17.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="32.0" layoutY="135.0" text="Start Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <Label layoutX="328.0" layoutY="135.0" text="End Date">
-                           <font>
-                              <Font size="14.0" />
-                           </font>
-                        </Label>
-                        <JFXButton layoutX="593.0" layoutY="130.0" onAction="#clearAnalysisDate" text="Clear date" />
-                     </children>
-                  </AnchorPane>
-              </items>
-            </SplitPane>
             <SplitPane fx:id="timeLoggerPane" dividerPositions="0.5" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0" style="-fx-background-color: white;">
                <items>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="325.0" prefWidth="717.0">
@@ -302,6 +193,15 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
+                        <JFXTextField fx:id="txt_Client" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_Contact" layoutX="102.0" layoutY="81.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_Email" layoutX="102.0" layoutY="121.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXTextField fx:id="txt_ClientHourlyRate" layoutX="102.0" layoutY="157.0" prefHeight="25.0" prefWidth="202.0" />
+                        <JFXButton layoutX="348.0" layoutY="154.0" onAction="#handleCreateClient" style="-fx-border-color: grey;" text="Create client">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font>
+                        </JFXButton>
                         <TableView fx:id="clientTableView" layoutY="204.0" prefHeight="341.0" prefWidth="717.0">
                           <columns>
                             <TableColumn fx:id="clientNameColumn" prefWidth="190.0" text="Client name" />
@@ -310,19 +210,10 @@
                               <TableColumn fx:id="clientHourlyRateColumn" prefWidth="165.0" text="Hourly rate in minutes" />
                           </columns>
                         </TableView>
-                        <JFXTextField fx:id="txt_Contact" layoutX="102.0" layoutY="81.0" prefHeight="25.0" prefWidth="202.0" />
-                        <JFXTextField fx:id="txt_Email" layoutX="102.0" layoutY="121.0" prefHeight="25.0" prefWidth="202.0" />
-                        <JFXTextField fx:id="txt_ClientHourlyRate" layoutX="102.0" layoutY="157.0" prefHeight="25.0" prefWidth="202.0" />
-                        <JFXTextField fx:id="txt_Client" layoutX="102.0" layoutY="50.0" prefHeight="25.0" prefWidth="202.0" />
                         <Label layoutX="20.0" layoutY="93.0" prefHeight="17.0" prefWidth="60.0" text="Contact" />
                         <Label layoutX="20.0" layoutY="125.0" prefHeight="17.0" prefWidth="60.0" text="Email" />
                         <Label layoutX="20.0" layoutY="161.0" prefHeight="17.0" prefWidth="60.0" text="Hourly rate" />
                         <Label layoutX="20.0" layoutY="54.0" prefHeight="17.0" prefWidth="60.0" text="Client" />
-                        <JFXButton layoutX="348.0" layoutY="154.0" onAction="#handleCreateClient" style="-fx-border-color: grey;" text="Create client">
-                           <font>
-                              <Font name="System Bold" size="14.0" />
-                           </font>
-                        </JFXButton>
                         <JFXButton layoutX="604.0" layoutY="554.0" onAction="#handleDeleteClient" style="-fx-border-color: black;" text="Delete client">
                            <font>
                               <Font name="System Bold" size="13.0" />
@@ -333,6 +224,60 @@
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Label>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane fx:id="projectPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView fx:id="projectsTableView" layoutY="220.0" prefHeight="324.0" prefWidth="717.0">
+                          <columns>
+                            <TableColumn fx:id="projectNameAdminColumn" prefWidth="237.0" text="Project Name" />
+                            <TableColumn fx:id="clientColumn" prefWidth="127.0" text="Customer" />
+                              <TableColumn fx:id="usedTimeAdminColumn" prefWidth="207.0" text="Used Time In Minutes" />
+                              <TableColumn fx:id="hourlyRateAdminColumn" prefWidth="145.0" text="Hourly rate In DKK" />
+                          </columns>
+                        </TableView>
+                        <JFXTextField fx:id="txt_projectName" layoutX="145.0" layoutY="53.0" prefHeight="25.0" prefWidth="224.0" />
+                        <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="171.0" text="Create New Project">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <JFXComboBox fx:id="clientComboBox" layoutX="145.0" layoutY="92.0" prefHeight="25.0" prefWidth="224.0" />
+                        <JFXTextField fx:id="txt_HourlyRateProject" layoutX="145.0" layoutY="127.0" prefHeight="25.0" prefWidth="224.0" />
+                        <JFXButton layoutX="542.0" layoutY="171.0" onAction="#handleCreateProject" text="Create Project">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXButton layoutX="603.0" layoutY="551.0" onAction="#handleDeleteProject" style="-fx-border-color: grey;" text="Delete project">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
+                        <Label layoutX="15.0" layoutY="55.0" text="Enter Project Name">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="15.0" layoutY="94.0" text="Select customer">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="13.0" layoutY="129.0" text="Enter hourly rate">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="426.0" layoutY="57.0" prefHeight="17.0" prefWidth="84.0" text="Cost Price" />
+                        <JFXTextField fx:id="costPrice" alignment="CENTER" editable="false" layoutX="533.0" layoutY="53.0" prefHeight="25.0" prefWidth="124.0" />
+                        <JFXCheckBox fx:id="quartersCheckBox" layoutX="15.0" layoutY="176.0" text="Round up project time to quarters">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </JFXCheckBox>
+                        <Label layoutX="376.0" layoutY="141.0" text="DKK" />
+                        <Label layoutX="664.0" layoutY="66.0" text="DKK" />
                      </children>
                   </AnchorPane>
               </items>
@@ -393,59 +338,114 @@
                   </AnchorPane>
                </items>
             </SplitPane>
-            <SplitPane fx:id="projectPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+            <SplitPane fx:id="analysePane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                      <children>
-                        <TableView fx:id="projectsTableView" layoutY="220.0" prefHeight="324.0" prefWidth="717.0">
-                          <columns>
-                            <TableColumn fx:id="projectNameAdminColumn" prefWidth="237.0" text="Project Name" />
-                            <TableColumn fx:id="clientColumn" prefWidth="127.0" text="Customer" />
-                              <TableColumn fx:id="usedTimeAdminColumn" prefWidth="207.0" text="Used Time In Minutes" />
-                              <TableColumn fx:id="hourlyRateAdminColumn" prefWidth="145.0" text="Hourly rate In DKK" />
-                          </columns>
-                        </TableView>
-                        <JFXTextField fx:id="txt_projectName" layoutX="145.0" layoutY="53.0" prefHeight="25.0" prefWidth="224.0" />
-                        <Label layoutX="23.0" layoutY="18.0" prefHeight="31.0" prefWidth="171.0" text="Create New Project">
+                        <BarChart fx:id="barChart" layoutY="183.0" prefHeight="406.0" prefWidth="717.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" fx:id="x" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis fx:id="y" side="LEFT" />
+                          </yAxis>
+                        </BarChart>
+                        <JFXComboBox fx:id="projectComboBox2" layoutX="112.0" layoutY="79.0" onAction="#handleFilterCharts" promptText="Select Project" />
+                        <JFXDatePicker fx:id="chartStartDate" editable="false" layoutX="112.0" layoutY="131.0" onAction="#handleFilterCharts" promptText="Select Start Date" />
+                        <JFXDatePicker fx:id="chartEndDate" editable="false" layoutX="394.0" layoutY="131.0" onAction="#handleFilterCharts" promptText="Select End Date" />
+                        <Label layoutX="32.0" layoutY="81.0" text="Project">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="36.0" prefHeight="31.0" prefWidth="171.0" text="Analysis">
                            <font>
                               <Font name="System Bold" size="17.0" />
                            </font>
                         </Label>
-                        <JFXButton layoutX="542.0" layoutY="171.0" onAction="#handleCreateProject" text="Create Project">
+                        <Label layoutX="32.0" layoutY="135.0" text="Start Date">
                            <font>
-                              <Font name="System Bold" size="13.0" />
+                              <Font size="14.0" />
                            </font>
-                        </JFXButton>
-                        <JFXComboBox fx:id="clientComboBox" layoutX="145.0" layoutY="92.0" prefHeight="25.0" prefWidth="224.0" />
-                        <JFXButton layoutX="603.0" layoutY="551.0" onAction="#handleDeleteProject" style="-fx-border-color: grey;" text="Delete project">
-                           <font>
-                              <Font name="System Bold" size="13.0" />
-                           </font></JFXButton>
-                        <JFXTextField fx:id="txt_HourlyRateProject" layoutX="145.0" layoutY="127.0" prefHeight="25.0" prefWidth="224.0" />
-                        <Label layoutX="15.0" layoutY="55.0" text="Enter Project Name">
+                        </Label>
+                        <Label layoutX="328.0" layoutY="135.0" text="End Date">
                            <font>
                               <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="15.0" layoutY="94.0" text="Select customer">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="13.0" layoutY="129.0" text="Enter hourly rate">
-                           <font>
-                              <Font size="14.0" />
-                           </font></Label>
-                        <Label layoutX="426.0" layoutY="57.0" prefHeight="17.0" prefWidth="84.0" text="Cost Price" />
-                        <JFXTextField fx:id="costPrice" alignment="CENTER" editable="false" layoutX="533.0" layoutY="53.0" prefHeight="25.0" prefWidth="124.0" />
-                        <JFXCheckBox fx:id="quartersCheckBox" layoutX="15.0" layoutY="176.0" text="Round up project time to quarters">
+                           </font>
+                        </Label>
+                        <JFXButton layoutX="593.0" layoutY="130.0" onAction="#clearAnalysisDate" text="Clear date" />
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <SplitPane fx:id="createUserPane" orientation="VERTICAL" prefHeight="200.0" prefWidth="160.0">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="589.0" prefWidth="626.0">
+                     <children>
+                        <JFXTextField fx:id="txt_userLogin" layoutX="135.0" layoutY="53.0" prefHeight="30.0" prefWidth="224.0" promptText="Enter Username" />
+                        <JFXTextField fx:id="txt_userPassword" layoutX="135.0" layoutY="95.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Password" />
+                        <JFXTextField fx:id="txt_userFullName" layoutX="135.0" layoutY="139.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Full Name" />
+                        <JFXTextField fx:id="txt_userEmail" layoutX="135.0" layoutY="183.0" prefHeight="32.0" prefWidth="224.0" promptText="Enter Email" />
+                        <JFXCheckBox fx:id="createAdminCheckBox" layoutX="135.0" layoutY="238.0" text="Admin">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </JFXCheckBox>
-                        <Label layoutX="376.0" layoutY="141.0" text="DKK" />
-                        <Label layoutX="664.0" layoutY="66.0" text="DKK" />
+                        <JFXButton layoutX="240.0" layoutY="233.0" onAction="#handleCreateUser" prefHeight="31.0" prefWidth="120.0" style="-fx-border-color: black;" text="Create Account">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <TableView fx:id="userView" layoutX="1.0" layoutY="277.0" prefHeight="268.0" prefWidth="717.0">
+                          <columns>
+                            <TableColumn fx:id="userViewUsername" prefWidth="163.0" text="Username" />
+                              <TableColumn fx:id="userViewFullName" prefWidth="230.0" text="Full Name" />
+                              <TableColumn fx:id="userViewEmail" prefWidth="190.0" text="Email" />
+                              <TableColumn fx:id="userViewRole" prefWidth="133.0" text="Role" />
+                          </columns>
+                        </TableView>
+                        <JFXButton layoutX="585.0" layoutY="552.0" onAction="#deleteUser" style="-fx-border-color: black;" text="Delete Account">
+                           <graphic>
+                              <FontAwesomeIconView text="" />
+                           </graphic>
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </JFXButton>
+                        <JFXComboBox fx:id="userComboBox" layoutX="412.0" layoutY="90.0" promptText="List Of Roles" />
+                        <JFXButton layoutX="553.0" layoutY="87.0" onAction="#updateUserRole" style="-fx-border-color: black;" text="Update">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font></JFXButton>
+                        <Label layoutX="22.0" layoutY="15.0" prefHeight="31.0" prefWidth="171.0" text="Create New Account">
+                           <font>
+                              <Font name="System Bold" size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="50.0" layoutY="56.0" prefHeight="25.0" prefWidth="63.0" text="Username">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="55.0" layoutY="99.0" prefHeight="25.0" prefWidth="60.0" text="Password">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="50.0" layoutY="186.0" prefHeight="25.0" prefWidth="67.0" text="User Email">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="50.0" layoutY="143.0" prefHeight="25.0" prefWidth="66.0" text="Full Name">
+                           <font>
+                              <Font size="14.0" />
+                           </font></Label>
+                        <Label layoutX="412.0" layoutY="59.0" text="Select a user to update their role">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
                      </children>
                   </AnchorPane>
-              </items>
+               </items>
             </SplitPane>
          </children>
       </StackPane>

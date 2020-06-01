@@ -192,7 +192,8 @@ public class bllManager implements bllFacade
     {
         try
         {
-            return dalFacade.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+            return dalFacade.createProject(projectName, clientId, startDate,
+                                           usedTime, isDeleted, clientName, hourlyRate, rounded);
         } catch (DalException ex)
         {
             throw new bllException(ex.getMessage());

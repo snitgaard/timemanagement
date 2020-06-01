@@ -183,11 +183,13 @@ public class Model
      * @throws ModelException
      */
     public Project createProject(String projectName, int clientId, String startDate,
-                                long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws ModelException
+                                long usedTime, int isDeleted, String clientName,
+                                double hourlyRate, int rounded) throws ModelException
     {
         try
         {
-            Project project = bllManager.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+            Project project = bllManager.createProject(projectName, clientId, startDate,
+                                                       usedTime, isDeleted, clientName, hourlyRate, rounded);
             allProjectsWithClients.add(project);
             return project;
         } catch (bllException ex)

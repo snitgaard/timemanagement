@@ -189,7 +189,8 @@ public class DalManager implements DalFacade
     public Project createProject(String projectName, int clientId, String startDate,
             long usedTime, int isDeleted, String clientName, double hourlyRate, int rounded) throws DalException
     {
-        return projectDAO.createProject(projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+        return projectDAO.createProject(projectName, clientId, startDate,
+                                        usedTime, isDeleted, clientName, hourlyRate, rounded);
     }
 
 

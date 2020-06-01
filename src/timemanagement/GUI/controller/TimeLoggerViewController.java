@@ -942,7 +942,9 @@ public class TimeLoggerViewController implements Initializable
             {
                 Date date1 = new SimpleDateFormat("yyyy-MM-dd").parse(tasks.getDate());
                 check = tasks.getUserId() == this.selectedUser.getId();
-                if (date1.after(start) && date1.before(end) && check || date1.equals(start) && check || date1.equals(end) && check)
+                if (date1.after(start) && date1.before(end) && check ||
+                                          date1.equals(start) && check ||  
+                                          date1.equals(end) && check)
                 {
                     result.add(tasks);
                 }

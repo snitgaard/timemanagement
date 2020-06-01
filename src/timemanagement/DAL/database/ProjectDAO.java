@@ -77,7 +77,9 @@ public class ProjectDAO
     {
         try (Connection con = dbCon.getConnection())
         {
-            String sql = "INSERT INTO Project (projectName, clientId, startDate, usedTime, isDeleted, hourlyRate, rounded) VALUES (?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO Project (projectName, clientId, startDate,"
+                    + " usedTime, isDeleted, hourlyRate, rounded) VALUES (?,?,?,?,?,?,?);";
+            
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, projectName);
             ps.setInt(2, clientId);
@@ -94,7 +96,8 @@ public class ProjectDAO
                 if (rs.next())
                 {
                     int id = rs.getInt(1);
-                    Project project = new Project(id, projectName, clientId, startDate, usedTime, isDeleted, clientName, hourlyRate, rounded);
+                    Project project = new Project(id, projectName, clientId, startDate,
+                                                  usedTime, isDeleted, clientName, hourlyRate, rounded);
                     return project;
                 }
             }

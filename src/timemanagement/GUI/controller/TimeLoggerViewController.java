@@ -1035,33 +1035,24 @@ public class TimeLoggerViewController implements Initializable
                 selectedTaskTwo = tasksTableView.getItems().get(i);
             }
         }
-
+   
         if (paidCheckBox.isSelected() == true)
         {
             int paid = 1;
-            selectedTask.setTaskName(titleField.getText());
-            selectedTask.setDescription(descriptionTextArea.getText());
             selectedTask.setPaid(paid);
-            selectedTaskTwo.setTaskName(titleField.getText());
-            model.editTask(selectedTask);
-            taskComboBox.getItems().remove(selectedTask);
-            taskComboBox.getItems().add(selectedTask);
-            taskComboBox.setValue(selectedTask);
-
         } else if (paidCheckBox.isSelected() == false)
         {
             int paid = 0;
+            selectedTask.setPaid(paid);
+        }
             selectedTask.setTaskName(titleField.getText());
             selectedTask.setDescription(descriptionTextArea.getText());
-            selectedTask.setPaid(paid);
             selectedTaskTwo.setTaskName(titleField.getText());
             model.editTask(selectedTask);
             taskComboBox.getItems().remove(selectedTask);
             taskComboBox.getItems().add(selectedTask);
             taskComboBox.setValue(selectedTask);
         }
-
-    }
 
     /**
      * Checks the textfields, if they are not empty, takes the indput and

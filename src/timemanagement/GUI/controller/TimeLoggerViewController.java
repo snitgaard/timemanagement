@@ -552,10 +552,15 @@ public class TimeLoggerViewController implements Initializable
 
             if (selectedProject.getRounded() == 0)
             {
-                model.addTime(model.timeCalculator(startTimeField.getText(), endTimeField.getText()), taskComboBox.getSelectionModel().getSelectedItem().getId());
+                model.addTime(model.timeCalculator(startTimeField.getText(), 
+                                                   endTimeField.getText()), 
+                                                   taskComboBox.getSelectionModel().getSelectedItem().getId());
+                
             } else
             {
-                model.addRoundedTime(model.timeCalculator(startTimeField.getText(), endTimeField.getText()), taskComboBox.getSelectionModel().getSelectedItem().getId());
+                model.addRoundedTime(model.timeCalculator(startTimeField.getText(),
+                                                          endTimeField.getText()),
+                                                          taskComboBox.getSelectionModel().getSelectedItem().getId());
             }
 
             for (int i = 0; i < tasksTableView.getItems().size(); i++)

@@ -515,11 +515,6 @@ public class bllManager implements bllFacade
             long input = duration / 1000;
             long minuteTime = input / 60;
 
-            if (minuteTime == 0)
-            {
-                minuteTime = 1;
-            }
-
             return minuteTime;
 
         } else if (start.equals(end))
@@ -533,11 +528,6 @@ public class bllManager implements bllFacade
 
             long input = durationAfterMidnight / 1000;
             long minuteTime = input / 60;
-
-            if (minuteTime == 0)
-            {
-                minuteTime = 1;
-            }
 
             return minuteTime;
         }

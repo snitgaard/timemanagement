@@ -194,7 +194,7 @@ public class TaskDAO
         try (Connection con = dbCon.getConnection())
         {
             int id = task.getId();
-            String sql = "UPDATE Task SET taskName = ?, descriptionelse = ?, paid = ? WHERE id =" + id + ";";
+            String sql = "UPDATE Task SET taskName = ?, description = ?, paid = ? WHERE id =" + id + ";";
             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, task.getTaskName());
             ps.setString(2, task.getDescription());

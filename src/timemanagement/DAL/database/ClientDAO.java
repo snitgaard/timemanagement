@@ -103,7 +103,7 @@ public class ClientDAO
      * a client, this method will get the id.
      *
      * @param clientName
-     * @return kundeId
+     * @return clientId
      * @throws DalException
      */
     public int getClientId(String clientName) throws DalException

@@ -880,6 +880,7 @@ public class TimeLoggerViewController implements Initializable
         {
             if (selectedTask != null && !txt_newUsedTime.getText().isEmpty())
             {
+                long oldUsedTime = selectedTask.getUsedTime();
                 int newUsedTime = Integer.parseInt(txt_newUsedTime.getText());
                 selectedTask.setUsedTime(newUsedTime);
                 model.updateTask(selectedTask);
@@ -888,6 +889,7 @@ public class TimeLoggerViewController implements Initializable
                     if (selectedTask.getProjectId() == projectsTableView.getItems().get(i).getId())
                     {
                         selectedProject = projectsTableView.getItems().get(i);
+                        selectedProject.setUsedTime(selectedProject.getUsedTime() - oldUsedTime + newUsedTime);
                         model.updateProjectTime(selectedProject);
                     }
                 }

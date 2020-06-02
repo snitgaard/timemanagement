@@ -480,7 +480,7 @@ public class TimeLoggerViewController implements Initializable
      * Handles the start / stop time function and changes the button icon /
      * label depending on which action is to be performed. Also gets the time
      * difference between when you press start and stop and calculates it into
-     * HH:mm:ss using the stopTidMethod.
+     * HH:mm:ss using the stopTimeMethod.
      *
      * @param event
      * @throws ParseException
@@ -1427,7 +1427,7 @@ public class TimeLoggerViewController implements Initializable
 
     /**
      * Gets the selected project, and calculate the estimated cost price, from
-     * the hourly rate and the time used Formated correctly.
+     * the hourly rate and the time used Formatted correctly.
      */
     private void calculateCostPrice()
     {

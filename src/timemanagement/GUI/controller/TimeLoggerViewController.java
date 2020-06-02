@@ -1010,7 +1010,7 @@ public class TimeLoggerViewController implements Initializable
     }
 
     /**
-     * Edits and saves the changes to the selectd task.
+     * Edits and saves the changes to the selected task.
      *
      * @throws ModelException DalException
      */

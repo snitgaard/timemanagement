@@ -842,11 +842,11 @@ public class TimeLoggerViewController implements Initializable
                 if (quartersCheckBox.isSelected())
                 {
                     selectedProject = model.createProject(txt_projectName.getText(), model.getClientId(selectedClient.getClientName()),
-                                                LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 1);
+                                                LocalDate.now().toString(), 0, 0, selectedClient.getClientName(), doubleHourlyRate, 1);
                 } else
                 {
                     selectedProject = model.createProject(txt_projectName.getText(), model.getClientId(selectedClient.getClientName()),
-                                                LocalDate.now().toString(), 0, 1, selectedClient.getClientName(), doubleHourlyRate, 0);
+                                                LocalDate.now().toString(), 0, 0, selectedClient.getClientName(), doubleHourlyRate, 0);
                 }
 
                 projectComboBox.getItems().add(selectedProject);
